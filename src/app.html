@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vyron — Database</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--glass:rgba(255,255,255,.025);--glass2:rgba(255,255,255,.06);--line:rgba(255,255,255,.075);--text:#f2f3f5;--mute:#8b8f98;--accent:#d9dcff;--ok:#6ee7a8;--warn:#fbbf6a;--bad:#ff7b8a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font:400 14px/1.5 Geist,Inter,system-ui,-apple-system,Segoe UI,sans-serif;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;z-index:0;border-radius:50%;filter:blur(140px);opacity:.16;pointer-events:none}
+body::before{width:480px;height:480px;background:#8f9bff;top:-160px;left:-120px}
+body::after{width:420px;height:420px;background:#5b6390;bottom:-160px;right:-100px}
+.app{position:relative;z-index:1;display:grid;grid-template-columns:230px 1fr;gap:18px;padding:18px;max-width:1280px;margin:auto}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);box-shadow:0 20px 60px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.07)}
+aside{padding:20px 14px;height:calc(100vh - 36px);position:sticky;top:18px;display:flex;flex-direction:column;gap:6px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px;letter-spacing:-.2px;padding:0 10px 18px}
+.logo i{width:27px;height:20px;background:url(/logo.png) center/contain no-repeat;display:block;flex:none}
+.nav{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;color:var(--mute);cursor:pointer;transition:.2s}
+.nav:hover{background:var(--glass);color:var(--text)}
+.nav.on{background:var(--glass2);color:var(--text);border:1px solid var(--line)}
+.sp{flex:1}
+main{display:flex;flex-direction:column;gap:18px;min-width:0}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-size:24px;font-weight:600;margin:0;letter-spacing:-.4px}
+header p{margin:2px 0 0;color:var(--mute)}
+.btn{background:linear-gradient(180deg,#fff,#cfd4e8);color:#0a0a0c;border:0;border-radius:11px;padding:10px 16px;font:500 14px Geist,Inter,sans-serif;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(184,196,255,.25)}
+.btn.ghost{background:var(--glass);color:var(--text);border:1px solid var(--line)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.stat{padding:18px}
+.stat span{color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.stat b{display:block;font-family:"Geist Mono",ui-monospace,monospace;font-size:28px;font-weight:500;margin-top:4px;letter-spacing:-.5px}
+.panel{padding:6px 0 0;overflow:hidden}
+.bar{display:flex;gap:10px;padding:14px 16px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+input,select{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;font:400 14px Geist,Inter,sans-serif;outline:none;transition:.2s;width:100%}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(184,196,255,.12)}
+select option{background:#111}
+.bar input{flex:1;min-width:180px}.bar select{width:auto}
+.wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th{text-align:left;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute);padding:12px 16px;cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--text)}
+td{padding:13px 16px;border-top:1px solid var(--line)}
+tbody tr{transition:.15s}tbody tr:hover{background:rgba(255,255,255,.04)}
+.who{display:flex;align-items:center;gap:11px}
+.av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#2b2f45,#0d0e16);border:1px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:600}
+.mute{color:var(--mute)}td.mute{font-family:"Geist Mono",ui-monospace,monospace;font-size:13px}
+.pill{padding:3px 10px;border-radius:99px;font-size:12px;border:1px solid currentColor;background:rgba(255,255,255,.03)}
+.Active{color:var(--ok)}.Pending{color:var(--warn)}.Archived{color:var(--mute)}
+.del{background:none;border:0;color:var(--mute);cursor:pointer;font-size:16px;padding:4px 8px;border-radius:8px}
+.del:hover{color:var(--bad);background:rgba(255,123,138,.1)}
+.empty{padding:40px;text-align:center;color:var(--mute)}
+.foot{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid var(--line);color:var(--mute);font-size:12px}
+.modal{position:fixed;inset:0;z-index:5;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);display:none;place-items:center;padding:18px}
+.modal.open{display:grid}
+.card{width:100%;max-width:420px;padding:24px;background:rgba(10,10,12,.7)}
+.card h2{margin:0 0 16px;font-size:18px}
+.card label{display:block;margin-bottom:12px;color:var(--mute);font-size:12px}
+.card label input,.card label select{margin-top:5px;color:var(--text)}
+.acts{display:flex;justify-content:flex-end;gap:10px;margin-top:8px}
+@media(max-width:820px){.app{grid-template-columns:1fr}aside{position:static;height:auto;flex-direction:row;overflow-x:auto;padding:10px}.logo{padding:0 10px 0 4px}.sp{display:none}.nav{white-space:nowrap}}
+</style>
+<style id="noguard">
+*{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text}
+img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="glass">
+    <a class="logo" href="/" style="color:inherit;text-decoration:none"><i></i>Vyron</a>
+    <div class="nav on">▦ &nbsp;Records</div>
+    <div class="nav">◈ &nbsp;Analytics</div>
+    <div class="nav">☰ &nbsp;Tables</div>
+    <div class="sp"></div>
+    <div class="nav">⚙ &nbsp;Settings</div>
+  </aside>
+  <main>
+    <header>
+      <div><h1>Records</h1><p>Manage everything in your database.</p></div>
+      <button class="btn" id="add">+ New record</button>
+    </header>
+    <section class="stats">
+      <div class="glass stat"><span>Total</span><b id="s1">0</b></div>
+      <div class="glass stat"><span>Active</span><b id="s2">0</b></div>
+      <div class="glass stat"><span>Pending</span><b id="s3">0</b></div>
+      <div class="glass stat"><span>Archived</span><b id="s4">0</b></div>
+    </section>
+    <section class="glass panel">
+      <div class="bar">
+        <input id="q" placeholder="Search records…">
+        <select id="f"><option value="">All statuses</option><option>Active</option><option>Pending</option><option>Archived</option></select>
+      </div>
+      <div class="wrap"><table>
+        <thead><tr><th data-k="name">Name ↕</th><th data-k="role">Role ↕</th><th data-k="status">Status ↕</th><th data-k="created">Created ↕</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table></div>
+      <div class="empty" id="empty" style="display:none">No records found.</div>
+      <div class="foot"><span id="count"></span><span>Stored in SQLite</span></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="m">
+  <div class="glass card">
+    <h2>New record</h2>
+    <label>Name<input id="n" placeholder="Jane Cooper"></label>
+    <label>Email<input id="e" placeholder="jane@example.com"></label>
+    <label>Role<input id="r" placeholder="Designer"></label>
+    <label>Status<select id="st"><option>Active</option><option>Pending</option><option>Archived</option></select></label>
+    <div class="acts"><button class="btn ghost" id="cancel">Cancel</button><button class="btn" id="save">Save</button></div>
+  </div>
+</div>
+
+<script>
+const KEY="obsidian-db";
+let data=[],sortK="created",asc=false;
+const api=async(m,u,b)=>{const r=await fetch("/api/records"+u,{method:m,headers:{"Content-Type":"application/json"},body:b?JSON.stringify(b):undefined});if(!r.ok)throw new Error(r.status);return r.json()};
+const load=async()=>{try{data=await api("GET","")}catch(e){data=[]}render()};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function render(){
+  const q=$("q").value.toLowerCase(),f=$("f").value;
+  const list=data.filter(d=>(!f||d.status===f)&&(d.name+d.email+d.role).toLowerCase().includes(q))
+    .sort((a,b)=>(a[sortK]>b[sortK]?1:-1)*(asc?1:-1));
+  $("rows").innerHTML=list.map(d=>`<tr><td><div class="who"><div class="av">${esc(d.name.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase())}</div><div>${esc(d.name)}<div class="mute">${esc(d.email)}</div></div></div></td><td>${esc(d.role)}</td><td><span class="pill ${d.status}">${d.status}</span></td><td class="mute">${d.created}</td><td style="text-align:right"><button class="del" data-id="${d.id}" title="Delete">✕</button></td></tr>`).join("");
+  $("empty").style.display=list.length?"none":"block";
+  $("count").textContent=`${list.length} of ${data.length} records`;
+  $("s1").textContent=data.length;
+  ["Active","Pending","Archived"].forEach((s,i)=>$("s"+(i+2)).textContent=data.filter(d=>d.status===s).length);
+}
+$("q").oninput=$("f").onchange=render;
+document.querySelectorAll("th[data-k]").forEach(th=>th.onclick=()=>{const k=th.dataset.k;asc=sortK===k?!asc:true;sortK=k;render()});
+$("rows").onclick=async e=>{const b=e.target.closest(".del");if(!b)return;await api("DELETE","/"+b.dataset.id);load()};
+const open=v=>$("m").classList.toggle("open",v);
+$("add").onclick=()=>{["n","e","r"].forEach(i=>$(i).value="");open(true);$("n").focus()};
+$("cancel").onclick=()=>open(false);
+$("m").onclick=e=>{if(e.target===$("m"))open(false)};
+$("save").onclick=async()=>{
+  const name=$("n").value.trim();if(!name){$("n").focus();return}
+  await api("POST","",{name,email:$("e").value.trim(),role:$("r").value.trim()||"—",status:$("st").value,created:new Date().toISOString().slice(0,10)});
+  open(false);load();
+};
+load();
+</script>
+<script>
+(function(){
+  document.addEventListener("contextmenu",function(e){e.preventDefault()});
+  document.addEventListener("dragstart",function(e){e.preventDefault()});
+  document.addEventListener("copy",function(e){e.preventDefault()});
+  document.addEventListener("cut",function(e){e.preventDefault()});
+  document.addEventListener("keydown",function(e){
+    var k=e.key;
+    if(k==="F12")return e.preventDefault();
+    if(e.ctrlKey&&e.shiftKey&&(k==="I"||k==="i"||k==="J"||k==="j"||k==="C"||k==="c"))return e.preventDefault();
+    if(e.ctrlKey&&(k==="U"||k==="u"))return e.preventDefault();
+    if(e.metaKey&&e.altKey&&(k==="I"||k==="i"||k==="J"||k==="j"||k==="C"||k==="c"))return e.preventDefault();
+  });
+})();
+</script>
+</body>
+</html>

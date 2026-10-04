@@ -1,211 +1,190 @@
-'use strict';
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
-const express = require('express');
+// Vyron — zero-dependency Node.js server with SQLite (requires Node 22.13+)
+const http = require("node:http");
+const fs = require("node:fs");
+const path = require("node:path");
+const crypto = require("node:crypto");
+const { DatabaseSync } = require("node:sqlite");
 
-/* tiny .env loader (local development; on Vercel use the project's Environment Variables).
-   Handles UTF-8, UTF-8 with BOM and UTF-16 files (Windows Notepad / PowerShell) and says what it found. */
-const ENV_FILE = path.join(__dirname, '.env');
-let ENV_NOTE = '';
-try {
-  let buf = fs.readFileSync(ENV_FILE), txt;
-  if (buf[0] === 0xFF && buf[1] === 0xFE) txt = buf.toString('utf16le');
-  else if (buf[0] === 0xFE && buf[1] === 0xFF) txt = Buffer.from(buf.slice(2)).swap16().toString('utf16le');
-  else txt = buf.toString('utf8');
-  txt = txt.replace(/^\uFEFF/, '');
-  let n = 0;
-  txt.split(/\r?\n/).forEach(l => {
-    const m = l.match(/^\s*(?:export\s+)?([A-Za-z0-9_]+)\s*=\s*(.*?)\s*$/);
-    if (!m || /^\s*#/.test(l)) return;
-    const val = m[2].replace(/^(['"])(.*)\1$/, '$2');
-    if (val && !process.env[m[1]]) { process.env[m[1]] = val; n++; }
-  });
-  ENV_NOTE = 'Loaded ' + ENV_FILE + ' (' + n + ' value' + (n === 1 ? '' : 's') + ' with content)';
-} catch (e) {
-  const near = ['.env.txt', '.env.example', 'env', 'env.txt'].find(f => fs.existsSync(path.join(__dirname, f)));
-  ENV_NOTE = 'No .env file found at ' + ENV_FILE + (near ? '  <-- found "' + near + '" instead: the file must be named exactly ".env" (Explorer: enable View > File name extensions)' : '');
+const PORT = process.env.PORT || 3000;
+const db = new DatabaseSync(path.join(__dirname, "vyron.db"));
+db.exec("PRAGMA foreign_keys = ON");
+db.exec(`
+CREATE TABLE IF NOT EXISTS records(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL, email TEXT DEFAULT '', role TEXT DEFAULT '',
+  status TEXT DEFAULT 'Active', created TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS guests(
+  token TEXT PRIMARY KEY,
+  created TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS cart_items(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  guest TEXT NOT NULL REFERENCES guests(token) ON DELETE CASCADE,
+  product_id INTEGER NOT NULL, color INTEGER NOT NULL, opt INTEGER NOT NULL,
+  qty INTEGER NOT NULL,
+  UNIQUE(guest, product_id, color, opt));
+CREATE TABLE IF NOT EXISTS orders(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  guest TEXT NOT NULL,
+  total INTEGER NOT NULL, items TEXT NOT NULL, created TEXT NOT NULL,
+  method TEXT NOT NULL DEFAULT '');
+`);
+if (!db.prepare("PRAGMA table_info(orders)").all().some(c => c.name === "status")) db.exec("ALTER TABLE orders ADD COLUMN status TEXT NOT NULL DEFAULT 'awaiting'");
+
+if (db.prepare("SELECT COUNT(*) c FROM records").get().c === 0) {
+  const ins = db.prepare("INSERT INTO records(name,email,role,status,created) VALUES(?,?,?,?,?)");
+  [["Ava Morgan","ava@example.com","Engineer","Active","2026-08-12"],
+   ["Liam Carter","liam@example.com","Designer","Active","2026-08-30"],
+   ["Noah Reed","noah@example.com","Product Manager","Pending","2026-09-04"],
+   ["Mia Foster","mia@example.com","Analyst","Archived","2026-09-15"],
+   ["Ethan Hayes","ethan@example.com","Support","Active","2026-09-28"]].forEach(r => ins.run(...r));
 }
 
-const E = process.env;
-/* Discord login needs only these 3 values (see .env.example):
-   DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, DISCORD_REDIRECT_URI */
-const CLIENT_ID = E.DISCORD_CLIENT_ID, CLIENT_SECRET = E.DISCORD_CLIENT_SECRET, REDIRECT_URI = E.DISCORD_REDIRECT_URI;
-const CONFIGURED = !!(CLIENT_ID && CLIENT_SECRET && REDIRECT_URI);
-/* session signing key is derived from the client secret, nothing to configure */
-const SECRET = CLIENT_SECRET ? crypto.createHmac('sha256', CLIENT_SECRET).update('vyron-session-v1').digest('hex') : crypto.randomBytes(32).toString('hex');
-const SESSION_DAYS = 7;
-const DISCORD = 'https://discord.com/api/v10';
-
-/* Wallet addresses (override with ETH_ADDRESS / SOL_ADDRESS / LTC_ADDRESS in the environment) */
-const CRYPTO = [
-  { id: 'ltc', name: 'Litecoin', symbol: 'LTC', cg: 'litecoin', decimals: 6, address: E.LTC_ADDRESS || 'LeGJQcZ9bpBB4sYWAr3myLAHX3oqpKJmWN' },
-  { id: 'sol', name: 'Solana',   symbol: 'SOL', cg: 'solana',   decimals: 5, address: E.SOL_ADDRESS || 'GMjFESghmNJDk17YUecARhZbBftnCDDUdx72CJDdvKk4' },
-  { id: 'eth', name: 'Ethereum', symbol: 'ETH', cg: 'ethereum', decimals: 7, address: E.ETH_ADDRESS || '0x0F64a14c25724dA8c6f1A161c4ADFA6fD88955A1' }
+/* Product catalog lives on the server so prices can't be tampered with from the browser. */
+const CATALOG = [
+  { name: "Premium Tweaks", price: 5, colors: [["", "#d9dcff"]], opts: ["Lifetime"], add: [0] },
 ];
 
-/* Live prices (USD). Coinbase spot first (real-time), CoinGecko as a per-coin fallback. Cached 10 s so every visitor does not hit the APIs. */
-let rateCache = { t: 0, v: null };
-async function getJson(url, ms) {
-  const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), ms || 3500);
-  try { const r = await fetch(url, { signal: ctl.signal, headers: { Accept: 'application/json' } }); if (!r.ok) throw new Error(url + ' ' + r.status); return await r.json(); }
-  finally { clearTimeout(to); }
-}
-async function rates() {
-  if (rateCache.v && Date.now() - rateCache.t < 10000) return rateCache;
-  const v = {};
-  await Promise.all(CRYPTO.map(async c => {
-    try {
-      const d = await getJson('https://api.coinbase.com/v2/prices/' + c.symbol + '-USD/spot');
-      const n = Number(d && d.data && d.data.amount); if (n > 0) v[c.id] = n;
-    } catch (e) { /* try the fallback below */ }
-  }));
-  const miss = CRYPTO.filter(c => !v[c.id]);
-  if (miss.length) {
-    try {
-      const d = await getJson('https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=' + miss.map(c => c.cg).join(','));
-      miss.forEach(c => { if (d[c.cg] && Number(d[c.cg].usd) > 0) v[c.id] = Number(d[c.cg].usd); });
-    } catch (e) { /* keep the last known values */ }
-  }
-  if (Object.keys(v).length) rateCache = { t: Date.now(), v: Object.assign({}, rateCache.v || {}, v) };
-  return rateCache.v ? rateCache : { t: 0, v: {} };
-}
+/* Payment methods. Crypto shows a wallet address (with a live amount); PayPal, BLIK and gift cards go through a ticket on the Discord server.
+   To add another coin, add an entry with "cg" (CoinGecko id) and "sym" (ticker) and a matching option in the front-end list. */
+const DISCORD = "https://discord.gg/vyron";
+const PAYMENT = {
+  sol:      { type: "crypto", label: "Solana",    coin: "SOL", cg: "solana",   address: "GMjFESghmNJDk17YUecARhZbBftnCDDUdx72CJDdvKk4" },
+  ltc:      { type: "crypto", label: "Litecoin",  coin: "LTC", cg: "litecoin", address: "LeGJQcZ9bpBB4sYWAr3myLAHX3oqpKJmWN" },
+  paypal:   { type: "ticket", label: "PayPal" },
+  blik:     { type: "ticket", label: "BLIK" },
+  giftcard: { type: "ticket", label: "Gift cards" },
+};
 
-const app = express();
-app.disable('x-powered-by');
-
-app.use((req, res, next) => {
-  res.set({
-    'X-Content-Type-Options': 'nosniff',
-    'X-Frame-Options': 'DENY',
-    'Referrer-Policy': 'strict-origin-when-cross-origin',
-    'Content-Security-Policy':
-      "default-src 'self'; img-src 'self' data: https://cdn.discordapp.com; style-src 'self' https://fonts.googleapis.com; " +
-      "font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-ancestors 'none'"
-  });
-  next();
-});
-
-/* ---------- helpers: cookies + signed session (stateless, works on Vercel) ---------- */
-const b64 = b => Buffer.from(b).toString('base64url');
-const sign = s => crypto.createHmac('sha256', SECRET).update(s).digest('base64url');
-function pack(obj) { const p = b64(JSON.stringify(obj)); return p + '.' + sign(p); }
-function unpack(tok) {
-  if (!tok || typeof tok !== 'string') return null;
-  const [p, s] = tok.split('.');
-  if (!p || !s) return null;
-  const good = sign(p);
-  if (s.length !== good.length || !crypto.timingSafeEqual(Buffer.from(s), Buffer.from(good))) return null;
-  try { const o = JSON.parse(Buffer.from(p, 'base64url').toString('utf8')); return o.exp > Date.now() ? o : null; } catch (e) { return null; }
-}
-function cookies(req) {
-  const out = {};
-  (req.headers.cookie || '').split(';').forEach(c => { const i = c.indexOf('='); if (i > 0) out[c.slice(0, i).trim()] = decodeURIComponent(c.slice(i + 1).trim()); });
-  return out;
-}
-const isHttps = req => (req.headers['x-forwarded-proto'] || req.protocol) === 'https';
-function setCookie(req, res, name, val, maxAgeSec) {
-  const parts = [name + '=' + encodeURIComponent(val), 'Path=/', 'HttpOnly', 'SameSite=Lax', 'Max-Age=' + maxAgeSec];
-  if (isHttps(req)) parts.push('Secure');
-  res.append('Set-Cookie', parts.join('; '));
-}
-const clearCookie = (req, res, name) => setCookie(req, res, name, '', 0);
-const session = req => unpack(cookies(req).vy_session);
-const avatarUrl = u => u.avatar
-  ? 'https://cdn.discordapp.com/avatars/' + u.id + '/' + u.avatar + '.png?size=64'
-  : 'https://cdn.discordapp.com/embed/avatars/' + Number((BigInt(u.id) >> 22n) % 6n) + '.png';
-const publicUser = s => ({ id: s.id, name: s.name, avatar: s.avatar });
-const needHeader = (req, res) => { if (req.get('X-Requested-With') !== 'vyron') { res.status(400).json({ error: 'bad_request' }); return false; } return true; };
-
-async function dget(url, headers) {
-  const r = await fetch(DISCORD + url, { headers });
-  if (!r.ok) throw new Error('discord ' + r.status);
+/* Live USD prices for every crypto in PAYMENT. Cached for a few seconds; several public sources are tried in turn. */
+const RATE_TTL = 15000;
+let rateCache = { at: 0, rates: {} };
+async function fetchJson(url) {
+  const r = await fetch(url, { signal: AbortSignal.timeout(4000), headers: { Accept: "application/json" } });
+  if (!r.ok) throw new Error("HTTP " + r.status);
   return r.json();
 }
-
-/* ---------- auth: Discord OAuth2 (identify only) ---------- */
-app.get('/api/auth/login', (req, res) => {
-  if (!CONFIGURED) return res.redirect('/?auth=unconfigured');
-  const state = crypto.randomBytes(16).toString('hex');
-  setCookie(req, res, 'vy_state', state, 600);
-  const q = new URLSearchParams({
-    client_id: CLIENT_ID, response_type: 'code', redirect_uri: REDIRECT_URI,
-    scope: 'identify', state, prompt: 'none'
-  });
-  res.redirect('https://discord.com/oauth2/authorize?' + q);
-});
-
-app.get('/api/auth/callback', async (req, res) => {
-  if (!CONFIGURED) return res.redirect('/?auth=unconfigured');
-  const st = cookies(req).vy_state;
-  clearCookie(req, res, 'vy_state');
-  if (req.query.error) return res.redirect('/?auth=cancelled');
-  if (!st || !req.query.code || req.query.state !== st) return res.redirect('/?auth=error');
-  try {
-    const tr = await fetch(DISCORD + '/oauth2/token', {
-      method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        client_id: CLIENT_ID, client_secret: CLIENT_SECRET, grant_type: 'authorization_code',
-        code: String(req.query.code), redirect_uri: REDIRECT_URI
-      })
-    });
-    if (!tr.ok) throw new Error('token ' + tr.status);
-    const tok = await tr.json();
-    const user = await dget('/users/@me', { Authorization: 'Bearer ' + tok.access_token });
-    const s = { id: user.id, name: user.global_name || user.username, avatar: avatarUrl(user), exp: Date.now() + SESSION_DAYS * 864e5 };
-    setCookie(req, res, 'vy_session', pack(s), SESSION_DAYS * 86400);
-    res.redirect('/?auth=ok');
-  } catch (e) {
-    console.error('auth error:', e.message);
-    res.redirect('/?auth=error');
+async function loadRates() {
+  const coins = Object.entries(PAYMENT).filter(([, p]) => p.type === "crypto");
+  const out = {};
+  try { // 1) CoinGecko, one request for all coins
+    const d = await fetchJson("https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=" + coins.map(([, p]) => p.cg).join(","));
+    for (const [id, p] of coins) { const v = d[p.cg] && d[p.cg].usd; if (v > 0) out[id] = v; }
+  } catch {}
+  for (const [id, p] of coins) { // 2) Coinbase, then 3) Binance for anything still missing
+    if (out[id]) continue;
+    try { const d = await fetchJson(`https://api.coinbase.com/v2/prices/${p.coin}-USD/spot`); const v = Number(d.data.amount); if (v > 0) out[id] = v; } catch {}
+    if (out[id]) continue;
+    try { const d = await fetchJson(`https://api.binance.com/api/v3/ticker/price?symbol=${p.coin}USDT`); const v = Number(d.price); if (v > 0) out[id] = v; } catch {}
   }
-});
-
-app.get('/api/me', (req, res) => {
-  res.set('Cache-Control', 'no-store');
-  const s = session(req);
-  res.json({ configured: CONFIGURED, user: s ? publicUser(s) : null });
-});
-
-app.post('/api/logout', (req, res) => {
-  if (!needHeader(req, res)) return;
-  clearCookie(req, res, 'vy_session');
-  res.json({ ok: true });
-});
-
-/* current prices, polled by the payment window so the amount follows the market */
-app.get('/api/rates', async (req, res) => {
-  res.set('Cache-Control', 'no-store');
-  const r = await rates();
-  res.json({ t: r.t || null, rates: r.v || {} });
-});
-
-/* payment details are only handed out to a signed-in user */
-app.post('/api/checkout', async (req, res) => {
-  if (!needHeader(req, res)) return;
-  res.set('Cache-Control', 'no-store');
-  const s = session(req);
-  if (!s) return res.status(401).json({ error: 'auth_required' });
-  const rt = (await rates()).v;
-  res.json({
-    user: publicUser(s),
-    crypto: CRYPTO.map(c => ({ id: c.id, name: c.name, symbol: c.symbol, decimals: c.decimals, address: c.address, usd: rt[c.id] || null }))
-  });
-});
-
-app.get('/healthz', (_, res) => res.json({ ok: true }));
-app.use('/api', (req, res) => res.status(404).json({ error: 'not_found' }));
-
-app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'], setHeaders: (res) => res.set('Cache-Control', 'no-cache') }));
-app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'public', 'index.html')));
-
-module.exports = app;
-if (require.main === module) {
-  const port = E.PORT || 3000;
-  app.listen(port, () => {
-    console.log('Vyron: http://localhost:' + port);
-    console.log(ENV_NOTE);
-    if (CONFIGURED) console.log('Discord login ON. Redirect URI to add in the Developer Portal: ' + REDIRECT_URI);
-    else console.log('Discord login is OFF - missing: ' + ['DISCORD_CLIENT_ID', 'DISCORD_CLIENT_SECRET', 'DISCORD_REDIRECT_URI'].filter(k => !E[k]).join(', '));
-  });
+  return out;
 }
+async function getRates() {
+  if (Date.now() - rateCache.at < RATE_TTL && Object.keys(rateCache.rates).length) return rateCache;
+  const fresh = await loadRates();
+  if (Object.keys(fresh).length) rateCache = { at: Date.now(), rates: { ...rateCache.rates, ...fresh } };
+  return rateCache;
+}
+
+/* No accounts and no Discord login: every visitor gets an anonymous cart tied to a random cookie. */
+const COOKIE_MS = 30 * 24 * 3600 * 1000;
+const json = (res, code, body, headers = {}) => { res.writeHead(code, { "Content-Type": "application/json", ...headers }); res.end(JSON.stringify(body)); };
+const readBody = req => new Promise(r => {
+  let b = "";
+  req.on("data", c => { b += c; if (b.length > 20000) req.destroy(); });
+  req.on("end", () => { try { r(JSON.parse(b || "{}")); } catch { r({}); } });
+  req.on("error", () => r({}));
+});
+const cookies = req => Object.fromEntries((req.headers.cookie || "").split(";").map(c => c.trim().split("=")).filter(c => c[0]).map(([k, ...v]) => [k, v.join("=")]));
+const cookieHdr = (token, maxAge) => `vs=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${maxAge}`;
+
+/* Returns the visitor's guest token, creating one (and a Set-Cookie header) on first use. */
+function guestOf(req) {
+  const t = cookies(req).vs;
+  if (t && /^[a-f0-9]{64}$/.test(t) && db.prepare("SELECT 1 FROM guests WHERE token=?").get(t)) return { token: t, headers: {} };
+  const token = crypto.randomBytes(32).toString("hex");
+  db.prepare("INSERT INTO guests(token,created) VALUES(?,?)").run(token, new Date().toISOString());
+  return { token, headers: { "Set-Cookie": cookieHdr(token, COOKIE_MS / 1000) } };
+}
+function cartOf(guest) {
+  const rows = db.prepare("SELECT * FROM cart_items WHERE guest=? ORDER BY id").all(guest);
+  const items = rows.map(r => {
+    const p = CATALOG[r.product_id];
+    const unit = p.price + p.add[r.opt];
+    return { id: r.id, productId: r.product_id, name: p.name, color: p.colors[r.color][0], hex: p.colors[r.color][1], opt: p.opts[r.opt], qty: r.qty, unit, line: unit * r.qty };
+  });
+  return { items, count: items.reduce((a, i) => a + i.qty, 0), total: items.reduce((a, i) => a + i.line, 0) };
+}
+const int = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
+
+http.createServer(async (req, res) => {
+  const url = new URL(req.url, "http://x");
+  const p = url.pathname;
+
+  /* ---- Cart (no login required) ---- */
+  const cm = p.match(/^\/api\/cart(?:\/(\d+))?$/);
+  if (cm) {
+    const g = guestOf(req), H = g.headers;
+    if (req.method === "GET" && !cm[1]) return json(res, 200, cartOf(g.token), H);
+    if (req.method === "POST" && !cm[1]) {
+      const b = await readBody(req), pr = CATALOG[b.productId];
+      if (!pr || !int(b.color, 0, pr.colors.length - 1) || !int(b.opt, 0, pr.opts.length - 1) || !int(b.qty, 1, 9)) return json(res, 400, { error: "Invalid item" }, H);
+      db.prepare(`INSERT INTO cart_items(guest,product_id,color,opt,qty) VALUES(?,?,?,?,?)
+        ON CONFLICT(guest,product_id,color,opt) DO UPDATE SET qty=MIN(99, qty+excluded.qty)`).run(g.token, b.productId, b.color, b.opt, b.qty);
+      return json(res, 200, cartOf(g.token), H);
+    }
+    if (req.method === "PATCH" && cm[1]) {
+      const b = await readBody(req);
+      if (!int(b.qty, 1, 99)) return json(res, 400, { error: "Invalid quantity" }, H);
+      db.prepare("UPDATE cart_items SET qty=? WHERE id=? AND guest=?").run(b.qty, Number(cm[1]), g.token);
+      return json(res, 200, cartOf(g.token), H);
+    }
+    if (req.method === "DELETE" && cm[1]) {
+      db.prepare("DELETE FROM cart_items WHERE id=? AND guest=?").run(Number(cm[1]), g.token);
+      return json(res, 200, cartOf(g.token), H);
+    }
+    return json(res, 405, { error: "method not allowed" }, H);
+  }
+  if (p === "/api/rates" && req.method === "GET") {
+    const c = await getRates();
+    return json(res, 200, { rates: c.rates, updated: c.at, stale: Date.now() - c.at > 3 * RATE_TTL }, { "Cache-Control": "no-store" });
+  }
+  const sm = p.match(/^\/api\/orders\/(\d+)\/sent$/);
+  if (sm && req.method === "POST") {
+    const g = guestOf(req), H = g.headers;
+    const r = db.prepare("UPDATE orders SET status='sent' WHERE id=? AND guest=?").run(Number(sm[1]), g.token);
+    if (!r.changes) return json(res, 404, { error: "Order not found" }, H);
+    return json(res, 200, { ok: true, status: "sent" }, H);
+  }
+  if (p === "/api/checkout" && req.method === "POST") {
+    const g = guestOf(req), H = g.headers;
+    const b = await readBody(req), method = String(b.method || ""), pm = Object.hasOwn(PAYMENT, method) ? PAYMENT[method] : null;
+    if (!pm) return json(res, 400, { error: "Please choose a payment method" }, H);
+    const c = cartOf(g.token);
+    if (!c.items.length) return json(res, 400, { error: "Your cart is empty" }, H);
+    const r = db.prepare("INSERT INTO orders(guest,total,items,created,method) VALUES(?,?,?,?,?)").run(g.token, c.total, JSON.stringify(c.items), new Date().toISOString(), method);
+    db.prepare("DELETE FROM cart_items WHERE guest=?").run(g.token);
+    return json(res, 201, { orderId: Number(r.lastInsertRowid), total: c.total, pay: { method, ...pm, discord: DISCORD } }, H);
+  }
+
+  /* ---- Records (dashboard) ---- */
+  const m = p.match(/^\/api\/records(?:\/(\d+))?$/);
+  if (m) {
+    if (req.method === "GET") return json(res, 200, db.prepare("SELECT * FROM records ORDER BY id DESC").all());
+    if (req.method === "POST") {
+      const b = await readBody(req);
+      if (!b.name || !String(b.name).trim()) return json(res, 400, { error: "name required" });
+      const r = db.prepare("INSERT INTO records(name,email,role,status,created) VALUES(?,?,?,?,?)")
+        .run(String(b.name).trim(), b.email || "", b.role || "", b.status || "Active", b.created || new Date().toISOString().slice(0, 10));
+      return json(res, 201, { id: Number(r.lastInsertRowid) });
+    }
+    if (req.method === "DELETE" && m[1]) { db.prepare("DELETE FROM records WHERE id=?").run(Number(m[1])); return json(res, 200, { ok: true }); }
+    return json(res, 405, { error: "method not allowed" });
+  }
+
+  /* ---- Static files ---- */
+  const root = path.join(__dirname, "public");
+  const file = path.join(root, p === "/" ? "index.html" : path.normalize(p));
+  if (!file.startsWith(root) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.writeHead(404); return res.end("Not found"); }
+  res.writeHead(200, { "Content-Type": file.endsWith(".html") ? "text/html; charset=utf-8" : file.endsWith(".png") ? "image/png" : /\.jpe?g$/.test(file) ? "image/jpeg" : file.endsWith(".webp") ? "image/webp" : "application/octet-stream" });
+  fs.createReadStream(file).pipe(res);
+}).listen(PORT, () => console.log(`Vyron running at http://localhost:${PORT}`));
