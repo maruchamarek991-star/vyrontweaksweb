@@ -4,7 +4,7 @@ Dark glass UI with a real SQLite database. No runtime dependencies, no install s
 
 ## Run
 1. Install Node.js 22.13 or newer (https://nodejs.org)
-2. In this folder run: `node server.js`
+2. In this folder run: `node local-server.js`
 3. Open http://localhost:3000 (landing page; dashboard at /app.html)
 
 ## Editing the site — IMPORTANT
@@ -18,7 +18,7 @@ Workflow:
    inline `<script>` through `javascript-obfuscator` (vendored in
    `tools/obfuscator.js`, no `npm install` needed) and copies the result into
    `public/`.
-3. Restart/redeploy `server.js`, which only ever serves files from `public/`.
+3. Restart/redeploy `local-server.js`, which only ever serves files from `public/`.
 
 The build also adds a right-click / text-selection / devtools-shortcut
 blocker to both pages (see "Copy & inspect protection" below) — it's already
