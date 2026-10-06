@@ -40,10 +40,10 @@ in the HTML the browser already has to download to render the page.
 The database file `vyron.db` is created automatically on first run.
 
 ## Deploy on Vercel
-Import this folder as the project root. `public/` is served statically and `api/*.js` run as serverless functions (`/api/rates`, `/api/checkout`, `/api/orders/:id/sent`). The cart is stored in the visitor's browser (localStorage) and prices are re-checked server-side at checkout, so no database is needed. Orders are not stored on the server; the customer gets an order ID to quote in the Discord ticket. The `/app.html` dashboard (`/api/records`) needs the local SQLite server and is not part of the Vercel deployment.
+Import this folder as the project root. `public/` is served statically and `api/*.js` run as serverless functions (`/api/rates`, `/api/checkout`, `/api/orders/:id/sent`). There is no cart: the visitor clicks "Buy now", picks a payment method and places the order. Prices are re-checked server-side at checkout, so no database is needed. Orders are not stored on the server; the customer gets an order ID to quote in the Discord ticket. The `/app.html` dashboard (`/api/records`) needs the local SQLite server and is not part of the Vercel deployment.
 
-## Cart & checkout
-No accounts, no sign-in and no Discord connection are needed to buy. The cart lives in the browser (localStorage).
+## Buying
+No accounts, no sign-in, no Discord connection and no cart: "Buy now" opens the payment-method picker directly.
 Prices are calculated on the server. The only product is **Premium Tweaks** ($5, Lifetime). Payment is by crypto (SOL / LTC, coin amount updates live from public price APIs every 15 s), or a ticket on
 the Discord server (`discord.gg/vyron`) for BLIK, PayPal and gift cards. After paying in crypto the customer presses "I've sent the payment" and gets a guide for sending the TX ID in a ticket.
 
