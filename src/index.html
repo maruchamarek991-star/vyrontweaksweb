@@ -377,6 +377,37 @@ nav button{border-radius:10px}
 .hero h2{font-weight:700;letter-spacing:-.04em}
 .plan::before{display:none}
 .eyebrow{letter-spacing:.22em}
+
+/* ===== Scratch-card coupon ===== */
+[hidden]{display:none!important}
+.cpbox{width:min(420px,100%);text-align:center}
+.cpbox .eyebrow{display:block;margin-bottom:8px}
+.cpbox h3{font-size:30px}
+.cpbox .sub{margin:6px auto 0;max-width:320px}
+.scard{position:relative;height:176px;margin:20px 0 12px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:radial-gradient(120% 150% at 50% 0%,rgba(170,185,255,.2),rgba(8,8,12,.96) 68%);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 20px 50px rgba(0,0,0,.5);outline:none}
+.scard:focus-visible{box-shadow:0 0 0 2px rgba(190,205,255,.6),0 20px 50px rgba(0,0,0,.5)}
+.sc-under{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#f4f5f7}
+.sc-under small{font:500 11px "JetBrains Mono",monospace;letter-spacing:.24em;text-transform:uppercase;color:#9a9ea8}
+.sc-under b{font:800 68px/1 Manrope,sans-serif;letter-spacing:-.04em;background:linear-gradient(180deg,#fff 10%,#9aa6d6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sc-off{font:700 13px "JetBrains Mono",monospace;letter-spacing:.5em;text-indent:.5em;color:#b9bdc9}
+.sc-code{margin-top:10px;font:600 13px "JetBrains Mono",monospace;letter-spacing:.1em;padding:6px 14px;border:1px dashed rgba(255,255,255,.3);border-radius:99px;background:rgba(255,255,255,.04);color:#f4f5f7;user-select:all}
+#sccv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;transition:opacity .7s ease}
+#sccv.gone{opacity:0;pointer-events:none}
+.scard.won{animation:cpWin 1s ease}
+@keyframes cpWin{0%{box-shadow:0 0 0 0 rgba(170,185,255,.55),0 20px 50px rgba(0,0,0,.5)}100%{box-shadow:0 0 0 26px rgba(170,185,255,0),0 20px 50px rgba(0,0,0,.5)}}
+.sc-tip{margin:0;color:var(--mute);font-size:13px}
+.sc-ok{display:inline-flex;align-items:center;gap:8px;font:600 14px Inter,sans-serif;color:var(--ok);background:rgba(110,231,168,.1);border:1px solid rgba(110,231,168,.28);border-radius:99px;padding:7px 16px}
+.sc-ok svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.sc-res{animation:pIn .6s cubic-bezier(.16,1,.3,1) both}
+.sc-res .sc-valid{margin:10px 0 0;color:var(--mute);font-size:13px}
+.sc-res .btnrow{grid-template-columns:1fr 1.4fr;margin-top:14px}
+.cprow{display:flex;gap:8px;margin:12px 0 2px}
+.cprow input{flex:1;min-width:0;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:var(--text);font:500 13px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;outline:none;transition:.2s}
+.cprow input::placeholder{text-transform:none;letter-spacing:0;color:var(--mute)}
+.cprow input:focus{border-color:rgba(170,185,255,.55)}
+.cprow .btn2{padding:0 18px}
+.osum .ln .dn{color:var(--ok)}
+@media(prefers-reduced-motion:reduce){.scard.won,.sc-res{animation:none}}
 </style>
 <style id="noguard">
 *{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -452,7 +483,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
         <div class="phd">
           <span class="vt"><img src="/logo.png" alt=""></span>
           <div class="ptx"><span class="tg">Flagship</span><h4>Premium Tweaks</h4><p>The complete Vyron optimization suite. Every advanced tweak, tested and applied safely, with a restore point before each change.</p></div>
-          <div class="pr"><b>$5</b><small>one-time · lifetime</small></div>
+          <div class="pr"><b id="tprice">$5</b><small id="tsub">one-time · lifetime</small></div>
         </div>
         <div class="pfg">
           <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="12" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M13 9.5h5M13 12.5h3M8 20h8"/></svg></span><div><b>GPU Tweaks</b><small>AMD · NVIDIA · Intel</small></div></div>
@@ -495,8 +526,24 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
   </div>
   <div class="eyebrow sec">Pricing</div>
   <div class="plan">
-    <div><span class="tg">Best value</span><h5>Lifetime</h5><div class="pp">$5</div><small>one-time</small><div class="note">Pay once. All current and future updates.</div></div>
+    <div><span class="tg">Best value</span><h5>Lifetime</h5><div class="pp" id="pprice">$5</div><small id="psub">one-time</small><div class="note">Pay once. All current and future updates.</div></div>
     <button class="cta" id="buynow" type="button">Buy now</button>
+  </div>
+</div></div>
+<div class="modal top" id="cpn" aria-hidden="true"><div class="glass box cpbox" role="dialog" aria-label="Scratch card discount">
+  <button class="x" id="cpx" type="button" aria-label="Close">✕</button>
+  <span class="eyebrow">Welcome gift</span>
+  <h3>Scratch &amp; save</h3>
+  <p class="sub">Scratch the card to reveal your discount. It's applied to your order automatically.</p>
+  <div class="scard" id="scard" tabindex="0" role="button" aria-label="Scratch card. Press Enter to reveal your discount.">
+    <div class="sc-under"><small>Your discount</small><b id="scpct">–</b><span class="sc-off">OFF</span><span class="sc-code" id="sccode">VYRON</span></div>
+    <canvas id="sccv"></canvas>
+  </div>
+  <p class="sc-tip" id="sctip">Use your mouse or finger to scratch the card.</p>
+  <div class="sc-res" id="scres" hidden>
+    <div class="sc-ok"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Discount applied to your order</div>
+    <p class="sc-valid" id="scvalid"></p>
+    <div class="btnrow"><button class="btn2" id="sccopy" type="button">Copy code</button><button class="cta full" id="scgo" type="button">Shop now</button></div>
   </div>
 </div></div>
 <div class="modal top" id="cm"><div class="glass box wide" id="cb"></div></div>
@@ -564,11 +611,35 @@ $p("pm").onclick=e=>{if(e.target===$p("pm"))closeP()};
 const api=async(m,u,b)=>{
   let r;try{r=await fetch("/api"+u,{method:m,headers:{"Content-Type":"application/json"},body:b?JSON.stringify(b):undefined})}catch{throw new Error("Connection problem. Please try again.")}
   let d={};try{d=await r.json()}catch{}
-  if(!r.ok){const e=new Error(d.error||"Something went wrong. Please try again.");e.status=r.status;throw e}
+  if(!r.ok){const e=new Error(d.error||"Something went wrong. Please try again.");e.status=r.status;e.data=d;throw e}
   return d};
-const ORDER={items:[{id:1,productId:PRODUCT.id,name:PRODUCT.name,opt:"Lifetime",qty:1,unit:PRODUCT.price,line:PRODUCT.price}],count:1,total:PRODUCT.price};
-let cartData=ORDER,payMode=false,payMethod=null;
-const money=n=>`<span class="amt"><sup>$</sup>${n}</span>`;
+/* Discount coupon (earned from the scratch card or typed in). Kept in the browser only for display; the server re-verifies the signed code at checkout. */
+let COUPON=null;
+try{const c=JSON.parse(localStorage.getItem("vy-coupon")||"null");if(c&&/^VYRON\d+-/.test(c.code)&&c.exp>Date.now()&&c.pct>=5&&c.pct<=20)COUPON={code:c.code,pct:c.pct,exp:c.exp}}catch{}
+const fm=n=>Number.isInteger(n)?String(n):n.toFixed(2);
+function buildOrder(){
+  const sub=Math.round(PRODUCT.price*100),tot=COUPON?Math.round(sub*(100-COUPON.pct)/100):sub;
+  return{items:[{id:1,productId:PRODUCT.id,name:PRODUCT.name,opt:"Lifetime",qty:1,unit:PRODUCT.price,line:PRODUCT.price}],count:1,sub:sub/100,disc:(sub-tot)/100,coupon:COUPON,total:tot/100};
+}
+let cartData=buildOrder(),payMode=false,payMethod=null,cdraft="";
+const money=n=>`<span class="amt"><sup>$</sup>${fm(n)}</span>`;
+function renderPrices(){
+  const o=buildOrder(),was=COUPON?`was $${fm(o.sub)} · −${COUPON.pct}% applied`:null;
+  $p("tprice").textContent="$"+fm(o.total);$p("pprice").textContent="$"+fm(o.total);
+  $p("tsub").textContent=was||"one-time · lifetime";$p("psub").textContent=was||"one-time";
+}
+function setCoupon(c){
+  COUPON=c;try{c?localStorage.setItem("vy-coupon",JSON.stringify(c)):localStorage.removeItem("vy-coupon")}catch{}
+  renderPrices();
+  if(payMode&&$p("cm").classList.contains("open")){cartData=buildOrder();drawPay()}
+}
+async function applyManual(){
+  const v=(cdraft||"").trim();if(!v){toast("Enter a discount code");return}
+  const b=$p("cpapply");if(b)b.disabled=true;
+  try{const d=await api("POST","/coupon",{code:v});cdraft="";setCoupon({code:d.code,pct:d.pct,exp:d.exp});toast("−"+d.pct+"% discount applied")}
+  catch(err){if(b)b.disabled=false;toast(err.message)}
+}
+renderPrices();
 const ICON={
 sol:`<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gsol" x1="3" y1="19.4" x2="20.8" y2="4.6" gradientUnits="userSpaceOnUse"><stop stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient></defs><g fill="url(#gsol)"><path d="M6.2 4.6h14.6l-3 3.5H3.2z"/><path d="M3.2 10.25h14.6l3 3.5H6.2z"/><path d="M6.2 15.9h14.6l-3 3.5H3.2z"/></g></svg>`,
 ltc:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#345D9D"/><path d="M10.8 6 8.8 15.8h6.8M7.6 12.6l6.2-2.4" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -600,7 +671,7 @@ async function fetchRates(){
 function startRates(){fetchRates();clearInterval(ratesTimer);ratesTimer=setInterval(()=>{if($p("cm").classList.contains("open"))fetchRates()},15000)}
 setInterval(refreshLive,1000);
 
-function buyNow(){closeP();cartData=ORDER;payMode=true;payMethod=null;drawPay();$p("cm").classList.add("open");startRates()}
+function buyNow(){closeP();cartData=buildOrder();payMode=true;payMethod=null;drawPay();$p("cm").classList.add("open");startRates()}
 function closeCart(){$p("cm").classList.remove("open")}
 $p("buynow").onclick=buyNow;
 
@@ -608,9 +679,10 @@ function drawPay(){
   const c=cartData;
   $p("cb").innerHTML=`<button class="x" id="cx">✕</button><h3>Payment method</h3><p class="sub">Choose how you want to pay.</p>
     <div class="osum">${c.items.map(i=>`<div class="ln"><div>${esc(i.name)}<span> · ${esc(i.opt)}${i.qty>1?" × "+i.qty:""}</span></div>${money(i.line)}</div>`).join("")}
-    <div class="tt"><span>Total</span>${money(c.total)}</div></div>`
+    ${c.coupon?`<div class="ln"><div>Discount<span> · ${esc(c.coupon.code)} (−${c.coupon.pct}%)</span></div><span class="amt dn">−<sup>$</sup>${fm(c.disc)}</span></div>`:""}
+    <div class="tt"><span>Total</span>${money(c.total)}</div></div>${c.coupon?"":`<div class="cprow"><input id="cpin" placeholder="Discount code" maxlength="40" autocomplete="off" spellcheck="false" value="${esc(cdraft)}"><button class="btn2" id="cpapply" type="button">Apply</button></div>`}`
     +PM.map(([g,list])=>`<div class="pmg">${g}</div>`+list.map(([id,name,hint,badge])=>`<button class="pmo ${payMethod===id?"on":""}" data-pm="${id}">${icon(id)}<span class="pmt">${name}<small>${hint}</small></span>${COIN[id]?`<span class="pmb amtb" data-coin="${id}" data-total="${c.total}" data-sfx=" ${COIN[id]}">…</span>`:`<span class="pmb">${badge}</span>`}<span class="pmc"></span></button>`).join("")).join("")
-    +`<div class="payrow"><button class="btn2" id="pk">Cancel</button><button class="cta" id="pc" ${payMethod?"":"disabled"}>Place order · $${c.total}</button></div>`;
+    +`<div class="payrow"><button class="btn2" id="pk">Cancel</button><button class="cta" id="pc" ${payMethod?"":"disabled"}>Place order · $${fm(c.total)}</button></div>`;
   $p("cx").onclick=closeCart;
   refreshLive();
 }
@@ -625,21 +697,21 @@ function drawPaid(d){
     $p("cb").innerHTML=pre+`
       <div class="send"><div class="top"><span class="lab" style="margin:0">Send exactly</span><span class="live"><i></i>Live</span></div>
         <div class="big"><span data-coin="${p.method}" data-total="${d.total}" id="sendamt">…</span><small>${esc(p.coin)}</small></div>
-        <div class="meta"><span data-rate="${p.method}"></span> · updated <span data-age></span> · refreshes every 15 s<br>This amount equals <b>$${d.total}</b> and follows the market, so send the amount shown at the moment you pay.</div>
+        <div class="meta"><span data-rate="${p.method}"></span> · updated <span data-age></span> · refreshes every 15 s<br>This amount equals <b>$${fm(d.total)}</b> and follows the market, so send the amount shown at the moment you pay.</div>
         <button class="btn2" id="cpamt" style="width:100%;margin-top:12px">Copy amount</button></div>
       <div class="lab">${esc(p.coin)} address</div><div class="payaddr">${esc(p.address)}</div>
       <button class="btn2" data-copy="${esc(p.address)}" style="width:100%">Copy address</button>
       <div class="btnrow"><button class="cta full" id="sentbtn">I've sent the payment</button><a class="cta full ghost2" href="${esc(p.discord)}" target="_blank" rel="noopener">Open our Discord</a></div>`;
     refreshLive();
   }else{
-    $p("cb").innerHTML=pre+`<ol class="steps"><li><span>Create a ticket on our Discord server.</span></li><li><span>Mention your <b>Order #${d.orderId}</b> and that you want to pay with <b>${esc(p.label)}</b>. We'll take it from there.</span></li></ol>
+    $p("cb").innerHTML=pre+`<ol class="steps"><li><span>Create a ticket on our Discord server.</span></li><li><span>Mention your <b>Order #${d.orderId}</b> and that you want to pay with <b>${esc(p.label)}</b>.${d.coupon?` Include your discount code <b>${esc(d.coupon.code)}</b>.`:""} We'll take it from there.</span></li></ol>
       <a class="cta full" href="${esc(p.discord)}" target="_blank" rel="noopener">Open our Discord</a>`;
   }
   $p("cx").onclick=closeCart;
 }
 function drawGuide(d,amt){
   const p=d.pay;
-  const msg=`Order #${d.orderId}\nPayment: ${p.coin}\nAmount sent: ${amt||"—"} ${p.coin} ($${d.total})\nTX ID: <paste your transaction ID here>`;
+  const msg=`Order #${d.orderId}\nPayment: ${p.coin}\nAmount sent: ${amt||"—"} ${p.coin} ($${fm(d.total)})${d.coupon?"\nDiscount code: "+d.coupon.code:""}\nTX ID: <paste your transaction ID here>`;
   $p("cb").innerHTML=`<button class="x" id="cx">✕</button>
     <div class="ohead">${icon(p.method,1)}<div><h3>Order #${d.orderId}</h3><span class="sent">Payment sent</span></div></div>
     <p class="sub" style="margin-bottom:6px">One last step: send us the transaction ID (TX ID) in a ticket so we can confirm your payment and give you the product.</p>
@@ -660,7 +732,8 @@ $p("cb").onclick=async e=>{
   try{
     if(e.target.closest("[data-pm]")){payMethod=e.target.closest("[data-pm]").dataset.pm;drawPay();return}
     else if(e.target.id==="pk"){closeCart();return}
-    else if(e.target.id==="pc"){if(!payMethod)return;e.target.disabled=true;const d=await api("POST","/checkout",{method:payMethod,items:cartData.items.map(i=>({productId:i.productId,qty:i.qty}))});payMode=false;payMethod=null;drawPaid(d);return}
+    else if(e.target.id==="cpapply"){applyManual();return}
+    else if(e.target.id==="pc"){if(!payMethod)return;e.target.disabled=true;const d=await api("POST","/checkout",{method:payMethod,coupon:COUPON?COUPON.code:undefined,items:cartData.items.map(i=>({productId:i.productId,qty:i.qty}))});payMode=false;payMethod=null;drawPaid(d);return}
     else if(e.target.id==="sentbtn"){
       const amt=($p("sendamt")||{}).textContent;const a=/^[0-9.]+$/.test(amt||"")?amt:"";
       e.target.disabled=true;try{await api("POST","/orders/"+lastPaid.orderId+"/sent")}catch{}
@@ -668,10 +741,73 @@ $p("cb").onclick=async e=>{
     else if(e.target.id==="cpamt"){const a=($p("sendamt")||{}).textContent||"";if(!/^[0-9.]+$/.test(a)){toast("Rate not loaded yet");return}try{await navigator.clipboard.writeText(a);e.target.textContent="Copied ✓";setTimeout(()=>{e.target.textContent="Copy amount"},1600)}catch{toast("Select the amount and copy it manually")}return}
     else if(e.target.closest("[data-copy]")){const b=e.target.closest("[data-copy]");try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="Copied ✓";setTimeout(()=>{b.textContent="Copy address"},1600)}catch{toast("Select the address and copy it manually")}return}
     else return;
-  }catch(err){const b=$p("pc")||$p("sentbtn");if(b)b.disabled=false;toast(err.message)}
+  }catch(err){
+    if(err.data&&err.data.couponInvalid){setCoupon(null);if(payMode&&$p("cm").classList.contains("open")){cartData=buildOrder();drawPay()}}
+    const b=$p("pc")||$p("sentbtn");if(b)b.disabled=false;toast(err.message)}
 };
+$p("cb").oninput=e=>{if(e.target.id==="cpin")cdraft=e.target.value};
+$p("cb").onkeydown=e=>{if(e.key==="Enter"&&e.target.id==="cpin"){e.preventDefault();applyManual()}};
 $p("cm").onclick=e=>{if(e.target===$p("cm"))closeCart()};
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeP()}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeP();closeCp()}});
+
+/* ===== Scratch-card coupon: appears COUPON_DELAY ms after the page loads (once per visitor, until the code expires) ===== */
+const COUPON_DELAY=5000,REVEAL_AT=.4; // reveal automatically once 40% of the foil is scratched off
+const cv=$p("sccv"),sc=$p("scard");
+let offer=null,cpDone=false,cpDown=false,cpLast=null,cpChk=0,cx=null;
+const closeCp=()=>$p("cpn").classList.remove("open");
+function paintFoil(){
+  const w=cv.offsetWidth,h=cv.offsetHeight,dpr=Math.min(window.devicePixelRatio||1,2);
+  cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);
+  cx=cv.getContext("2d",{willReadFrequently:true});cx.setTransform(dpr,0,0,dpr,0,0);
+  const g=cx.createLinearGradient(0,0,w,h);
+  g.addColorStop(0,"#eceef6");g.addColorStop(.3,"#8f96ab");g.addColorStop(.55,"#d9dce8");g.addColorStop(.8,"#7a8097");g.addColorStop(1,"#b9bdcc");
+  cx.fillStyle=g;cx.fillRect(0,0,w,h);
+  cx.strokeStyle="rgba(255,255,255,.14)";cx.lineWidth=1;
+  for(let i=-h;i<w;i+=7){cx.beginPath();cx.moveTo(i,0);cx.lineTo(i+h,h);cx.stroke()}
+  for(let i=0;i<650;i++){cx.fillStyle=Math.random()<.5?"rgba(255,255,255,.18)":"rgba(10,12,20,.12)";cx.fillRect(Math.random()*w,Math.random()*h,1.6,1.6)}
+  cx.textAlign="center";cx.textBaseline="middle";
+  cx.fillStyle="rgba(14,16,24,.62)";cx.font="800 28px Manrope,Inter,sans-serif";if("letterSpacing" in cx)cx.letterSpacing="5px";
+  cx.fillText("SCRATCH HERE",w/2,h/2-10);
+  cx.fillStyle="rgba(14,16,24,.5)";cx.font="500 12px 'JetBrains Mono',monospace";if("letterSpacing" in cx)cx.letterSpacing="3px";
+  cx.fillText("5% – 20% OFF",w/2,h/2+22);
+  cx.strokeStyle="#000";cx.globalCompositeOperation="destination-out"; // erase strength = stroke alpha, so it must be fully opaque
+}
+function cpPos(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*(cv.offsetWidth/r.width),y:(e.clientY-r.top)*(cv.offsetHeight/r.height)}}
+function cpSeg(a,b){cx.lineWidth=38;cx.lineCap="round";cx.lineJoin="round";cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}
+function cpCleared(){
+  const w=cv.width,h=cv.height,d=cx.getImageData(0,0,w,h).data;let n=0,t=0;
+  for(let y=0;y<h;y+=6)for(let x=0;x<w;x+=6){t++;if(d[(y*w+x)*4+3]<40)n++}
+  return n/t;
+}
+function cpCheck(force){
+  const now=performance.now();if(!force&&now-cpChk<140)return;cpChk=now;
+  if(cpCleared()>=REVEAL_AT)cpReveal();
+}
+function cpReveal(){
+  if(cpDone||!offer)return;cpDone=true;cpDown=false;
+  cv.classList.add("gone");sc.classList.add("won");sc.removeAttribute("role");sc.removeAttribute("tabindex");
+  $p("sctip").hidden=true;$p("scres").hidden=false;
+  $p("scvalid").textContent="Valid until "+new Date(offer.exp).toLocaleDateString("en-US",{month:"short",day:"numeric"})+"";
+  setCoupon({code:offer.code,pct:offer.pct,exp:offer.exp}); // <- the discount is attached automatically
+  toast("−"+offer.pct+"% applied to your order");
+}
+cv.addEventListener("pointerdown",e=>{if(cpDone)return;e.preventDefault();cpDown=true;try{cv.setPointerCapture(e.pointerId)}catch{}cpLast=cpPos(e);cpSeg(cpLast,cpLast)});
+cv.addEventListener("pointermove",e=>{if(!cpDown||cpDone)return;const p=cpPos(e);cpSeg(cpLast,p);cpLast=p;cpCheck(false)});
+["pointerup","pointercancel"].forEach(t=>cv.addEventListener(t,()=>{if(!cpDown)return;cpDown=false;cpCheck(true)}));
+sc.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&!cpDone){e.preventDefault();cpReveal()}});
+$p("cpx").onclick=closeCp;
+$p("cpn").onclick=e=>{if(e.target===$p("cpn"))closeCp()};
+$p("scgo").onclick=()=>{closeCp();go("products")};
+$p("sccopy").onclick=async e=>{try{await navigator.clipboard.writeText(offer.code);e.target.textContent="Copied ✓";setTimeout(()=>{e.target.textContent="Copy code"},1600)}catch{toast("Select the code and copy it manually")}};
+async function showOffer(){
+  if(COUPON||offer)return; // visitor already has a valid code
+  if(document.querySelector(".modal.open")){setTimeout(showOffer,2000);return} // never interrupt a purchase
+  try{offer=await api("POST","/coupon")}catch{return}
+  $p("scpct").textContent=offer.pct+"%";$p("sccode").textContent=offer.code;
+  $p("cpn").classList.add("open");$p("cpn").setAttribute("aria-hidden","false");
+  requestAnimationFrame(paintFoil);
+}
+setTimeout(showOffer,COUPON_DELAY);
 </script>
 <script>
 (function(){
