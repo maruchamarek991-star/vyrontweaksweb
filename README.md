@@ -1,10 +1,10 @@
-# Zentro
+# Vyron
 
 Dark glass UI with a real SQLite database. No runtime dependencies, no install step.
 
 ## Run
 1. Install Node.js 22.13 or newer (https://nodejs.org)
-2. In this folder run: `node server.js`
+2. In this folder run: `node local-server.js`
 3. Open http://localhost:3000 (landing page; dashboard at /app.html)
 
 ## Editing the site — IMPORTANT
@@ -18,7 +18,7 @@ Workflow:
    inline `<script>` through `javascript-obfuscator` (vendored in
    `tools/obfuscator.js`, no `npm install` needed) and copies the result into
    `public/`.
-3. Restart/redeploy `server.js`, which only ever serves files from `public/`.
+3. Restart/redeploy `local-server.js`, which only ever serves files from `public/`.
 
 The build also adds a right-click / text-selection / devtools-shortcut
 blocker to both pages (see "Copy & inspect protection" below) — it's already
@@ -37,22 +37,20 @@ Nothing sensitive depends on this: passwords are hashed server-side, prices
 are calculated server-side, and the wallet addresses are only ever strings
 in the HTML the browser already has to download to render the page.
 
-The database file `zentro.db` is created automatically on first run.
+The database file `vyron.db` is created automatically on first run.
 
-## Accounts & cart
-Visitors must sign up (nickname + password) to add to the cart or buy. Accounts, sessions, carts and orders live in `zentro.db`
-(passwords are salted + scrypt-hashed, never stored in plain text). Prices are calculated on the server.
+## Deploy on Vercel
+Import this folder as the project root. `public/` is served statically and `api/*.js` run as serverless functions (`/api/rates`, `/api/checkout`, `/api/orders/:id/sent`). There is no cart: the visitor clicks "Buy now", picks a payment method and places the order. Prices are re-checked server-side at checkout, so no database is needed. Orders are not stored on the server; the customer gets an order ID to quote in the Discord ticket. The `/app.html` dashboard (`/api/records`) needs the local SQLite server and is not part of the Vercel deployment.
+
+## Buying
+No accounts, no sign-in, no Discord connection and no cart: "Buy now" opens the payment-method picker directly.
+Prices are calculated on the server. The only product is **Premium Tweaks** ($5, Lifetime). Payment is by crypto (SOL / LTC, coin amount updates live from public price APIs every 15 s), or a ticket on
+the Discord server (`discord.gg/vyron`) for BLIK, PayPal and gift cards. After paying in crypto the customer presses "I've sent the payment" and gets a guide for sending the TX ID in a ticket.
 
 ## API
-- POST   /api/register  { nick, password }
-- POST   /api/login     { nick, password }
-- POST   /api/logout
-- GET    /api/me
-- GET    /api/cart
-- POST   /api/cart      { productId, color, opt, qty }
-- PATCH  /api/cart/:id  { qty }
-- DELETE /api/cart/:id
-- POST   /api/checkout
+- GET    /api/rates
+- POST   /api/orders/:id/sent
+- POST   /api/checkout  { method, items: [{ productId, qty }] }
 - GET    /api/records
 - POST   /api/records   { name, email, role, status }
 - DELETE /api/records/:id
