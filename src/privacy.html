@@ -8,7 +8,12 @@
 <meta name="theme-color" content="#050506">
 <meta name="color-scheme" content="dark light">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="__SITE_URL__/privacy.html">
+<link rel="canonical" href="__CANON__">
+<link rel="alternate" hreflang="en" href="__ALT_EN__">
+<link rel="alternate" hreflang="pl" href="__ALT_PL__">
+<link rel="alternate" hreflang="x-default" href="__ALT_EN__">
+<!--CSP-->
+<!--ANALYTICS-->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -18,7 +23,9 @@
 <meta property="og:site_name" content="Vyron">
 <meta property="og:title" content="Privacy Policy – Vyron">
 <meta property="og:description" content="How the Vyron website and software handle your information.">
-<meta property="og:url" content="__SITE_URL__/privacy.html">
+<meta property="og:url" content="__CANON__">
+<meta property="og:locale" content="__LOCALE__">
+<meta property="og:locale:alternate" content="__LOCALE_ALT__">
 <meta property="og:image" content="__SITE_URL__/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +41,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:26px 0 18px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font:700 18px Manrope,sans-serif;letter-spacing:-.01em}
 .brand img{width:30px;height:auto;display:block}
+.topr{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .back{color:var(--mute);text-decoration:none;font:500 14px Inter,sans-serif;padding:8px 14px;border:1px solid var(--line);border-radius:10px;transition:.2s}
 .back:hover{color:var(--text)}
 .doc{margin-top:8px;margin-bottom:34px;padding:44px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
@@ -54,26 +62,27 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 </style>
 </head>
 <body>
-<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><a class="back" href="/">← Back to site</a></div>
+<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><div class="topr"><a class="back" href="/pl/privacy.html" hreflang="pl" lang="pl">Polski</a><a class="back" href="/">← Back to site</a></div></div>
 <main class="doc">
 <h1>Privacy Policy</h1>
 <p class="upd">Last updated: October 10, 2026</p>
-<p class="lead">This policy explains what information the Vyron website and Vyron Tweaks software process, why, and what choices you have. In short: there are no accounts, no ads and no analytics trackers.</p>
+<p class="lead">This policy explains what information the Vyron website and Vyron Tweaks software process, why, and what choices you have. In short: there are no accounts, no ads and no tracking cookies.</p>
 
 <h2>1. Information we process</h2>
 <ul>
 <li><b>Website visits.</b> Our hosting provider (Vercel) processes technical data such as your IP address, browser type and requested pages in server logs to deliver the site and keep it secure.</li>
-<li><b>Orders.</b> When you choose a payment method the website generates an order number and the amount to pay. The website itself does not store orders in a customer database.</li>
+<li><b>Orders.</b> When you choose a payment method the website generates an order number and the amount to pay. The website itself does not store orders in a customer database. For crypto payments our server reads the public blockchain to see whether a transfer of the exact amount has arrived; this does not require any personal data.</li>
 <li><b>Discord tickets.</b> Payments are confirmed and products are delivered in Discord tickets. There we can see your Discord username and ID and whatever you send us, such as your order number, a transaction ID or payment details you choose to share. Discord's own privacy policy applies to that service.</li>
 <li><b>Licensing.</b> The Product verifies your license through KeyAuth, a third-party licensing service. This may involve your license key, a hardware identifier of your PC and your IP address.</li>
+<li data-analytics><b>Analytics.</b> We use Plausible Analytics, a privacy-friendly tool that counts page views without cookies and without storing personal data about you.</li>
 <li><b>Payments.</b> Cryptocurrency transactions are public on the blockchain. If you pay with PayPal, PayPal shares limited payment details with us under its own policy.</li>
 </ul>
 
 <h2>2. Data stored in your browser</h2>
-<p>The website saves two small items in your browser's local storage: your light/dark theme choice and, if you receive one, your discount code with its expiry. We do not use advertising or tracking cookies. You can clear this data at any time in your browser settings.</p>
+<p>The website saves up to three small items in your browser's local storage: your light/dark theme choice, your language choice and, if you receive one, your discount code with its expiry. We do not use advertising or tracking cookies. You can clear this data at any time in your browser settings.</p>
 
 <h2>3. Third-party services</h2>
-<p>To display the site your browser loads fonts from Google Fonts, which means Google receives your IP address. Our server fetches cryptocurrency exchange rates from public price APIs to show the amount to pay, and the public member count of our Discord invite to show our community size; your personal data is not sent to them.</p>
+<p>To display the site your browser loads fonts from Google Fonts, which means Google receives your IP address. Our server fetches cryptocurrency exchange rates from public price APIs to show the amount to pay, and the public member count of our Discord invite to show our community size; your personal data is not sent to them. To check crypto payments our server queries public blockchain nodes and explorers (for example a Solana RPC node and Litecoin explorers); only our own wallet address is looked up. To keep the daily discount fair, our server briefly uses your IP address and browser type to calculate it; this is not stored.</p>
 
 <h2>4. Why we use information</h2>
 <ul>
@@ -102,6 +111,6 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 <p>Questions about this document? Open a ticket on our <a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord server</a>.</p>
 </main>
 <div class="bot"><span>© <span id="yr">2026</span> Vyron</span><nav aria-label="Legal"><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a><a href="/refund.html">Refund Policy</a><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></nav></div>
-<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();document.querySelectorAll("a[hreflang]").forEach(function(a){a.addEventListener("click",function(){try{localStorage.setItem("vy-lang",a.getAttribute("hreflang"))}catch(e){}})});</script>
 </body>
 </html>

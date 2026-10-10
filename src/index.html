@@ -3,12 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vyron Tweaks – Windows Optimizer for Gaming (FPS, Ping, Input Lag)</title>
-<meta name="description" content="Vyron Tweaks is a Windows optimizer for gaming. Debloat Windows and tune GPU, CPU, RAM and network settings for higher FPS, lower ping and less input lag. One-time lifetime license.">
+<title data-i18n="meta.title">Vyron Tweaks – Windows Optimizer for Gaming (FPS, Ping, Input Lag)</title>
+<meta name="description" content="Vyron Tweaks is a Windows optimizer for gaming. Debloat Windows and tune GPU, CPU, RAM and network settings for higher FPS, lower ping and less input lag. One-time lifetime license." data-i18n-attr="content:meta.desc">
 <meta name="theme-color" content="#050506">
 <meta name="color-scheme" content="dark light">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="__SITE_URL__/">
+<link rel="canonical" href="__CANON__">
+<link rel="alternate" hreflang="en" href="__ALT_EN__">
+<link rel="alternate" hreflang="pl" href="__ALT_PL__">
+<link rel="alternate" hreflang="x-default" href="__ALT_EN__">
+<!--CSP-->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -16,17 +20,21 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vyron">
-<meta property="og:title" content="Vyron Tweaks – Windows Optimizer for Gaming">
-<meta property="og:description" content="Higher FPS, lower ping and less input lag. Debloat Windows and tune GPU, CPU, RAM and network settings. Pay once, lifetime updates.">
-<meta property="og:url" content="__SITE_URL__/">
+<meta property="og:title" content="Vyron Tweaks – Windows Optimizer for Gaming" data-i18n-attr="content:meta.ogtitle">
+<meta property="og:description" content="Higher FPS, lower ping and less input lag. Debloat Windows and tune GPU, CPU, RAM and network settings. Pay once, lifetime updates." data-i18n-attr="content:meta.ogdesc">
+<meta property="og:url" content="__CANON__">
+<meta property="og:locale" content="__LOCALE__">
+<meta property="og:locale:alternate" content="__LOCALE_ALT__">
 <meta property="og:image" content="__SITE_URL__/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Vyron – Windows optimizer for gaming">
+<meta property="og:image:alt" content="Vyron – Windows optimizer for gaming" data-i18n-attr="content:meta.ogalt">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Vyron Tweaks – Windows Optimizer for Gaming">
-<meta name="twitter:description" content="Higher FPS, lower ping and less input lag. Pay once, lifetime updates.">
+<meta name="twitter:title" content="Vyron Tweaks – Windows Optimizer for Gaming" data-i18n-attr="content:meta.ogtitle">
+<meta name="twitter:description" content="Higher FPS, lower ping and less input lag. Pay once, lifetime updates." data-i18n-attr="content:meta.twdesc">
 <meta name="twitter:image" content="__SITE_URL__/og-image.png">
+<!--JSONLD-->
+<!--ANALYTICS-->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -35,7 +43,7 @@
 *{box-sizing:border-box}
 html{height:100%;scroll-behavior:smooth}
 body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:400 16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden;padding-top:env(safe-area-inset-top,0px);transition:background .3s,color .3s}
-h1,h2,h3,h4{font-family:Manrope,Inter,sans-serif}
+h1,h2,h3,h4,.ttl-h{font-family:Manrope,Inter,sans-serif}
 .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
 .glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);box-shadow:0 20px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06)}
 .gt{background:linear-gradient(180deg,#fff 10%,#8c92a3);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -49,8 +57,8 @@ h1,h2,h3,h4{font-family:Manrope,Inter,sans-serif}
 #intro .lgw{width:clamp(54px,8vw,76px);aspect-ratio:1;display:grid;place-items:center}
 #intro .lg{width:100%;height:auto;opacity:0;transform:translate3d(0,-75vh,0);filter:drop-shadow(0 0 18px rgba(190,205,255,.35));animation:iLogo 1s cubic-bezier(.5,0,.75,.5) .2s forwards;will-change:transform,opacity}
 #intro .ttl{position:relative;margin-top:26px}
-#intro h1{margin:0;font:800 clamp(66px,19vw,220px)/1 Manrope,"Space Grotesk",sans-serif;letter-spacing:.08em;text-indent:.08em;display:flex;color:#f4f5f7}
-#intro h1 span{display:inline-block;opacity:0;transform:translate3d(0,70px,0);background:linear-gradient(180deg,#fff 15%,#8f96ab);-webkit-background-clip:text;background-clip:text;color:transparent;animation:iWave 1.1s cubic-bezier(.3,.7,.3,1) forwards,iBob 2.2s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.11s + 1.05s),calc(var(--i)*.18s + 2.3s);will-change:transform,opacity}
+#intro .ttl-h{margin:0;font:800 clamp(66px,19vw,220px)/1 Manrope,"Space Grotesk",sans-serif;letter-spacing:.08em;text-indent:.08em;display:flex;color:#f4f5f7}
+#intro .ttl-h span{display:inline-block;opacity:0;transform:translate3d(0,70px,0);background:linear-gradient(180deg,#fff 15%,#8f96ab);-webkit-background-clip:text;background-clip:text;color:transparent;animation:iWave 1.1s cubic-bezier(.3,.7,.3,1) forwards,iBob 2.2s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.11s + 1.05s),calc(var(--i)*.18s + 2.3s);will-change:transform,opacity}
 #intro .tag{display:flex;gap:.9em;flex-wrap:wrap;justify-content:center;margin:22px 0 0;font:600 clamp(11px,2.6vw,17px)/1 "JetBrains Mono",monospace;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:#b9bdc9}
 #intro .tag span{display:inline-block;opacity:0;will-change:transform,opacity}
 #intro .tag .t1{transform:translate3d(-60px,0,0);animation:tagL .6s cubic-bezier(.16,1,.3,1) 2.1s forwards}
@@ -118,7 +126,7 @@ main{position:relative;z-index:1;opacity:0;animation:in .8s ease 3.35s forwards}
 .hero{position:relative;text-align:center;padding:200px 0 70px;min-height:640px}
 .hbadge{display:inline-flex;align-items:center;gap:10px;padding:8px 18px 8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--glass);font:500 13px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:26px}
 .hbadge img{width:18px;height:auto}
-.hero h2{font-size:clamp(42px,7.4vw,86px);line-height:1.05;letter-spacing:-.035em;margin:0 auto 24px;font-weight:800;max-width:900px}
+.hero h1{font-size:clamp(42px,7.4vw,86px);line-height:1.05;letter-spacing:-.035em;margin:0 auto 24px;font-weight:800;max-width:900px}
 .hero p{color:var(--mute);max-width:700px;margin:0 auto 34px;font-size:clamp(15px,1.7vw,18px);line-height:1.65}
 
 /* Marquee */
@@ -134,7 +142,7 @@ main{position:relative;z-index:1;opacity:0;animation:in .8s ease 3.35s forwards}
 
 /* Why us */
 .why{padding:70px 0 100px;text-align:center}
-.why h3{font-size:clamp(34px,5vw,56px);letter-spacing:-.03em;margin:0 0 14px;font-weight:800}
+.why h2{font-size:clamp(34px,5vw,56px);letter-spacing:-.03em;margin:0 0 14px;font-weight:800}
 .why .sub{color:var(--mute);max-width:560px;margin:0 auto 46px;font-size:18px}
 .wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
 .wc{padding:34px 26px 32px;border-radius:30px;transition:.3s}
@@ -146,7 +154,7 @@ main{position:relative;z-index:1;opacity:0;animation:in .8s ease 3.35s forwards}
 
 /* Products */
 .pg{padding:150px 0 100px}
-.pg h3{font-size:clamp(34px,5vw,54px);letter-spacing:-.03em;margin:8px 0 10px;font-weight:800}
+.pg h2{font-size:clamp(34px,5vw,54px);letter-spacing:-.03em;margin:8px 0 10px;font-weight:800}
 .pg .sub{color:var(--mute);margin:0 0 36px;font-size:18px}
 .tile{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;max-width:820px;padding:28px 30px;border-radius:30px;cursor:pointer;transition:.3s;text-align:left;width:100%;color:var(--text);font:inherit}
 .tile:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.25)}
@@ -160,7 +168,7 @@ main{position:relative;z-index:1;opacity:0;animation:in .8s ease 3.35s forwards}
 
 /* Contact */
 .ct{padding:150px 0 100px}
-.ct h3{font-size:clamp(40px,6vw,68px);letter-spacing:-.035em;margin:12px 0 14px;font-weight:800}
+.ct h2{font-size:clamp(40px,6vw,68px);letter-spacing:-.035em;margin:12px 0 14px;font-weight:800}
 .ct .sub{color:var(--mute);margin:0 0 36px;font-size:18px}
 .dc{display:block;width:min(432px,100%);padding:28px;border-radius:28px;color:var(--text);text-decoration:none;transition:.3s}
 .dc:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.25)}
@@ -327,8 +335,8 @@ nav button.on{background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,2
 .cta:hover::after{left:130%}
 .cta:active{transform:translateY(0) scale(.97)}
 .cta.ghost2{background:var(--glass2)}
-.hero h2{text-shadow:0 0 80px rgba(150,170,255,.12)}
-.hero h2 .gt{background:linear-gradient(180deg,#fff 10%,#9aa6d6);-webkit-background-clip:text;background-clip:text}
+.hero h1{text-shadow:0 0 80px rgba(150,170,255,.12)}
+.hero h1 .gt{background:linear-gradient(180deg,#fff 10%,#9aa6d6);-webkit-background-clip:text;background-clip:text}
 @keyframes gshift{to{background-position:100% 0}}
 .hbadge{box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 30px rgba(150,170,255,.07)}
 .wc{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.012))}
@@ -395,7 +403,7 @@ body::before{animation:none;opacity:.5;background:radial-gradient(45% 35% at 50%
 .pill{border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.3)}
 nav button{border-radius:10px}
 .hbadge{border-radius:8px;letter-spacing:.18em;font-size:12px;padding:7px 14px 7px 10px}
-.hero h2{font-weight:700;letter-spacing:-.04em}
+.hero h1{font-weight:700;letter-spacing:-.04em}
 .plan::before{display:none}
 .eyebrow{letter-spacing:.22em}
 
@@ -433,7 +441,7 @@ nav button{border-radius:10px}
 .how,.faq{text-align:center}
 .how{padding:10px 0 100px}
 .faq{padding:0 0 110px}
-.how h3,.faq h3{font-size:clamp(34px,5vw,56px);letter-spacing:-.03em;margin:0 0 14px;font-weight:800}
+.how h2,.faq h2{font-size:clamp(34px,5vw,56px);letter-spacing:-.03em;margin:0 0 14px;font-weight:800}
 .how .sub,.faq .sub{color:var(--mute);max-width:560px;margin:0 auto 46px;font-size:18px}
 .hgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .hc{padding:30px 28px 32px;border-radius:24px;text-align:left;transition:.3s;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.012))}
@@ -478,7 +486,7 @@ nav button{border-radius:10px}
 
 /* ===== Changelog ===== */
 .cl{padding:150px 0 100px}
-.cl h3{font-size:clamp(34px,5vw,54px);letter-spacing:-.03em;margin:8px 0 10px;font-weight:800}
+.cl h2{font-size:clamp(34px,5vw,54px);letter-spacing:-.03em;margin:8px 0 10px;font-weight:800}
 .cl .sub{color:var(--mute);margin:0 0 36px;font-size:18px;max-width:620px}
 .rel{max-width:820px;padding:30px 32px 24px;border-radius:24px;text-align:left;margin-bottom:20px}
 .rh{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
@@ -536,6 +544,32 @@ html.skipped .wm{animation:wm 1.6s ease .1s forwards,fog 20s ease-in-out 2s infi
 }
 @media(max-width:380px){nav button{padding:8px 5px;font-size:12.5px}}
 @media(max-width:340px){nav button{padding:8px 3px;font-size:12px}.brand img{width:22px}.ib{width:32px;height:32px}}
+
+/* ---- language switch ---- */
+.lsw{display:flex;align-items:center;gap:2px;padding:3px;border-radius:99px;border:1px solid var(--line);background:var(--glass2)}
+.lsw button{border:0;background:none;color:var(--mute);font:600 12px "JetBrains Mono",monospace;letter-spacing:.06em;padding:7px 10px;border-radius:99px;cursor:pointer;transition:.2s}
+.lsw button:hover{color:var(--text)}
+.lsw button.on{color:var(--text);background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05));box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
+[data-theme=light] .lsw button.on{background:rgba(0,0,0,.08);box-shadow:none}
+@media(max-width:520px){.lsw button{padding:6px 7px;font-size:11px}.act{gap:5px}}
+@media(max-width:380px){.lsw button{padding:6px 5px;font-size:10.5px}}
+/* ---- crypto order status ---- */
+.ostat.det{color:#7cc4ff;background:rgba(124,196,255,.12);border-color:rgba(124,196,255,.32)}
+.ostat.okc{color:var(--ok);background:rgba(110,231,168,.12);border-color:rgba(110,231,168,.3)}
+.ostat.bad{color:#fb7185;background:rgba(251,113,133,.12);border-color:rgba(251,113,133,.32)}
+.qnote{margin:12px 0;padding:12px 14px;border-radius:12px;border:1px dashed var(--line);font-size:12.5px;line-height:1.55;color:var(--mute)}
+.qnote b{color:var(--text);font-weight:600}
+.opanel{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--glass);margin:14px 0 4px;font-size:13.5px;line-height:1.5;color:var(--mute)}
+.opanel b{display:block;color:var(--text);font-weight:600;font-size:14.5px}
+.opanel span{display:block}
+.opanel .dg{margin-top:6px;color:var(--warn)}
+.opanel .ico{flex:none;width:22px;height:22px;margin-top:1px}
+.opanel .spin{border-radius:50%;border:2px solid var(--line);border-top-color:var(--text);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.opanel.ok{border-color:rgba(110,231,168,.4);background:rgba(110,231,168,.08)}.opanel.ok b,.opanel.ok .ico{color:var(--ok)}
+.opanel.det{border-color:rgba(124,196,255,.4)}
+.opanel.bad{border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.07)}.opanel.bad .ico{color:#fb7185}
+@media(prefers-reduced-motion:reduce){.opanel .spin{animation-duration:2.4s}}
 </style>
 <style id="noguard">
 *{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -545,7 +579,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 </head>
 <body>
 
-<button id="skip" type="button" aria-label="Skip intro">Skip intro</button>
+<button id="skip" type="button" aria-label="Skip intro" data-i18n="intro.skip" data-i18n-attr="aria-label:intro.skip">Skip intro</button>
 <div id="intro" aria-hidden="true">
   <div class="aura"></div>
   
@@ -553,9 +587,9 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
     <div class="wrap">
     <div class="lgw"><img class="lg" src="/logo.png" alt="" draggable="false"></div>
     <div class="ttl">
-      <h1 aria-label="Vyron"><span style="--i:0">V</span><span style="--i:1">Y</span><span style="--i:2">R</span><span style="--i:3">O</span><span style="--i:4">N</span></h1>
+      <div class="ttl-h" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">Y</span><span style="--i:2">R</span><span style="--i:3">O</span><span style="--i:4">N</span></div>
           </div>
-    <p class="tag"><span class="t1">Max Performance.</span><span class="t2">Zero Lag.</span></p>
+    <p class="tag"><span class="t1" data-i18n="intro.t1">Max Performance.</span><span class="t2" data-i18n="intro.t2">Zero Lag.</span></p>
     <div class="bar"><i></i></div>
   </div>
 </div>
@@ -565,26 +599,27 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 <header><div class="pill">
   <div class="brand" data-t="home"><img src="/logo.png" alt=""><b>Vyron</b></div>
   <nav>
-    <button class="on" data-t="home">Main</button>
-    <button data-t="products">Products</button>
-    <button data-t="updates">Changelog</button>
-    <button data-t="contact">Contact Us</button>
+    <button class="on" data-t="home" data-i18n="nav.home">Main</button>
+    <button data-t="products" data-i18n="nav.products">Products</button>
+    <button data-t="updates" data-i18n="nav.updates">Changelog</button>
+    <button data-t="contact" data-i18n="nav.contact">Contact Us</button>
   </nav>
   <div class="act">
-    <button class="ib" id="theme" aria-label="Toggle theme"><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
+    <div class="lsw" role="group" aria-label="Language" data-i18n-attr="aria-label:a11y.lang"><button type="button" data-lang="pl" lang="pl" title="Polski" aria-pressed="false">PL</button><button type="button" class="on" data-lang="en" lang="en" title="English" aria-pressed="true">EN</button></div>
+    <button class="ib" id="theme" aria-label="Toggle theme" data-i18n-attr="aria-label:a11y.theme"><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
   </div>
 </div></header>
 
 <main>
   <section class="panel on" id="home">
     <div class="wrap hero">
-      <div class="hbadge"><img src="/logo.png" alt="">Faster, Smoother, Sharper</div>
-      <h2>Optimize <span class="gt">your</span> PC for Gaming</h2>
-      <p>Vyron Tweaks removes bloatware and optimizes your PC for higher FPS, lower input delay, and reduced ping. Get smoother gameplay and precision hit registration tweaks for competitive shooters.</p>
-      <button class="cta" id="explore" type="button"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Explore Services</button>
+      <div class="hbadge"><img src="/logo.png" alt=""><span data-i18n="hero.badge">Faster, Smoother, Sharper</span></div>
+      <h1 data-i18n="hero.h">Optimize <span class="gt">your</span> PC for Gaming</h1>
+      <p data-i18n="hero.p">Vyron Tweaks removes bloatware and optimizes your PC for higher FPS, lower input delay, and reduced ping. Get smoother gameplay and precision hit registration tweaks for competitive shooters.</p>
+      <button class="cta" id="explore" type="button"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span data-i18n="hero.cta">Explore Services</span></button>
       <div><a class="dcount" id="dchero" href="https://discord.gg/vyron" target="_blank" rel="noopener" hidden><i></i><span id="dchtxt"></span></a></div>
     </div>
-    <div class="tested"><span class="eyebrow">Tested in</span>
+    <div class="tested"><span class="eyebrow" data-i18n="tested">Tested in</span>
       <div class="mq"><div class="mt">
         <div class="g"><div class="gm"><img src="/img/valorant.png" alt="">Valorant</div><div class="gm"><img src="/img/fortnite.png" alt="">Fortnite</div><div class="gm"><img src="/img/cs2.png" alt="">CS2</div></div>
         <div class="g"><div class="gm"><img src="/img/valorant.png" alt="">Valorant</div><div class="gm"><img src="/img/fortnite.png" alt="">Fortnite</div><div class="gm"><img src="/img/cs2.png" alt="">CS2</div></div>
@@ -593,65 +628,65 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
       </div></div>
     </div>
     <div class="wrap why">
-      <h3 class="gt">Why Choose Us</h3>
-      <p class="sub">Experience the difference with our advanced PC optimization technology</p>
+      <h2 class="gt" data-i18n="why.h">Why Choose Us</h2>
+      <p class="sub" data-i18n="why.sub">Experience the difference with our advanced PC optimization technology</p>
       <div class="wgrid">
-        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><path d="M4 18a8.5 8.5 0 1 1 16 0"/><path d="M12 14l4-5"/><circle cx="12" cy="15" r="1"/></svg></div><h4>Increase FPS</h4><p>Raise frame rates with targeted OS, driver, and game tuning.</p></div>
-        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0"/><path d="M5.5 12.5a10 10 0 0 1 13 0"/><path d="M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r=".8"/></svg></div><h4>Decrease Ping</h4><p>Lower network delay with smart routing, DNS, and QoS rules.</p></div>
-        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 2.5h5M12 2.5v3.5"/></svg></div><h4>Reduce Latency</h4><p>Cut input lag by refining timers, buffers, and scheduling.</p></div>
-        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></div><h4>Debloat Windows</h4><p>Remove preinstalled apps, telemetry and background junk that waste CPU and memory.</p></div>
+        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><path d="M4 18a8.5 8.5 0 1 1 16 0"/><path d="M12 14l4-5"/><circle cx="12" cy="15" r="1"/></svg></div><h4 data-i18n="why.1.t">Increase FPS</h4><p data-i18n="why.1.p">Raise frame rates with targeted OS, driver, and game tuning.</p></div>
+        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0"/><path d="M5.5 12.5a10 10 0 0 1 13 0"/><path d="M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r=".8"/></svg></div><h4 data-i18n="why.2.t">Decrease Ping</h4><p data-i18n="why.2.p">Lower network delay with smart routing, DNS, and QoS rules.</p></div>
+        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 2.5h5M12 2.5v3.5"/></svg></div><h4 data-i18n="why.3.t">Reduce Latency</h4><p data-i18n="why.3.p">Cut input lag by refining timers, buffers, and scheduling.</p></div>
+        <div class="glass wc"><div class="wi"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4.5h6V7M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></div><h4 data-i18n="why.4.t">Debloat Windows</h4><p data-i18n="why.4.p">Remove preinstalled apps, telemetry and background junk that waste CPU and memory.</p></div>
       </div>
     </div>
 
     <div class="wrap how">
-      <span class="eyebrow">How it works</span>
-      <h3 class="gt">From checkout to FPS in 3 steps</h3>
-      <p class="sub">No account, no subscription. Pay once and you are set.</p>
+      <span class="eyebrow" data-i18n="how.eyebrow">How it works</span>
+      <h2 class="gt" data-i18n="how.h">From checkout to FPS in 3 steps</h2>
+      <p class="sub" data-i18n="how.sub">No account, no subscription. Pay once and you are set.</p>
       <div class="hgrid">
-        <div class="glass hc"><div class="hn">01</div><div class="wi"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></div><h4>Choose a payment method</h4><p>Pick <b>Crypto</b>, <b>BLIK</b>, <b>PayPal</b> or <b>gift cards</b>. You get an order number and the exact amount to pay.</p></div>
-        <div class="glass hc"><div class="hn">02</div><div class="wi"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.3A7.5 7.5 0 1 1 20 11.5z"/><path d="M8.5 10.5h7M8.5 13.5h4"/></svg></div><h4>Open a ticket on Discord</h4><p>Send your order number (and the transaction ID for crypto). We confirm your payment personally.</p></div>
-        <div class="glass hc"><div class="hn">03</div><div class="wi"><svg viewBox="0 0 24 24"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z"/></svg></div><h4>Get Vyron and optimize</h4><p>We deliver your product in the ticket. Run Vyron Tweaks and apply the tweaks you want. A restore point is created before every change.</p></div>
+        <div class="glass hc"><div class="hn">01</div><div class="wi"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/></svg></div><h4 data-i18n="how.1.t">Choose a payment method</h4><p data-i18n="how.1.p">Pick <b>Crypto</b>, <b>BLIK</b>, <b>PayPal</b> or <b>gift cards</b>. You get an order number and the exact amount to pay.</p></div>
+        <div class="glass hc"><div class="hn">02</div><div class="wi"><svg viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.3A7.5 7.5 0 1 1 20 11.5z"/><path d="M8.5 10.5h7M8.5 13.5h4"/></svg></div><h4 data-i18n="how.2.t">Open a ticket on Discord</h4><p data-i18n="how.2.p">Send us your order number. Crypto payments are detected automatically; for other methods we confirm your payment personally.</p></div>
+        <div class="glass hc"><div class="hn">03</div><div class="wi"><svg viewBox="0 0 24 24"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6z"/></svg></div><h4 data-i18n="how.3.t">Get Vyron and optimize</h4><p data-i18n="how.3.p">We deliver your product in the ticket. Run Vyron Tweaks and apply the tweaks you want. A restore point is created before every change.</p></div>
       </div>
     </div>
 
     <div class="wrap faq">
-      <span class="eyebrow">FAQ</span>
-      <h3 class="gt">Questions, answered</h3>
-      <p class="sub">Still unsure? Open a ticket on our Discord and we will help.</p>
+      <span class="eyebrow" data-i18n="faq.eyebrow">FAQ</span>
+      <h2 class="gt" data-i18n="faq.h">Questions, answered</h2>
+      <p class="sub" data-i18n="faq.sub">Still unsure? Open a ticket on our Discord and we will help.</p>
       <div class="faql">
-        <details class="fi" name="faq"><summary>Is Vyron Tweaks safe to use?</summary><div class="fa"><p>Vyron creates a Windows restore point before it applies changes, so you can roll back if you do not like a result. It changes Windows, driver and network settings and removes preinstalled apps, so we still recommend reading what a tweak does before applying it and restarting your PC afterwards.</p></div></details>
-        <details class="fi" name="faq"><summary>Can I get banned in games?</summary><div class="fa"><p>Vyron is a system optimizer, not a game modification. It does not inject code into games or read or change game memory. We cannot speak for every anti-cheat, so if you play a game with strict rules, ask us on Discord before buying.</p></div></details>
-        <details class="fi" name="faq"><summary>What is included in Premium Tweaks?</summary><div class="fa"><p>GPU tweaks (general, plus AMD, NVIDIA and Intel), CPU tweaks for AMD and Intel, system tweaks for disk, memory, debloat, internet and processes, and firmware (BIOS) tweaks. See the full list under <b>Products</b>.</p></div></details>
-        <details class="fi" name="faq"><summary>Is it really a one-time payment?</summary><div class="fa"><p>Yes. The lifetime license is paid once and includes all current and future updates. There is no subscription and nothing renews.</p></div></details>
-        <details class="fi" name="faq"><summary>How do I pay and how fast do I get the product?</summary><div class="fa"><p>You can pay with Solana, Litecoin, BLIK, PayPal or gift cards. Payments are confirmed manually in a Discord ticket, and your product is delivered in that same ticket once the payment is confirmed. Crypto payments are confirmed after the transfer appears on the blockchain.</p></div></details>
-        <details class="fi" name="faq"><summary>What do I need to run it?</summary><div class="fa"><p>A PC running Windows 10 or 11 (64-bit) and administrator rights, since changing system settings requires them. GPU tweaks support AMD, NVIDIA and Intel graphics.</p></div></details>
-        <details class="fi" name="faq"><summary>Can I get a refund?</summary><div class="fa"><p>If the product does not work on your system and we cannot fix it, or we cannot deliver it, we will refund you. The full conditions are in our <a href="/refund.html">Refund Policy</a>.</p></div></details>
-        <details class="fi" name="faq"><summary>How do I get support?</summary><div class="fa"><p>Open a ticket on our <a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord server</a>. Include your order number so we can find your purchase quickly.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q1">Is Vyron Tweaks safe to use?</summary><div class="fa" data-i18n="faq.a1"><p>Vyron creates a Windows restore point before it applies changes, so you can roll back if you do not like a result. It changes Windows, driver and network settings and removes preinstalled apps, so we still recommend reading what a tweak does before applying it and restarting your PC afterwards.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q2">Can I get banned in games?</summary><div class="fa" data-i18n="faq.a2"><p>Vyron is a system optimizer, not a game modification. It does not inject code into games or read or change game memory. We cannot speak for every anti-cheat, so if you play a game with strict rules, ask us on Discord before buying.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q3">What is included in Premium Tweaks?</summary><div class="fa" data-i18n="faq.a3"><p>GPU tweaks (general, plus AMD, NVIDIA and Intel), CPU tweaks for AMD and Intel, system tweaks for disk, memory, debloat, internet and processes, and firmware (BIOS) tweaks. See the full list under <b>Products</b>.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q4">Is it really a one-time payment?</summary><div class="fa" data-i18n="faq.a4"><p>Yes. The lifetime license is paid once and includes all current and future updates. There is no subscription and nothing renews.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q5">How do I pay and how fast do I get the product?</summary><div class="fa" data-i18n="faq.a5"><p>You can pay with Solana, Litecoin, BLIK, PayPal or gift cards. Crypto payments are detected automatically as soon as the transfer appears on the blockchain, and the payment window shows the status live. BLIK, PayPal and gift card payments are confirmed manually in a Discord ticket. Your product is delivered in that ticket once the payment is confirmed.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q6">What do I need to run it?</summary><div class="fa" data-i18n="faq.a6"><p>A PC running Windows 10 or 11 (64-bit) and administrator rights, since changing system settings requires them. GPU tweaks support AMD, NVIDIA and Intel graphics.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q7">Can I get a refund?</summary><div class="fa" data-i18n="faq.a7"><p>If the product does not work on your system and we cannot fix it, or we cannot deliver it, we will refund you. The full conditions are in our <a href="/refund.html">Refund Policy</a>.</p></div></details>
+        <details class="fi" name="faq"><summary data-i18n="faq.q8">How do I get support?</summary><div class="fa" data-i18n="faq.a8"><p>Open a ticket on our <a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord server</a>. Include your order number so we can find your purchase quickly.</p></div></details>
       </div>
     </div>
   </section>
 
   <section class="panel" id="products">
     <div class="wrap pg">
-      <span class="eyebrow">Products</span>
-      <h3>Choose your upgrade</h3>
-      <p class="sub">One suite. Everything you need to run your PC at full speed.</p>
-      <div class="glass pcard" id="tile" role="button" tabindex="0" aria-label="Open Premium Tweaks">
+      <span class="eyebrow" data-i18n="prod.eyebrow">Products</span>
+      <h2 data-i18n="prod.h">Choose your upgrade</h2>
+      <p class="sub" data-i18n="prod.sub">One suite. Everything you need to run your PC at full speed.</p>
+      <div class="glass pcard" id="tile" role="button" tabindex="0" aria-label="Open Premium Tweaks" data-i18n-attr="aria-label:a11y.openProduct">
         <div class="pglow" aria-hidden="true"></div>
         <div class="phd">
           <span class="vt"><img src="/logo.png" alt=""></span>
-          <div class="ptx"><span class="tg">Flagship</span><h4>Premium Tweaks</h4><p>The complete Vyron optimization suite. Every advanced tweak, tested and applied safely, with a restore point before each change.</p></div>
-          <div class="pr"><b id="tprice">$5</b><small id="tsub">one-time · lifetime</small></div>
+          <div class="ptx"><span class="tg" data-i18n="prod.flag">Flagship</span><h4>Premium Tweaks</h4><p data-i18n="prod.desc">The complete Vyron optimization suite. Every advanced tweak, tested and applied safely, with a restore point before each change.</p></div>
+          <div class="pr"><b id="tprice">$5</b><small id="tsub" data-i18n="price.tile">one-time · lifetime</small></div>
         </div>
         <div class="pfg">
-          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="12" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M13 9.5h5M13 12.5h3M8 20h8"/></svg></span><div><b>GPU Tweaks</b><small>AMD · NVIDIA · Intel</small></div></div>
-          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></span><div><b>CPU Tweaks</b><small>AMD · Intel</small></div></div>
-          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><div><b>System Tweaks</b><small>Disk, RAM, debloat, network</small></div></div>
-          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg></span><div><b>Firmware</b><small>BIOS tweaks</small></div></div>
+          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="12" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M13 9.5h5M13 12.5h3M8 20h8"/></svg></span><div><b data-i18n="prod.gpu">GPU Tweaks</b><small>AMD · NVIDIA · Intel</small></div></div>
+          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></span><div><b data-i18n="prod.cpu">CPU Tweaks</b><small>AMD · Intel</small></div></div>
+          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><div><b data-i18n="prod.sys">System Tweaks</b><small data-i18n="prod.sys.sub">Disk, RAM, debloat, network</small></div></div>
+          <div class="pfi"><span class="pfs"><svg viewBox="0 0 24 24"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg></span><div><b data-i18n="prod.fw">Firmware</b><small data-i18n="prod.fw.sub">BIOS tweaks</small></div></div>
         </div>
         <div class="pft">
-          <span class="safe"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>Restore point before every change</span>
-          <span class="pbtns"><button class="btn2" id="tiledet" type="button">View details</button><button class="cta" id="tilebuy" type="button">Buy now</button></span>
+          <span class="safe"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="m9 12 2 2 4-4"/></svg><span data-i18n="prod.safe">Restore point before every change</span></span>
+          <span class="pbtns"><button class="btn2" id="tiledet" type="button" data-i18n="prod.details">View details</button><button class="cta" id="tilebuy" type="button" data-i18n="buy">Buy now</button></span>
         </div>
       </div>
     </div>
@@ -659,93 +694,123 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 
   <section class="panel" id="updates">
     <div class="wrap cl">
-      <span class="eyebrow">Changelog</span>
-      <h3>What's new</h3>
-      <p class="sub">Every Vyron Tweaks release, newest first. Updates are included with your lifetime license.</p>
+      <span class="eyebrow" data-i18n="cl.eyebrow">Changelog</span>
+      <h2 data-i18n="cl.h">What's new</h2>
+      <p class="sub" data-i18n="cl.sub">Every Vyron Tweaks release, newest first. Updates are included with your lifetime license.</p>
 
       <!-- To add a release: copy the whole <article> below, paste it ABOVE the previous one, change the text and
            date, and move the "Latest" badge to the newest release. Then run: node scripts/build.js -->
       <article class="glass rel">
-        <div class="rh"><span class="ver">Update 1.0.1</span><span class="badge">Latest</span></div>
+        <div class="rh"><span class="ver" data-i18n="rel.ver">Update 1.0.1</span><span class="badge" data-i18n="rel.latest">Latest</span></div>
         <ul class="rl">
-          <li><span class="ck add">Added</span><div>Presets and Game Boost
+          <li><span class="ck add" data-i18n="rel.added">Added</span><div><span data-i18n="rel.presets">Presets and Game Boost</span>
             <div class="gchips"><span class="gchip"><img src="/img/fortnite.png" alt="">Fortnite</span><span class="gchip"><img src="/img/cs2.png" alt="">CS2</span><span class="gchip"><img src="/img/valorant.png" alt="">Valorant</span></div></div></li>
-          <li><span class="ck add">Added</span><div>New tweaks</div></li>
-          <li><span class="ck fix">Fixed</span><div>Bugs</div></li>
+          <li><span class="ck add" data-i18n="rel.added">Added</span><div data-i18n="rel.tweaks">New tweaks</div></li>
+          <li><span class="ck fix" data-i18n="rel.fixed">Fixed</span><div data-i18n="rel.bugs">Bugs</div></li>
         </ul>
-        <div class="rf"><img src="/logo.png" alt=""><b>Vyron</b><span class="dot">•</span><span>vyron.lol</span><span class="dot">•</span><time datetime="2026-10-08T23:15">8 Oct 2026, 23:15</time></div>
+        <div class="rf"><img src="/logo.png" alt=""><b>Vyron</b><span class="dot">•</span><span>vyron.lol</span><span class="dot">•</span><time datetime="2026-10-08T23:15" data-i18n="rel.date">8 Oct 2026, 23:15</time></div>
       </article>
     </div>
   </section>
 
   <section class="panel" id="contact">
     <div class="wrap ct">
-      <span class="eyebrow">Contact Us</span>
-      <h3>Get in touch.</h3>
-      <p class="sub">Questions, support or purchases — reach us on any of these channels.</p>
+      <span class="eyebrow" data-i18n="ct.eyebrow">Contact Us</span>
+      <h2 data-i18n="ct.h">Get in touch.</h2>
+      <p class="sub" data-i18n="ct.sub">Questions, support or purchases — reach us on any of these channels.</p>
       <a class="glass dc" href="https://discord.gg/vyron" target="_blank" rel="noopener">
         <div class="dci"><svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg></div>
-        <h4>Discord</h4><p>Join the community, get support and early updates.</p>
+        <h4>Discord</h4><p data-i18n="ct.dc.p">Join the community, get support and early updates.</p>
         <div class="dcs" id="dccard" hidden><i></i><span id="dcctxt"></span></div>
-        <b>Open Discord <svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></b>
+        <b><span data-i18n="ct.open">Open Discord</span> <svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></b>
       </a>
     </div>
   </section>
   <footer class="ft">
     <div class="wrap">
       <div class="ftg">
-        <div class="ftb"><div class="brand2"><img src="/logo.png" alt=""><b>Vyron</b></div><p>Windows optimization for competitive gaming. Higher FPS, lower ping, less input lag.</p></div>
-        <div class="ftc" role="group" aria-label="Site"><h5>Site</h5><button type="button" data-t="home">Main</button><button type="button" data-t="products">Products</button><button type="button" data-t="updates">Changelog</button><button type="button" data-t="contact">Contact Us</button></div>
-        <div class="ftc" role="group" aria-label="Legal"><h5>Legal</h5><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a><a href="/refund.html">Refund Policy</a></div>
-        <div class="ftc" role="group" aria-label="Community"><h5>Community</h5><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></div>
+        <div class="ftb"><div class="brand2"><img src="/logo.png" alt=""><b>Vyron</b></div><p data-i18n="ft.p">Windows optimization for competitive gaming. Higher FPS, lower ping, less input lag.</p></div>
+        <div class="ftc" role="group" aria-label="Site" data-i18n-attr="aria-label:a11y.site"><h5 data-i18n="ft.site">Site</h5><button type="button" data-t="home" data-i18n="nav.home">Main</button><button type="button" data-t="products" data-i18n="nav.products">Products</button><button type="button" data-t="updates" data-i18n="nav.updates">Changelog</button><button type="button" data-t="contact" data-i18n="nav.contact">Contact Us</button></div>
+        <div class="ftc" role="group" aria-label="Legal" data-i18n-attr="aria-label:a11y.legal"><h5 data-i18n="ft.legal">Legal</h5><a href="/terms.html" data-i18n="legal.terms">Terms of Service</a><a href="/privacy.html" data-i18n="legal.privacy">Privacy Policy</a><a href="/refund.html" data-i18n="legal.refund">Refund Policy</a></div>
+        <div class="ftc" role="group" aria-label="Community" data-i18n-attr="aria-label:a11y.community"><h5 data-i18n="ft.community">Community</h5><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></div>
       </div>
-      <div class="ftbot"><span>© <span id="yr">2026</span> Vyron. All rights reserved.</span><span>Not affiliated with Riot Games, Epic Games, Valve, Microsoft, NVIDIA, AMD or Intel. All trademarks belong to their respective owners.</span></div>
+      <div class="ftbot"><span>© <span id="yr">2026</span> <span data-i18n="ft.rights">Vyron. All rights reserved.</span></span><span data-i18n="ft.disclaimer">Not affiliated with Riot Games, Epic Games, Valve, Microsoft, NVIDIA, AMD or Intel. All trademarks belong to their respective owners.</span></div>
     </div>
   </footer>
 </main>
 
-<div class="stk" id="stk"><div class="sp"><b id="stkp">$5</b><small id="stksub">one-time · lifetime</small></div><button class="cta" id="stkbuy" type="button">Buy now</button></div>
+<div class="stk" id="stk"><div class="sp"><b id="stkp">$5</b><small id="stksub" data-i18n="price.tile">one-time · lifetime</small></div><button class="cta" id="stkbuy" type="button" data-i18n="buy">Buy now</button></div>
 
 <div class="modal" id="pm"><div class="glass pd" id="pd">
-  <button class="x" id="pcl" aria-label="Close">✕</button>
-  <div class="px"><span class="vt"><img src="/logo.png" alt=""></span><div><div class="tg" style="display:inline-block;padding:5px 14px;border-radius:99px;border:1px solid var(--line);font:500 11px 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)">Flagship</div><h3>Premium Tweaks</h3><p>The complete Vyron optimization suite. Every advanced tweak, tested and applied safely, with a restore point before each change.</p></div></div>
-  <div class="eyebrow sec">What's included</div>
+  <button class="x" id="pcl" aria-label="Close" data-i18n-attr="aria-label:a11y.close">✕</button>
+  <div class="px"><span class="vt"><img src="/logo.png" alt=""></span><div><div class="tg" style="display:inline-block;padding:5px 14px;border-radius:99px;border:1px solid var(--line);font:500 11px 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)" data-i18n="prod.flag">Flagship</div><h3>Premium Tweaks</h3><p data-i18n="prod.desc">The complete Vyron optimization suite. Every advanced tweak, tested and applied safely, with a restore point before each change.</p></div></div>
+  <div class="eyebrow sec" data-i18n="inc.h">What's included</div>
   <div class="inc">
-    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="12" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M13 9.5h5M13 12.5h3M8 20h8"/></svg></div><div><h5>GPU Tweaks</h5><p>General GPU tweaks, plus AMD, NVIDIA and Intel.</p></div></div>
-    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></div><div><h5>CPU Tweaks</h5><p>General CPU tweaks for AMD and Intel.</p></div></div>
-    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><div><h5>System Tweaks</h5><p>Disk, memory, debloat, internet and processes.</p></div></div>
-    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg></div><div><h5>Firmware</h5><p>BIOS tweaks.</p></div></div>
+    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="12" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M13 9.5h5M13 12.5h3M8 20h8"/></svg></div><div><h5 data-i18n="prod.gpu">GPU Tweaks</h5><p data-i18n="inc.gpu.p">General GPU tweaks, plus AMD, NVIDIA and Intel.</p></div></div>
+    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></div><div><h5 data-i18n="prod.cpu">CPU Tweaks</h5><p data-i18n="inc.cpu.p">General CPU tweaks for AMD and Intel.</p></div></div>
+    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><div><h5 data-i18n="prod.sys">System Tweaks</h5><p data-i18n="inc.sys.p">Disk, memory, debloat, internet and processes.</p></div></div>
+    <div class="ic"><div class="ii"><svg viewBox="0 0 24 24"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg></div><div><h5 data-i18n="prod.fw">Firmware</h5><p data-i18n="inc.fw.p">BIOS tweaks.</p></div></div>
   </div>
-  <div class="eyebrow sec">Pricing</div>
+  <div class="eyebrow sec" data-i18n="plan.h">Pricing</div>
   <div class="plan">
-    <div><span class="tg">Best value</span><h5>Lifetime</h5><div class="pp" id="pprice">$5</div><small id="psub">one-time</small><div class="note">Pay once. All current and future updates.</div></div>
-    <button class="cta" id="buynow" type="button">Buy now</button>
+    <div><span class="tg" data-i18n="plan.best">Best value</span><h5 data-i18n="plan.name">Lifetime</h5><div class="pp" id="pprice">$5</div><small id="psub" data-i18n="price.plan">one-time</small><div class="note" data-i18n="plan.note">Pay once. All current and future updates.</div></div>
+    <button class="cta" id="buynow" type="button" data-i18n="buy">Buy now</button>
   </div>
-  <p class="legal-note">By purchasing you agree to our <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/refund.html" target="_blank" rel="noopener">Refund Policy</a>.</p>
+  <p class="legal-note" data-i18n="legal.note">By purchasing you agree to our <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/refund.html" target="_blank" rel="noopener">Refund Policy</a>.</p>
 </div></div>
-<div class="modal top" id="cpn" aria-hidden="true"><div class="glass box cpbox" role="dialog" aria-label="Scratch card discount">
-  <button class="x" id="cpx" type="button" aria-label="Close">✕</button>
-  <span class="eyebrow">Welcome gift</span>
-  <h3>Scratch &amp; save</h3>
-  <p class="sub">Scratch the card to reveal your discount. It's applied to your order automatically.</p>
-  <div class="scard" id="scard" tabindex="0" role="button" aria-label="Scratch card. Press Enter to reveal your discount.">
-    <div class="sc-under"><small>Your discount</small><b id="scpct">–</b><span class="sc-off">OFF</span><span class="sc-code" id="sccode">VYRON</span></div>
+<div class="modal top" id="cpn" aria-hidden="true"><div class="glass box cpbox" role="dialog" aria-label="Scratch card discount" data-i18n-attr="aria-label:a11y.scratchDialog">
+  <button class="x" id="cpx" type="button" aria-label="Close" data-i18n-attr="aria-label:a11y.close">✕</button>
+  <span class="eyebrow" id="cpeb" data-i18n="cp.eyebrow">Welcome gift</span>
+  <h3 data-i18n="cp.h">Scratch &amp; save</h3>
+  <p class="sub" data-i18n="cp.sub">Scratch the card to reveal your discount. It's applied to your order automatically.</p>
+  <div class="scard" id="scard" tabindex="0" role="button" aria-label="Scratch card. Press Enter to reveal your discount." data-i18n-attr="aria-label:a11y.scratchCard">
+    <div class="sc-under"><small data-i18n="cp.your">Your discount</small><b id="scpct">–</b><span class="sc-off" data-i18n="cp.off">OFF</span><span class="sc-code" id="sccode">VYRON</span></div>
     <canvas id="sccv"></canvas>
   </div>
-  <p class="sc-tip" id="sctip">Use your mouse or finger to scratch the card.</p>
+  <p class="sc-tip" id="sctip" data-i18n="cp.tip">Use your mouse or finger to scratch the card.</p>
   <div class="sc-res" id="scres" hidden>
-    <div class="sc-ok"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Discount applied to your order</div>
+    <div class="sc-ok"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span data-i18n="cp.ok">Discount applied to your order</span></div>
     <p class="sc-valid" id="scvalid"></p>
-    <div class="btnrow"><button class="btn2" id="sccopy" type="button">Copy code</button><button class="cta full" id="scgo" type="button">Shop now</button></div>
+    <div class="btnrow"><button class="btn2" id="sccopy" type="button" data-i18n="cp.copy">Copy code</button><button class="cta full" id="scgo" type="button" data-i18n="cp.shop">Shop now</button></div>
   </div>
 </div></div>
 <div class="modal top" id="cm"><div class="glass box wide" id="cb"></div></div>
 <div class="toast" id="toast"></div>
 
+<!--I18N-->
 <script>
 const $p=id=>document.getElementById(id);
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const DISCORD="https://discord.gg/vyron";
+
+/* ===== Language (EN / PL). I18N is injected by the build (src/i18n.js). ===== */
+const LOC={en:"en-US",pl:"pl-PL"};
+let LANG=document.documentElement.lang==="pl"?"pl":"en";
+const t=(k,v)=>{
+  let s=I18N[LANG][k];if(s===undefined)s=I18N.en[k];if(s===undefined)return k;
+  return v?s.replace(/\{(\w+)\}/g,(m,n)=>v[n]!==undefined?v[n]:m):s;
+};
+const nf=n=>n.toLocaleString(LOC[LANG]);
+const fmtDT=ms=>new Date(ms).toLocaleString(LOC[LANG],{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+function applyI18n(){
+  document.querySelectorAll("[data-i18n]").forEach(el=>{const s=I18N[LANG][el.dataset.i18n];if(s!==undefined)el.innerHTML=s});
+  document.querySelectorAll("[data-i18n-attr]").forEach(el=>el.dataset.i18nAttr.split(";").forEach(p=>{
+    const i=p.indexOf(":"),a=p.slice(0,i),s=I18N[LANG][p.slice(i+1)];if(s!==undefined)el.setAttribute(a,s)}));
+  document.querySelectorAll("a[href]").forEach(a=>{ // legal pages exist once per language
+    const m=/^(?:\/pl)?\/(terms|privacy|refund)\.html$/.exec(a.getAttribute("href"));
+    if(m)a.setAttribute("href",(LANG==="pl"?"/pl":"")+"/"+m[1]+".html")});
+}
+function setLang(l,byUser){
+  if(l!==LANG||byUser){
+    LANG=l;document.documentElement.lang=l;applyI18n();
+    document.querySelectorAll("[data-lang]").forEach(b=>{const on=b.dataset.lang===l;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
+    if(byUser){try{localStorage.setItem("vy-lang",l)}catch{}}
+    try{if(location.pathname==="/"||/^\/pl\/?$/.test(location.pathname))history.replaceState(null,"",l==="pl"?"/pl/":"/")}catch{}
+    renderPrices();renderDiscord();renderValid();if(!cpDone&&cx&&offer)paintFoil();
+    if($p("cm").classList.contains("open")&&redraw)redraw();
+  }
+}
+document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>setLang(b.dataset.lang,true));
 
 /* Navigation: animated tab switching (exit -> enter with staggered children) */
 let curTab="home",navBusy=false;
@@ -802,7 +867,7 @@ $p("explore").onclick=()=>go("products");
 /* Product (single item: Premium Tweaks, Lifetime) */
 const PRODUCT={id:0,name:"Premium Tweaks",opt:0,price:5};
 const toastEl=$p("toast");let tt;
-function toast(m){toastEl.textContent=m;toastEl.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove("on"),2200)}
+function toast(m){toastEl.textContent=m;toastEl.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove("on"),2600)}
 const openP=()=>$p("pm").classList.add("open"),closeP=()=>$p("pm").classList.remove("open");
 $p("pcl").onclick=closeP;
 $p("tile").onclick=e=>{
@@ -812,40 +877,52 @@ $p("tile").onclick=e=>{
 $p("tile").onkeydown=e=>{if((e.key==="Enter"||e.key===" ")&&e.target===$p("tile")){e.preventDefault();openP()}};
 $p("pm").onclick=e=>{if(e.target===$p("pm"))closeP()};
 
-/* Direct purchase: no cart, no account. One product, quantity 1; the server re-checks the price at checkout. */
+/* Direct purchase: no cart, no account. One product, quantity 1; the server re-checks the price at checkout.
+   Server errors carry a `code`; the text shown comes from the visitor's language (err.<code>). */
 const api=async(m,u,b)=>{
-  let r;try{r=await fetch("/api"+u,{method:m,headers:{"Content-Type":"application/json"},body:b?JSON.stringify(b):undefined})}catch{throw new Error("Connection problem. Please try again.")}
+  let r;try{r=await fetch("/api"+u,{method:m,headers:{"Content-Type":"application/json"},body:b?JSON.stringify(b):undefined})}catch{throw new Error(t("err.conn"))}
   let d={};try{d=await r.json()}catch{}
-  if(!r.ok){const e=new Error(d.error||"Something went wrong. Please try again.");e.status=r.status;e.data=d;throw e}
+  if(!r.ok){const e=new Error(d.code&&I18N.en["err."+d.code]!==undefined?t("err."+d.code):t("err.generic"));e.status=r.status;e.data=d;throw e}
   return d};
-/* Discount coupon (earned from the scratch card or typed in). Kept in the browser only for display; the server re-verifies the signed code at checkout. */
-let COUPON=null;
-try{const c=JSON.parse(localStorage.getItem("vy-coupon")||"null");if(c&&/^VYRON\d+-/.test(c.code)&&c.exp>Date.now()&&c.pct>=5&&c.pct<=20)COUPON={code:c.code,pct:c.pct,exp:c.exp}}catch{}
+
+/* Discount coupon (earned from the scratch card or typed in). Valid 24 h; kept in the browser only for display - the server
+   re-verifies the signed code at checkout. When it expires the visitor gets a NEW scratch card with a new random discount. */
+let COUPON=null,RETURNING=false,expT=null;
+try{const c=JSON.parse(localStorage.getItem("vy-coupon")||"null");
+  if(c&&/^VYRON\d+-/.test(c.code)&&c.exp>Date.now()&&c.pct>=5&&c.pct<=20)COUPON={code:c.code,pct:c.pct,exp:c.exp};
+  else if(c){RETURNING=true;localStorage.removeItem("vy-coupon")}}catch{}
 const fm=n=>Number.isInteger(n)?String(n):n.toFixed(2);
 function buildOrder(){
   const sub=Math.round(PRODUCT.price*100),tot=COUPON?Math.round(sub*(100-COUPON.pct)/100):sub;
-  return{items:[{id:1,productId:PRODUCT.id,name:PRODUCT.name,opt:"Lifetime",qty:1,unit:PRODUCT.price,line:PRODUCT.price}],count:1,sub:sub/100,disc:(sub-tot)/100,coupon:COUPON,total:tot/100};
+  return{items:[{id:1,productId:PRODUCT.id,name:PRODUCT.name,qty:1,unit:PRODUCT.price,line:PRODUCT.price}],count:1,sub:sub/100,disc:(sub-tot)/100,coupon:COUPON,total:tot/100};
 }
-let cartData=buildOrder(),payMode=false,payMethod=null,cdraft="";
+let cartData=buildOrder(),payMode=false,payMethod=null,cdraft="",redraw=null,view="";
 const money=n=>`<span class="amt"><sup>$</sup>${fm(n)}</span>`;
 function renderPrices(){
-  const o=buildOrder(),was=COUPON?`was $${fm(o.sub)} · −${COUPON.pct}% applied`:null;
+  const o=buildOrder(),was=COUPON?t("price.was",{old:fm(o.sub),pct:COUPON.pct}):null;
   $p("tprice").textContent="$"+fm(o.total);$p("pprice").textContent="$"+fm(o.total);
-  $p("tsub").textContent=was||"one-time · lifetime";$p("psub").textContent=was||"one-time";
-  $p("stkp").textContent="$"+fm(o.total);$p("stksub").textContent=was||"one-time · lifetime";
+  $p("tsub").textContent=was||t("price.tile");$p("psub").textContent=was||t("price.plan");
+  $p("stkp").textContent="$"+fm(o.total);$p("stksub").textContent=was||t("price.tile");
+}
+const timeLeft=ms=>t("left",{h:Math.floor(ms/3600000),m:Math.floor(ms%3600000/60000)});
+function scheduleExpiry(){clearTimeout(expT);if(COUPON)expT=setTimeout(couponExpired,Math.min(Math.max(COUPON.exp-Date.now(),0)+300,2e9))}
+function couponExpired(){
+  if(!COUPON)return;
+  if(COUPON.exp>Date.now()){scheduleExpiry();return}
+  setCoupon(null);RETURNING=true;resetCard();toast(t("toast.couponExpired"));setTimeout(showOffer,3500);
 }
 function setCoupon(c){
   COUPON=c;try{c?localStorage.setItem("vy-coupon",JSON.stringify(c)):localStorage.removeItem("vy-coupon")}catch{}
-  renderPrices();
+  scheduleExpiry();renderPrices();
   if(payMode&&$p("cm").classList.contains("open")){cartData=buildOrder();drawPay()}
 }
 async function applyManual(){
-  const v=(cdraft||"").trim();if(!v){toast("Enter a discount code");return}
+  const v=(cdraft||"").trim();if(!v){toast(t("toast.enterCode"));return}
   const b=$p("cpapply");if(b)b.disabled=true;
-  try{const d=await api("POST","/coupon",{code:v});cdraft="";setCoupon({code:d.code,pct:d.pct,exp:d.exp});toast("−"+d.pct+"% discount applied")}
+  try{const d=await api("POST","/coupon",{code:v});cdraft="";setCoupon({code:d.code,pct:d.pct,exp:d.exp});toast(t("toast.applied",{pct:d.pct}))}
   catch(err){if(b)b.disabled=false;toast(err.message)}
 }
-renderPrices();
+renderPrices();scheduleExpiry();
 const ICON={
 sol:`<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="gsol" x1="3" y1="19.4" x2="20.8" y2="4.6" gradientUnits="userSpaceOnUse"><stop stop-color="#9945FF"/><stop offset="1" stop-color="#14F195"/></linearGradient></defs><g fill="url(#gsol)"><path d="M6.2 4.6h14.6l-3 3.5H3.2z"/><path d="M3.2 10.25h14.6l3 3.5H6.2z"/><path d="M6.2 15.9h14.6l-3 3.5H3.2z"/></g></svg>`,
 ltc:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#345D9D"/><path d="M10.8 6 8.8 15.8h6.8M7.6 12.6l6.2-2.4" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -853,31 +930,38 @@ paypal:`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#3aa0ff" d="M7.0
 giftcard:`<svg viewBox="0 0 24 24" fill="none" stroke="#fbbf6a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11" rx="2"/><path d="M3.5 13h17M12 9v11"/><path d="M12 9C10.5 9 8.2 8.4 8.2 6.6c0-1.1.8-1.8 1.8-1.8 1.4 0 2 1.9 2 4.2zM12 9c1.5 0 3.8-.6 3.8-2.4 0-1.1-.8-1.8-1.8-1.8-1.4 0-2 1.9-2 4.2z"/></svg>`};
 ICON.blik=`<img src="/img/blik.png" alt="BLIK" draggable="false">`;
 const icon=(id,lg)=>`<span class="pmi ${id} ${lg?"lg":""}">${ICON[id]}</span>`;
-const PM=[["Crypto",[["sol","Solana","Send SOL to our wallet","SOL"],["ltc","Litecoin","Send LTC to our wallet","LTC"]]],["BLIK",[["blik","BLIK","Pay via a ticket on our Discord","Ticket"]]],["PayPal",[["paypal","PayPal","Pay via a ticket on our Discord","Ticket"]]],["Gift cards",[["giftcard","Gift cards","Pay via a ticket on our Discord","Ticket"]]]];
+/* [group key, [[id, name (literal or key), hint key, badge (coin symbol or key)], ...]] */
+const PM=[["pm.crypto",[["sol","Solana","pm.sol.hint","SOL"],["ltc","Litecoin","pm.ltc.hint","LTC"]]],["pm.blik",[["blik","BLIK","pm.ticket.hint","pm.ticket.badge"]]],["pm.paypal",[["paypal","PayPal","pm.ticket.hint","pm.ticket.badge"]]],["pm.giftcard",[["giftcard","pm.giftcard","pm.ticket.hint","pm.ticket.badge"]]]];
+const tl=s=>/^pm\./.test(s)?t(s):s;
 const COIN={sol:"SOL",ltc:"LTC"};
 
-/* Live crypto rates (USD per coin), refreshed from the server every 15 s while the cart is open */
+/* Live crypto rates (USD per coin): only used for the "≈ amount" hints in the method list. The real, locked amount comes from the server at checkout. */
 let rates={},ratesAt=0,ratesErr=false,ratesTimer=null;
 const cryptoAmt=(id,total)=>rates[id]>0?Math.ceil(total/rates[id]*1e6)/1e6:null;
 const fmtAmt=a=>a.toFixed(6);
 const fmtUsd=n=>n>=100?n.toFixed(2):n.toPrecision(5).replace(/\.?0+$/,"");
+const mmss=ms=>{ms=Math.max(0,Math.ceil(ms/1000));return Math.floor(ms/60)+":"+String(ms%60).padStart(2,"0")};
 function refreshLive(){
   document.querySelectorAll("[data-coin]").forEach(el=>{
     const id=el.dataset.coin,a=cryptoAmt(id,+el.dataset.total);
-    const txt=a===null?(ratesErr?"rate n/a":"…"):fmtAmt(a)+(el.dataset.sfx||"");
+    const txt=a===null?(ratesErr?t("rate.na"):"…"):"≈ "+fmtAmt(a)+(el.dataset.sfx||"");
     if(el.textContent!==txt){el.textContent=txt;if(a!==null){el.classList.remove("flash");void el.offsetWidth;el.classList.add("flash")}}
   });
-  document.querySelectorAll("[data-rate]").forEach(el=>{const id=el.dataset.rate;el.textContent=rates[id]>0?`1 ${COIN[id]} = $${fmtUsd(rates[id])}`:"rate unavailable"});
-  document.querySelectorAll("[data-age]").forEach(el=>{el.textContent=ratesAt?Math.max(0,Math.round((Date.now()-ratesAt)/1000))+"s ago":"…"});
+  if(ORD){
+    const left=ORD.d.crypto.expires-Date.now();
+    document.querySelectorAll("[data-quote]").forEach(el=>{el.textContent=mmss(left)});
+    if(view==="order"&&ORD.status==="waiting"&&!ORD.qexp&&left<=0){ORD.qexp=true;drawCrypto()}
+  }
+  document.querySelectorAll("[data-left]").forEach(el=>{el.textContent=COUPON?timeLeft(COUPON.exp-Date.now()):""});
 }
 async function fetchRates(){
   try{const d=await api("GET","/rates");rates=d.rates||{};ratesAt=Date.now();ratesErr=!Object.keys(rates).length}catch{ratesErr=!Object.keys(rates).length}
   refreshLive();
 }
-function startRates(){fetchRates();clearInterval(ratesTimer);ratesTimer=setInterval(()=>{if($p("cm").classList.contains("open"))fetchRates()},15000)}
+function startRates(){fetchRates();clearInterval(ratesTimer);ratesTimer=setInterval(()=>{if($p("cm").classList.contains("open")&&view==="pay")fetchRates()},15000)}
 setInterval(refreshLive,1000);
 
-function buyNow(){closeP();cartData=buildOrder();payMode=true;payMethod=null;drawPay();$p("cm").classList.add("open");startRates()}
+function buyNow(){closeP();stopPoll();ORD=null;cartData=buildOrder();payMode=true;payMethod=null;drawPay();$p("cm").classList.add("open");startRates()}
 function closeCart(){$p("cm").classList.remove("open")}
 $p("buynow").onclick=buyNow;
 
@@ -891,97 +975,157 @@ $p("stkbuy").onclick=buyNow;
 })();
 
 /* Discord community counter: numbers come from /api/discord (cached server-side); hidden if unavailable */
+let DC=null;
+function renderDiscord(){
+  if(!DC)return;
+  $p("dchtxt").innerHTML=t("dc.hero",{m:nf(DC.m)});
+  $p("dcctxt").innerHTML=t("dc.card",{o:DC.o>0?t("dc.online",{o:nf(DC.o)}):"",m:nf(DC.m)});
+  $p("dchero").hidden=false;$p("dccard").hidden=false;
+}
 (async function(){
   try{
     const r=await fetch("/api/discord");if(!r.ok)return;
     const d=await r.json(),m=Math.floor(+d.members),o=Math.floor(+d.online);
     if(!(m>0))return;
-    const f=n=>n.toLocaleString("en-US");
-    $p("dchtxt").innerHTML="Join <b>"+f(m)+"</b> members on Discord";
-    $p("dcctxt").innerHTML=(o>0?"<b>"+f(o)+"</b> online · ":"")+"<b>"+f(m)+"</b> members";
-    $p("dchero").hidden=false;$p("dccard").hidden=false;
+    DC={m,o};renderDiscord();
   }catch{}
 })();
 
+/* ===== Payment window ===== */
 function drawPay(){
+  view="pay";redraw=drawPay;
   const c=cartData;
-  $p("cb").innerHTML=`<button class="x" id="cx">✕</button><h3>Payment method</h3><p class="sub">Choose how you want to pay.</p>
-    <div class="osum">${c.items.map(i=>`<div class="ln"><div>${esc(i.name)}<span> · ${esc(i.opt)}${i.qty>1?" × "+i.qty:""}</span></div>${money(i.line)}</div>`).join("")}
-    ${c.coupon?`<div class="ln"><div>Discount<span> · ${esc(c.coupon.code)} (−${c.coupon.pct}%)</span></div><span class="amt dn">−<sup>$</sup>${fm(c.disc)}</span></div>`:""}
-    <div class="tt"><span>Total</span>${money(c.total)}</div></div>${c.coupon?"":`<div class="cprow"><input id="cpin" placeholder="Discount code" maxlength="40" autocomplete="off" spellcheck="false" value="${esc(cdraft)}"><button class="btn2" id="cpapply" type="button">Apply</button></div>`}`
-    +PM.map(([g,list])=>`<div class="pmg">${g}</div>`+list.map(([id,name,hint,badge])=>`<button class="pmo ${payMethod===id?"on":""}" data-pm="${id}">${icon(id)}<span class="pmt">${name}<small>${hint}</small></span>${COIN[id]?`<span class="pmb amtb" data-coin="${id}" data-total="${c.total}" data-sfx=" ${COIN[id]}">…</span>`:`<span class="pmb">${badge}</span>`}<span class="pmc"></span></button>`).join("")).join("")
-    +`<div class="payrow"><button class="btn2" id="pk">Cancel</button><button class="cta" id="pc" ${payMethod?"":"disabled"}>Place order · $${fm(c.total)}</button></div>`;
+  $p("cb").innerHTML=`<button class="x" id="cx" aria-label="${esc(t("a11y.close"))}">✕</button><h3>${t("pay.h")}</h3><p class="sub">${t("pay.sub")}</p>
+    <div class="osum">${c.items.map(i=>`<div class="ln"><div>${esc(i.name)}<span> · ${esc(t("plan.name"))}${i.qty>1?" × "+i.qty:""}</span></div>${money(i.line)}</div>`).join("")}
+    ${c.coupon?`<div class="ln"><div>${t("pay.discount")}<span> · ${esc(c.coupon.code)} (−${c.coupon.pct}%) · <span data-left>${esc(timeLeft(c.coupon.exp-Date.now()))}</span></span></div><span class="amt dn">−<sup>$</sup>${fm(c.disc)}</span></div>`:""}
+    <div class="tt"><span>${t("pay.total")}</span>${money(c.total)}</div></div>${c.coupon?"":`<div class="cprow"><input id="cpin" placeholder="${esc(t("pay.codePh"))}" maxlength="40" autocomplete="off" spellcheck="false" value="${esc(cdraft)}"><button class="btn2" id="cpapply" type="button">${t("pay.apply")}</button></div>`}`
+    +PM.map(([g,list])=>`<div class="pmg">${t(g)}</div>`+list.map(([id,name,hint,badge])=>`<button class="pmo ${payMethod===id?"on":""}" data-pm="${id}">${icon(id)}<span class="pmt">${esc(tl(name))}<small>${t(hint)}</small></span>${COIN[id]?`<span class="pmb amtb" data-coin="${id}" data-total="${c.total}" data-sfx=" ${COIN[id]}">…</span>`:`<span class="pmb">${t(badge)}</span>`}<span class="pmc"></span></button>`).join("")).join("")
+    +`<div class="payrow"><button class="btn2" id="pk">${t("pay.cancel")}</button><button class="cta" id="pc" ${payMethod?"":"disabled"}>${t("pay.place",{total:fm(c.total)})}</button></div>`;
   $p("cx").onclick=closeCart;
   refreshLive();
 }
-let lastPaid=null;
+let lastPaid=null,ORD=null;
+
+/* The message the customer pastes into a Discord ticket (also used for the manual TX-ID fallback). */
+const orderMsg=(d,amt,tx)=>{const p=d.pay;return[t("msg.order",{id:d.orderId}),t("msg.pay",{coin:p.coin}),t("msg.amount",{amt:amt||"—",coin:p.coin,total:fm(d.total)}),...(d.coupon?[t("msg.coupon",{code:d.coupon.code})]:[]),t("msg.tx",{tx:tx||t("msg.paste")})].join("\n")};
+const closeBtn=()=>`<button class="x" id="cx" aria-label="${esc(t("a11y.close"))}">✕</button>`;
+const SPIN=`<i class="ico spin"></i>`,CHECK=`<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>`,WARN=`<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>`;
+
 function drawPaid(d){
-  lastPaid=d;
-  const p=d.pay,crypto=p.type==="crypto";
-  const pre=`<button class="x" id="cx">✕</button>
-    <div class="ohead">${icon(p.method,1)}<div><h3>Order #${d.orderId}</h3><span class="ostat">Awaiting payment</span></div></div>
-    <div class="due"><div><b>${esc(p.label)}</b><small>${crypto?"Order total":"Pay via a Discord ticket"}</small></div>${money(d.total)}</div>`;
-  if(crypto){
-    $p("cb").innerHTML=pre+`
-      <div class="send"><div class="top"><span class="lab" style="margin:0">Send exactly</span><span class="live"><i></i>Live</span></div>
-        <div class="big"><span data-coin="${p.method}" data-total="${d.total}" id="sendamt">…</span><small>${esc(p.coin)}</small></div>
-        <div class="meta"><span data-rate="${p.method}"></span> · updated <span data-age></span> · refreshes every 15 s<br>This amount equals <b>$${fm(d.total)}</b> and follows the market, so send the amount shown at the moment you pay.</div>
-        <button class="btn2" id="cpamt" style="width:100%;margin-top:12px">Copy amount</button></div>
-      <div class="lab">${esc(p.coin)} address</div><div class="payaddr">${esc(p.address)}</div>
-      <button class="btn2" data-copy="${esc(p.address)}" style="width:100%">Copy address</button>
-      <div class="btnrow"><button class="cta full" id="sentbtn">I've sent the payment</button><a class="cta full ghost2" href="${esc(p.discord)}" target="_blank" rel="noopener">Open our Discord</a></div>`;
-    refreshLive();
-  }else{
-    $p("cb").innerHTML=pre+`<ol class="steps"><li><span>Create a ticket on our Discord server.</span></li><li><span>Mention your <b>Order #${d.orderId}</b> and that you want to pay with <b>${esc(p.label)}</b>.${d.coupon?` Include your discount code <b>${esc(d.coupon.code)}</b>.`:""} We'll take it from there.</span></li></ol>
-      <a class="cta full" href="${esc(p.discord)}" target="_blank" rel="noopener">Open our Discord</a>`;
-  }
+  lastPaid=d;redraw=()=>drawPaid(d);
+  const p=d.pay;
+  if(p.type==="crypto"){drawCrypto();return}
+  view="ticket";
+  $p("cb").innerHTML=`${closeBtn()}
+    <div class="ohead">${icon(p.method,1)}<div><h3>${t("ord.title",{id:d.orderId})}</h3><span class="ostat">${t("ord.st.waiting")}</span></div></div>
+    <div class="due"><div><b>${esc(p.label)}</b><small>${t("ord.ticket")}</small></div>${money(d.total)}</div>
+    <ol class="steps"><li><span>${t("ord.ticket.1")}</span></li><li><span>${t("ord.ticket.2",{id:esc(d.orderId),method:esc(p.method==="giftcard"?t("pm.giftcard"):p.label),coupon:d.coupon?t("ord.ticket.coupon",{code:esc(d.coupon.code)}):""})}</span></li></ol>
+    <a class="cta full" href="${esc(p.discord)}" target="_blank" rel="noopener">${t("btn.discord")}</a>`;
   $p("cx").onclick=closeCart;
 }
-function drawGuide(d,amt){
-  const p=d.pay;
-  const msg=`Order #${d.orderId}\nPayment: ${p.coin}\nAmount sent: ${amt||"—"} ${p.coin} ($${fm(d.total)})${d.coupon?"\nDiscount code: "+d.coupon.code:""}\nTX ID: <paste your transaction ID here>`;
-  $p("cb").innerHTML=`<button class="x" id="cx">✕</button>
-    <div class="ohead">${icon(p.method,1)}<div><h3>Order #${d.orderId}</h3><span class="sent">Payment sent</span></div></div>
-    <p class="sub" style="margin-bottom:6px">One last step: send us the transaction ID (TX ID) in a ticket so we can confirm your payment and give you the product.</p>
+
+/* Crypto order: the amount is locked by the server for 30 min and the blockchain is polled until the payment shows up. */
+function drawCrypto(){
+  view="order";const o=ORD,d=o.d,p=d.pay,c=d.crypto,st=o.status,left=c.expires-Date.now();
+  const chip={waiting:["",t("ord.st.waiting")],detected:["det",t("ord.st.detected")],confirmed:["okc",t("ord.st.confirmed")],expired:["bad",t("ord.st.expired")]}[st];
+  let panel;
+  if(st==="confirmed")panel=["ok",CHECK,t("panel.confirmed")];
+  else if(st==="detected")panel=["det",SPIN,t("panel.detected",{conf:o.conf||0,req:o.req||1})];
+  else if(st==="expired")panel=["bad",WARN,t("panel.expired")];
+  else if(o.qexp||left<=0)panel=["bad",SPIN,t("panel.qexp")];
+  else panel=["",SPIN,t("panel.waiting")];
+  const extra=o.degraded&&(st==="waiting"||st==="detected")?`<span class="dg">${t("panel.degraded").replace(/<\/?span>/g,"")}</span>`:"";
+  const head=`${closeBtn()}<div class="ohead">${icon(p.method,1)}<div><h3>${t("ord.title",{id:d.orderId})}</h3><span class="ostat ${chip[0]}">${chip[1]}</span></div></div>
+    <div class="due"><div><b>${esc(p.label)}</b><small>${t("ord.total")}</small></div>${money(d.total)}</div>`;
+  const pnl=`<div class="opanel ${panel[0]}" role="status" aria-live="polite">${panel[1]}<div>${panel[2]}${extra}</div></div>`;
+  const disc=`<a class="cta full" href="${esc(p.discord)}" target="_blank" rel="noopener">${t("btn.ticket")}</a>`;
+  if(st==="confirmed"){
+    $p("cb").innerHTML=head+pnl+`<div class="tpl" id="tpl">${esc(orderMsg(d,c.amount,o.txid))}</div><button class="btn2" id="cptpl" style="width:100%">${t("guide.copy")}</button><div class="btnrow">${disc}</div>`;
+  }else{
+    const rate=`1 ${p.coin} = $${fmtUsd(c.rate)}`,expired=st==="expired"||o.qexp||left<=0;
+    $p("cb").innerHTML=head+(st==="expired"?"":`
+      <div class="send"><div class="top"><span class="lab" style="margin:0">${t("crypto.send")}</span><span class="live"><i></i>${t("crypto.locked")}</span></div>
+        <div class="big"><span id="sendamt">${esc(c.amount)}</span><small>${esc(p.coin)}</small></div>
+        <div class="meta">${expired?t("crypto.rateExp",{rate}):t("crypto.rate",{rate,time:'<span data-quote>'+mmss(left)+'</span>'})}</div>
+        <button class="btn2" id="cpamt" style="width:100%;margin-top:12px">${t("crypto.copyAmt")}</button></div>
+      <div class="qnote">${t("crypto.note",{network:t("net."+p.method)})}</div>
+      <div class="lab">${t("crypto.addr",{coin:esc(p.coin)})}</div><div class="payaddr">${esc(p.address)}</div>
+      <button class="btn2" data-copy="${esc(p.address)}" style="width:100%">${t("crypto.copyAddr")}</button>`)
+      +pnl+`<div class="btnrow">${st==="expired"||expired?`<button class="cta full" id="neword">${t("btn.new")}</button>`:""}<button class="cta full ghost2" id="manual">${t("btn.manual")}</button></div>`;
+  }
+  $p("cx").onclick=closeCart;refreshLive();
+}
+function stopPoll(){if(ORD&&ORD.timer){clearInterval(ORD.timer);ORD.timer=null}}
+function startPoll(){stopPoll();ORD.timer=setInterval(pollOrder,5000);pollOrder()}
+async function pollOrder(){
+  const o=ORD;if(!o||o.busy)return;o.busy=true;
+  const before=o.status+"|"+o.conf+"|"+o.degraded;
+  try{
+    const r=await api("POST","/verify",{token:o.d.crypto.token});
+    if(o!==ORD)return;
+    o.degraded=!!r.degraded;o.status=r.status;o.txid=r.txid;o.conf=r.confirmations;o.req=r.required;
+    if(r.status==="confirmed"||r.status==="expired")stopPoll();
+  }catch(e){if(o!==ORD)return;o.degraded=true;if(e.data&&e.data.code==="bad_token")stopPoll()}
+  finally{o.busy=false}
+  if(o===ORD&&before!==o.status+"|"+o.conf+"|"+o.degraded){
+    if(o.status==="confirmed"&&!$p("cm").classList.contains("open")){$p("cm").classList.add("open");lastPaid=o.d;redraw=()=>drawPaid(o.d);drawCrypto()}
+    else if(view==="order"&&$p("cm").classList.contains("open"))drawCrypto();
+    else if(o.status==="confirmed")toast(t("ord.st.confirmed")+" ✓");
+  }
+}
+function drawGuide(d,amt,tx){
+  view="guide";redraw=()=>drawGuide(d,amt,tx);
+  const p=d.pay,msg=orderMsg(d,amt,tx);
+  $p("cb").innerHTML=`${closeBtn()}
+    <div class="ohead">${icon(p.method,1)}<div><h3>${t("ord.title",{id:d.orderId})}</h3><span class="sent">${t("ord.st.sent")}</span></div></div>
+    <p class="sub" style="margin-bottom:6px">${t("guide.sub")}</p>
     <ol class="steps">
-      <li><span><b>Find your TX ID.</b> Open your wallet or exchange, go to the transaction history, open the ${esc(p.coin)} transfer you just made and copy its <b>Transaction ID</b> (also called TX hash). It's a long string of letters and numbers.</span></li>
-      <li><span><b>Open a ticket</b> on our Discord server.</span></li>
-      <li><span><b>Paste this message</b> into the ticket, with your TX ID in place of the placeholder (copy it below).</span></li>
-      <li><span><b>Wait for confirmation.</b> Once the transfer is confirmed on the blockchain we deliver your product in the ticket.</span></li>
+      <li><span>${t("guide.1",{coin:esc(p.coin)})}</span></li>
+      <li><span>${t("guide.2")}</span></li>
+      <li><span>${t("guide.3")}</span></li>
+      <li><span>${t("guide.4")}</span></li>
     </ol>
     <div class="tpl" id="tpl">${esc(msg)}</div>
-    <button class="btn2" id="cptpl" style="width:100%">Copy message</button>
-    <div class="btnrow"><a class="cta full" href="${esc(p.discord)}" target="_blank" rel="noopener">Open ticket on Discord</a><button class="cta full ghost2" id="gback">Back to payment details</button></div>`;
+    <button class="btn2" id="cptpl" style="width:100%">${t("guide.copy")}</button>
+    <div class="btnrow"><a class="cta full" href="${esc(p.discord)}" target="_blank" rel="noopener">${t("btn.ticket")}</a><button class="cta full ghost2" id="gback">${t("guide.back")}</button></div>`;
   $p("cx").onclick=closeCart;
-  $p("cptpl").onclick=async e=>{try{await navigator.clipboard.writeText(msg);e.target.textContent="Copied ✓";setTimeout(()=>{e.target.textContent="Copy message"},1600)}catch{toast("Select the message and copy it manually")}};
-  $p("gback").onclick=()=>drawPaid(d);
+}
+async function copyTo(text,btn,failKey){
+  const orig=btn.textContent;
+  try{await navigator.clipboard.writeText(text);btn.textContent=t("copied");setTimeout(()=>{btn.textContent=orig},1600)}catch{toast(t(failKey))}
 }
 $p("cb").onclick=async e=>{
   try{
     if(e.target.closest("[data-pm]")){payMethod=e.target.closest("[data-pm]").dataset.pm;drawPay();return}
     else if(e.target.id==="pk"){closeCart();return}
     else if(e.target.id==="cpapply"){applyManual();return}
-    else if(e.target.id==="pc"){if(!payMethod)return;e.target.disabled=true;const d=await api("POST","/checkout",{method:payMethod,coupon:COUPON?COUPON.code:undefined,items:cartData.items.map(i=>({productId:i.productId,qty:i.qty}))});payMode=false;payMethod=null;drawPaid(d);return}
-    else if(e.target.id==="sentbtn"){
-      const amt=($p("sendamt")||{}).textContent;const a=/^[0-9.]+$/.test(amt||"")?amt:"";
-      e.target.disabled=true;try{await api("POST","/orders/"+lastPaid.orderId+"/sent")}catch{}
-      drawGuide(lastPaid,a);return}
-    else if(e.target.id==="cpamt"){const a=($p("sendamt")||{}).textContent||"";if(!/^[0-9.]+$/.test(a)){toast("Rate not loaded yet");return}try{await navigator.clipboard.writeText(a);e.target.textContent="Copied ✓";setTimeout(()=>{e.target.textContent="Copy amount"},1600)}catch{toast("Select the amount and copy it manually")}return}
-    else if(e.target.closest("[data-copy]")){const b=e.target.closest("[data-copy]");try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="Copied ✓";setTimeout(()=>{b.textContent="Copy address"},1600)}catch{toast("Select the address and copy it manually")}return}
+    else if(e.target.id==="pc"){
+      if(!payMethod)return;e.target.disabled=true;
+      const d=await api("POST","/checkout",{method:payMethod,coupon:COUPON?COUPON.code:undefined,items:cartData.items.map(i=>({productId:i.productId,qty:i.qty}))});
+      payMode=false;payMethod=null;
+      if(d.crypto){ORD={d,status:"waiting",txid:null,conf:0,req:1,degraded:false,timer:null,busy:false,qexp:false};drawPaid(d);startPoll()}
+      else drawPaid(d);
+      return}
+    else if(e.target.id==="manual"){const o=ORD;drawGuide(o.d,o.d.crypto.amount,o.txid);return}
+    else if(e.target.id==="neword"){stopPoll();ORD=null;cartData=buildOrder();payMode=true;payMethod=null;drawPay();startRates();return}
+    else if(e.target.id==="gback"){drawPaid(lastPaid);return}
+    else if(e.target.id==="cptpl"){copyTo(($p("tpl")||{}).textContent||"",e.target,"toast.copyMsg");return}
+    else if(e.target.id==="cpamt"){copyTo(($p("sendamt")||{}).textContent||"",e.target,"toast.copyAmount");return}
+    else if(e.target.closest("[data-copy]")){const b=e.target.closest("[data-copy]");copyTo(b.dataset.copy,b,"toast.copyAddress");return}
     else return;
   }catch(err){
-    if(err.data&&err.data.couponInvalid){setCoupon(null);if(payMode&&$p("cm").classList.contains("open")){cartData=buildOrder();drawPay()}}
-    const b=$p("pc")||$p("sentbtn");if(b)b.disabled=false;toast(err.message)}
+    if(err.data&&err.data.couponInvalid){setCoupon(null);RETURNING=true;resetCard();setTimeout(showOffer,3500);if(payMode&&$p("cm").classList.contains("open")){cartData=buildOrder();drawPay()}}
+    const b=$p("pc");if(b)b.disabled=false;toast(err.message)}
 };
 $p("cb").oninput=e=>{if(e.target.id==="cpin")cdraft=e.target.value};
 $p("cb").onkeydown=e=>{if(e.key==="Enter"&&e.target.id==="cpin"){e.preventDefault();applyManual()}};
 $p("cm").onclick=e=>{if(e.target===$p("cm"))closeCart()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeP();closeCp()}});
 
-/* ===== Scratch-card coupon: appears COUPON_DELAY ms after the page loads (once per visitor, until the code expires) ===== */
+/* ===== Scratch-card coupon: appears COUPON_DELAY ms after the page loads, and again with a new discount each time the old one expires (every 24 h) ===== */
 const COUPON_DELAY=5000,REVEAL_AT=.4; // reveal automatically once 40% of the foil is scratched off
 const cv=$p("sccv"),sc=$p("scard");
-let offer=null,cpDone=false,cpDown=false,cpLast=null,cpChk=0,cx=null;
+let offer=null,cpDone=false,cpDown=false,cpLast=null,cpChk=0,cx=null,offering=false;
 const closeCp=()=>$p("cpn").classList.remove("open");
 function paintFoil(){
   const w=cv.offsetWidth,h=cv.offsetHeight,dpr=Math.min(window.devicePixelRatio||1,2);
@@ -995,9 +1139,9 @@ function paintFoil(){
   for(let i=0;i<650;i++){cx.fillStyle=Math.random()<.5?"rgba(255,255,255,.18)":"rgba(10,12,20,.12)";cx.fillRect(Math.random()*w,Math.random()*h,1.6,1.6)}
   cx.textAlign="center";cx.textBaseline="middle";
   cx.fillStyle="rgba(14,16,24,.62)";cx.font="800 28px Manrope,Inter,sans-serif";if("letterSpacing" in cx)cx.letterSpacing="5px";
-  cx.fillText("SCRATCH HERE",w/2,h/2-10);
+  cx.fillText(t("cp.foil1"),w/2,h/2-10);
   cx.fillStyle="rgba(14,16,24,.5)";cx.font="500 12px 'JetBrains Mono',monospace";if("letterSpacing" in cx)cx.letterSpacing="3px";
-  cx.fillText("5% – 20% OFF",w/2,h/2+22);
+  cx.fillText(t("cp.foil2"),w/2,h/2+22);
   cx.strokeStyle="#000";cx.globalCompositeOperation="destination-out"; // erase strength = stroke alpha, so it must be fully opaque
 }
 function cpPos(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*(cv.offsetWidth/r.width),y:(e.clientY-r.top)*(cv.offsetHeight/r.height)}}
@@ -1011,13 +1155,20 @@ function cpCheck(force){
   const now=performance.now();if(!force&&now-cpChk<140)return;cpChk=now;
   if(cpCleared()>=REVEAL_AT)cpReveal();
 }
+function renderValid(){if(offer&&cpDone)$p("scvalid").textContent=t("cp.valid",{d:fmtDT(offer.exp)})}
 function cpReveal(){
   if(cpDone||!offer)return;cpDone=true;cpDown=false;
   cv.classList.add("gone");sc.classList.add("won");sc.removeAttribute("role");sc.removeAttribute("tabindex");
   $p("sctip").hidden=true;$p("scres").hidden=false;
-  $p("scvalid").textContent="Valid until "+new Date(offer.exp).toLocaleDateString("en-US",{month:"short",day:"numeric"})+"";
+  renderValid();
   setCoupon({code:offer.code,pct:offer.pct,exp:offer.exp}); // <- the discount is attached automatically
-  toast("−"+offer.pct+"% applied to your order");
+  toast(t("toast.appliedOrder",{pct:offer.pct}));
+}
+/* Back to a fresh, unscratched card (used when a coupon expires and a new one is rolled) */
+function resetCard(){
+  offer=null;cpDone=false;cpDown=false;
+  cv.classList.remove("gone");sc.classList.remove("won");sc.setAttribute("role","button");sc.setAttribute("tabindex","0");
+  $p("sctip").hidden=false;$p("scres").hidden=true;$p("scpct").textContent="–";$p("sccode").textContent="VYRON";
 }
 cv.addEventListener("pointerdown",e=>{if(cpDone)return;e.preventDefault();cpDown=true;try{cv.setPointerCapture(e.pointerId)}catch{}cpLast=cpPos(e);cpSeg(cpLast,cpLast)});
 cv.addEventListener("pointermove",e=>{if(!cpDown||cpDone)return;const p=cpPos(e);cpSeg(cpLast,p);cpLast=p;cpCheck(false)});
@@ -1026,16 +1177,30 @@ sc.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&!cpDone){e.
 $p("cpx").onclick=closeCp;
 $p("cpn").onclick=e=>{if(e.target===$p("cpn"))closeCp()};
 $p("scgo").onclick=()=>{closeCp();go("products")};
-$p("sccopy").onclick=async e=>{try{await navigator.clipboard.writeText(offer.code);e.target.textContent="Copied ✓";setTimeout(()=>{e.target.textContent="Copy code"},1600)}catch{toast("Select the code and copy it manually")}};
+$p("sccopy").onclick=async e=>{if(offer)copyTo(offer.code,e.target,"toast.copyCode")};
 async function showOffer(){
-  if(COUPON||offer)return; // visitor already has a valid code
+  if(COUPON||offer||offering)return; // visitor already has a valid code
   if(document.querySelector(".modal.open")){setTimeout(showOffer,2000);return} // never interrupt a purchase
-  try{offer=await api("POST","/coupon")}catch{return}
+  offering=true;let o;
+  try{o=await api("POST","/coupon")}catch{offering=false;return}
+  offering=false;if(COUPON)return;offer=o;
+  const eb=$p("cpeb");eb.dataset.i18n=RETURNING?"cp.eyebrow2":"cp.eyebrow";eb.innerHTML=t(eb.dataset.i18n);
   $p("scpct").textContent=offer.pct+"%";$p("sccode").textContent=offer.code;
   $p("cpn").classList.add("open");$p("cpn").setAttribute("aria-hidden","false");
   requestAnimationFrame(paintFoil);
 }
 setTimeout(showOffer,COUPON_DELAY);
+
+/* First visit: pick the language. /pl/ is already Polish; on / use the saved choice, else the browser language. */
+(function(){
+  let pref=null;try{pref=localStorage.getItem("vy-lang")}catch{}
+  const nav=String((navigator.languages&&navigator.languages[0])||navigator.language||"en").toLowerCase();
+  if(location.pathname==="/"||location.pathname==="/index.html"){
+    const want=pref||(nav.startsWith("pl")?"pl":"en");
+    if(want!==LANG)setLang(want,false);
+  }
+  document.querySelectorAll("[data-lang]").forEach(b=>{const on=b.dataset.lang===LANG;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
+})();
 </script>
 <script>
 (function(){

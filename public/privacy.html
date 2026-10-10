@@ -9,6 +9,11 @@
 <meta name="color-scheme" content="dark light">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://vyron.lol/privacy.html">
+<link rel="alternate" hreflang="en" href="https://vyron.lol/privacy.html">
+<link rel="alternate" hreflang="pl" href="https://vyron.lol/pl/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://vyron.lol/privacy.html">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-cANYUjlccZll5sFeajrq5tJ9CEa8NXJQG6q4dtEpMc4='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'">
+
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -19,6 +24,8 @@
 <meta property="og:title" content="Privacy Policy – Vyron">
 <meta property="og:description" content="How the Vyron website and software handle your information.">
 <meta property="og:url" content="https://vyron.lol/privacy.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pl_PL">
 <meta property="og:image" content="https://vyron.lol/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +41,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:26px 0 18px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font:700 18px Manrope,sans-serif;letter-spacing:-.01em}
 .brand img{width:30px;height:auto;display:block}
+.topr{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .back{color:var(--mute);text-decoration:none;font:500 14px Inter,sans-serif;padding:8px 14px;border:1px solid var(--line);border-radius:10px;transition:.2s}
 .back:hover{color:var(--text)}
 .doc{margin-top:8px;margin-bottom:34px;padding:44px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
@@ -54,26 +62,26 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 </style>
 </head>
 <body>
-<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><a class="back" href="/">← Back to site</a></div>
+<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><div class="topr"><a class="back" href="/pl/privacy.html" hreflang="pl" lang="pl">Polski</a><a class="back" href="/">← Back to site</a></div></div>
 <main class="doc">
 <h1>Privacy Policy</h1>
 <p class="upd">Last updated: October 10, 2026</p>
-<p class="lead">This policy explains what information the Vyron website and Vyron Tweaks software process, why, and what choices you have. In short: there are no accounts, no ads and no analytics trackers.</p>
+<p class="lead">This policy explains what information the Vyron website and Vyron Tweaks software process, why, and what choices you have. In short: there are no accounts, no ads and no tracking cookies.</p>
 
 <h2>1. Information we process</h2>
 <ul>
 <li><b>Website visits.</b> Our hosting provider (Vercel) processes technical data such as your IP address, browser type and requested pages in server logs to deliver the site and keep it secure.</li>
-<li><b>Orders.</b> When you choose a payment method the website generates an order number and the amount to pay. The website itself does not store orders in a customer database.</li>
+<li><b>Orders.</b> When you choose a payment method the website generates an order number and the amount to pay. The website itself does not store orders in a customer database. For crypto payments our server reads the public blockchain to see whether a transfer of the exact amount has arrived; this does not require any personal data.</li>
 <li><b>Discord tickets.</b> Payments are confirmed and products are delivered in Discord tickets. There we can see your Discord username and ID and whatever you send us, such as your order number, a transaction ID or payment details you choose to share. Discord's own privacy policy applies to that service.</li>
 <li><b>Licensing.</b> The Product verifies your license through KeyAuth, a third-party licensing service. This may involve your license key, a hardware identifier of your PC and your IP address.</li>
 <li><b>Payments.</b> Cryptocurrency transactions are public on the blockchain. If you pay with PayPal, PayPal shares limited payment details with us under its own policy.</li>
 </ul>
 
 <h2>2. Data stored in your browser</h2>
-<p>The website saves two small items in your browser's local storage: your light/dark theme choice and, if you receive one, your discount code with its expiry. We do not use advertising or tracking cookies. You can clear this data at any time in your browser settings.</p>
+<p>The website saves up to three small items in your browser's local storage: your light/dark theme choice, your language choice and, if you receive one, your discount code with its expiry. We do not use advertising or tracking cookies. You can clear this data at any time in your browser settings.</p>
 
 <h2>3. Third-party services</h2>
-<p>To display the site your browser loads fonts from Google Fonts, which means Google receives your IP address. Our server fetches cryptocurrency exchange rates from public price APIs to show the amount to pay, and the public member count of our Discord invite to show our community size; your personal data is not sent to them.</p>
+<p>To display the site your browser loads fonts from Google Fonts, which means Google receives your IP address. Our server fetches cryptocurrency exchange rates from public price APIs to show the amount to pay, and the public member count of our Discord invite to show our community size; your personal data is not sent to them. To check crypto payments our server queries public blockchain nodes and explorers (for example a Solana RPC node and Litecoin explorers); only our own wallet address is looked up. To keep the daily discount fair, our server briefly uses your IP address and browser type to calculate it; this is not stored.</p>
 
 <h2>4. Why we use information</h2>
 <ul>
@@ -102,6 +110,6 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 <p>Questions about this document? Open a ticket on our <a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord server</a>.</p>
 </main>
 <div class="bot"><span>© <span id="yr">2026</span> Vyron</span><nav aria-label="Legal"><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a><a href="/refund.html">Refund Policy</a><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></nav></div>
-<script>function _0x3a6e(_0x412680,_0xb3889f){_0x412680=_0x412680-0x1b4;var _0x322fc1=_0x322f();var _0x3a6eeb=_0x322fc1[_0x412680];if(_0x3a6e['jhGYfp']===undefined){var _0x37fc62=function(_0x24865f){var _0x1edbd5='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';var _0x36c8a2='',_0x121935='';for(var _0x4f8ec1=0x0,_0x124129,_0x32f576,_0x2eedf5=0x0;_0x32f576=_0x24865f['charAt'](_0x2eedf5++);~_0x32f576&&(_0x124129=_0x4f8ec1%0x4?_0x124129*0x40+_0x32f576:_0x32f576,_0x4f8ec1++%0x4)?_0x36c8a2+=String['fromCharCode'](0xff&_0x124129>>(-0x2*_0x4f8ec1&0x6)):0x0){_0x32f576=_0x1edbd5['indexOf'](_0x32f576);}for(var _0x1911ca=0x0,_0x54e298=_0x36c8a2['length'];_0x1911ca<_0x54e298;_0x1911ca++){_0x121935+='%'+('00'+_0x36c8a2['charCodeAt'](_0x1911ca)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x121935);};_0x3a6e['oiRlAX']=_0x37fc62,_0x3a6e['VeQZuO']={},_0x3a6e['jhGYfp']=!![];}var _0x45776f=_0x322fc1[0x0];_0x3a6e['LThUIz']!==_0x45776f&&(_0x3a6e['VeQZuO']={},_0x3a6e['LThUIz']=_0x45776f);var _0x9f8794=_0x3a6e['VeQZuO'][_0x412680];return _0x9f8794===undefined?(_0x3a6eeb=_0x3a6e['oiRlAX'](_0x3a6eeb),_0x3a6e['VeQZuO'][_0x412680]=_0x3a6eeb):_0x3a6eeb=_0x9f8794,_0x3a6eeb;}var _0x451002=_0x3a6e;(function(_0x35c6ce,_0x2c424a){var _0x42c084=_0x3a6e,_0x1590e3=_0x35c6ce();while(!![]){try{var _0x12d778=-parseInt(_0x42c084(0x1bb))/0x1+parseInt(_0x42c084(0x1bc))/0x2+-parseInt(_0x42c084(0x1b6))/0x3*(-parseInt(_0x42c084(0x1c4))/0x4)+parseInt(_0x42c084(0x1ba))/0x5*(parseInt(_0x42c084(0x1b5))/0x6)+parseInt(_0x42c084(0x1c2))/0x7+-parseInt(_0x42c084(0x1be))/0x8*(-parseInt(_0x42c084(0x1b4))/0x9)+parseInt(_0x42c084(0x1bf))/0xa*(-parseInt(_0x42c084(0x1c0))/0xb);if(_0x12d778===_0x2c424a)break;else _0x1590e3['push'](_0x1590e3['shift']());}catch(_0x7a1530){_0x1590e3['push'](_0x1590e3['shift']());}}}(_0x322f,0x69dde));function _0x322f(){var _0x32836e=['ogfcBvvXta','mteXotKYmgniruPAyq','mtK4tNDqtfnQ','DNKTDgHLBwu','ntK0ndy0nuL4u0XHCW','C2v0qxr0CMLIDxrL','mZiYmgXbvvLPta','zgf0ys10AgvTzq','mJy4mdKYovjhvvzWvG','mZbgrMHbsNy','mJq0mLLbwwDAEq','z2v0rwXLBwvUDej5swq','zgfYAW','zg9JDw1LBNrfBgvTzw50','odi0ntu1yxfjr0jZ','nZK0mdq5rwj4rgzr','mtiZmZe4ofznsNLZuG','Dgv4DenVBNrLBNq'];_0x322f=function(){return _0x32836e;};return _0x322f();}try{document[_0x451002(0x1b9)][_0x451002(0x1c3)](_0x451002(0x1c5),localStorage['getItem'](_0x451002(0x1c1))||_0x451002(0x1b8));}catch(_0x54e298){}document[_0x451002(0x1b7)]('yr')[_0x451002(0x1bd)]=new Date()['getFullYear']();</script>
+<script>function _0xb52e(_0x3235bb,_0x2a49b1){_0x3235bb=_0x3235bb-0x119;var _0x58378c=_0x5837();var _0xb52ee1=_0x58378c[_0x3235bb];if(_0xb52e['VuLbQS']===undefined){var _0x4d3149=function(_0x954ca5){var _0xbcdb07='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';var _0x56d732='',_0x1c06c0='';for(var _0x2ebd6a=0x0,_0x3d24fd,_0x7959e9,_0x41a1be=0x0;_0x7959e9=_0x954ca5['charAt'](_0x41a1be++);~_0x7959e9&&(_0x3d24fd=_0x2ebd6a%0x4?_0x3d24fd*0x40+_0x7959e9:_0x7959e9,_0x2ebd6a++%0x4)?_0x56d732+=String['fromCharCode'](0xff&_0x3d24fd>>(-0x2*_0x2ebd6a&0x6)):0x0){_0x7959e9=_0xbcdb07['indexOf'](_0x7959e9);}for(var _0x5288da=0x0,_0x7c1d42=_0x56d732['length'];_0x5288da<_0x7c1d42;_0x5288da++){_0x1c06c0+='%'+('00'+_0x56d732['charCodeAt'](_0x5288da)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x1c06c0);};_0xb52e['LczKif']=_0x4d3149,_0xb52e['oMoKRp']={},_0xb52e['VuLbQS']=!![];}var _0x1742e9=_0x58378c[0x0];_0xb52e['bycrmA']!==_0x1742e9&&(_0xb52e['oMoKRp']={},_0xb52e['bycrmA']=_0x1742e9);var _0x62b03b=_0xb52e['oMoKRp'][_0x3235bb];return _0x62b03b===undefined?(_0xb52ee1=_0xb52e['LczKif'](_0xb52ee1),_0xb52e['oMoKRp'][_0x3235bb]=_0xb52ee1):_0xb52ee1=_0x62b03b,_0xb52ee1;}function _0x5837(){var _0x2690a5=['mtKYntK1twzUrK1j','CMTyDxm','odC0mtiYsNDgvfHK','zg9JDw1LBNrfBgvTzw50','ngLSqNjHtG','ndi5mJGWy1vvrujo','z2v0rNvSBfLLyxi','mtfIy2LuBgK','mtu5uvDTr2jp','zM9YrwfJAa','nZCXotCWshPxsezw','Dgv4DenVBNrLBNq','z2v0rwXLBwvUDej5swq','n0X0vgPLsW','C2v0qxr0CMLIDxrL','zgfYAW','C2v0sxrLBq','t2TPEwy','odi1otyWmhPUtNfKCW','z2v0sxrLBq','y2XPy2S','nte4mLriuNbpsq','mJm0rvPftej0','ndm0otzNvhLJDwK'];_0x5837=function(){return _0x2690a5;};return _0x5837();}var _0x381235=_0xb52e;(function(_0x199a80,_0x340310){var _0x469b15=_0xb52e,_0x2e1eb4=_0x199a80();while(!![]){try{var _0x18e43d=parseInt(_0x469b15(0x127))/0x1+parseInt(_0x469b15(0x124))/0x2*(parseInt(_0x469b15(0x12f))/0x3)+-parseInt(_0x469b15(0x12b))/0x4*(-parseInt(_0x469b15(0x119))/0x5)+-parseInt(_0x469b15(0x129))/0x6*(-parseInt(_0x469b15(0x11c))/0x7)+-parseInt(_0x469b15(0x126))/0x8*(-parseInt(_0x469b15(0x125))/0x9)+parseInt(_0x469b15(0x12c))/0xa*(parseInt(_0x469b15(0x12e))/0xb)+-parseInt(_0x469b15(0x121))/0xc;if(_0x18e43d===_0x340310)break;else _0x2e1eb4['push'](_0x2e1eb4['shift']());}catch(_0x20ff57){_0x2e1eb4['push'](_0x2e1eb4['shift']());}}}(_0x5837,0x1ec25));try{document[_0x381235(0x12a)][_0x381235(0x11d)]('data-theme',localStorage[_0x381235(0x122)]('vy-theme')||_0x381235(0x11e));}catch(_0x39ae48){}document[_0x381235(0x11b)]('yr')[_0x381235(0x11a)]=new Date()[_0x381235(0x12d)](),document['querySelectorAll']('a[hreflang]')[_0x381235(0x130)](function(_0x254ed1){var _0x17a1e6=_0x381235,_0xd17a26={'Okiyf':'vy-lang','rkXus':'hreflang'};_0x254ed1['addEventListener'](_0x17a1e6(0x123),function(){var _0x4ca614=_0x17a1e6;try{localStorage[_0x4ca614(0x11f)](_0xd17a26[_0x4ca614(0x120)],_0x254ed1['getAttribute'](_0xd17a26[_0x4ca614(0x128)]));}catch(_0x3d0bf9){}});});</script>
 </body>
 </html>

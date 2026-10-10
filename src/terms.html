@@ -8,7 +8,12 @@
 <meta name="theme-color" content="#050506">
 <meta name="color-scheme" content="dark light">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="__SITE_URL__/terms.html">
+<link rel="canonical" href="__CANON__">
+<link rel="alternate" hreflang="en" href="__ALT_EN__">
+<link rel="alternate" hreflang="pl" href="__ALT_PL__">
+<link rel="alternate" hreflang="x-default" href="__ALT_EN__">
+<!--CSP-->
+<!--ANALYTICS-->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -18,7 +23,9 @@
 <meta property="og:site_name" content="Vyron">
 <meta property="og:title" content="Terms of Service – Vyron">
 <meta property="og:description" content="The terms for using the Vyron website and Vyron Tweaks software.">
-<meta property="og:url" content="__SITE_URL__/terms.html">
+<meta property="og:url" content="__CANON__">
+<meta property="og:locale" content="__LOCALE__">
+<meta property="og:locale:alternate" content="__LOCALE_ALT__">
 <meta property="og:image" content="__SITE_URL__/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +41,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:26px 0 18px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font:700 18px Manrope,sans-serif;letter-spacing:-.01em}
 .brand img{width:30px;height:auto;display:block}
+.topr{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .back{color:var(--mute);text-decoration:none;font:500 14px Inter,sans-serif;padding:8px 14px;border:1px solid var(--line);border-radius:10px;transition:.2s}
 .back:hover{color:var(--text)}
 .doc{margin-top:8px;margin-bottom:34px;padding:44px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
@@ -54,7 +62,7 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 </style>
 </head>
 <body>
-<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><a class="back" href="/">← Back to site</a></div>
+<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><div class="topr"><a class="back" href="/pl/terms.html" hreflang="pl" lang="pl">Polski</a><a class="back" href="/">← Back to site</a></div></div>
 <main class="doc">
 <h1>Terms of Service</h1>
 <p class="upd">Last updated: October 10, 2026</p>
@@ -79,9 +87,10 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 <h2>4. Orders and payment</h2>
 <ul>
 <li>Prices are shown in US dollars. We accept the payment methods listed at checkout (currently Solana, Litecoin, BLIK, PayPal and gift cards).</li>
-<li>Your order is complete only after we confirm your payment in a Discord ticket.</li>
+<li>Your order is complete once your payment is confirmed. Crypto payments are detected automatically on the blockchain; other payments are confirmed by us in a Discord ticket.</li>
 <li>Crypto transfers are irreversible. Please double-check the address, the network and the exact amount. We are not responsible for funds sent to a wrong address or on a wrong network.</li>
-<li>Discount codes are valid for a limited time, apply once per order and have no cash value.</li>
+<li>For crypto orders the amount shown at checkout is locked for 30 minutes. We match your payment to your order by that exact amount, so please send exactly that amount in a single transfer. If you send a different amount or pay after the offer has expired, we may need to review the payment manually in a Discord ticket.</li>
+<li>Discount codes are valid for 24 hours from the moment they are issued, apply once per order, cannot be combined with other offers and have no cash value. When a code expires you may receive a new one with a different discount.</li>
 </ul>
 
 <h2>5. Delivery</h2>
@@ -109,6 +118,6 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 <p>Questions about this document? Open a ticket on our <a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord server</a>.</p>
 </main>
 <div class="bot"><span>© <span id="yr">2026</span> Vyron</span><nav aria-label="Legal"><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a><a href="/refund.html">Refund Policy</a><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></nav></div>
-<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();document.querySelectorAll("a[hreflang]").forEach(function(a){a.addEventListener("click",function(){try{localStorage.setItem("vy-lang",a.getAttribute("hreflang"))}catch(e){}})});</script>
 </body>
 </html>

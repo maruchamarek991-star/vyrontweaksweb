@@ -8,7 +8,12 @@
 <meta name="theme-color" content="#050506">
 <meta name="color-scheme" content="dark light">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="__SITE_URL__/refund.html">
+<link rel="canonical" href="__CANON__">
+<link rel="alternate" hreflang="en" href="__ALT_EN__">
+<link rel="alternate" hreflang="pl" href="__ALT_PL__">
+<link rel="alternate" hreflang="x-default" href="__ALT_EN__">
+<!--CSP-->
+<!--ANALYTICS-->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -18,7 +23,9 @@
 <meta property="og:site_name" content="Vyron">
 <meta property="og:title" content="Refund Policy – Vyron">
 <meta property="og:description" content="When and how Vyron Tweaks orders can be refunded.">
-<meta property="og:url" content="__SITE_URL__/refund.html">
+<meta property="og:url" content="__CANON__">
+<meta property="og:locale" content="__LOCALE__">
+<meta property="og:locale:alternate" content="__LOCALE_ALT__">
 <meta property="og:image" content="__SITE_URL__/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +41,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:26px 0 18px}
 .brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font:700 18px Manrope,sans-serif;letter-spacing:-.01em}
 .brand img{width:30px;height:auto;display:block}
+.topr{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .back{color:var(--mute);text-decoration:none;font:500 14px Inter,sans-serif;padding:8px 14px;border:1px solid var(--line);border-radius:10px;transition:.2s}
 .back:hover{color:var(--text)}
 .doc{margin-top:8px;margin-bottom:34px;padding:44px;border:1px solid var(--line);border-radius:18px;background:var(--card)}
@@ -54,7 +62,7 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 </style>
 </head>
 <body>
-<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><a class="back" href="/">← Back to site</a></div>
+<div class="top"><a class="brand" href="/"><img src="/logo.png" alt="">Vyron</a><div class="topr"><a class="back" href="/pl/refund.html" hreflang="pl" lang="pl">Polski</a><a class="back" href="/">← Back to site</a></div></div>
 <main class="doc">
 <h1>Refund Policy</h1>
 <p class="upd">Last updated: October 10, 2026</p>
@@ -91,6 +99,6 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 <p>Questions about this document? Open a ticket on our <a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord server</a>.</p>
 </main>
 <div class="bot"><span>© <span id="yr">2026</span> Vyron</span><nav aria-label="Legal"><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a><a href="/refund.html">Refund Policy</a><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></nav></div>
-<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();</script>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();document.querySelectorAll("a[hreflang]").forEach(function(a){a.addEventListener("click",function(){try{localStorage.setItem("vy-lang",a.getAttribute("hreflang"))}catch(e){}})});</script>
 </body>
 </html>

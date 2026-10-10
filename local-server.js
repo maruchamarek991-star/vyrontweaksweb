@@ -25,7 +25,8 @@ const ROUTES = [
   [/^\/api\/checkout$/, "./api/checkout.js"],
   [/^\/api\/coupon$/, "./api/coupon.js"],
   [/^\/api\/discord$/, "./api/discord.js"],
-  [/^\/api\/orders\/\d+\/sent$/, "./api/orders/[id]/sent.js"],
+  [/^\/api\/verify$/, "./api/verify.js"],
+  [/^\/api\/orders\/[0-9A-Fa-f]{6}\/sent$/, "./api/orders/[id]/sent.js"],
 ];
 
 http.createServer(async (req, res) => {
@@ -51,8 +52,14 @@ http.createServer(async (req, res) => {
 
   /* ---- Static files ---- */
   const root = path.join(__dirname, "public");
-  const file = path.join(root, p === "/" ? "index.html" : path.normalize(p));
-  if (!file.startsWith(root) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.writeHead(404); return res.end("Not found"); }
+  if (p === "/pl") { res.writeHead(301, { Location: "/pl/" }); return res.end(); }
+  let file = path.join(root, path.normalize(p));
+  if (file.startsWith(root) && fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html"); // "/" and "/pl/"
+  if (!file.startsWith(root) || !fs.existsSync(file)) {
+    const nf = path.join(root, "404.html");
+    res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+    return fs.existsSync(nf) ? fs.createReadStream(nf).pipe(res) : res.end("Not found");
+  }
   const MIME = { ".html": "text/html; charset=utf-8", ".png": "image/png", ".ico": "image/x-icon", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml", ".txt": "text/plain; charset=utf-8", ".xml": "application/xml" };
   res.writeHead(200, { "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream" });
   fs.createReadStream(file).pipe(res);
