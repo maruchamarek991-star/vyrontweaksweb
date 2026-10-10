@@ -7,6 +7,13 @@ const fs = require("fs");
 const path = require("path");
 const JSObfuscator = require("../tools/obfuscator.js");
 
+// Public address of the site, used for canonical + Open Graph URLs (they must be absolute).
+// Set it once here, or per build:  SITE_URL=https://your-domain.com node scripts/build.js
+const DEFAULT_SITE_URL = "https://your-domain.com";
+const SITE_URL = (process.env.SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
+if (SITE_URL === DEFAULT_SITE_URL)
+  console.warn("WARNING: SITE_URL is not set - canonical/Open Graph links point to " + DEFAULT_SITE_URL + ". Edit DEFAULT_SITE_URL in scripts/build.js or run with SITE_URL=https://yourdomain.");
+
 const SRC = path.join(__dirname, "..", "src");
 const PUBLIC = path.join(__dirname, "..", "public");
 
@@ -39,6 +46,7 @@ function obfuscateFile(file) {
     return `<script${attrs}>${result.getObfuscatedCode()}</script>`;
   });
 
+  html = html.split("__SITE_URL__").join(SITE_URL);
   fs.writeFileSync(outPath, html);
   console.log(`built ${file} (${count} script block(s) obfuscated)`);
 }

@@ -52,6 +52,7 @@ http.createServer(async (req, res) => {
   const root = path.join(__dirname, "public");
   const file = path.join(root, p === "/" ? "index.html" : path.normalize(p));
   if (!file.startsWith(root) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) { res.writeHead(404); return res.end("Not found"); }
-  res.writeHead(200, { "Content-Type": file.endsWith(".html") ? "text/html; charset=utf-8" : file.endsWith(".png") ? "image/png" : "application/octet-stream" });
+  const MIME = { ".html": "text/html; charset=utf-8", ".png": "image/png", ".ico": "image/x-icon", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml", ".txt": "text/plain; charset=utf-8", ".xml": "application/xml" };
+  res.writeHead(200, { "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream" });
   fs.createReadStream(file).pipe(res);
 }).listen(PORT, () => console.log(`Vyron running at http://localhost:${PORT}`));
