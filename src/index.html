@@ -475,6 +475,67 @@ nav button{border-radius:10px}
 .legal-note{margin:14px 4px 0;color:var(--mute);font-size:13px;line-height:1.5}
 .legal-note a{color:var(--text);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:760px){.ftg{grid-template-columns:1fr 1fr}.ftb{grid-column:1/-1}.fi summary{padding:16px 18px;font-size:16px}.fa{padding:0 18px 18px}}
+
+/* ===== Changelog ===== */
+.cl{padding:150px 0 100px}
+.cl h3{font-size:clamp(34px,5vw,54px);letter-spacing:-.03em;margin:8px 0 10px;font-weight:800}
+.cl .sub{color:var(--mute);margin:0 0 36px;font-size:18px;max-width:620px}
+.rel{max-width:820px;padding:30px 32px 24px;border-radius:24px;text-align:left;margin-bottom:20px}
+.rh{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.ver{font:800 clamp(24px,4vw,30px)/1 Manrope,sans-serif;letter-spacing:-.03em}
+.badge{padding:4px 12px;border-radius:99px;border:1px solid rgba(110,231,168,.3);background:rgba(110,231,168,.1);color:var(--ok);font:500 11px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+.rl{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.rl li{display:flex;align-items:flex-start;gap:14px;font-size:16.5px;line-height:1.55}
+.ck{flex:none;min-width:70px;text-align:center;margin-top:2px;padding:3px 10px;border-radius:8px;font:500 11px "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);background:var(--glass2);color:var(--mute)}
+.ck.add{color:var(--ok);border-color:rgba(110,231,168,.3);background:rgba(110,231,168,.1)}
+.ck.fix{color:var(--warn);border-color:rgba(251,191,106,.3);background:rgba(251,191,106,.1)}
+.gchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.gchip{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 6px;border-radius:99px;border:1px solid var(--line);background:var(--glass2);font:500 12.5px "JetBrains Mono",monospace;letter-spacing:.04em;color:var(--text)}
+.gchip img{width:20px;height:20px;border-radius:6px;object-fit:cover;display:block}
+.rf{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:26px;padding-top:18px;border-top:1px solid var(--line);color:var(--mute);font-size:13.5px}
+.rf img{width:26px;height:auto;display:block}
+.rf b{color:var(--text);font-weight:600}
+.rf .dot{opacity:.5}
+@media(max-width:620px){.rel{padding:24px 20px 20px}.rl li{flex-direction:column;gap:6px}.ck{align-self:flex-start}}
+
+/* ===== Discord counter ===== */
+.dcount{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:8px 18px;border-radius:99px;border:1px solid var(--line);background:var(--glass);color:var(--mute);font:500 14px Inter,sans-serif;text-decoration:none;transition:.2s}
+.dcount:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+.dcount b,.dcs b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums}
+.dcount i,.dcs i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 1.6s ease-in-out infinite;flex:none}
+.dcs{display:flex;align-items:center;gap:10px;margin:-6px 0 18px;color:var(--mute);font-size:14px}
+
+/* ===== Skip intro ===== */
+#skip{position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:101;padding:10px 20px;border-radius:99px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#d6d9e3;font:500 12px "JetBrains Mono",monospace;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;opacity:0;animation:fadeIn .5s ease .5s forwards,skipOut .4s ease 2.85s forwards;transition:background .2s,border-color .2s;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#skip:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.34)}
+#skip:focus-visible{outline:2px solid rgba(190,205,255,.7);outline-offset:3px}
+@keyframes skipOut{to{opacity:0;visibility:hidden}}
+html.skipped #skip{animation:skipOut .2s ease forwards}
+html.skipped #intro{animation:introFast .35s ease forwards}
+@keyframes introFast{to{opacity:0;visibility:hidden}}
+html.skipped header,html.skipped main{animation-delay:.05s}
+html.skipped .wm{animation:wm 1.6s ease .1s forwards,fog 20s ease-in-out 2s infinite alternate}
+
+/* ===== Sticky "Buy now" (phones) ===== */
+.stk{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:35;display:none;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 18px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(26,26,30,.9),rgba(14,14,17,.92));backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);box-shadow:0 14px 40px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);transform:translateY(150%);opacity:0;pointer-events:none;transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .3s}
+.stk.on{transform:none;opacity:1;pointer-events:auto}
+.stk .sp b{display:block;font:800 22px/1.1 Manrope,sans-serif;letter-spacing:-.03em}
+.stk .sp small{display:block;margin-top:2px;font:500 11px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.stk .cta{padding:12px 26px;font-size:15px;flex:none}
+[data-theme=light] .stk{background:rgba(255,255,255,.92)}
+@media(max-width:760px){.stk{display:flex}.toast{bottom:92px}.ft{padding-bottom:104px}}
+
+/* Narrow phones: 4 tabs + theme button must fit inside the pill */
+@media(max-width:520px){
+  header{padding:0 8px}
+  .pill{padding:7px 8px 7px 10px;gap:4px}
+  .brand img{width:26px}
+  nav{gap:0;min-width:0}
+  nav button{padding:8px 7px;font-size:13px;letter-spacing:-.01em}
+  .ib{width:34px;height:34px}
+}
+@media(max-width:380px){nav button{padding:8px 5px;font-size:12.5px}}
+@media(max-width:340px){nav button{padding:8px 3px;font-size:12px}.brand img{width:22px}.ib{width:32px;height:32px}}
 </style>
 <style id="noguard">
 *{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -484,6 +545,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 </head>
 <body>
 
+<button id="skip" type="button" aria-label="Skip intro">Skip intro</button>
 <div id="intro" aria-hidden="true">
   <div class="aura"></div>
   
@@ -505,6 +567,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
   <nav>
     <button class="on" data-t="home">Main</button>
     <button data-t="products">Products</button>
+    <button data-t="updates">Changelog</button>
     <button data-t="contact">Contact Us</button>
   </nav>
   <div class="act">
@@ -519,6 +582,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
       <h2>Optimize <span class="gt">your</span> PC for Gaming</h2>
       <p>Vyron Tweaks removes bloatware and optimizes your PC for higher FPS, lower input delay, and reduced ping. Get smoother gameplay and precision hit registration tweaks for competitive shooters.</p>
       <button class="cta" id="explore" type="button"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Explore Services</button>
+      <div><a class="dcount" id="dchero" href="https://discord.gg/vyron" target="_blank" rel="noopener" hidden><i></i><span id="dchtxt"></span></a></div>
     </div>
     <div class="tested"><span class="eyebrow">Tested in</span>
       <div class="mq"><div class="mt">
@@ -593,6 +657,27 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
     </div>
   </section>
 
+  <section class="panel" id="updates">
+    <div class="wrap cl">
+      <span class="eyebrow">Changelog</span>
+      <h3>What's new</h3>
+      <p class="sub">Every Vyron Tweaks release, newest first. Updates are included with your lifetime license.</p>
+
+      <!-- To add a release: copy the whole <article> below, paste it ABOVE the previous one, change the text and
+           date, and move the "Latest" badge to the newest release. Then run: node scripts/build.js -->
+      <article class="glass rel">
+        <div class="rh"><span class="ver">Update 1.0.1</span><span class="badge">Latest</span></div>
+        <ul class="rl">
+          <li><span class="ck add">Added</span><div>Presets and Game Boost
+            <div class="gchips"><span class="gchip"><img src="/img/fortnite.png" alt="">Fortnite</span><span class="gchip"><img src="/img/cs2.png" alt="">CS2</span><span class="gchip"><img src="/img/valorant.png" alt="">Valorant</span></div></div></li>
+          <li><span class="ck add">Added</span><div>New tweaks</div></li>
+          <li><span class="ck fix">Fixed</span><div>Bugs</div></li>
+        </ul>
+        <div class="rf"><img src="/logo.png" alt=""><b>Vyron</b><span class="dot">•</span><span>vyron.lol</span><span class="dot">•</span><time datetime="2026-10-08T23:15">8 Oct 2026, 23:15</time></div>
+      </article>
+    </div>
+  </section>
+
   <section class="panel" id="contact">
     <div class="wrap ct">
       <span class="eyebrow">Contact Us</span>
@@ -601,6 +686,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
       <a class="glass dc" href="https://discord.gg/vyron" target="_blank" rel="noopener">
         <div class="dci"><svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.2,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg></div>
         <h4>Discord</h4><p>Join the community, get support and early updates.</p>
+        <div class="dcs" id="dccard" hidden><i></i><span id="dcctxt"></span></div>
         <b>Open Discord <svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></b>
       </a>
     </div>
@@ -609,7 +695,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
     <div class="wrap">
       <div class="ftg">
         <div class="ftb"><div class="brand2"><img src="/logo.png" alt=""><b>Vyron</b></div><p>Windows optimization for competitive gaming. Higher FPS, lower ping, less input lag.</p></div>
-        <div class="ftc" role="group" aria-label="Site"><h5>Site</h5><button type="button" data-t="home">Main</button><button type="button" data-t="products">Products</button><button type="button" data-t="contact">Contact Us</button></div>
+        <div class="ftc" role="group" aria-label="Site"><h5>Site</h5><button type="button" data-t="home">Main</button><button type="button" data-t="products">Products</button><button type="button" data-t="updates">Changelog</button><button type="button" data-t="contact">Contact Us</button></div>
         <div class="ftc" role="group" aria-label="Legal"><h5>Legal</h5><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a><a href="/refund.html">Refund Policy</a></div>
         <div class="ftc" role="group" aria-label="Community"><h5>Community</h5><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></div>
       </div>
@@ -617,6 +703,8 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
     </div>
   </footer>
 </main>
+
+<div class="stk" id="stk"><div class="sp"><b id="stkp">$5</b><small id="stksub">one-time · lifetime</small></div><button class="cta" id="stkbuy" type="button">Buy now</button></div>
 
 <div class="modal" id="pm"><div class="glass pd" id="pd">
   <button class="x" id="pcl" aria-label="Close">✕</button>
@@ -687,9 +775,20 @@ $p("explore").onclick=()=>go("products");
 
 /* Intro: removed from the DOM once its CSS animation has finished; first panel enters as the page fades in */
 (function(){
-  const intro=$p("intro");
-  setTimeout(()=>{intro&&intro.remove()},4000);
-  const h=$p("home");stagger(h);setTimeout(()=>h.classList.add("in"),3350);
+  const intro=$p("intro"),skip=$p("skip"),h=$p("home");stagger(h);
+  const tRemove=setTimeout(()=>{intro&&intro.remove();skip&&skip.remove()},4000);
+  const tHome=setTimeout(()=>h.classList.add("in"),3350);
+  /* Skip: fade the intro out right away and start the page reveal now instead of at 3.3 s */
+  let skipped=false;
+  const doSkip=()=>{
+    if(skipped||!intro||!intro.isConnected)return;skipped=true;
+    clearTimeout(tRemove);clearTimeout(tHome);
+    document.documentElement.classList.add("skipped");
+    h.classList.add("in");
+    setTimeout(()=>{intro.remove();skip&&skip.remove()},450);
+  };
+  skip&&(skip.onclick=doSkip);
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")doSkip()});
 })();
 
 /* Theme */
@@ -733,6 +832,7 @@ function renderPrices(){
   const o=buildOrder(),was=COUPON?`was $${fm(o.sub)} · −${COUPON.pct}% applied`:null;
   $p("tprice").textContent="$"+fm(o.total);$p("pprice").textContent="$"+fm(o.total);
   $p("tsub").textContent=was||"one-time · lifetime";$p("psub").textContent=was||"one-time";
+  $p("stkp").textContent="$"+fm(o.total);$p("stksub").textContent=was||"one-time · lifetime";
 }
 function setCoupon(c){
   COUPON=c;try{c?localStorage.setItem("vy-coupon",JSON.stringify(c)):localStorage.removeItem("vy-coupon")}catch{}
@@ -780,6 +880,28 @@ setInterval(refreshLive,1000);
 function buyNow(){closeP();cartData=buildOrder();payMode=true;payMethod=null;drawPay();$p("cm").classList.add("open");startRates()}
 function closeCart(){$p("cm").classList.remove("open")}
 $p("buynow").onclick=buyNow;
+
+/* Sticky "Buy now" bar (phones): slides in after you scroll past the hero */
+$p("stkbuy").onclick=buyNow;
+(function(){
+  const stk=$p("stk");let tick=false;
+  const upd=()=>{tick=false;stk.classList.toggle("on",window.scrollY>360)};
+  window.addEventListener("scroll",()=>{if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});
+  upd();
+})();
+
+/* Discord community counter: numbers come from /api/discord (cached server-side); hidden if unavailable */
+(async function(){
+  try{
+    const r=await fetch("/api/discord");if(!r.ok)return;
+    const d=await r.json(),m=Math.floor(+d.members),o=Math.floor(+d.online);
+    if(!(m>0))return;
+    const f=n=>n.toLocaleString("en-US");
+    $p("dchtxt").innerHTML="Join <b>"+f(m)+"</b> members on Discord";
+    $p("dcctxt").innerHTML=(o>0?"<b>"+f(o)+"</b> online · ":"")+"<b>"+f(m)+"</b> members";
+    $p("dchero").hidden=false;$p("dccard").hidden=false;
+  }catch{}
+})();
 
 function drawPay(){
   const c=cartData;

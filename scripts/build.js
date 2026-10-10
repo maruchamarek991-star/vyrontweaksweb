@@ -8,11 +8,11 @@ const path = require("path");
 const JSObfuscator = require("../tools/obfuscator.js");
 
 // Public address of the site, used for canonical + Open Graph URLs (they must be absolute).
-// Set it once here, or per build:  SITE_URL=https://your-domain.com node scripts/build.js
-const DEFAULT_SITE_URL = "https://your-domain.com";
+// Set it once here, or per build:  SITE_URL=https://vyron.lol node scripts/build.js
+const DEFAULT_SITE_URL = "https://vyron.lol";
 const SITE_URL = (process.env.SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
-if (SITE_URL === DEFAULT_SITE_URL)
-  console.warn("WARNING: SITE_URL is not set - canonical/Open Graph links point to " + DEFAULT_SITE_URL + ". Edit DEFAULT_SITE_URL in scripts/build.js or run with SITE_URL=https://yourdomain.");
+if (SITE_URL.includes("your-domain"))
+  console.warn("WARNING: SITE_URL is not set - canonical/Open Graph links point to " + SITE_URL + ". Set DEFAULT_SITE_URL in scripts/build.js or run with SITE_URL=https://yourdomain.");
 
 const SRC = path.join(__dirname, "..", "src");
 const PUBLIC = path.join(__dirname, "..", "public");
