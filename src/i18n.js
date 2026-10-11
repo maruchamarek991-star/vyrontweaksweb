@@ -146,8 +146,8 @@ const en = {
   "ft.disclaimer": "Not affiliated with Riot Games, Epic Games, Valve, Microsoft, NVIDIA, AMD or Intel. All trademarks belong to their respective owners.",
 
   /* ---- scratch card ---- */
-  "cp.eyebrow": "Welcome gift",
-  "cp.eyebrow2": "A new gift for you",
+  "cp.eyebrow": "Trick or treat",
+  "cp.eyebrow2": "Another treat for you",
   "cp.h": "Scratch &amp; save",
   "cp.sub": "Scratch the card to reveal your discount. It's applied to your order automatically.",
   "cp.your": "Your discount",
@@ -157,11 +157,13 @@ const en = {
   "cp.copy": "Copy code",
   "cp.shop": "Shop now",
   "cp.valid": "Valid for 24 hours · until {d}",
-  "cp.foil1": "SCRATCH HERE",
+  "cp.foil1": "SCRATCH IF YOU DARE",
   "cp.foil2": "5% – 20% OFF",
 
   /* ================= JavaScript strings ================= */
   "copied": "Copied ✓",
+  "fx.on": "Spooky effects: on",
+  "fx.off": "Spooky effects: off",
   "left": "{h}h {m}m left",
   "dc.hero": "Join <b>{m}</b> members on Discord",
   "dc.card": "{o}<b>{m}</b> members",
@@ -177,7 +179,7 @@ const en = {
   "toast.enterCode": "Enter a discount code",
   "toast.applied": "−{pct}% discount applied",
   "toast.appliedOrder": "−{pct}% applied to your order",
-  "toast.couponExpired": "Your discount has expired. A new one is on its way!",
+  "toast.couponExpired": "Your discount turned to dust. A new treat is on its way!",
   "toast.copyCode": "Select the code and copy it manually",
   "toast.copyAmount": "Select the amount and copy it manually",
   "toast.copyAddress": "Select the address and copy it manually",
@@ -387,8 +389,8 @@ const pl = {
   "ft.disclaimer": "Nie jesteśmy powiązani z firmami Riot Games, Epic Games, Valve, Microsoft, NVIDIA, AMD ani Intel. Wszystkie znaki towarowe należą do ich właścicieli.",
 
   /* ---- scratch card ---- */
-  "cp.eyebrow": "Prezent powitalny",
-  "cp.eyebrow2": "Nowy prezent dla Ciebie",
+  "cp.eyebrow": "Cukierek albo psikus",
+  "cp.eyebrow2": "Kolejny cukierek dla Ciebie",
   "cp.h": "Zdrap i oszczędzaj",
   "cp.sub": "Zdrap kartę, aby odkryć swój rabat. Zostanie on automatycznie naliczony do zamówienia.",
   "cp.your": "Twój rabat",
@@ -398,11 +400,13 @@ const pl = {
   "cp.copy": "Kopiuj kod",
   "cp.shop": "Przejdź do zakupów",
   "cp.valid": "Ważny przez 24 godziny · do {d}",
-  "cp.foil1": "ZDRAP TUTAJ",
+  "cp.foil1": "ZDRAP, JEŚLI SIĘ ODWAŻYSZ",
   "cp.foil2": "5% – 20% RABATU",
 
   /* ================= JavaScript strings ================= */
   "copied": "Skopiowano ✓",
+  "fx.on": "Efekty halloweenowe: włączone",
+  "fx.off": "Efekty halloweenowe: wyłączone",
   "left": "zostało {h} godz. {m} min",
   "dc.hero": "Dołącz do <b>{m}</b> osób na Discordzie",
   "dc.card": "{o}<b>{m}</b> członków",
@@ -418,7 +422,7 @@ const pl = {
   "toast.enterCode": "Wpisz kod rabatowy",
   "toast.applied": "Zastosowano rabat −{pct}%",
   "toast.appliedOrder": "Rabat −{pct}% naliczony do zamówienia",
-  "toast.couponExpired": "Twój rabat wygasł. Za chwilę pojawi się nowy!",
+  "toast.couponExpired": "Twój rabat obrócił się w proch. Nowy cukierek już leci!",
   "toast.copyCode": "Zaznacz kod i skopiuj go ręcznie",
   "toast.copyAmount": "Zaznacz kwotę i skopiuj ją ręcznie",
   "toast.copyAddress": "Zaznacz adres i skopiuj go ręcznie",

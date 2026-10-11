@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="meta.title">Vyron Tweaks – Windows Optimizer for Gaming (FPS, Ping, Input Lag)</title>
 <meta name="description" content="Vyron Tweaks is a Windows optimizer for gaming. Debloat Windows and tune GPU, CPU, RAM and network settings for higher FPS, lower ping and less input lag. One-time lifetime license." data-i18n-attr="content:meta.desc">
-<meta name="theme-color" content="#050506">
+<meta name="theme-color" content="#080403">
 <meta name="color-scheme" content="dark light">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="__CANON__">
@@ -570,6 +570,153 @@ html.skipped .wm{animation:wm 1.6s ease .1s forwards,fog 20s ease-in-out 2s infi
 .opanel.det{border-color:rgba(124,196,255,.4)}
 .opanel.bad{border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.07)}.opanel.bad .ico{color:#fb7185}
 @media(prefers-reduced-motion:reduce){.opanel .spin{animation-duration:2.4s}}
+
+/* =====================================================================
+   HALLOWEEN THEME — black glass, lava-orange glow, bats, webs, embers.
+   Everything below overrides the base styles above. To go back to the
+   neutral look, remove this block (and the .fx layers / intro bits in the body).
+   ===================================================================== */
+:root{--bg:#060304;--glass:rgba(255,150,70,.04);--glass2:rgba(255,140,60,.085);--line:rgba(255,140,60,.2);--text:#fff1e6;--mute:#b79d8f;--ok:#7ef2a6;--warn:#ffb347;--pill:rgba(16,8,6,.74);--solid:#ff7a1a;--solidtx:#1a0a02;--modal:#0d0605;--wm:.3;--wmf:brightness(1);--ember:#ff7a1a;--ember2:#ffb347;--lava:linear-gradient(180deg,#fff2c4 0%,#ffbd52 42%,#ff5a00 100%)}
+[data-theme=light]{--bg:#f3e7d6;--glass:rgba(255,255,255,.55);--glass2:rgba(140,60,0,.07);--line:rgba(140,60,0,.22);--text:#1d0f08;--mute:#6d5142;--ok:#157a43;--warn:#b45309;--pill:rgba(255,247,235,.85);--solid:#d9480f;--solidtx:#fff;--modal:#fff8ee;--wm:.16;--wmf:brightness(.9);--ember:#d9480f;--ember2:#c2410c;--lava:linear-gradient(180deg,#7c2d12,#d9480f)}
+::selection{background:#ff6a00;color:#000}
+html{scrollbar-color:#7a2e08 #0a0504}
+body{background:var(--bg)}
+body::before,body::before{animation:aur 14s ease-in-out infinite alternate;opacity:1;background:radial-gradient(46% 38% at 12% 8%,rgba(122,52,220,.16),transparent 70%),radial-gradient(52% 40% at 88% 92%,rgba(255,90,10,.17),transparent 72%),radial-gradient(40% 30% at 50% 100%,rgba(255,60,0,.12),transparent 70%)}
+[data-theme=light] body::before{background:radial-gradient(46% 38% at 12% 8%,rgba(150,90,220,.12),transparent 70%),radial-gradient(52% 40% at 88% 92%,rgba(255,120,40,.16),transparent 72%)}
+h1,h2,h3{text-shadow:0 0 34px rgba(255,90,0,.22)}
+[data-theme=light] h1,[data-theme=light] h2,[data-theme=light] h3{text-shadow:none}
+.gt,.hero h1 .gt{background:var(--lava);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(255,100,0,.45));animation:candle 5s steps(1,end) infinite}
+[data-theme=light] .gt,[data-theme=light] .hero h1 .gt{background:var(--lava);-webkit-background-clip:text;background-clip:text;filter:none;animation:none}
+@keyframes candle{0%,100%{opacity:1}12%{opacity:.82}14%{opacity:1}47%{opacity:.9}49%{opacity:1}71%{opacity:.78}73%{opacity:1}}
+.eyebrow,.pmg,.lab{color:var(--ember2)}
+.glass{background:linear-gradient(145deg,rgba(255,150,70,.07),rgba(20,8,6,.35));border-color:var(--line);box-shadow:0 24px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,190,120,.12),0 0 0 1px rgba(0,0,0,.4)}
+[data-theme=light] .glass{background:linear-gradient(145deg,rgba(255,255,255,.75),rgba(255,236,214,.5));box-shadow:0 18px 50px rgba(120,50,0,.15),inset 0 1px 0 #fff}
+.pill{position:relative;background:linear-gradient(180deg,rgba(28,12,8,.82),rgba(12,6,5,.82));border-color:rgba(255,140,60,.28);box-shadow:0 14px 50px rgba(0,0,0,.6),0 0 40px rgba(255,90,0,.08),inset 0 1px 0 rgba(255,190,120,.14)}
+[data-theme=light] .pill{background:rgba(255,247,235,.85);box-shadow:0 12px 40px rgba(120,50,0,.18),inset 0 1px 0 #fff}
+nav button.on{color:var(--text);background:rgba(255,120,30,.14);border-color:rgba(255,140,60,.4);box-shadow:0 0 22px rgba(255,100,0,.2),inset 0 0 12px rgba(255,120,30,.1)}
+nav button:hover{color:#fff}
+.brand img,.hbadge img,.brand2 img,.rf img{filter:drop-shadow(0 0 7px rgba(255,100,0,.7))}
+.brand img{animation:candle 6s steps(1,end) infinite 1s}
+.vt{background:radial-gradient(circle at 50% 35%,rgba(255,110,20,.22),#120806 72%);border-color:rgba(255,140,60,.3)}
+.vt img{filter:drop-shadow(0 0 14px rgba(255,100,0,.65))}
+.ib,.btn2,.lsw{border-color:var(--line)}
+.ib:hover,.btn2:hover{border-color:rgba(255,140,60,.5);box-shadow:0 0 20px rgba(255,100,0,.2)}
+.lsw button.on{color:#1a0a02;background:linear-gradient(180deg,#ffc15e,#ff7a1a);box-shadow:0 0 14px rgba(255,100,0,.45)}
+[data-theme=light] .lsw button.on{color:#fff;background:var(--solid)}
+.cta{background:linear-gradient(180deg,#ffc15e 0%,#ff7a1a 55%,#e24a00 100%);color:#1a0a02;text-shadow:0 1px 0 rgba(255,255,255,.28);box-shadow:0 8px 30px rgba(255,100,0,.38),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(120,30,0,.35)}
+.cta:hover{box-shadow:0 14px 44px rgba(255,110,0,.62),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(120,30,0,.35);filter:brightness(1.07)}
+[data-theme=light] .cta{color:#fff;text-shadow:none;background:linear-gradient(180deg,#f2672a,#c2410c)}
+.cta.ghost2{background:var(--glass2);color:var(--text);text-shadow:none;box-shadow:none;border:1px solid var(--line)}
+.cta.ghost2:hover{box-shadow:0 0 20px rgba(255,100,0,.2);filter:none;border-color:rgba(255,140,60,.5)}
+.hbadge,.tile .tg,.ptx .tg,.plan .tg{color:var(--ember2);border-color:rgba(255,140,60,.35);background:rgba(255,110,20,.07)}
+.wc:hover,.tile:hover,.dc:hover,.pcard:hover{border-color:rgba(255,140,60,.55);box-shadow:0 26px 70px rgba(0,0,0,.55),0 0 50px rgba(255,90,0,.18)}
+.pglow{background:radial-gradient(circle,rgba(255,100,10,.3),transparent 65%)}
+.wi,.pfs,.ic .ii,.dci{background:radial-gradient(circle at 50% 30%,rgba(255,120,30,.2),rgba(255,120,30,.05));border-color:rgba(255,140,60,.3)}
+.wi svg,.pfs svg,.ic .ii svg{stroke:var(--ember2);filter:drop-shadow(0 0 6px rgba(255,110,20,.6))}
+.dci svg{fill:var(--ember2)}
+.pfi{background:rgba(255,130,50,.04)}
+.pfi:hover{border-color:rgba(255,140,60,.45)}
+.plan{border-color:rgba(255,140,60,.7);background:linear-gradient(135deg,rgba(255,110,20,.14),rgba(255,110,20,.03));box-shadow:0 0 50px rgba(255,90,0,.12)}
+[data-theme=light] .plan{border-color:rgba(217,72,15,.7);background:rgba(217,72,15,.05)}
+.pmo.on{border-color:var(--ember);background:rgba(255,110,20,.1);box-shadow:0 0 22px rgba(255,100,0,.2)}
+.pmo.on .pmc{border-color:var(--ember);background:var(--ember)}
+.pmo.on .pmc::after{border-color:#1a0a02}
+.steps li::before{background:rgba(255,120,30,.14);border-color:rgba(255,140,60,.4);color:var(--ember2)}
+.opanel .spin{border-top-color:var(--ember)}
+.live,.live i{color:var(--ok)}
+.ostat{color:var(--ember2);background:rgba(255,120,30,.12);border-color:rgba(255,140,60,.35)}
+.badge,.ck.add,.sent,.sc-ok{color:var(--ok)}
+.fa a,.ftc a:hover,.ftc button:hover{color:var(--ember2)}
+.ftc a:focus-visible,.ftc button:focus-visible,.pcard:focus-visible{outline-color:var(--ember)}
+.ftbot{border-top-color:var(--line)}
+.modal{background:rgba(8,2,1,.82)}
+.pd,.box{background:linear-gradient(180deg,#140a08,#0b0504);border:1px solid var(--line);box-shadow:0 30px 100px rgba(0,0,0,.8),0 0 70px rgba(255,90,0,.1)}
+[data-theme=light] .pd,[data-theme=light] .box{background:linear-gradient(180deg,#fffaf2,#f8ecdc)}
+.toast{background:rgba(18,8,5,.94);border-color:rgba(255,140,60,.5);box-shadow:0 10px 40px rgba(255,90,0,.25)}
+.stk{background:linear-gradient(180deg,rgba(28,12,8,.92),rgba(12,6,5,.94));border-color:rgba(255,140,60,.35)}
+.send .big{color:var(--ember2);text-shadow:0 0 22px rgba(255,100,0,.35)}
+[data-theme=light] .send .big{text-shadow:none}
+.mt .gm{color:#cdb3a3}
+/* watermark: a big blurred lava glow of the logo behind the hero */
+.wm{filter:blur(60px) saturate(1.5) var(--wmf);animation:wm 1.4s ease 3.4s forwards,wmBreath 6s ease-in-out 4s infinite alternate}
+@keyframes wmBreath{from{transform:translateX(-50%) scale(1)}to{transform:translateX(-50%) scale(1.06)}}
+/* lava drips under the header pill */
+.drips{position:absolute;left:28px;right:28px;top:100%;height:0;pointer-events:none}
+.drips i{position:absolute;top:-4px;width:7px;height:11px;border-radius:50% 50% 50% 50%/32% 32% 68% 68%;background:linear-gradient(180deg,#ffa63a,#ff4d00);box-shadow:0 0 12px rgba(255,90,0,.8);transform-origin:50% 0;opacity:0;animation:drip 8s ease-in infinite var(--d)}
+@keyframes drip{0%{opacity:0;transform:scaleY(.2)}6%{opacity:1;transform:scaleY(.9)}30%{opacity:1;transform:scaleY(2.1)}48%{opacity:1;transform:translateY(8px) scaleY(1.2)}78%{opacity:.9;transform:translateY(64px) scaleY(.9)}92%,100%{opacity:0;transform:translateY(120px) scaleY(.7)}}
+[data-theme=light] .drips{display:none}
+
+/* ---------- atmosphere layers ---------- */
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.torch{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(300px 300px at var(--mx,50%) var(--my,30%),rgba(255,110,20,.11),transparent 70%)}
+@media(hover:none){.torch{display:none}}
+.fog{position:fixed;left:0;right:0;bottom:0;height:46vh;z-index:0;pointer-events:none;overflow:hidden}
+.fog i{position:absolute;bottom:-12vh;left:-30%;width:160%;height:100%;will-change:transform;opacity:.9}
+.fog .f1{background:radial-gradient(ellipse 40% 45% at 30% 85%,rgba(255,80,10,.17),transparent 70%),radial-gradient(ellipse 36% 40% at 75% 90%,rgba(130,50,230,.14),transparent 70%);animation:fogA 24s ease-in-out infinite alternate}
+.fog .f2{background:radial-gradient(ellipse 34% 38% at 55% 95%,rgba(255,150,40,.12),transparent 70%),radial-gradient(ellipse 30% 32% at 12% 92%,rgba(200,40,40,.12),transparent 70%);animation:fogB 31s ease-in-out infinite alternate}
+.fog .f3{background:radial-gradient(ellipse 50% 30% at 50% 100%,rgba(30,10,8,.8),transparent 75%)}
+@keyframes fogA{to{transform:translateX(14%) scale(1.08)}}
+@keyframes fogB{to{transform:translateX(-12%) scale(1.12)}}
+[data-theme=light] .fog{opacity:.5}
+.webs{position:fixed;inset:0;z-index:30;pointer-events:none;color:rgba(255,215,185,.5)}
+.webs svg{position:absolute;top:0;width:min(30vw,300px);height:min(30vw,300px);opacity:.38;filter:drop-shadow(0 0 4px rgba(255,120,40,.35))}
+.webs .wl{left:0}.webs .wr{right:0;transform:scaleX(-1)}
+[data-theme=light] .webs{color:rgba(90,40,10,.5)}
+.spider{position:fixed;top:0;left:max(10px,6vw);z-index:36;pointer-events:none;display:flex;flex-direction:column;align-items:center;animation:spiderDrop 17s cubic-bezier(.45,0,.3,1) 6s infinite}
+.spider .thread{display:block;width:1px;height:calc(100vh + 40px);margin-top:-100vh;background:linear-gradient(180deg,rgba(255,225,200,.0),rgba(255,225,200,.55));box-shadow:0 0 4px rgba(255,170,100,.4)}
+.spider svg{filter:drop-shadow(0 0 8px rgba(255,90,0,.5));margin-top:-1px}
+@keyframes spiderDrop{0%,30%{transform:translateY(0)}42%{transform:translateY(34vh)}46%{transform:translateY(31vh)}50%{transform:translateY(35vh)}64%{transform:translateY(35vh)}78%,100%{transform:translateY(0)}}
+@media(max-width:620px){.spider{left:auto;right:12px}}
+.bats{position:fixed;inset:0;z-index:45;pointer-events:none;overflow:hidden}
+.bat{position:absolute;left:0;top:var(--y);width:var(--s);height:calc(var(--s)/2);opacity:0;color:#0b0505;animation:batX var(--t) linear var(--d) infinite}
+.bat svg{display:block;width:100%;height:100%;fill:#0a0405;filter:drop-shadow(0 0 5px rgba(255,100,0,.65));animation:flap .26s ease-in-out infinite alternate,batY calc(var(--t)/5) ease-in-out infinite alternate}
+.bat.r{animation-name:batXR}
+@keyframes batX{0%{opacity:0;transform:translateX(-14vw)}4%{opacity:1}96%{opacity:1}100%{opacity:0;transform:translateX(112vw)}}
+@keyframes batXR{0%{opacity:0;transform:translateX(112vw) scaleX(-1)}4%{opacity:1}96%{opacity:1}100%{opacity:0;transform:translateX(-14vw) scaleX(-1)}}
+@keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(.5)}}
+@keyframes batY{from{translate:0 -3.5vh}to{translate:0 3.5vh}}
+.bolt{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(70% 55% at 62% 0%,rgba(215,190,255,.5),rgba(150,100,255,.16) 50%,transparent 75%)}
+.bolt.on{animation:bolt 1.1s ease-out}
+@keyframes bolt{0%{opacity:0}6%{opacity:.5}14%{opacity:.08}24%{opacity:.34}100%{opacity:0}}
+html.calm #fx,html.calm .torch,html.calm .fog,html.calm .spider,html.calm .bats,html.calm .bolt,html.calm .drips,html.calm .webs{display:none}
+html.calm .gt,html.calm .brand img{animation:none}
+.fxbtn{background:none;border:1px solid var(--line);color:var(--mute);border-radius:99px;padding:5px 14px;font:500 12px "JetBrains Mono",monospace;letter-spacing:.04em;cursor:pointer;transition:.2s}
+.fxbtn:hover{color:var(--text);border-color:rgba(255,140,60,.55);box-shadow:0 0 16px rgba(255,100,0,.25)}
+.fxbtn[hidden]{display:none}
+
+/* ---------- intro: lightning, fog, bats, lava logo ---------- */
+#intro{background:radial-gradient(80% 60% at 50% 55%,#1c0a06,#050203 70%)}
+#intro .aura{background:radial-gradient(circle,rgba(255,100,10,.4),rgba(255,70,0,.12) 40%,transparent 68%)}
+#intro .ring{border-color:rgba(255,140,50,.75);box-shadow:0 0 30px rgba(255,100,0,.45),inset 0 0 30px rgba(255,100,0,.25)}
+#intro .lgw{width:clamp(150px,27vmin,250px)}
+#intro .lg{filter:drop-shadow(0 0 26px rgba(255,100,0,.7));animation:iLogo 1s cubic-bezier(.5,0,.75,.5) .2s forwards,lavaPulse 1.2s ease-in-out 1.25s infinite alternate}
+@keyframes lavaPulse{from{filter:drop-shadow(0 0 16px rgba(255,90,0,.55))}to{filter:drop-shadow(0 0 44px rgba(255,140,30,.95))}}
+#intro .ttl{margin-top:18px}
+#intro .ttl-h{font-size:clamp(54px,14vw,170px);color:#ffb347}
+#intro .ttl-h span{background:var(--lava);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 18px rgba(255,90,0,.55))}
+#intro .tag{color:#d9a98a}
+#intro .tag .t2{color:#ffb347;text-shadow:0 0 18px rgba(255,100,0,.8)}
+#intro .bar{background:rgba(255,140,60,.15)}
+#intro .bar i{background:linear-gradient(90deg,#c2310a,#ff7a1a,#ffd27a);box-shadow:0 0 14px rgba(255,110,0,.8)}
+#intro .ifog{position:absolute;left:-20%;width:140%;height:60%;pointer-events:none;will-change:transform}
+#intro .ifog.a{bottom:-10%;background:radial-gradient(ellipse 45% 45% at 35% 70%,rgba(255,80,10,.28),transparent 70%),radial-gradient(ellipse 40% 40% at 78% 80%,rgba(120,40,220,.24),transparent 70%);animation:fogA 9s ease-in-out infinite alternate}
+#intro .ifog.b{top:-15%;background:radial-gradient(ellipse 40% 40% at 70% 30%,rgba(120,40,220,.22),transparent 70%),radial-gradient(ellipse 35% 35% at 20% 40%,rgba(255,60,0,.16),transparent 70%);animation:fogB 11s ease-in-out infinite alternate}
+#intro .flash{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(60% 50% at 60% 10%,rgba(220,200,255,.55),rgba(150,100,255,.18) 50%,transparent 80%);animation:flashI 3.2s linear forwards}
+@keyframes flashI{0%,4%{opacity:0}5%{opacity:.6}9%{opacity:.08}12%{opacity:.4}22%{opacity:0}40%{opacity:0}41%{opacity:.5}46%{opacity:.06}49%{opacity:.3}60%,100%{opacity:0}}
+#intro .iem{position:absolute;bottom:-10px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,#fff2b0,#ff8a1a 45%,transparent 72%);box-shadow:0 0 10px rgba(255,120,20,.9);opacity:0;animation:iem var(--t) ease-out var(--d) infinite}
+@keyframes iem{0%{opacity:0;transform:translate3d(0,0,0)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),-92vh,0)}}
+#intro .ibat{position:absolute;left:50%;top:50%;width:var(--s);height:calc(var(--s)/2);margin:calc(var(--s)/-4) 0 0 calc(var(--s)/-2);fill:#050203;filter:drop-shadow(0 0 6px rgba(255,100,0,.8));opacity:0;animation:batOut 1.9s cubic-bezier(.3,.1,.5,1) var(--d) forwards,flap .22s ease-in-out infinite alternate}
+@keyframes batOut{0%{opacity:0;transform:translate3d(0,0,0) scale(.2)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) scale(1.5)}}
+@media(prefers-reduced-motion:reduce){#intro .ibat,#intro .iem,#intro .flash,.bolt,.spider,.drips{display:none}.bat{display:none}.gt,.brand img{animation:none}}
+
+/* ---------- scratch card: trick or treat ---------- */
+.scard{border-color:rgba(255,140,60,.4);background:radial-gradient(120% 150% at 50% 0%,rgba(255,110,20,.32),rgba(14,5,3,.97) 68%);box-shadow:inset 0 1px 0 rgba(255,200,140,.2),0 20px 60px rgba(255,80,0,.22)}
+.sc-under small{color:var(--ember2)}
+.sc-under b{background:var(--lava);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 14px rgba(255,100,0,.5))}
+.sc-off{color:#e8bfa3}
+.sc-code{border-color:rgba(255,140,60,.55);background:rgba(255,110,20,.08);color:#fff1e6}
+.scard.won{animation:cpWin 1s ease,wonGlow 2.2s ease-in-out infinite alternate}
+@keyframes wonGlow{from{box-shadow:inset 0 1px 0 rgba(255,200,140,.2),0 20px 60px rgba(255,80,0,.22)}to{box-shadow:inset 0 1px 0 rgba(255,200,140,.3),0 20px 90px rgba(255,100,0,.5)}}
 </style>
 <style id="noguard">
 *{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
@@ -578,17 +725,34 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="bat" viewBox="0 0 120 60"><path d="M60 16 56 6 54 15C46 10 30 8 4 16 12 18 14 24 14 28 20 24 26 26 28 32 34 28 40 30 42 38 48 34 54 36 56 44L60 52 64 44C66 36 72 34 78 38 80 30 86 28 92 32 94 26 100 24 106 28 106 24 108 18 116 16 90 8 74 10 66 15L64 6z"/></symbol>
+    <symbol id="web" viewBox="0 0 210 210"><path d="M0 0L210.0 0.0M0 0L201.9 57.9M0 0L174.1 117.4M0 0L123.4 169.9M0 0L64.9 199.7M0 0L0.0 210.0M34.0 0.0Q26.9 3.8 32.7 9.4M32.7 9.4Q24.7 11.5 28.2 19.0M28.2 19.0Q19.6 18.9 20.0 27.5M20.0 27.5Q12.3 24.2 10.5 32.3M10.5 32.3Q4.3 26.9 0.0 34.0M66.0 0.0Q52.3 7.3 63.4 18.2M63.4 18.2Q47.9 22.3 54.7 36.9M54.7 36.9Q38.0 36.7 38.8 53.4M38.8 53.4Q24.0 47.0 20.4 62.8M20.4 62.8Q8.3 52.1 0.0 66.0M100.0 0.0Q79.2 11.1 96.1 27.6M96.1 27.6Q72.5 33.8 82.9 55.9M82.9 55.9Q57.5 55.6 58.8 80.9M58.8 80.9Q36.3 71.3 30.9 95.1M30.9 95.1Q12.5 79.0 0.0 100.0M138.0 0.0Q109.3 15.4 132.7 38.0M132.7 38.0Q100.1 46.7 114.4 77.2M114.4 77.2Q79.4 76.7 81.1 111.6M81.1 111.6Q50.1 98.4 42.6 131.2M42.6 131.2Q17.3 109.0 0.0 138.0M178.0 0.0Q141.0 19.8 171.1 49.1M171.1 49.1Q129.1 60.2 147.6 99.5M147.6 99.5Q102.4 98.9 104.6 144.0M104.6 144.0Q64.6 126.9 55.0 169.3M55.0 169.3Q22.3 140.6 0.0 178.0" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="torch" aria-hidden="true"></div>
+<div class="fog" aria-hidden="true"><i class="f1"></i><i class="f2"></i><i class="f3"></i></div>
+<div class="webs" aria-hidden="true"><svg class="wl"><use href="#web"/></svg><svg class="wr"><use href="#web"/></svg></div>
+<div class="spider" aria-hidden="true"><i class="thread"></i><svg viewBox="0 0 40 34" width="34" height="29"><g stroke="#1b0d09" stroke-width="2" stroke-linecap="round" fill="none"><path d="M16 15 5 6 2 12M16 17 3 17 1 24M17 19 6 27 5 32M18 21 12 31 13 34"/><path d="M24 15 35 6 38 12M24 17 37 17 39 24M23 19 34 27 35 32M22 21 28 31 27 34"/></g><ellipse cx="20" cy="22" rx="7" ry="8.5" fill="#150a07" stroke="#ff7a1a" stroke-opacity=".5"/><circle cx="20" cy="12" r="5" fill="#150a07" stroke="#ff7a1a" stroke-opacity=".5"/><circle cx="18" cy="11" r="1.3" fill="#ff3b1a"/><circle cx="22" cy="11" r="1.3" fill="#ff3b1a"/><path d="M17 20h6M20 16v12" stroke="#ff7a1a" stroke-opacity=".45" stroke-width="1.2"/></svg></div>
+<div class="bats" id="bats" aria-hidden="true"></div>
+<div class="bolt" id="bolt" aria-hidden="true"></div>
+
 
 <button id="skip" type="button" aria-label="Skip intro" data-i18n="intro.skip" data-i18n-attr="aria-label:intro.skip">Skip intro</button>
 <div id="intro" aria-hidden="true">
   <div class="aura"></div>
-  
-    <i class="ring" style="--d:.95s"></i><i class="ring" style="--d:1.07s"></i><i class="ring" style="--d:1.19s"></i>
-    <div class="wrap">
+  <div class="ifog a"></div><div class="ifog b"></div>
+  <i class="iem" style="--x:44%;--s:5px;--t:2.7s;--d:0.1s;--dx:45px"></i><i class="iem" style="--x:71%;--s:4px;--t:2.6s;--d:0.1s;--dx:4px"></i><i class="iem" style="--x:30%;--s:4px;--t:2.3s;--d:0.7s;--dx:-30px"></i><i class="iem" style="--x:14%;--s:8px;--t:2.7s;--d:1.3s;--dx:-45px"></i><i class="iem" style="--x:31%;--s:9px;--t:3.0s;--d:1.5s;--dx:13px"></i><i class="iem" style="--x:77%;--s:7px;--t:2.3s;--d:0.4s;--dx:11px"></i><i class="iem" style="--x:20%;--s:6px;--t:2.7s;--d:0.9s;--dx:13px"></i><i class="iem" style="--x:42%;--s:8px;--t:3.2s;--d:0.3s;--dx:14px"></i><i class="iem" style="--x:76%;--s:9px;--t:2.4s;--d:0.2s;--dx:31px"></i><i class="iem" style="--x:11%;--s:8px;--t:2.3s;--d:0.3s;--dx:27px"></i><i class="iem" style="--x:71%;--s:7px;--t:3.1s;--d:0.7s;--dx:58px"></i><i class="iem" style="--x:61%;--s:6px;--t:2.6s;--d:1.3s;--dx:29px"></i><i class="iem" style="--x:34%;--s:4px;--t:2.9s;--d:0.8s;--dx:52px"></i><i class="iem" style="--x:46%;--s:9px;--t:2.7s;--d:1.0s;--dx:-51px"></i><i class="iem" style="--x:18%;--s:8px;--t:2.7s;--d:1.2s;--dx:-41px"></i><i class="iem" style="--x:65%;--s:7px;--t:2.2s;--d:1.1s;--dx:37px"></i><i class="iem" style="--x:74%;--s:8px;--t:3.1s;--d:1.3s;--dx:-17px"></i><i class="iem" style="--x:91%;--s:6px;--t:2.9s;--d:0.9s;--dx:-2px"></i><i class="iem" style="--x:11%;--s:4px;--t:3.3s;--d:0.8s;--dx:25px"></i><i class="iem" style="--x:11%;--s:4px;--t:3.1s;--d:0.5s;--dx:13px"></i><i class="iem" style="--x:90%;--s:7px;--t:2.5s;--d:0.6s;--dx:25px"></i><i class="iem" style="--x:47%;--s:4px;--t:3.3s;--d:0.6s;--dx:18px"></i>
+  <div class="flash"></div>
+  <i class="ring" style="--d:.95s"></i><i class="ring" style="--d:1.07s"></i><i class="ring" style="--d:1.19s"></i>
+  <svg class="ibat" viewBox="0 0 120 60" style="--dx:-46vw;--dy:-34vh;--s:64px;--d:0.55s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:44vw;--dy:-38vh;--s:58px;--d:0.62s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-52vw;--dy:8vh;--s:50px;--d:0.7s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:50vw;--dy:12vh;--s:54px;--d:0.78s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-24vw;--dy:-46vh;--s:44px;--d:0.85s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:26vw;--dy:-44vh;--s:46px;--d:0.9s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-34vw;--dy:36vh;--s:40px;--d:1.0s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:36vw;--dy:34vh;--s:42px;--d:1.05s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:0vw;--dy:-48vh;--s:52px;--d:0.95s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-12vw;--dy:40vh;--s:36px;--d:1.1s"><use href="#bat"/></svg>
+  <div class="wrap">
     <div class="lgw"><img class="lg" src="/logo.png" alt="" draggable="false"></div>
     <div class="ttl">
       <div class="ttl-h" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">Y</span><span style="--i:2">R</span><span style="--i:3">O</span><span style="--i:4">N</span></div>
-          </div>
+    </div>
     <p class="tag"><span class="t1" data-i18n="intro.t1">Max Performance.</span><span class="t2" data-i18n="intro.t2">Zero Lag.</span></p>
     <div class="bar"><i></i></div>
   </div>
@@ -596,7 +760,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 
 <div class="wmwrap" aria-hidden="true"><img class="wm" src="/img/logo-bg.png" alt="" draggable="false"></div>
 
-<header><div class="pill">
+<header><div class="pill"><div class="drips" aria-hidden="true"><i style="left:12%;--d:1s"></i><i style="left:47%;--d:4.2s"></i><i style="left:78%;--d:6.4s"></i></div>
   <div class="brand" data-t="home"><img src="/logo.png" alt=""><b>Vyron</b></div>
   <nav>
     <button class="on" data-t="home" data-i18n="nav.home">Main</button>
@@ -734,7 +898,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
         <div class="ftc" role="group" aria-label="Legal" data-i18n-attr="aria-label:a11y.legal"><h5 data-i18n="ft.legal">Legal</h5><a href="/terms.html" data-i18n="legal.terms">Terms of Service</a><a href="/privacy.html" data-i18n="legal.privacy">Privacy Policy</a><a href="/refund.html" data-i18n="legal.refund">Refund Policy</a></div>
         <div class="ftc" role="group" aria-label="Community" data-i18n-attr="aria-label:a11y.community"><h5 data-i18n="ft.community">Community</h5><a href="https://discord.gg/vyron" target="_blank" rel="noopener">Discord</a></div>
       </div>
-      <div class="ftbot"><span>© <span id="yr">2026</span> <span data-i18n="ft.rights">Vyron. All rights reserved.</span></span><span data-i18n="ft.disclaimer">Not affiliated with Riot Games, Epic Games, Valve, Microsoft, NVIDIA, AMD or Intel. All trademarks belong to their respective owners.</span></div>
+      <div class="ftbot"><span>© <span id="yr">2026</span> <span data-i18n="ft.rights">Vyron. All rights reserved.</span></span><button class="fxbtn" id="fxbtn" type="button" hidden></button><span data-i18n="ft.disclaimer">Not affiliated with Riot Games, Epic Games, Valve, Microsoft, NVIDIA, AMD or Intel. All trademarks belong to their respective owners.</span></div>
     </div>
   </footer>
 </main>
@@ -760,7 +924,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 </div></div>
 <div class="modal top" id="cpn" aria-hidden="true"><div class="glass box cpbox" role="dialog" aria-label="Scratch card discount" data-i18n-attr="aria-label:a11y.scratchDialog">
   <button class="x" id="cpx" type="button" aria-label="Close" data-i18n-attr="aria-label:a11y.close">✕</button>
-  <span class="eyebrow" id="cpeb" data-i18n="cp.eyebrow">Welcome gift</span>
+  <span class="eyebrow" id="cpeb" data-i18n="cp.eyebrow">Trick or treat</span>
   <h3 data-i18n="cp.h">Scratch &amp; save</h3>
   <p class="sub" data-i18n="cp.sub">Scratch the card to reveal your discount. It's applied to your order automatically.</p>
   <div class="scard" id="scard" tabindex="0" role="button" aria-label="Scratch card. Press Enter to reveal your discount." data-i18n-attr="aria-label:a11y.scratchCard">
@@ -806,7 +970,7 @@ function setLang(l,byUser){
     document.querySelectorAll("[data-lang]").forEach(b=>{const on=b.dataset.lang===l;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
     if(byUser){try{localStorage.setItem("vy-lang",l)}catch{}}
     try{if(location.pathname==="/"||/^\/pl\/?$/.test(location.pathname))history.replaceState(null,"",l==="pl"?"/pl/":"/")}catch{}
-    renderPrices();renderDiscord();renderValid();if(!cpDone&&cx&&offer)paintFoil();
+    renderPrices();renderDiscord();renderValid();renderFx();if(!cpDone&&cx&&offer)paintFoil();
     if($p("cm").classList.contains("open")&&redraw)redraw();
   }
 }
@@ -1132,15 +1296,16 @@ function paintFoil(){
   cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);
   cx=cv.getContext("2d",{willReadFrequently:true});cx.setTransform(dpr,0,0,dpr,0,0);
   const g=cx.createLinearGradient(0,0,w,h);
-  g.addColorStop(0,"#eceef6");g.addColorStop(.3,"#8f96ab");g.addColorStop(.55,"#d9dce8");g.addColorStop(.8,"#7a8097");g.addColorStop(1,"#b9bdcc");
+  g.addColorStop(0,"#ffd98a");g.addColorStop(.3,"#c75a12");g.addColorStop(.55,"#ff9a3a");g.addColorStop(.8,"#8c3305");g.addColorStop(1,"#e0822f");
   cx.fillStyle=g;cx.fillRect(0,0,w,h);
-  cx.strokeStyle="rgba(255,255,255,.14)";cx.lineWidth=1;
+  cx.strokeStyle="rgba(70,18,0,.2)";cx.lineWidth=1;
   for(let i=-h;i<w;i+=7){cx.beginPath();cx.moveTo(i,0);cx.lineTo(i+h,h);cx.stroke()}
-  for(let i=0;i<650;i++){cx.fillStyle=Math.random()<.5?"rgba(255,255,255,.18)":"rgba(10,12,20,.12)";cx.fillRect(Math.random()*w,Math.random()*h,1.6,1.6)}
+  for(let i=0;i<650;i++){cx.fillStyle=Math.random()<.5?"rgba(255,235,190,.22)":"rgba(40,8,0,.16)";cx.fillRect(Math.random()*w,Math.random()*h,1.6,1.6)}
   cx.textAlign="center";cx.textBaseline="middle";
-  cx.fillStyle="rgba(14,16,24,.62)";cx.font="800 28px Manrope,Inter,sans-serif";if("letterSpacing" in cx)cx.letterSpacing="5px";
-  cx.fillText(t("cp.foil1"),w/2,h/2-10);
-  cx.fillStyle="rgba(14,16,24,.5)";cx.font="500 12px 'JetBrains Mono',monospace";if("letterSpacing" in cx)cx.letterSpacing="3px";
+  const txt=t("cp.foil1");let fs=28;if("letterSpacing" in cx)cx.letterSpacing="4px";
+  cx.font=`800 ${fs}px Manrope,Inter,sans-serif`;while(fs>11&&cx.measureText(txt).width>w*.9){fs--;cx.font=`800 ${fs}px Manrope,Inter,sans-serif`}
+  cx.fillStyle="rgba(40,10,0,.78)";cx.fillText(txt,w/2,h/2-10);
+  cx.fillStyle="rgba(40,10,0,.6)";cx.font="500 12px 'JetBrains Mono',monospace";if("letterSpacing" in cx)cx.letterSpacing="3px";
   cx.fillText(t("cp.foil2"),w/2,h/2+22);
   cx.strokeStyle="#000";cx.globalCompositeOperation="destination-out"; // erase strength = stroke alpha, so it must be fully opaque
 }
@@ -1190,6 +1355,60 @@ async function showOffer(){
   requestAnimationFrame(paintFoil);
 }
 setTimeout(showOffer,COUPON_DELAY);
+
+/* ===== Halloween atmosphere: embers, bats, lightning, torch light. Can be switched off in the footer (and is off by default for "reduce motion"). ===== */
+const FXS={on:true,raf:0,last:0,P:[],W:0,H:0};
+(function(){let v=null;try{v=localStorage.getItem("vy-fx")}catch{}FXS.on=v?v!=="off":!matchMedia("(prefers-reduced-motion:reduce)").matches})();
+const fxc=$p("fx"),fcx=fxc.getContext("2d");
+const mkSprite=c=>{const s=document.createElement("canvas");s.width=s.height=48;const g=s.getContext("2d"),r=g.createRadialGradient(24,24,0,24,24,24);r.addColorStop(0,"rgba("+c+",1)");r.addColorStop(.25,"rgba("+c+",.55)");r.addColorStop(1,"rgba("+c+",0)");g.fillStyle=r;g.fillRect(0,0,48,48);return s};
+const SPR=[mkSprite("255,235,170"),mkSprite("255,130,30"),mkSprite("255,100,20"),mkSprite("170,100,255")];
+function fxResize(){const d=Math.min(devicePixelRatio||1,1.5);FXS.W=innerWidth;FXS.H=innerHeight;fxc.width=FXS.W*d;fxc.height=FXS.H*d;fcx.setTransform(d,0,0,d,0,0)}
+function spawn(burst,x,y){
+  if(burst){const a=Math.random()*6.283,v=40+Math.random()*150;return{x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-30,r:6+Math.random()*10,life:0,max:.7+Math.random()*.8,s:Math.random()<.25?0:1,sway:0,ph:0,burst:1}}
+  const k=Math.random();
+  return{x:Math.random()*FXS.W,y:FXS.H+10,vx:0,vy:-(18+Math.random()*50),r:8+Math.random()*18,life:0,max:5+Math.random()*6,s:k<.12?3:k<.45?0:k<.8?1:2,sway:10+Math.random()*28,ph:Math.random()*6.28,burst:0};
+}
+function fxFrame(t){
+  FXS.raf=requestAnimationFrame(fxFrame);
+  const dt=Math.min((t-FXS.last)/1000||.016,.05);FXS.last=t;
+  if(FXS.P.length<Math.min(70,FXS.W/22)&&Math.random()<.35)FXS.P.push(spawn());
+  const light=document.documentElement.getAttribute("data-theme")==="light";
+  fcx.clearRect(0,0,FXS.W,FXS.H);fcx.globalCompositeOperation=light?"source-over":"lighter";
+  for(let i=FXS.P.length-1;i>=0;i--){
+    const p=FXS.P[i];p.life+=dt;if(p.life>p.max||p.y<-30){FXS.P.splice(i,1);continue}
+    if(p.burst){p.vx*=.96;p.vy=p.vy*.96+60*dt}else p.x+=Math.sin(p.life*1.3+p.ph)*p.sway*dt;
+    p.x+=p.vx*dt;p.y+=p.vy*dt;
+    const k=p.life/p.max,a=Math.min(1,k*5)*(1-k)*(p.s===3?.55:.9)*(p.burst?1:.55+.45*Math.sin(p.life*7+p.ph));
+    fcx.globalAlpha=Math.max(0,a)*(light?.7:1);fcx.drawImage(SPR[p.s],p.x-p.r,p.y-p.r,p.r*2,p.r*2);
+  }
+  fcx.globalAlpha=1;
+}
+const fxStart=()=>{if(!FXS.raf&&!document.hidden){FXS.last=performance.now();FXS.raf=requestAnimationFrame(fxFrame)}};
+const fxStop=()=>{cancelAnimationFrame(FXS.raf);FXS.raf=0;fcx.clearRect(0,0,FXS.W,FXS.H);FXS.P.length=0};
+function renderFx(){const b=$p("fxbtn");b.hidden=false;b.textContent=t(FXS.on?"fx.on":"fx.off");b.setAttribute("aria-pressed",String(FXS.on))}
+function setFx(on,persist){
+  FXS.on=on;document.documentElement.classList.toggle("calm",!on);on?fxStart():fxStop();
+  if(persist){try{localStorage.setItem("vy-fx",on?"on":"off")}catch{}}
+  renderFx();
+}
+function mkBats(){
+  const box=$p("bats");box.innerHTML="";
+  for(let i=0,n=innerWidth<620?3:6;i<n;i++){
+    const d=document.createElement("div");d.className="bat"+(i%2?" r":"");
+    d.style.cssText="--y:"+(6+Math.random()*58)+"%;--s:"+(26+Math.random()*34)+"px;--t:"+(14+Math.random()*16)+"s;--d:"+(5+i*4+Math.random()*6)+"s";
+    d.innerHTML='<svg viewBox="0 0 120 60"><use href="#bat"/></svg>';box.appendChild(d);
+  }
+}
+function lightning(){
+  if(FXS.on){const b=$p("bolt");b.classList.remove("on");void b.offsetWidth;b.classList.add("on")}
+  setTimeout(lightning,16000+Math.random()*26000);
+}
+fxc.addEventListener&&addEventListener("resize",fxResize);
+document.addEventListener("visibilitychange",()=>{if(document.hidden)fxStop();else if(FXS.on)fxStart()});
+addEventListener("pointerdown",e=>{if(FXS.on&&FXS.raf&&FXS.P.length<220)for(let i=0;i<14;i++)FXS.P.push(spawn(1,e.clientX,e.clientY))});
+if(matchMedia("(hover:hover)").matches){let raf=0,mx=0,my=0;addEventListener("pointermove",e=>{mx=e.clientX;my=e.clientY;if(!raf)raf=requestAnimationFrame(()=>{raf=0;const r=document.documentElement.style;r.setProperty("--mx",mx+"px");r.setProperty("--my",my+"px")})},{passive:true})}
+$p("fxbtn").onclick=()=>setFx(!FXS.on,true);
+fxResize();mkBats();setFx(FXS.on,false);setTimeout(lightning,9000);
 
 /* First visit: pick the language. /pl/ is already Polish; on / use the saved choice, else the browser language. */
 (function(){

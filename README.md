@@ -43,6 +43,18 @@ The database file `vyron.db` is created automatically on first run.
 ## Deploy on Vercel
 Import this folder as the project root. `public/` is served statically and `api/*.js` run as serverless functions (`/api/rates`, `/api/checkout`, `/api/verify`, `/api/coupon`, `/api/discord`). There is no cart: the visitor clicks "Buy now", picks a payment method and places the order. Prices are re-checked server-side at checkout, so no database is needed. Orders are not stored on the server; the customer gets an order ID to quote in the Discord ticket. The `/app.html` dashboard (`/api/records`) needs the local SQLite server and is not part of the Vercel deployment.
 
+## Halloween theme (v10)
+Black glass + lava-orange glow, with a new logo everywhere (`public/logo.png`, `public/img/logo-bg.png`, favicons, app icons, `og-image.png` were regenerated from the new artwork).
+- **Styles:** one block at the end of the main `<style>` in `src/index.html` ("HALLOWEEN THEME"). It overrides the neutral base styles through CSS variables
+  (`--ember`, `--lava`, ...). The light theme became a candle-lit parchment version. Legal pages and the 404 use the same palette.
+- **Atmosphere (all in `src/index.html`):** lightning-lit intro with bats and embers, floating embers (canvas, click = ember burst), flying bats,
+  spider-web corners, a spider that lowers itself on a thread, drifting fog, lava drips under the header, a torch light that follows the mouse, rare soft lightning flashes.
+- **Trick or treat:** the scratch card now has an orange foil and "Trick or treat" texts (EN + PL in `src/i18n.js`).
+- **Accessibility / performance:** effects are switched off automatically for visitors with "reduce motion", pause when the tab is hidden, use few particles on phones,
+  and every visitor can turn them off in the footer ("Spooky effects") — the choice is remembered.
+- **Taking the theme down after Halloween:** delete the "HALLOWEEN THEME" CSS block, the layers right after `<body>` (svg symbols, `#fx`, `.torch`, `.fog`, `.webs`, `.spider`, `.bats`, `.bolt`),
+  the `.drips` element in the header, the intro extras (`.ifog`, `.iem`, `.flash`, `.ibat`) and the "Halloween atmosphere" JavaScript block, then run the build.
+
 ## Languages (EN / PL)
 - `/` is English, `/pl/` is Polish. Both are real pre-rendered pages (good for SEO and no-JS visitors), with `hreflang` links.
   The PL/EN switch in the header translates the page instantly without reloading and remembers the choice. A visitor whose browser is set to

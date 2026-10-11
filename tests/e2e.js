@@ -117,7 +117,7 @@ const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok
       // the stored coupon is valid for 2.5 s -> no card at 5 s unless it expired: wait for expiry + re-offer
       await page.waitForFunction(() => !localStorage.getItem("vy-coupon"), null, { timeout: 8000 });
       await page.waitForSelector("#cpn.open #scard:not(.won)", { timeout: 15000 });
-      assert.equal((await page.locator("#cpeb").textContent()).trim(), "A new gift for you");
+      assert.equal((await page.locator("#cpeb").textContent()).trim(), "Another treat for you");
       assert.match(await txt(page, "#tsub"), /one-time/);
       assert.deepEqual(page.errors, []);
     });
