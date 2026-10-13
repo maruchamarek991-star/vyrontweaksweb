@@ -15,31 +15,17 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 (async () => {
   console.log("coupons");
-  await test("code is valid for exactly 24 hours, then it expires", () => {
-    const now = Date.now(), c = issueCoupon("1.2.3.4|UA", now);
-    assert.ok(c.pct >= 5 && c.pct <= 20);
-    assert.ok(Math.abs(c.exp - (now + 24 * HOUR)) < MINUTE, "expiry is 24h from issue");
-    assert.ok(verifyCoupon(c.code, now + 24 * HOUR - 2 * MINUTE), "still valid just before 24h");
-    assert.equal(verifyCoupon(c.code, now + 24 * HOUR + 2 * MINUTE), null, "expired just after 24h");
+  await test("HALLOWEEN20 is -20 % and expires on 1 Nov 2026 at 00:00 Polish time", () => {
+    assert.equal(shop.COUPON_EXP, Date.UTC(2026, 9, 31, 23, 0, 0));
+    const c = verifyCoupon("halloween20", shop.COUPON_EXP - 1000);
+    assert.ok(c && c.pct === 20 && c.code === "HALLOWEEN20");
+    assert.equal(verifyCoupon("HALLOWEEN20", shop.COUPON_EXP), null, "expired at the deadline");
+    assert.equal(issueCoupon("a|b", shop.COUPON_EXP + 1), null);
   });
-  await test("tampered or forged codes are rejected", () => {
-    const c = issueCoupon("x|y");
-    assert.equal(verifyCoupon(c.code.replace(/^VYRON\d+/, "VYRON20")), c.pct === 20 ? c.code : null);
-    assert.equal(verifyCoupon(c.code.slice(0, -1) + (c.code.endsWith("A") ? "B" : "A")), null);
-    assert.equal(verifyCoupon("VYRON20-ZZZZZZZZZ-0000000000"), null);
+  await test("old scratch-card codes and random strings are rejected", () => {
+    assert.equal(verifyCoupon("VYRON20-ZZZZZZZZZ-0000000000", shop.COUPON_EXP - 1000), null);
+    assert.equal(verifyCoupon("HALLOWEEN30", shop.COUPON_EXP - 1000), null);
     assert.equal(verifyCoupon(""), null);
-  });
-  await test("re-rolling does not help: same visitor + same day -> same percentage", () => {
-    const now = Date.UTC(2026, 9, 10, 0, 30); // everything below stays inside the same UTC day
-    const set = new Set(Array.from({ length: 30 }, () => issueCoupon("5.6.7.8|Chrome", now + Math.random() * 22 * HOUR).pct));
-    assert.equal(set.size, 1);
-  });
-  await test("a new day gives a new random percentage; visitors differ; all within 5-20", () => {
-    const days = new Set(), visitors = new Set();
-    for (let d = 0; d < 60; d++) { const p = issueCoupon("9.9.9.9|UA", Date.UTC(2026, 9, 1 + d, 8)).pct; days.add(p); assert.ok(p >= 5 && p <= 20); }
-    for (let v = 0; v < 60; v++) visitors.add(issueCoupon("10.0.0." + v + "|UA", Date.UTC(2026, 9, 10, 8)).pct);
-    assert.ok(days.size > 8, "percentage changes from day to day (" + days.size + " distinct)");
-    assert.ok(visitors.size > 8, "visitors get different percentages (" + visitors.size + " distinct)");
   });
   await test("fingerprint uses forwarded IP + UA and reduces IPv6 to /64", () => {
     const a = shop.fingerprint({ headers: { "x-forwarded-for": "2001:db8:1:2:aaaa:bbbb:cccc:dddd, 10.0.0.1", "user-agent": "UA" } });
@@ -57,9 +43,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     assert.equal(r.code, 400); assert.equal(r.body.code, "coupon_invalid"); assert.equal(r.body.couponInvalid, true);
   });
   await test("ticket methods have no crypto block; coupon discount is applied in cents", async () => {
-    const c = issueCoupon("a|b"), r = await checkout({ method: "blik", coupon: c.code, items: [{ productId: 0, qty: 1 }] });
+    if (Date.now() >= shop.COUPON_EXP) return; // the Halloween sale is over
+    const r = await checkout({ method: "blik", coupon: "HALLOWEEN20", items: [{ productId: 0, qty: 1 }] });
     assert.equal(r.code, 201); assert.equal(r.body.crypto, undefined);
-    assert.equal(r.body.total, Math.round(500 * (100 - c.pct) / 100) / 100);
+    assert.equal(r.body.total, 4);
   });
   let order;
   await test("SOL checkout locks a unique amount in a signed token", async () => {

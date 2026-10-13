@@ -84,16 +84,11 @@ Black glass + lava-orange glow, with a new logo everywhere (`public/logo.png`, `
   automatically; one transaction could in theory match two orders only if both got the identical random dust (1 in 9999) — check that the same TX hash isn't
   quoted in two tickets. Delivery itself is still done by you in the ticket.
 
-## Scratch-card discount coupon
-- A code is valid for exactly **24 hours** from the moment it is issued. When it expires it is removed and the visitor gets a **new scratch card with a new random discount**
-  (also while the page stays open).
-- Re-rolling for a better discount no longer works: the percentage (5–20 %) is derived (HMAC) from the visitor's IP + browser and the current UTC day, so asking again the
-  same day returns the same percentage. A different percentage can only come on another day, i.e. after the old code expired. Nothing is stored; a VPN/new IP
-  can still get one more roll per day.
-- `POST /api/coupon` issues the visitor's code; `POST /api/coupon { code }` validates one. `POST /api/checkout` re-verifies and recomputes the price server-side.
-- **Set `COUPON_SECRET`** (any long random string) in the Vercel environment variables. Without it a public development secret is used and anyone could forge codes.
-- Tunables: `COUPON_MIN` / `COUPON_MAX` / `COUPON_TTL_H` in `lib/shop.js`; `COUPON_DELAY` and `REVEAL_AT` in `src/index.html`.
-- Limitation of the stateless design: a code can be used for any number of orders until it expires (one-time use needs storage, e.g. Vercel KV).
+## Halloween coupon
+- One general code for every visitor: **HALLOWEEN20** = **-20 %**. It is applied to the order automatically when the page opens; a popup with a countdown appears a few seconds after the intro (once per session) and a small badge in the corner reopens it.
+- It expires on **1 November 2026 at 00:00 Polish time** (`2026-10-31T23:00:00Z`). The deadline is enforced on the server (`COUPON_EXP` in `lib/shop.js`, override with the `COUPON_EXPIRES` env var) and in the browser, which removes the discount and the badge at the deadline.
+- `POST /api/coupon` returns the current offer (410 after the deadline); `POST /api/coupon { code }` validates a code. `POST /api/checkout` re-verifies it and recomputes the price server-side.
+- To run a new promo, change `COUPON_CODE` / `COUPON_PCT` / `COUPON_EXP` in `lib/shop.js` and `HW` in `src/index.html`, then `node scripts/build.js`.
 
 ## SEO & security
 - Generated automatically: `sitemap.xml` (with hreflang), `robots.txt`, canonical + Open Graph per language, JSON-LD (`Organization`, `WebSite`,

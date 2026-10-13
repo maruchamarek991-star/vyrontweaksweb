@@ -90,35 +90,15 @@ const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok
     assert.deepEqual(leaks, []); assert.deepEqual(page.errors, []); await ctx.close();
   });
 
-  console.log("coupon: 24 h, then a new one");
+  console.log("Halloween coupon");
   {
     const { ctx, page } = await mk("en-US"); await page.goto(BASE + "/"); await skipIntro(page);
-    let first;
-    await test("scratch card appears, scratching reveals a 5-20% code valid for 24 h and applies it", async () => {
+    await test("-20% Halloween popup appears and the discount is already applied", async () => {
       await page.waitForSelector("#cpn.open", { timeout: 9000 });
-      const box = await page.locator("#sccv").boundingBox();
-      for (let y = box.y + 15; y < box.y + box.height; y += 24) { await page.mouse.move(box.x + 5, y); await page.mouse.down(); await page.mouse.move(box.x + box.width - 5, y, { steps: 8 }); await page.mouse.up(); }
-      await page.waitForSelector("#scres:not([hidden])");
-      first = await page.evaluate(() => JSON.parse(localStorage.getItem("vy-coupon")));
-      assert.ok(first.pct >= 5 && first.pct <= 20);
-      assert.ok(Math.abs(first.exp - Date.now() - 24 * 3600e3) < 120e3, "expires in 24h");
-      assert.match(await txt(page, "#scvalid"), /Valid for 24 hours/);
-      assert.match(await txt(page, "#tsub"), new RegExp(`−${first.pct}% applied`));
-    });
-    await test("re-asking the server the same day returns the same percentage (no re-rolling)", async () => {
-      const pcts = await page.evaluate(async () => { const r = []; for (let i = 0; i < 6; i++) r.push((await (await fetch("/api/coupon", { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" })).json()).pct); return r; });
-      assert.equal(new Set(pcts).size, 1);
-    });
-    await test("when the code expires it is removed and a NEW scratch card appears", async () => {
-      await page.click("#cpx");
-      await page.evaluate(() => { const c = JSON.parse(localStorage.getItem("vy-coupon")); c.exp = Date.now() + 2500; localStorage.setItem("vy-coupon", JSON.stringify(c)); });
-      await page.reload(); await skipIntro(page);
-      await page.waitForSelector("#cpn.open", { state: "attached" });
-      // the stored coupon is valid for 2.5 s -> no card at 5 s unless it expired: wait for expiry + re-offer
-      await page.waitForFunction(() => !localStorage.getItem("vy-coupon"), null, { timeout: 8000 });
-      await page.waitForSelector("#cpn.open #scard:not(.won)", { timeout: 15000 });
-      assert.equal((await page.locator("#cpeb").textContent()).trim(), "Another treat for you");
-      assert.match(await txt(page, "#tsub"), /one-time/);
+      assert.match(await txt(page, "#sccode"), /HALLOWEEN20/);
+      assert.match(await txt(page, "#tsub"), /−20% applied/);
+      const c = await page.evaluate(() => JSON.parse(localStorage.getItem("vy-coupon")));
+      assert.equal(c.pct, 20); assert.equal(c.exp, Date.UTC(2026, 9, 31, 23));
       assert.deepEqual(page.errors, []);
     });
     await ctx.close();
