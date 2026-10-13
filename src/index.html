@@ -51,32 +51,8 @@ h1,h2,h3,h4,.ttl-h{font-family:Manrope,Inter,sans-serif}
 
 /* Intro / loading screen — transform + opacity only (GPU composited, no layout or blur work per frame) */
 #intro{position:fixed;inset:0;z-index:100;background:#030304;display:grid;place-items:center;overflow:hidden;contain:layout paint;animation:introOut .6s cubic-bezier(.7,0,.3,1) 3.2s forwards}
-#intro .aura{position:absolute;inset:0;margin:auto;width:min(120vmin,980px);height:min(120vmin,980px);border-radius:50%;background:radial-gradient(circle,rgba(170,185,255,.22),rgba(120,140,255,.07) 38%,transparent 66%);opacity:0;transform:scale(.4);animation:aura 1.4s cubic-bezier(.16,1,.3,1) 1s forwards,auraPulse 1.6s ease-in-out 2.4s infinite alternate;will-change:transform,opacity}
-#intro .ring{position:absolute;inset:0;margin:auto;width:min(62vmin,520px);height:min(62vmin,520px);border-radius:50%;border:1.5px solid rgba(220,230,255,.6);opacity:0;transform:scale(.15);animation:ring 1.2s cubic-bezier(.2,.7,.2,1) var(--d) forwards;will-change:transform,opacity}
-#intro .wrap{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 18px}
-#intro .lgw{width:clamp(54px,8vw,76px);aspect-ratio:1;display:grid;place-items:center}
-#intro .lg{width:100%;height:auto;opacity:0;transform:translate3d(0,-75vh,0);filter:drop-shadow(0 0 18px rgba(190,205,255,.35));animation:iLogo 1s cubic-bezier(.5,0,.75,.5) .2s forwards;will-change:transform,opacity}
-#intro .ttl{position:relative;margin-top:26px}
-#intro .ttl-h{margin:0;font:800 clamp(66px,19vw,220px)/1 Manrope,"Space Grotesk",sans-serif;letter-spacing:.08em;text-indent:.08em;display:flex;color:#f4f5f7}
-#intro .ttl-h span{display:inline-block;opacity:0;transform:translate3d(0,70px,0);background:linear-gradient(180deg,#fff 15%,#8f96ab);-webkit-background-clip:text;background-clip:text;color:transparent;animation:iWave 1.1s cubic-bezier(.3,.7,.3,1) forwards,iBob 2.2s ease-in-out infinite alternate;animation-delay:calc(var(--i)*.11s + 1.05s),calc(var(--i)*.18s + 2.3s);will-change:transform,opacity}
-#intro .tag{display:flex;gap:.9em;flex-wrap:wrap;justify-content:center;margin:22px 0 0;font:600 clamp(11px,2.6vw,17px)/1 "JetBrains Mono",monospace;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;color:#b9bdc9}
-#intro .tag span{display:inline-block;opacity:0;will-change:transform,opacity}
-#intro .tag .t1{transform:translate3d(-60px,0,0);animation:tagL .6s cubic-bezier(.16,1,.3,1) 2.1s forwards}
-#intro .tag .t2{transform:translate3d(60px,0,0);color:#fff;animation:tagR .6s cubic-bezier(.16,1,.3,1) 2.3s forwards,tagPop .5s ease 2.8s 1}
-#intro .bar{width:min(260px,60vw);height:2px;margin-top:40px;background:rgba(255,255,255,.1);overflow:hidden;opacity:0;animation:fadeIn .4s ease .5s forwards}
-#intro .bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#8f9bff,#fff);transform:translate3d(-100%,0,0);animation:load 2.6s cubic-bezier(.45,0,.2,1) .6s forwards;will-change:transform}
 @keyframes in{to{opacity:1;filter:none;transform:none}}
 @keyframes fadeIn{to{opacity:1}}
-@keyframes iLogo{0%{opacity:1;transform:translate3d(0,-75vh,0)}55%{transform:translate3d(0,0,0)}72%{transform:translate3d(0,-22px,0)}88%{transform:translate3d(0,0,0)}95%{transform:translate3d(0,-5px,0)}100%{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes iWave{0%{opacity:0;transform:translate3d(0,70px,0)}35%{opacity:1;transform:translate3d(0,-18px,0)}65%{transform:translate3d(0,8px,0)}85%{transform:translate3d(0,-3px,0)}100%{opacity:1;transform:translate3d(0,0,0)}}
-@keyframes iBob{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-9px,0)}}
-@keyframes load{to{transform:translate3d(0,0,0)}}
-@keyframes ring{15%{opacity:.7}to{opacity:0;transform:scale(3.4)}}
-@keyframes aura{to{opacity:1;transform:scale(1)}}
-@keyframes auraPulse{from{opacity:.75}to{opacity:1}}
-@keyframes tagL{to{opacity:1;transform:none}}
-@keyframes tagR{to{opacity:1;transform:none}}
-@keyframes tagPop{40%{transform:scale(1.18)}to{transform:none}}
 @keyframes introOut{to{opacity:0;visibility:hidden;transform:scale(1.06)}}
 
 /* Watermark */
@@ -685,29 +661,8 @@ html.calm .gt,html.calm .brand img{animation:none}
 .fxbtn[hidden]{display:none}
 
 /* ---------- intro: lightning, fog, bats, lava logo ---------- */
-#intro{background:radial-gradient(80% 60% at 50% 55%,#1c0a06,#050203 70%)}
-#intro .aura{background:radial-gradient(circle,rgba(255,100,10,.4),rgba(255,70,0,.12) 40%,transparent 68%)}
-#intro .ring{border-color:rgba(255,140,50,.75);box-shadow:0 0 30px rgba(255,100,0,.45),inset 0 0 30px rgba(255,100,0,.25)}
-#intro .lgw{width:clamp(150px,27vmin,250px)}
-#intro .lg{filter:drop-shadow(0 0 26px rgba(255,100,0,.7));animation:iLogo 1s cubic-bezier(.5,0,.75,.5) .2s forwards,lavaPulse 1.2s ease-in-out 1.25s infinite alternate}
-@keyframes lavaPulse{from{filter:drop-shadow(0 0 16px rgba(255,90,0,.55))}to{filter:drop-shadow(0 0 44px rgba(255,140,30,.95))}}
-#intro .ttl{margin-top:18px}
-#intro .ttl-h{font-size:clamp(54px,14vw,170px);color:#ffb347}
-#intro .ttl-h span{background:var(--lava);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 18px rgba(255,90,0,.55))}
-#intro .tag{color:#d9a98a}
-#intro .tag .t2{color:#ffb347;text-shadow:0 0 18px rgba(255,100,0,.8)}
-#intro .bar{background:rgba(255,140,60,.15)}
-#intro .bar i{background:linear-gradient(90deg,#c2310a,#ff7a1a,#ffd27a);box-shadow:0 0 14px rgba(255,110,0,.8)}
-#intro .ifog{position:absolute;left:-20%;width:140%;height:60%;pointer-events:none;will-change:transform}
-#intro .ifog.a{bottom:-10%;background:radial-gradient(ellipse 45% 45% at 35% 70%,rgba(255,80,10,.28),transparent 70%),radial-gradient(ellipse 40% 40% at 78% 80%,rgba(120,40,220,.24),transparent 70%);animation:fogA 9s ease-in-out infinite alternate}
-#intro .ifog.b{top:-15%;background:radial-gradient(ellipse 40% 40% at 70% 30%,rgba(120,40,220,.22),transparent 70%),radial-gradient(ellipse 35% 35% at 20% 40%,rgba(255,60,0,.16),transparent 70%);animation:fogB 11s ease-in-out infinite alternate}
-#intro .flash{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(60% 50% at 60% 10%,rgba(220,200,255,.55),rgba(150,100,255,.18) 50%,transparent 80%);animation:flashI 3.2s linear forwards}
-@keyframes flashI{0%,4%{opacity:0}5%{opacity:.6}9%{opacity:.08}12%{opacity:.4}22%{opacity:0}40%{opacity:0}41%{opacity:.5}46%{opacity:.06}49%{opacity:.3}60%,100%{opacity:0}}
-#intro .iem{position:absolute;bottom:-10px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;background:radial-gradient(circle,#fff2b0,#ff8a1a 45%,transparent 72%);box-shadow:0 0 10px rgba(255,120,20,.9);opacity:0;animation:iem var(--t) ease-out var(--d) infinite}
-@keyframes iem{0%{opacity:0;transform:translate3d(0,0,0)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),-92vh,0)}}
-#intro .ibat{position:absolute;left:50%;top:50%;width:var(--s);height:calc(var(--s)/2);margin:calc(var(--s)/-4) 0 0 calc(var(--s)/-2);fill:#050203;filter:drop-shadow(0 0 6px rgba(255,100,0,.8));opacity:0;animation:batOut 1.9s cubic-bezier(.3,.1,.5,1) var(--d) forwards,flap .22s ease-in-out infinite alternate}
-@keyframes batOut{0%{opacity:0;transform:translate3d(0,0,0) scale(.2)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) scale(1.5)}}
-@media(prefers-reduced-motion:reduce){#intro .ibat,#intro .iem,#intro .flash,.bolt,.spider,.drips{display:none}.bat{display:none}.gt,.brand img{animation:none}}
+
+@media(prefers-reduced-motion:reduce){.bolt,.spider,.drips{display:none}.bat{display:none}.gt,.brand img{animation:none}}
 
 /* ---------- scratch card: trick or treat ---------- */
 .scard{border-color:rgba(255,140,60,.4);background:radial-gradient(120% 150% at 50% 0%,rgba(255,110,20,.32),rgba(14,5,3,.97) 68%);box-shadow:inset 0 1px 0 rgba(255,200,140,.2),0 20px 60px rgba(255,80,0,.22)}
@@ -722,6 +677,67 @@ html.calm .gt,html.calm .brand img{animation:none}
 *{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
 input,textarea{-webkit-user-select:text;-moz-user-select:text;user-select:text}
 img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
+
+/* ---------- INTRO v2: letters of "Vyron" fall from the top ---------- */
+#intro{background:radial-gradient(90% 70% at 50% 55%,#1a0b07,#050203 72%)}
+#intro .iglow{position:absolute;left:50%;top:50%;width:min(110vmin,900px);aspect-ratio:1;margin:calc(min(110vmin,900px)/-2) 0 0 calc(min(110vmin,900px)/-2);border-radius:50%;background:radial-gradient(circle,rgba(255,100,10,.34),rgba(255,70,0,.1) 40%,transparent 68%);opacity:0;transform:scale(.6);animation:iGlow 1.6s cubic-bezier(.16,1,.3,1) .9s forwards;will-change:transform,opacity}
+#intro .ittl{position:relative;display:flex;font:800 clamp(64px,18vw,210px)/1 Manrope,"Space Grotesk",sans-serif;letter-spacing:.02em;filter:drop-shadow(0 0 26px rgba(255,90,0,.5))}
+#intro .ittl span{display:inline-block;opacity:0;transform:translate3d(0,-70vh,0) rotate(var(--r));filter:blur(14px);
+  background-image:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.95) 50%,transparent 62%),linear-gradient(180deg,#fff2c4 0%,#ffbd52 42%,#ff5a00 100%);
+  background-size:260% 100%,100% 100%;background-repeat:no-repeat;background-position:160% 0,0 0;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:iFall 1.25s cubic-bezier(.55,0,.8,.5) calc(.25s + var(--i)*.14s) forwards,iShine 1.1s ease-in-out calc(1.95s + var(--i)*.09s) forwards;will-change:transform,opacity,filter}
+#intro .iline{position:absolute;left:50%;top:50%;width:min(52vw,520px);height:2px;margin-top:min(13vw,120px);transform:translateX(-50%) scaleX(0);background:linear-gradient(90deg,transparent,#ff9a3c,transparent);box-shadow:0 0 18px rgba(255,110,0,.8);opacity:.9;animation:iLine 1s cubic-bezier(.16,1,.3,1) 1.9s forwards}
+@keyframes iFall{0%{opacity:0;transform:translate3d(0,-70vh,0) rotate(var(--r));filter:blur(14px)}12%{opacity:1}55%{opacity:1;transform:translate3d(0,0,0) rotate(0);filter:blur(0)}70%{transform:translate3d(0,-26px,0) rotate(calc(var(--r)*-.15))}84%{transform:translate3d(0,0,0) rotate(0)}92%{transform:translate3d(0,-7px,0)}100%{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}}
+@keyframes iShine{to{background-position:-60% 0,0 0}}
+@keyframes iGlow{to{opacity:1;transform:scale(1)}}
+@keyframes iLine{to{transform:translateX(-50%) scaleX(1)}}
+@media(prefers-reduced-motion:reduce){#intro .ittl span{animation:none;opacity:1;transform:none;filter:none}#intro .iline,#intro .iglow{animation:none;opacity:.8;transform:translateX(-50%)}#intro .iglow{transform:none}}
+
+/* ---------- POLISH: finer details across the whole page ---------- */
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+/* fine film grain: adds depth to the flat dark background */
+body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.055;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+[data-theme=light] body::after{opacity:.035;mix-blend-mode:multiply}
+/* typography */
+.hero h1{text-wrap:balance;letter-spacing:-.04em;line-height:1.03;text-shadow:0 2px 60px rgba(255,90,0,.25)}
+.hero p,.why .sub,.pg .sub{text-wrap:pretty}
+.why h2,.pg h2{text-wrap:balance}
+.hbadge{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,190,120,.14),0 0 24px rgba(255,90,0,.1)}
+.eyebrow{letter-spacing:.24em}
+/* glass: soft gradient edge + smoother, springy hover */
+.glass:not(.pd):not(.box){position:relative;border-color:rgba(255,140,60,.16)}
+.glass:not(.pd):not(.box)::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;background:linear-gradient(160deg,rgba(255,200,140,.4),rgba(255,140,60,0) 38%,rgba(255,110,30,0) 62%,rgba(255,110,30,.2));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:.7;transition:opacity .35s}
+.glass:not(.pd):not(.box):hover::before{opacity:1}
+[data-theme=light] .glass:not(.pd):not(.box)::before{background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(217,72,15,0) 45%,rgba(217,72,15,.2));opacity:.8}
+.wc,.tile,.dc,.pcard{transition:transform .45s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .4s}
+.wc:hover,.tile:hover{transform:translateY(-7px)}
+.wi{transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+.wc:hover .wi{transform:translateY(-3px) scale(1.07);box-shadow:0 0 30px rgba(255,100,0,.35)}
+/* buttons: lift, press, shine sweep */
+.cta{position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,filter .3s}
+.cta::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;pointer-events:none;background:linear-gradient(105deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);transition:left .7s cubic-bezier(.16,1,.3,1)}
+.cta:hover::after{left:130%}
+.cta.ghost2::after{display:none}
+.cta:active,.btn2:active,.ib:active{transform:translateY(0) scale(.97)}
+.btn2,.ib,nav button{transition:background .2s,border-color .25s,box-shadow .25s,color .2s,transform .25s cubic-bezier(.16,1,.3,1)}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:10px}
+/* header pill */
+.pill{backdrop-filter:blur(26px) saturate(170%);-webkit-backdrop-filter:blur(26px) saturate(170%)}
+/* page sections breathe a bit more */
+.why{padding:90px 0 120px}
+.why .sub{margin-bottom:54px}
+.wgrid{gap:22px}
+/* marquee: softer edge fade */
+.mq{-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+/* scrollbar */
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-track{background:#0a0504}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#8a3410,#4a1a08);border-radius:99px;border:2px solid #0a0504}
+::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#ff7a1a,#a8350a)}
+[data-theme=light] ::-webkit-scrollbar-track{background:#f3e7d6}
+[data-theme=light] ::-webkit-scrollbar-thumb{border-color:#f3e7d6}
+@media(max-width:620px){.hero{padding-top:150px}.why{padding:60px 0 90px}.wc:hover,.tile:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.cta::after{display:none}.wc,.tile{transition:none}}
 </style>
 </head>
 <body>
@@ -741,22 +757,7 @@ img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 
 
 <button id="skip" type="button" aria-label="Skip intro" data-i18n="intro.skip" data-i18n-attr="aria-label:intro.skip">Skip intro</button>
-<div id="intro" aria-hidden="true">
-  <div class="aura"></div>
-  <div class="ifog a"></div><div class="ifog b"></div>
-  <i class="iem" style="--x:44%;--s:5px;--t:2.7s;--d:0.1s;--dx:45px"></i><i class="iem" style="--x:71%;--s:4px;--t:2.6s;--d:0.1s;--dx:4px"></i><i class="iem" style="--x:30%;--s:4px;--t:2.3s;--d:0.7s;--dx:-30px"></i><i class="iem" style="--x:14%;--s:8px;--t:2.7s;--d:1.3s;--dx:-45px"></i><i class="iem" style="--x:31%;--s:9px;--t:3.0s;--d:1.5s;--dx:13px"></i><i class="iem" style="--x:77%;--s:7px;--t:2.3s;--d:0.4s;--dx:11px"></i><i class="iem" style="--x:20%;--s:6px;--t:2.7s;--d:0.9s;--dx:13px"></i><i class="iem" style="--x:42%;--s:8px;--t:3.2s;--d:0.3s;--dx:14px"></i><i class="iem" style="--x:76%;--s:9px;--t:2.4s;--d:0.2s;--dx:31px"></i><i class="iem" style="--x:11%;--s:8px;--t:2.3s;--d:0.3s;--dx:27px"></i><i class="iem" style="--x:71%;--s:7px;--t:3.1s;--d:0.7s;--dx:58px"></i><i class="iem" style="--x:61%;--s:6px;--t:2.6s;--d:1.3s;--dx:29px"></i><i class="iem" style="--x:34%;--s:4px;--t:2.9s;--d:0.8s;--dx:52px"></i><i class="iem" style="--x:46%;--s:9px;--t:2.7s;--d:1.0s;--dx:-51px"></i><i class="iem" style="--x:18%;--s:8px;--t:2.7s;--d:1.2s;--dx:-41px"></i><i class="iem" style="--x:65%;--s:7px;--t:2.2s;--d:1.1s;--dx:37px"></i><i class="iem" style="--x:74%;--s:8px;--t:3.1s;--d:1.3s;--dx:-17px"></i><i class="iem" style="--x:91%;--s:6px;--t:2.9s;--d:0.9s;--dx:-2px"></i><i class="iem" style="--x:11%;--s:4px;--t:3.3s;--d:0.8s;--dx:25px"></i><i class="iem" style="--x:11%;--s:4px;--t:3.1s;--d:0.5s;--dx:13px"></i><i class="iem" style="--x:90%;--s:7px;--t:2.5s;--d:0.6s;--dx:25px"></i><i class="iem" style="--x:47%;--s:4px;--t:3.3s;--d:0.6s;--dx:18px"></i>
-  <div class="flash"></div>
-  <i class="ring" style="--d:.95s"></i><i class="ring" style="--d:1.07s"></i><i class="ring" style="--d:1.19s"></i>
-  <svg class="ibat" viewBox="0 0 120 60" style="--dx:-46vw;--dy:-34vh;--s:64px;--d:0.55s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:44vw;--dy:-38vh;--s:58px;--d:0.62s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-52vw;--dy:8vh;--s:50px;--d:0.7s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:50vw;--dy:12vh;--s:54px;--d:0.78s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-24vw;--dy:-46vh;--s:44px;--d:0.85s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:26vw;--dy:-44vh;--s:46px;--d:0.9s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-34vw;--dy:36vh;--s:40px;--d:1.0s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:36vw;--dy:34vh;--s:42px;--d:1.05s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:0vw;--dy:-48vh;--s:52px;--d:0.95s"><use href="#bat"/></svg><svg class="ibat" viewBox="0 0 120 60" style="--dx:-12vw;--dy:40vh;--s:36px;--d:1.1s"><use href="#bat"/></svg>
-  <div class="wrap">
-    <div class="lgw"><img class="lg" src="/logo.png" alt="" draggable="false"></div>
-    <div class="ttl">
-      <div class="ttl-h" aria-hidden="true"><span style="--i:0">V</span><span style="--i:1">Y</span><span style="--i:2">R</span><span style="--i:3">O</span><span style="--i:4">N</span></div>
-    </div>
-    <p class="tag"><span class="t1" data-i18n="intro.t1">Max Performance.</span><span class="t2" data-i18n="intro.t2">Zero Lag.</span></p>
-    <div class="bar"><i></i></div>
-  </div>
-</div>
+<div id="intro" aria-hidden="true"><i class="iglow"></i><div class="ittl"><span style="--i:0;--r:-9deg">V</span><span style="--i:1;--r:7deg">y</span><span style="--i:2;--r:-6deg">r</span><span style="--i:3;--r:8deg">o</span><span style="--i:4;--r:-7deg">n</span></div><i class="iline"></i></div>
 
 <div class="wmwrap" aria-hidden="true"><img class="wm" src="/img/logo-bg.png" alt="" draggable="false"></div>
 
