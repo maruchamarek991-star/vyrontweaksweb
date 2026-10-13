@@ -612,8 +612,6 @@ nav button:hover{color:#fff}
 
 /* ---------- atmosphere layers ---------- */
 #fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.torch{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(300px 300px at var(--mx,50%) var(--my,30%),rgba(255,110,20,.11),transparent 70%)}
-@media(hover:none){.torch{display:none}}
 .fog{position:fixed;left:0;right:0;bottom:0;height:46vh;z-index:0;pointer-events:none;overflow:hidden}
 .fog i{position:absolute;bottom:-12vh;left:-30%;width:160%;height:100%;will-change:transform;opacity:.9}
 .fog .f1{background:radial-gradient(ellipse 40% 45% at 30% 85%,rgba(255,80,10,.17),transparent 70%),radial-gradient(ellipse 36% 40% at 75% 90%,rgba(130,50,230,.14),transparent 70%);animation:fogA 24s ease-in-out infinite alternate}
@@ -642,7 +640,7 @@ nav button:hover{color:#fff}
 .bolt{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:0;background:radial-gradient(70% 55% at 62% 0%,rgba(215,190,255,.5),rgba(150,100,255,.16) 50%,transparent 75%)}
 .bolt.on{animation:bolt 1.1s ease-out}
 @keyframes bolt{0%{opacity:0}6%{opacity:.5}14%{opacity:.08}24%{opacity:.34}100%{opacity:0}}
-html.calm #fx,html.calm .torch,html.calm .fog,html.calm .spider,html.calm .bats,html.calm .bolt,html.calm .drips,html.calm .webs{display:none}
+html.calm #fx,html.calm .fog,html.calm .spider,html.calm .bats,html.calm .bolt,html.calm .drips,html.calm .webs{display:none}
 html.calm .gt,html.calm .brand img{animation:none}
 .fxbtn{background:none;border:1px solid var(--line);color:var(--mute);border-radius:99px;padding:5px 14px;font:500 12px "JetBrains Mono",monospace;letter-spacing:.04em;cursor:pointer;transition:.2s}
 .fxbtn:hover{color:var(--text);border-color:rgba(255,140,60,.55);box-shadow:0 0 16px rgba(255,100,0,.25)}
@@ -743,10 +741,7 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 /* ---------- "Why choose us" cards: spotlight, tilt, drawn icons, pulse ring, animated title ---------- */
 .wc{--rx:0deg;--ry:0deg;transform-style:preserve-3d;will-change:transform}
 .wc:hover{transform:perspective(900px) translateY(-8px) rotateX(var(--rx)) rotateY(var(--ry))}
-.wc,.tile{--mx:50%;--my:50%}
 .wc>*{position:relative;z-index:1}
-.wc::after,.tile::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;opacity:0;transition:opacity .35s;background:radial-gradient(260px circle at var(--mx) var(--my),rgba(255,140,50,.22),rgba(255,110,20,.07) 45%,transparent 70%)}
-.wc:hover::after,.tile:hover::after{opacity:1}
 .wi{position:relative}
 .wi::before{content:"";position:absolute;inset:0;border-radius:inherit;border:1.5px solid rgba(255,150,60,.7);opacity:0;pointer-events:none}
 .wc:hover .wi::before{animation:wiPulse 1.5s ease-out infinite}
@@ -759,6 +754,29 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 .wc p{transition:color .3s}
 .wc:hover p{color:var(--text)}
 @media(prefers-reduced-motion:reduce){.wc:hover .wi::before{animation:none}.wc:hover{transform:translateY(-6px)}}
+
+/* ---------- SMOOTH MOTION: one easing curve for every hover and tab change ---------- */
+:root{--ease:cubic-bezier(.22,1,.36,1);--ease-io:cubic-bezier(.65,0,.35,1)}
+/* tab change: calm crossfade + soft rise, no blur (blur made it stutter) */
+.panel.out{animation:pOut .24s var(--ease-io) forwards}
+.panel.in .wrap>*,.panel.in .wgrid>*,.panel.in .tested>*{animation:pIn .9s var(--ease) backwards;animation-delay:calc(var(--k,0)*55ms + 30ms)}
+@keyframes pIn{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:none}}
+@keyframes pOut{to{opacity:0;transform:translate3d(0,-8px,0)}}
+/* hovers: longer, softer, springy-out easing everywhere */
+.tile,.dc,.pcard,.wc{transition:transform .7s var(--ease),border-color .5s var(--ease),box-shadow .6s var(--ease),background .5s var(--ease)}
+.wc:hover{transform:perspective(1000px) translate3d(0,-8px,0) rotateX(var(--rx)) rotateY(var(--ry))}
+.wi{transition:transform .7s var(--ease),box-shadow .6s var(--ease),border-color .5s}
+.wc h4{transition:background-size .7s var(--ease),transform .7s var(--ease)}
+.wc p{transition:color .5s var(--ease)}
+nav button,.ib,.btn2,.lsw button,.fxbtn,.ftc a,.ftc button,.pmo,.qty button,.rm{transition:color .4s var(--ease),background-color .4s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease),transform .4s var(--ease),opacity .3s}
+.cta{transition:transform .5s var(--ease),box-shadow .5s var(--ease),filter .4s var(--ease),background-color .4s var(--ease)}
+.cta:hover{transform:translate3d(0,-2px,0)}
+.cta::after{transition:left .9s var(--ease)}
+.fi,.fi summary{transition:background-color .4s var(--ease),border-color .4s var(--ease)}
+.hwb{transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.toast{transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.box{animation:popIn .65s var(--ease) both}
+.modal.open{animation:mIn .5s var(--ease) both}
 </style>
 </head>
 <body>
@@ -769,7 +787,6 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
   </defs>
 </svg>
 <canvas id="fx" aria-hidden="true"></canvas>
-<div class="torch" aria-hidden="true"></div>
 <div class="fog" aria-hidden="true"><i class="f1"></i><i class="f2"></i><i class="f3"></i></div>
 <div class="webs" aria-hidden="true"><svg class="wl"><use href="#web"/></svg><svg class="wr"><use href="#web"/></svg></div>
 <div class="spider" aria-hidden="true"><i class="thread"></i><svg viewBox="0 0 40 34" width="34" height="29"><g stroke="#1b0d09" stroke-width="2" stroke-linecap="round" fill="none"><path d="M16 15 5 6 2 12M16 17 3 17 1 24M17 19 6 27 5 32M18 21 12 31 13 34"/><path d="M24 15 35 6 38 12M24 17 37 17 39 24M23 19 34 27 35 32M22 21 28 31 27 34"/></g><ellipse cx="20" cy="22" rx="7" ry="8.5" fill="#150a07" stroke="#ff7a1a" stroke-opacity=".5"/><circle cx="20" cy="12" r="5" fill="#150a07" stroke="#ff7a1a" stroke-opacity=".5"/><circle cx="18" cy="11" r="1.3" fill="#ff3b1a"/><circle cx="22" cy="11" r="1.3" fill="#ff3b1a"/><path d="M17 20h6M20 16v12" stroke="#ff7a1a" stroke-opacity=".45" stroke-width="1.2"/></svg></div>
@@ -1016,7 +1033,7 @@ function go(t){
     to.classList.remove("in");void to.offsetWidth;to.classList.add("in");
     window.scrollTo({top:0});
   };
-  clearTimeout(go.t);go.t=setTimeout(done,300);
+  clearTimeout(go.t);go.t=setTimeout(done,230);
 }
 document.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>go(b.dataset.t));
 $p("explore").onclick=()=>go("products");
@@ -1335,21 +1352,19 @@ if(hwActive()){
   if(!seen)setTimeout(showOffer,COUPON_DELAY);
 }
 
-/* Cards: cursor spotlight + gentle 3D tilt (mouse only; the tilt is skipped for "reduce motion") */
+/* "Why choose us" cards: gentle 3D tilt (mouse only, skipped for "reduce motion") */
 (function(){
-  if(!matchMedia("(hover:hover)").matches)return;
-  const calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
-  document.querySelectorAll(".wc,.tile").forEach(el=>{
+  if(!matchMedia("(hover:hover)").matches||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  document.querySelectorAll(".wc").forEach(el=>{
     el.addEventListener("pointermove",e=>{
       const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-      el.style.setProperty("--mx",(x*100)+"%");el.style.setProperty("--my",(y*100)+"%");
-      if(!calm&&el.classList.contains("wc")){el.style.setProperty("--ry",((x-.5)*12).toFixed(2)+"deg");el.style.setProperty("--rx",((.5-y)*10).toFixed(2)+"deg")}
+      el.style.setProperty("--ry",((x-.5)*9).toFixed(2)+"deg");el.style.setProperty("--rx",((.5-y)*7).toFixed(2)+"deg");
     });
     el.addEventListener("pointerleave",()=>{el.style.setProperty("--rx","0deg");el.style.setProperty("--ry","0deg")});
   });
 })();
 
-/* ===== Halloween atmosphere: embers, bats, lightning, torch light. Can be switched off in the footer (and is off by default for "reduce motion"). ===== */
+/* ===== Halloween atmosphere: embers, bats, lightning. Can be switched off in the footer (and is off by default for "reduce motion"). ===== */
 const FXS={on:true,raf:0,last:0,P:[],W:0,H:0};
 (function(){let v=null;try{v=localStorage.getItem("vy-fx")}catch{}FXS.on=v?v!=="off":!matchMedia("(prefers-reduced-motion:reduce)").matches})();
 const fxc=$p("fx"),fcx=fxc.getContext("2d");
@@ -1399,7 +1414,6 @@ function lightning(){
 fxc.addEventListener&&addEventListener("resize",fxResize);
 document.addEventListener("visibilitychange",()=>{if(document.hidden)fxStop();else if(FXS.on)fxStart()});
 addEventListener("pointerdown",e=>{if(FXS.on&&FXS.raf&&FXS.P.length<220)for(let i=0;i<14;i++)FXS.P.push(spawn(1,e.clientX,e.clientY))});
-if(matchMedia("(hover:hover)").matches){let raf=0,mx=0,my=0;addEventListener("pointermove",e=>{mx=e.clientX;my=e.clientY;if(!raf)raf=requestAnimationFrame(()=>{raf=0;const r=document.documentElement.style;r.setProperty("--mx",mx+"px");r.setProperty("--my",my+"px")})},{passive:true})}
 $p("fxbtn").onclick=()=>setFx(!FXS.on,true);
 fxResize();mkBats();setFx(FXS.on,false);setTimeout(lightning,9000);
 
