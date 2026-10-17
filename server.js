@@ -44,7 +44,7 @@ if (db.prepare("SELECT COUNT(*) c FROM records").get().c === 0) {
 
 /* Product catalog lives on the server so prices can't be tampered with from the browser. */
 const CATALOG = [
-  { name: "Minecraft Internal", soon: true, price: 5, colors: [["","#4ade80"]], opts: ["1 Day","7 Days","30 Days"], add: [0,10,20] },
+  { name: "Minecraft Client 1.21.11", soon: true, price: 5, colors: [["","#4ade80"]], opts: ["1 Day","7 Days","30 Days"], add: [0,10,20] },
   { name: "Valorant Internal",  price: 10, colors: [["","#f87171"]], opts: ["7 Days","30 Days","Lifetime"], add: [0,15,30] },
   { name: "Vanguard Emulator",  price: 15, colors: [["","#c4b5fd"]], opts: ["7 Days","2 Weeks","1 Month","Lifetime"], add: [0,5,25,45] },
   { name: "CS2 Internal", soon: true,       price: 8, colors: [["","#fbbf6a"]], opts: ["1 Day","7 Days","30 Days"], add: [0,17,37] },
