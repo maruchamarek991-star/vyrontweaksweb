@@ -116,6 +116,12 @@ const en = {
   "legal.note": "By purchasing you agree to our <a href=\"/terms.html\" target=\"_blank\" rel=\"noopener\">Terms</a> and <a href=\"/refund.html\" target=\"_blank\" rel=\"noopener\">Refund Policy</a>.",
 
   /* ---- changelog ---- */
+  "demo.eyebrow": "Live preview",
+  "demo.h": "See Vyron in action",
+  "demo.sub": "This is how the app looks. Click through the menu, flip a few tweaks and watch the live monitor.",
+  "demo.aria": "Interactive preview of the Vyron app",
+  "demo.lic": "Lifetime license",
+  "demo.note": "Interactive demo with sample data. Nothing is changed on your PC.",
   "cl.eyebrow": "Changelog",
   "cl.h": "What's new",
   "cl.sub": "Every Vyron Tweaks release, newest first. Updates are included with your lifetime license.",
@@ -371,6 +377,12 @@ const pl = {
   "legal.note": "Dokonując zakupu, akceptujesz nasz <a href=\"/pl/terms.html\" target=\"_blank\" rel=\"noopener\">Regulamin</a> oraz <a href=\"/pl/refund.html\" target=\"_blank\" rel=\"noopener\">Politykę zwrotów</a>.",
 
   /* ---- changelog ---- */
+  "demo.eyebrow": "Podgląd na żywo",
+  "demo.h": "Zobacz Vyron w akcji",
+  "demo.sub": "Tak wygląda aplikacja. Klikaj po menu, przełączaj tweaki i obserwuj monitor na żywo.",
+  "demo.aria": "Interaktywny podgląd aplikacji Vyron",
+  "demo.lic": "Licencja dożywotnia",
+  "demo.note": "Interaktywne demo z przykładowymi danymi. Nic nie zmienia się na Twoim komputerze.",
   "cl.eyebrow": "Dziennik zmian",
   "cl.h": "Co nowego",
   "cl.sub": "Wszystkie wydania Vyron Tweaks, od najnowszego. Aktualizacje są wliczone w licencję dożywotnią.",
