@@ -1,11 +1,1 @@
-{
-  "name": "vyron",
-  "version": "1.2.0",
-  "private": true,
-  "scripts": {
-    "start": "node local-server.js",
-    "build": "node scripts/build.js",
-    "test": "node tests/backend.test.js"
-  },
-  "engines": { "node": "22.x" }
-}
+{ "name": "zentro", "version": "1.0.0", "private": true, "scripts": { "start": "node server.js" }, "engines": { "node": ">=22.13" } }
