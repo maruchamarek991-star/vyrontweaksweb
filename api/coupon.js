@@ -1,7 +1,8 @@
 const { send, issueCoupon, verifyCoupon } = require("../lib/shop");
+const { limited } = require("../lib/limit");
 /* POST /api/coupon            -> the current Halloween offer { code, pct, exp }, or 410 once it has ended
    POST /api/coupon { code }   -> validates a code and returns { code, pct, exp } or 400 */
-module.exports = (req, res) => {
+module.exports = limited("coupon", 30, 60000, (req, res) => {
   if (req.method !== "POST") return send(res, 405, { error: "method not allowed" });
   const b = req.body || {};
   if (b.code !== undefined) {
@@ -10,4 +11,4 @@ module.exports = (req, res) => {
   }
   const c = issueCoupon();
   c ? send(res, 200, c) : send(res, 410, { error: "The Halloween sale has ended", code: "coupon_invalid" });
-};
+});

@@ -99,6 +99,19 @@ Black glass + lava-orange glow, with a new logo everywhere (`public/logo.png`, `
 - Analytics: off by default. `ANALYTICS_DOMAIN=yourdomain node scripts/build.js` adds cookie-free Plausible (and the matching line in the privacy policy).
 - Not included: guides/blog articles for Google traffic (content you should write and fact-check yourself).
 
+## Security hardening (v15) — works without any Vercel setting
+- **Forged order tokens are worthless even if `COUPON_SECRET` is not set.** `lib/chain.js` (`plausible()`) rejects tokens that claim a price below the cheapest
+  possible order, a coupon percentage that does not exist, a coupon used after its deadline, a creation time in the future, or a coin amount worth
+  less than ~40 % of the claimed price. Setting `COUPON_SECRET` on Vercel is still recommended (optional): it makes tokens unforgeable altogether.
+- **Rate limiting** (`lib/limit.js`, in memory, per IP): checkout 30/min, verify 90/min (a customer polls 12/min), rates 60/min, coupon 30/min, discord 30/min.
+  Over the limit the API answers `429` + `Retry-After` (`code: "rate_limited"`); the payment window already treats failed polls as "retrying" and keeps going.
+  Counters are per serverless instance, so this is best effort, but it stops scripts from hammering the public blockchain / price APIs through us.
+- **One transaction pays one order** (per server instance): a second order with an identical amount is no longer matched to the same TX.
+  A guarantee across instances would need a small database (not added, to keep the setup unchanged).
+- **`.vercelignore`** keeps `public/app.html` (the local-only dashboard, which cannot work on Vercel), `tools/`, `tests/` and `vyron.db` out of the deployment.
+  Locally nothing changes: `node local-server.js` still serves the dashboard.
+- No change to `src/` or `public/`: the website itself is identical, so no rebuild is needed.
+
 ## Tests
 `npm test` runs the backend tests (coupons, order tokens, SOL/LTC verification against a fake blockchain). The browser tests (`node tests/e2e.js`, needs Playwright
 and `PORT=3111 node -r ./tests/preload.js local-server.js` running) click through both languages, the scratch card and complete SOL/LTC payments.

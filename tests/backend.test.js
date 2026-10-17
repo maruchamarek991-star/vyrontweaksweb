@@ -141,5 +141,48 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     const r = await chain.checkOrder("nope"); assert.equal(r.code, 400); assert.equal(r.body.code, "bad_token");
   });
 
+
+  console.log("security hardening");
+  await test("a token forged with the default secret is useless: tiny amount, bogus price or bogus coupon -> bad_token", async () => {
+    const now = Date.now();
+    const bad = [
+      { v: 1, id: "AAAAA1", m: "sol", u: 100, c: now, t: 500, p: 0 },                 // 0.000001 SOL for a $5 product
+      { v: 1, id: "AAAAA2", m: "sol", u: 1e8, c: now, t: 1, p: 0 },                    // price below the cheapest order
+      { v: 1, id: "AAAAA3", m: "sol", u: 1e8, c: now, t: 500, p: 90 },                 // coupon percentage that does not exist
+      { v: 1, id: "AAAAA4", m: "ltc", u: 1e8, c: shop.COUPON_EXP + 1, t: 400, p: 20 }, // coupon used after it expired
+      { v: 1, id: "AAAAA5", m: "sol", u: 1e8, c: now + 3600000, t: 500, p: 0 },        // created in the future
+    ];
+    for (const o of bad) { const r = await chain.checkOrder(signOrder(o)); assert.equal(r.code, 400, JSON.stringify(o)); assert.equal(r.body.code, "bad_token"); }
+  });
+  await test("a transaction pays only one order", async () => {
+    chain._cache.clear(); chain._claimed.clear();
+    const a = (await checkout({ method: "ltc", items: [{ productId: 0, qty: 1 }] })).body;
+    const ua = parseOrder(a.crypto.token).u;
+    state.ltc.push({ txid: "ltcDUP", value: ua, confirmed: true, height: 1000, time: Math.floor(Date.now() / 1000) });
+    assert.equal((await check(a.crypto.token)).status, "confirmed");
+    // a second order that (by a 1-in-9999 coincidence) got the very same amount must not be paid by the same transaction
+    const twin = signOrder({ ...parseOrder(a.crypto.token), id: "TWIN01" });
+    assert.equal((await check(twin)).status, "waiting");
+    assert.equal((await check(a.crypto.token)).status, "confirmed", "the original order still sees its payment");
+  });
+
+  console.log("rate limiting");
+  const { limited, hit } = require("../lib/limit");
+  const fakeRes = () => { const r = { headers: {}, setHeader(k, v) { r.headers[k] = v; }, end(b) { r.body = b; } }; return r; };
+  await test("429 + Retry-After after the limit, other visitors are not affected, window resets", async () => {
+    let calls = 0; const h = limited("t1", 3, 1000, () => { calls++; });
+    const req = ip => ({ headers: { "x-forwarded-for": ip }, socket: {} });
+    for (let i = 0; i < 3; i++) h(req("1.1.1.1"), fakeRes());
+    const r = fakeRes(); h(req("1.1.1.1"), r);
+    assert.equal(calls, 3); assert.equal(r.statusCode, 429); assert.ok(Number(r.headers["Retry-After"]) >= 1);
+    assert.equal(JSON.parse(r.body).code, "rate_limited");
+    h(req("2.2.2.2"), fakeRes()); assert.equal(calls, 4, "another IP is fine");
+    assert.equal(hit("t2", "9.9.9.9", 1, 1000, 0), 0); assert.ok(hit("t2", "9.9.9.9", 1, 1000, 10) > 0);
+    assert.equal(hit("t2", "9.9.9.9", 1, 1000, 1001), 0, "a new window starts after the old one ended");
+  });
+  await test("a normal visitor polling /api/verify every 5 s is far below the limit", () => {
+    for (let i = 0; i < 12; i++) assert.equal(hit("verify-normal", "3.3.3.3", 90, 60000, i * 5000), 0);
+  });
+
   console.log(`\n${passed} passed${process.exitCode ? ", SOME FAILED" : ""}`);
 })();
