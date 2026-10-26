@@ -36,7 +36,7 @@ const en = {
 
   /* ---- hero ---- */
   "hero.badge": "Faster, Smoother, Sharper",
-  "hero.h": "Optimize <span class=\"gt\">your</span> PC for Gaming",
+  "hero.h": "Optimize your PC for Gaming",
   "hero.p": "Vyron Tweaks removes bloatware and optimizes your PC for higher FPS, lower input delay, and reduced ping. Get smoother gameplay and precision hit registration tweaks for competitive shooters.",
   "hero.cta": "Explore Services",
   "tested": "Tested in",
@@ -101,6 +101,7 @@ const en = {
   "prod.details": "View details",
   "buy": "Buy now",
   "price.tile": "one-time · lifetime",
+  "pay.with": "Pay with",
   "price.plan": "one-time",
   "inc.h": "What's included",
   "inc.gpu.p": "General GPU tweaks, plus AMD, NVIDIA and Intel.",
@@ -260,7 +261,7 @@ const pl = {
 
   /* ---- hero ---- */
   "hero.badge": "Szybciej, płynniej, precyzyjniej",
-  "hero.h": "Zoptymalizuj <span class=\"gt\">swój</span> komputer do gier",
+  "hero.h": "Zoptymalizuj swój komputer do gier",
   "hero.p": "Vyron Tweaks usuwa zbędne oprogramowanie i optymalizuje komputer pod kątem wyższego FPS, mniejszego input lagu i niższego pingu. Ciesz się płynniejszą rozgrywką oraz tweakami poprawiającymi precyzję rejestracji trafień w strzelankach rywalizacyjnych.",
   "hero.cta": "Zobacz ofertę",
   "tested": "Przetestowano w",
@@ -325,6 +326,7 @@ const pl = {
   "prod.details": "Szczegóły",
   "buy": "Kup teraz",
   "price.tile": "jednorazowo · dożywotnio",
+  "pay.with": "Zapłać przez",
   "price.plan": "jednorazowo",
   "inc.h": "Co zawiera",
   "inc.gpu.p": "Ogólne tweaki GPU oraz tweaki dla kart AMD, NVIDIA i Intel.",
