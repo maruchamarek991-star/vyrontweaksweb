@@ -88,9 +88,9 @@ function jsonLd(lang, canon) {
   const faq = [];
   for (let i = 1; d["faq.q" + i]; i++) faq.push({ "@type": "Question", name: d["faq.q" + i], acceptedAnswer: { "@type": "Answer", text: stripTags(d["faq.a" + i]) } });
   const graph = [
-    { "@type": "Organization", "@id": SITE_URL + "/#org", name: "Vyron", url: SITE_URL + "/", logo: SITE_URL + "/logo.png", sameAs: ["https://discord.gg/vyron"] },
+    { "@type": "Organization", "@id": SITE_URL + "/#org", name: "Vyron", url: SITE_URL + "/", logo: SITE_URL + "/logo.png?v=20", sameAs: ["https://discord.gg/vyron"] },
     { "@type": "WebSite", "@id": SITE_URL + "/#site", name: "Vyron Tweaks", url: SITE_URL + "/", inLanguage: lang, publisher: { "@id": SITE_URL + "/#org" } },
-    { "@type": "SoftwareApplication", name: "Vyron Tweaks", description: d["meta.desc"], url: canon, image: SITE_URL + "/og-image.png", inLanguage: lang,
+    { "@type": "SoftwareApplication", name: "Vyron Tweaks", description: d["meta.desc"], url: canon, image: SITE_URL + "/og-image.png?v=20", inLanguage: lang,
       applicationCategory: "UtilitiesApplication", operatingSystem: "Windows 10, Windows 11", publisher: { "@id": SITE_URL + "/#org" },
       offers: { "@type": "Offer", price, priceCurrency: "USD", availability: "https://schema.org/InStock", url: canon } },
     { "@type": "FAQPage", inLanguage: lang, mainEntity: faq },
