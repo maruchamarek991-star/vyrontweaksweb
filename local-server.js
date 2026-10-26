@@ -23,7 +23,6 @@ const readBody = req => new Promise(r => {
 const ROUTES = [
   [/^\/api\/rates$/, "./api/rates.js"],
   [/^\/api\/checkout$/, "./api/checkout.js"],
-  [/^\/api\/coupon$/, "./api/coupon.js"],
   [/^\/api\/discord$/, "./api/discord.js"],
   [/^\/api\/verify$/, "./api/verify.js"],
   [/^\/api\/orders\/[0-9A-Fa-f]{6}\/sent$/, "./api/orders/[id]/sent.js"],

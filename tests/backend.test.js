@@ -7,26 +7,14 @@ const { install, state } = require("./mock-network");
 install();
 const shop = require("../lib/shop");
 const chain = require("../lib/chain");
-const { issueCoupon, verifyCoupon, checkout, parseOrder, signOrder, MINUTE, HOUR, DAY } = shop;
+const { checkout, parseOrder, signOrder, MINUTE, HOUR, DAY } = shop;
 
 let passed = 0;
 const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok  " + name); } catch (e) { console.log("FAIL  " + name + "\n" + e.stack); process.exitCode = 1; } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 (async () => {
-  console.log("coupons");
-  await test("HALLOWEEN20 is -20 % and expires on 1 Nov 2026 at 00:00 Polish time", () => {
-    assert.equal(shop.COUPON_EXP, Date.UTC(2026, 9, 31, 23, 0, 0));
-    const c = verifyCoupon("halloween20", shop.COUPON_EXP - 1000);
-    assert.ok(c && c.pct === 20 && c.code === "HALLOWEEN20");
-    assert.equal(verifyCoupon("HALLOWEEN20", shop.COUPON_EXP), null, "expired at the deadline");
-    assert.equal(issueCoupon("a|b", shop.COUPON_EXP + 1), null);
-  });
-  await test("old scratch-card codes and random strings are rejected", () => {
-    assert.equal(verifyCoupon("VYRON20-ZZZZZZZZZ-0000000000", shop.COUPON_EXP - 1000), null);
-    assert.equal(verifyCoupon("HALLOWEEN30", shop.COUPON_EXP - 1000), null);
-    assert.equal(verifyCoupon(""), null);
-  });
+  console.log("fingerprint");
   await test("fingerprint uses forwarded IP + UA and reduces IPv6 to /64", () => {
     const a = shop.fingerprint({ headers: { "x-forwarded-for": "2001:db8:1:2:aaaa:bbbb:cccc:dddd, 10.0.0.1", "user-agent": "UA" } });
     const b = shop.fingerprint({ headers: { "x-forwarded-for": "2001:db8:1:2:1111:2222:3333:4444", "user-agent": "UA" } });
@@ -38,15 +26,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     const r = await checkout({ method: "nope", items: [{ productId: 0, qty: 1 }] });
     assert.equal(r.code, 400); assert.equal(r.body.code, "choose_method");
   });
-  await test("expired / invalid coupon is reported with its code", async () => {
-    const r = await checkout({ method: "paypal", coupon: "VYRON10-AAAAAAAAA-0000000000", items: [{ productId: 0, qty: 1 }] });
-    assert.equal(r.code, 400); assert.equal(r.body.code, "coupon_invalid"); assert.equal(r.body.couponInvalid, true);
-  });
-  await test("ticket methods have no crypto block; coupon discount is applied in cents", async () => {
-    if (Date.now() >= shop.COUPON_EXP) return; // the Halloween sale is over
+  await test("ticket methods have no crypto block and no discount; a coupon code from an old page is ignored", async () => {
     const r = await checkout({ method: "blik", coupon: "HALLOWEEN20", items: [{ productId: 0, qty: 1 }] });
     assert.equal(r.code, 201); assert.equal(r.body.crypto, undefined);
-    assert.equal(r.body.total, 4);
+    assert.equal(r.body.total, 5); assert.equal(r.body.discount, 0); assert.equal(r.body.coupon, undefined);
   });
   let order;
   await test("SOL checkout locks a unique amount in a signed token", async () => {
@@ -143,13 +126,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 
   console.log("security hardening");
-  await test("a token forged with the default secret is useless: tiny amount, bogus price or bogus coupon -> bad_token", async () => {
+  await test("a token forged with the default secret is useless: tiny amount, bogus price or a discount that does not exist -> bad_token", async () => {
     const now = Date.now();
     const bad = [
       { v: 1, id: "AAAAA1", m: "sol", u: 100, c: now, t: 500, p: 0 },                 // 0.000001 SOL for a $5 product
       { v: 1, id: "AAAAA2", m: "sol", u: 1e8, c: now, t: 1, p: 0 },                    // price below the cheapest order
-      { v: 1, id: "AAAAA3", m: "sol", u: 1e8, c: now, t: 500, p: 90 },                 // coupon percentage that does not exist
-      { v: 1, id: "AAAAA4", m: "ltc", u: 1e8, c: shop.COUPON_EXP + 1, t: 400, p: 20 }, // coupon used after it expired
+      { v: 1, id: "AAAAA3", m: "sol", u: 1e8, c: now, t: 500, p: 90 },                 // a discount (there are none)
+      { v: 1, id: "AAAAA4", m: "ltc", u: 1e8, c: now, t: 400, p: 20 },                  // -20% price, no such discount
       { v: 1, id: "AAAAA5", m: "sol", u: 1e8, c: now + 3600000, t: 500, p: 0 },        // created in the future
     ];
     for (const o of bad) { const r = await chain.checkOrder(signOrder(o)); assert.equal(r.code, 400, JSON.stringify(o)); assert.equal(r.body.code, "bad_token"); }

@@ -66,9 +66,8 @@ const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok
     assert.equal(await page.getAttribute("html", "lang"), "pl"); assert.match(await txt(page, "h1"), /Zoptymalizuj/);
     assert.deepEqual(page.errors, []); await ctx.close();
   });
-  await test("no English left on the Polish page (home, product modal, scratch card, payment window)", async () => {
+  await test("no English left on the Polish page (home, product modal, payment window)", async () => {
     const { ctx, page } = await mk("en-US"); await page.goto(BASE + "/pl/"); await skipIntro(page);
-    await page.waitForSelector("#cpn.open", { timeout: 9000 }); // scratch card
     const I18N = await page.evaluate(() => I18N);
     const strip = s => s.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/\{\w+\}|\$/g, "").trim();
     const leaks = [];
@@ -80,7 +79,6 @@ const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok
         if (body.includes(e)) leaks.push(`${label}: ${k} -> "${e}"`);
       }
     };
-    await check("scratch"); await page.click("#cpx");
     await check("home");
     for (const t of ["products", "updates", "contact"]) { await page.click(`nav button[data-t="${t}"]`); await page.waitForTimeout(450); await check(t); }
     await page.click("nav button[data-t=\"products\"]"); await page.waitForTimeout(450); await page.click("#tile"); await check("product modal"); await page.click("#pcl");
@@ -90,24 +88,9 @@ const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok
     assert.deepEqual(leaks, []); assert.deepEqual(page.errors, []); await ctx.close();
   });
 
-  console.log("Halloween coupon");
-  {
-    const { ctx, page } = await mk("en-US"); await page.goto(BASE + "/"); await skipIntro(page);
-    await test("-20% Halloween popup appears and the discount is already applied", async () => {
-      await page.waitForSelector("#cpn.open", { timeout: 9000 });
-      assert.match(await txt(page, "#sccode"), /HALLOWEEN20/);
-      assert.match(await txt(page, "#tsub"), /−20% applied/);
-      const c = await page.evaluate(() => JSON.parse(localStorage.getItem("vy-coupon")));
-      assert.equal(c.pct, 20); assert.equal(c.exp, Date.UTC(2026, 9, 31, 23));
-      assert.deepEqual(page.errors, []);
-    });
-    await ctx.close();
-  }
-
   console.log("crypto payment, verified automatically");
   for (const [lang, locale] of [["en", "en-US"], ["pl", "pl-PL"]]) {
     const { ctx, page } = await mk(locale); await page.goto(BASE + (lang === "pl" ? "/pl/" : "/")); await skipIntro(page);
-    await page.waitForSelector("#cpn.open", { timeout: 9000 }); await page.click("#cpx");
     await openBuy(page); await page.click('[data-pm="sol"]'); await page.click("#pc");
     await page.waitForSelector("#sendamt");
     const amount = await txt(page, "#sendamt");
@@ -133,7 +116,6 @@ const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok
   }
   await test("LTC: mempool payment -> detected, 1 confirmation -> confirmed", async () => {
     const { ctx, page } = await mk("en-US"); await page.goto(BASE + "/"); await skipIntro(page);
-    await page.waitForSelector("#cpn.open", { timeout: 9000 }); await page.click("#cpx");
     await openBuy(page); await page.click('[data-pm="ltc"]'); await page.click("#pc"); await page.waitForSelector("#sendamt");
     await mock("payLtc", Number((await txt(page, "#sendamt")).replace(".", "")));
     await page.waitForSelector(".ostat.det", { timeout: 15000 });
@@ -143,7 +125,6 @@ const test = async (name, fn) => { try { await fn(); passed++; console.log("  ok
   });
   await test("ticket methods (BLIK) are unchanged: no polling, ticket steps shown", async () => {
     const { ctx, page } = await mk("pl-PL"); await page.goto(BASE + "/pl/"); await skipIntro(page);
-    await page.waitForSelector("#cpn.open", { timeout: 9000 }); await page.click("#cpx");
     await openBuy(page); await page.click('[data-pm="blik"]'); await page.click("#pc"); await page.waitForSelector(".steps");
     assert.match(await txt(page, ".steps"), /Podaj numer zamówienia #[0-9A-F]{6} oraz wybraną metodę płatności: BLIK/);
     await ctx.close();

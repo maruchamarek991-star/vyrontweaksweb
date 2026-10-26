@@ -41,19 +41,11 @@ in the HTML the browser already has to download to render the page.
 The database file `vyron.db` is created automatically on first run.
 
 ## Deploy on Vercel
-Import this folder as the project root. `public/` is served statically and `api/*.js` run as serverless functions (`/api/rates`, `/api/checkout`, `/api/verify`, `/api/coupon`, `/api/discord`). There is no cart: the visitor clicks "Buy now", picks a payment method and places the order. Prices are re-checked server-side at checkout, so no database is needed. Orders are not stored on the server; the customer gets an order ID to quote in the Discord ticket. The `/app.html` dashboard (`/api/records`) needs the local SQLite server and is not part of the Vercel deployment.
+Import this folder as the project root. `public/` is served statically and `api/*.js` run as serverless functions (`/api/rates`, `/api/checkout`, `/api/verify`, `/api/discord`). There is no cart: the visitor clicks "Buy now", picks a payment method and places the order. Prices are re-checked server-side at checkout, so no database is needed. Orders are not stored on the server; the customer gets an order ID to quote in the Discord ticket. The `/app.html` dashboard (`/api/records`) needs the local SQLite server and is not part of the Vercel deployment.
 
-## Halloween theme (v10)
-Black glass + lava-orange glow, with a new logo everywhere (`public/logo.png`, `public/img/logo-bg.png`, favicons, app icons, `og-image.png` were regenerated from the new artwork).
-- **Styles:** one block at the end of the main `<style>` in `src/index.html` ("HALLOWEEN THEME"). It overrides the neutral base styles through CSS variables
-  (`--ember`, `--lava`, ...). The light theme became a candle-lit parchment version. Legal pages and the 404 use the same palette.
-- **Atmosphere (all in `src/index.html`):** lightning-lit intro with bats and embers, floating embers (canvas, click = ember burst), flying bats,
-  spider-web corners, a spider that lowers itself on a thread, drifting fog, lava drips under the header, a torch light that follows the mouse, rare soft lightning flashes.
-- **Trick or treat:** the scratch card now has an orange foil and "Trick or treat" texts (EN + PL in `src/i18n.js`).
-- **Accessibility / performance:** effects are switched off automatically for visitors with "reduce motion", pause when the tab is hidden, use few particles on phones,
-  and every visitor can turn them off in the footer ("Spooky effects") — the choice is remembered.
-- **Taking the theme down after Halloween:** delete the "HALLOWEEN THEME" CSS block, the layers right after `<body>` (svg symbols, `#fx`, `.torch`, `.fog`, `.webs`, `.spider`, `.bats`, `.bolt`),
-  the `.drips` element in the header, the intro extras (`.ifog`, `.iem`, `.flash`, `.ibat`) and the "Halloween atmosphere" JavaScript block, then run the build.
+## Look (v17)
+The Halloween theme (lava-orange glow, bats, webs, spider, embers, lightning, "Spooky effects" toggle) was removed. The site is back on the neutral black/silver base styles; the "Midnight City" skyline (see below) is the only background effect.
+The Halloween coupon (HALLOWEEN20: popup, badge, countdown, `/api/coupon`, server-side discount logic) was removed as well — there are no discounts on the site now. `COUPON_SECRET` is still the (optional) signing key for order tokens; the name was kept so your Vercel settings keep working.
 
 ## Languages (EN / PL)
 - `/` is English, `/pl/` is Polish. Both are real pre-rendered pages (good for SEO and no-JS visitors), with `hreflang` links.
@@ -84,12 +76,6 @@ Black glass + lava-orange glow, with a new logo everywhere (`public/logo.png`, `
   automatically; one transaction could in theory match two orders only if both got the identical random dust (1 in 9999) — check that the same TX hash isn't
   quoted in two tickets. Delivery itself is still done by you in the ticket.
 
-## Halloween coupon
-- One general code for every visitor: **HALLOWEEN20** = **-20 %**. It is applied to the order automatically when the page opens; a popup with a countdown appears a few seconds after the intro (once per session) and a small badge in the corner reopens it.
-- It expires on **1 November 2026 at 00:00 Polish time** (`2026-10-31T23:00:00Z`). The deadline is enforced on the server (`COUPON_EXP` in `lib/shop.js`, override with the `COUPON_EXPIRES` env var) and in the browser, which removes the discount and the badge at the deadline.
-- `POST /api/coupon` returns the current offer (410 after the deadline); `POST /api/coupon { code }` validates a code. `POST /api/checkout` re-verifies it and recomputes the price server-side.
-- To run a new promo, change `COUPON_CODE` / `COUPON_PCT` / `COUPON_EXP` in `lib/shop.js` and `HW` in `src/index.html`, then `node scripts/build.js`.
-
 ## SEO & security
 - Generated automatically: `sitemap.xml` (with hreflang), `robots.txt`, canonical + Open Graph per language, JSON-LD (`Organization`, `WebSite`,
   `SoftwareApplication` with the price, `FAQPage` from the FAQ text), a real `<h1>`, a styled `404.html`.
@@ -101,9 +87,9 @@ Black glass + lava-orange glow, with a new logo everywhere (`public/logo.png`, `
 
 ## Security hardening (v15) — works without any Vercel setting
 - **Forged order tokens are worthless even if `COUPON_SECRET` is not set.** `lib/chain.js` (`plausible()`) rejects tokens that claim a price below the cheapest
-  possible order, a coupon percentage that does not exist, a coupon used after its deadline, a creation time in the future, or a coin amount worth
+  possible order, any discount (there are none), a creation time in the future, or a coin amount worth
   less than ~40 % of the claimed price. Setting `COUPON_SECRET` on Vercel is still recommended (optional): it makes tokens unforgeable altogether.
-- **Rate limiting** (`lib/limit.js`, in memory, per IP): checkout 30/min, verify 90/min (a customer polls 12/min), rates 60/min, coupon 30/min, discord 30/min.
+- **Rate limiting** (`lib/limit.js`, in memory, per IP): checkout 30/min, verify 90/min (a customer polls 12/min), rates 60/min, discord 30/min.
   Over the limit the API answers `429` + `Retry-After` (`code: "rate_limited"`); the payment window already treats failed polls as "retrying" and keeps going.
   Counters are per serverless instance, so this is best effort, but it stops scripts from hammering the public blockchain / price APIs through us.
 - **One transaction pays one order** (per server instance): a second order with an identical amount is no longer matched to the same TX.
@@ -113,8 +99,8 @@ Black glass + lava-orange glow, with a new logo everywhere (`public/logo.png`, `
 - No change to `src/` or `public/`: the website itself is identical, so no rebuild is needed.
 
 ## Tests
-`npm test` runs the backend tests (coupons, order tokens, SOL/LTC verification against a fake blockchain). The browser tests (`node tests/e2e.js`, needs Playwright
-and `PORT=3111 node -r ./tests/preload.js local-server.js` running) click through both languages, the scratch card and complete SOL/LTC payments.
+`npm test` runs the backend tests (order tokens, SOL/LTC verification against a fake blockchain). The browser tests (`node tests/e2e.js`, needs Playwright
+and `PORT=3111 node -r ./tests/preload.js local-server.js` running) click through both languages and complete SOL/LTC payments.
 
 ## Buying
 No accounts, no sign-in, no Discord connection and no cart: "Buy now" opens the payment-method picker directly.
@@ -124,7 +110,6 @@ the Discord server (`discord.gg/vyron`) for BLIK, PayPal and gift cards.
 ## API
 - GET    /api/rates
 - POST   /api/verify    { token }   (crypto payment status)
-- POST   /api/coupon    [{ code }]
 - POST   /api/orders/:id/sent   (legacy, unused)
 - POST   /api/checkout  { method, items: [{ productId, qty }] }
 - GET    /api/records
