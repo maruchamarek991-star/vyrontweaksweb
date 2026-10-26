@@ -651,7 +651,7 @@ nav button,.ib,.btn2,.lsw button,.ftc a,.ftc button,.pmo,.qty button,.rm{transit
 
 <body>
 <canvas id="city" aria-hidden="true"></canvas>
-<audio id="mc" src="/audio/midnight-city.mp3" loop preload="auto"></audio>
+<audio id="mc" src="/audio/music.mp3" loop preload="auto"></audio>
 <div id="muhint" role="status"></div>
 
 
@@ -1194,7 +1194,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeP(
 })();
 </script>
 <script>
-/* ===== Midnight City: background music + audio-reactive neon skyline (self-contained). Song file: /audio/midnight-city.mp3 ===== */
+/* ===== Midnight City: background music + audio-reactive neon skyline (self-contained). Song file: /audio/music.mp3 ===== */
 (function(){
   const $=id=>document.getElementById(id),root=document.documentElement,cv=$("city"),cx=cv.getContext("2d"),au=$("mc"),btn=$("mus"),hint=$("muhint"),hdr=document.querySelector("header"),wmw=document.querySelector(".wmwrap");
   const RM=matchMedia("(prefers-reduced-motion:reduce)").matches,PL=(root.lang||"en").slice(0,2)==="pl",VOL=.45,BPM=105;
