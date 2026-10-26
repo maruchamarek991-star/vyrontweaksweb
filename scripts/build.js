@@ -125,7 +125,7 @@ function finish(html, { lang, canon, altEn, altPl, jsonld }) {
   const csp = [
     "default-src 'none'", `script-src ${hashes.join(" ")}${plaus}`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", "font-src https://fonts.gstatic.com",
-    "img-src 'self' data:", `connect-src 'self'${plaus}`, "manifest-src 'self'", "base-uri 'self'", "form-action 'none'",
+    "img-src 'self' data:", "media-src 'self'", `connect-src 'self'${plaus}`, "manifest-src 'self'", "base-uri 'self'", "form-action 'none'",
   ].join("; ");
   return html.replace("<!--CSP-->", `<meta http-equiv="Content-Security-Policy" content="${csp}">`);
 }

@@ -61,6 +61,13 @@ http.createServer(async (req, res) => {
     return fs.existsSync(nf) ? fs.createReadStream(nf).pipe(res) : res.end("Not found");
   }
   const MIME = { ".html": "text/html; charset=utf-8", ".png": "image/png", ".ico": "image/x-icon", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml", ".txt": "text/plain; charset=utf-8", ".xml": "application/xml" };
-  res.writeHead(200, { "Content-Type": MIME[path.extname(file).toLowerCase()] || "application/octet-stream" });
+  MIME[".mp3"] = "audio/mpeg";
+  const type = MIME[path.extname(file).toLowerCase()] || "application/octet-stream", size = fs.statSync(file).size, rg = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || "");
+  if (rg) { // Range support (Safari needs it for audio)
+    const a = rg[1] ? +rg[1] : 0, z = rg[2] ? Math.min(+rg[2], size - 1) : size - 1;
+    res.writeHead(206, { "Content-Type": type, "Accept-Ranges": "bytes", "Content-Range": `bytes ${a}-${z}/${size}`, "Content-Length": z - a + 1 });
+    return fs.createReadStream(file, { start: a, end: z }).pipe(res);
+  }
+  res.writeHead(200, { "Content-Type": type, "Accept-Ranges": "bytes", "Content-Length": size });
   fs.createReadStream(file).pipe(res);
 }).listen(PORT, () => console.log(`Vyron running at http://localhost:${PORT}`));

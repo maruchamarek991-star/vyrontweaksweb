@@ -130,3 +130,13 @@ the Discord server (`discord.gg/vyron`) for BLIK, PayPal and gift cards.
 - GET    /api/records
 - POST   /api/records   { name, email, role, status }
 - DELETE /api/records/:id
+
+## Midnight City (v16): background music + audio-reactive skyline
+- **Music:** put your MP3 at `public/audio/midnight-city.mp3` (the file itself is not included). Browsers block autoplay with sound, so the music starts on the visitor's
+  first click / key press / tap (a small hint appears at the bottom until then). Fade-in, loops, pauses when the tab is hidden, and the new equalizer button in the header
+  mutes it (choice remembered in `vy-music`).
+- **Audio-reactive visuals:** a neon skyline canvas (`#city`) with 3 parallax layers, twinkling windows, blinking tower lights and light trails on the road.
+  Bass from the song (Web Audio analyser) drives the skyline, the header glow, the big background logo and the equalizer button. Without the file it uses a 105 BPM pulse.
+  Switched off by the existing "Spooky effects" toggle and in the light theme.
+- Code: CSS `<style id="midnight">`, the `#city` / `<audio id="mc">` elements after `#fx`, and the last `<script>` ("Midnight City") in `src/index.html`; `media-src 'self'` added to the CSP in `scripts/build.js`.
+- Rights: a copyrighted song on a commercial site needs a licence — otherwise expect takedowns (Vercel/GitHub/Discord) or complaints.
