@@ -729,6 +729,58 @@ html.noi #intro,html.noi #skip{display:none}
 html.noi header,html.noi main{animation-delay:0s;animation-duration:.5s}
 html.noi #city{animation-delay:.1s}
 </style>
+<style id="motion">
+/* ===== MOTION v24: calm background, 3D tilt rows, pointer-reactive cards, sliding nav, scroll reveals ===== */
+/* background: the aurora no longer pulses its opacity, it only drifts (slowly); the header glow follows a smoothed signal */
+@keyframes aur{to{transform:translate3d(1.5%,2%,0) scale(1.05)}}
+body::before{animation-duration:55s;will-change:transform}
+.pill::after{opacity:calc(var(--beat,0)*.9)}
+
+/* shared: JS drives transform + --h (hover 0..1) + --mx/--my (pointer) with a lerp, so CSS must not fight it with its own transition */
+.tl{transition:border-color .4s var(--ease),box-shadow .5s var(--ease),background-color .4s var(--ease)!important;will-change:transform}
+.spot{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:var(--h,0);z-index:-1;
+  background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.11),transparent 60%)}
+[data-theme=light] .spot{background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(0,0,0,.06),transparent 60%)}
+
+/* WHY CHOOSE US: every row is its own piece of glass that leans toward the cursor; icon, title and text sit at different depths */
+.wr{position:relative;transform-style:preserve-3d;
+  border-top-color:color-mix(in srgb,var(--line) calc((1 - var(--h,0))*100%),transparent)}
+.wr:hover,[data-theme=light] .wr:hover{background:none}
+.wr .spot{inset:3px 12px;border-radius:18px;z-index:0;
+  background:radial-gradient(560px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.15),transparent 62%),linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 30px 60px -24px rgba(0,0,0,.9),0 0 44px rgba(214,216,222,.07)}
+[data-theme=light] .wr .spot{background:radial-gradient(560px circle at var(--mx,50%) var(--my,50%),rgba(0,0,0,.05),transparent 62%),linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,255,255,.65));border-color:rgba(0,0,0,.1);box-shadow:0 26px 50px -26px rgba(0,0,0,.35)}
+.wr>:not(.spot){position:relative;z-index:1}
+.wr .wi{transform:translateZ(calc(var(--h,0)*42px)) rotate(calc(var(--h,0)*-6deg)) scale(calc(1 + var(--h,0)*.1));transition:box-shadow .5s var(--ease),border-color .4s var(--ease)}
+.wr h4{transform:translateZ(calc(var(--h,0)*28px))}
+.wr p{transform:translateZ(calc(var(--h,0)*14px));transition:color .45s var(--ease)}
+.wr:hover p{color:var(--text)}
+.wr:hover .wi{box-shadow:0 0 30px rgba(214,216,222,.3),inset 0 1px 0 rgba(255,255,255,.14);border-color:rgba(255,255,255,.3)}
+/* icons draw themselves when a row scrolls into view */
+.mo .wr.vis .wi svg *{stroke-dasharray:80;animation:wiDraw 1.4s var(--ease) both;animation-delay:calc(var(--rd,0ms) + 350ms)}
+
+/* scroll reveal (class "mo" is only set when JS runs and motion is allowed) */
+.mo .rv{transition:opacity .9s var(--ease) var(--rd,0ms),translate 1.1s var(--ease) var(--rd,0ms),scale 1.1s var(--ease) var(--rd,0ms),background-color .4s var(--ease),border-color .4s var(--ease)}
+.mo .rv:not(.vis){opacity:0;translate:0 38px;scale:.975}
+
+/* hero: layers drift slightly against the cursor (individual transform properties, so the entrance animation is untouched) */
+.hero{--px:0;--py:0}
+.hero>.hbadge{translate:calc(var(--px)*16px) calc(var(--py)*10px)}
+.hero>h1{translate:calc(var(--px)*-9px) calc(var(--py)*-5px)}
+.hero>p{translate:calc(var(--px)*-4px) calc(var(--py)*-2px)}
+
+/* nav: one glass pill that glides to the active tab */
+nav.hasind button.on{background:none;box-shadow:none;border-color:transparent}
+nav .nind{position:absolute;left:0;top:0;z-index:0;pointer-events:none;width:var(--w,0);height:var(--ih,0);transform:translateX(var(--x,0));border-radius:99px;opacity:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));border:1px solid var(--line);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 4px 18px rgba(0,0,0,.35)}
+nav .nind.ready{opacity:1;transition:transform .65s var(--ease),width .65s var(--ease),height .3s,top .3s,opacity .4s}
+[data-theme=light] nav .nind{background:rgba(0,0,0,.07);box-shadow:none}
+@media(prefers-reduced-motion:reduce){nav .nind.ready{transition:none}.mo .rv{transition:none}}
+</style>
+
+
 
 <body>
 <canvas id="city" aria-hidden="true"></canvas>
@@ -1267,7 +1319,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeP(
   const $=id=>document.getElementById(id),root=document.documentElement,cv=$("city"),cx=cv.getContext("2d"),au=$("mc"),btn=$("mus"),hint=$("muhint"),hdr=document.querySelector("header");
   const RM=matchMedia("(prefers-reduced-motion:reduce)").matches,PL=(root.lang||"en").slice(0,2)==="pl",VOL=.45,BPM=105;
   let want=true;try{want=localStorage.getItem("vy-music")!=="off"}catch{}
-  let ac=null,an=null,fd=null,playing=false,hasAudio=true,beat=0,W=0,H=0,mx=.5,my=.5,sx=.5,t0=performance.now(),raf=0;
+  let ac=null,an=null,fd=null,playing=false,hasAudio=true,beat=0,en=0,last=performance.now(),W=0,H=0,mx=.5,my=.5,sx=.5,t0=performance.now(),raf=0;
   const rnd=(a,b)=>a+Math.random()*(b-a);
 
   /* ---- audio ---- */
@@ -1301,22 +1353,149 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeP(
 
   /* ---- ambient background: soft silver-blue glow + drifting dust, breathes with the music ---- */
   const BL=[[.15,.2,.6,"205,208,216",0],[.85,.35,.55,"225,226,232",1.7],[.5,.95,.7,"180,184,194",3.1]];let P=[];
-  function build(){const d=Math.min(devicePixelRatio||1,1.25);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);P=Array.from({length:Math.min(70,W/22|0)},()=>({x:Math.random()*W,y:Math.random()*H,r:rnd(.6,1.7),v:rnd(5,16),ph:rnd(0,6.28)}))}
+  function build(){
+    const d=Math.min(devicePixelRatio||1,1.25),ow=W,oh=H;W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+    if(P.length&&ow&&oh){P.forEach(p=>{p.x*=W/ow;p.y*=H/oh})} /* resize (e.g. mobile address bar): keep the dust where it is instead of re-rolling it */
+    else P=Array.from({length:Math.min(70,W/22|0)},()=>({x:Math.random()*W,y:Math.random()*H,r:rnd(.6,1.7),v:rnd(5,16),ph:rnd(0,6.28)}));
+  }
   function frame(t){
     raf=requestAnimationFrame(frame);
+    const dt=Math.min(.05,Math.max(.001,(t-last)/1000));last=t;
     if(RM||root.dataset.theme==="light")return;
-    const T=(t-t0)/1000,b=readBeat(t);sx+=(mx-sx)*.05;
-    hdr.style.setProperty("--beat",b.toFixed(3));btn.style.setProperty("--beat",b.toFixed(3));
+    const T=(t-t0)/1000,raw=readBeat(t);sx+=(mx-sx)*(1-Math.pow(.05,dt));
+    /* the picture follows the music through a slow envelope (attack .35 s, release .9 s) instead of flashing on every kick */
+    en+=(raw-en)*(1-Math.exp(-dt/(raw>en?.35:.9)));
+    hdr.style.setProperty("--beat",(en*.5).toFixed(3));btn.style.setProperty("--beat",raw.toFixed(3));
     cx.clearRect(0,0,W,H);cx.globalCompositeOperation="lighter";
-    BL.forEach(o=>{const x=(o[0]+Math.sin(T*.07+o[4])*.06+(sx-.5)*.05)*W,y=(o[1]+Math.cos(T*.05+o[4])*.05)*H,r=o[2]*Math.max(W,H)*(1+b*.05),g=cx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,"rgba("+o[3]+","+(.11+b*.08).toFixed(3)+")");g.addColorStop(1,"rgba("+o[3]+",0)");cx.fillStyle=g;cx.fillRect(0,0,W,H)});
-    P.forEach(p=>{p.y-=p.v*(1+b*1.6)/60;if(p.y<-4){p.y=H+4;p.x=Math.random()*W}const a=.12+.3*Math.pow(Math.sin(T*.8+p.ph),2);cx.fillStyle="rgba(228,229,233,"+a.toFixed(2)+")";cx.beginPath();cx.arc(p.x+Math.sin(T*.3+p.ph)*9,p.y,p.r,0,6.283);cx.fill()});
+    BL.forEach(o=>{const x=(o[0]+Math.sin(T*.05+o[4])*.06+(sx-.5)*.05)*W,y=(o[1]+Math.cos(T*.04+o[4])*.05)*H,r=o[2]*Math.max(W,H)*(1+en*.02),g=cx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,"rgba("+o[3]+","+(.1+en*.025).toFixed(3)+")");g.addColorStop(1,"rgba("+o[3]+",0)");cx.fillStyle=g;cx.fillRect(0,0,W,H)});
+    P.forEach(p=>{
+      p.y-=p.v*(1+en*.5)*dt;if(p.y<-6){p.y=H+6;p.x=Math.random()*W}
+      const edge=Math.min(1,Math.max(0,Math.min(p.y,H-p.y)/90)); /* fade in/out at the screen edges: no popping when a particle wraps around */
+      const a=(.1+.2*Math.pow(Math.sin(T*.35+p.ph),2))*edge;
+      cx.fillStyle="rgba(228,229,233,"+a.toFixed(3)+")";cx.beginPath();cx.arc(p.x+Math.sin(T*.22+p.ph)*10,p.y,p.r,0,6.283);cx.fill()});
     cx.globalCompositeOperation="source-over";
   }
   addEventListener("pointermove",e=>{mx=e.clientX/innerWidth},{passive:true});
-  addEventListener("resize",build);
+  {let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(build,120)})}
   document.addEventListener("visibilitychange",()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;if(playing)au.pause()}else{if(!raf)raf=requestAnimationFrame(frame);if(playing)au.play().catch(()=>{})}});
   build();raf=requestAnimationFrame(frame);
 })();
 </script>
+<script>
+/* ===== Motion v24: 3D tilt + spotlight, magnetic buttons, hero depth, nav indicator, scroll reveal ===== */
+(function(){
+  const RM=matchMedia("(prefers-reduced-motion:reduce)").matches,root=document.documentElement,clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+
+  /* nav: sliding indicator */
+  (function(){
+    const nav=document.querySelector("nav");if(!nav)return;
+    const ind=document.createElement("i");ind.className="nind";ind.setAttribute("aria-hidden","true");nav.prepend(ind);nav.classList.add("hasind");
+    let shown=false;
+    const place=()=>{
+      const b=nav.querySelector("button.on");if(!b||!b.offsetWidth)return;
+      ind.style.setProperty("--x",b.offsetLeft+"px");ind.style.setProperty("--w",b.offsetWidth+"px");ind.style.setProperty("--ih",b.offsetHeight+"px");
+      ind.style.top=b.offsetTop+"px";ind.style.borderRadius=getComputedStyle(b).borderRadius;
+      if(!shown){shown=true;requestAnimationFrame(()=>requestAnimationFrame(()=>ind.classList.add("ready")))}
+    };
+    new MutationObserver(place).observe(nav,{attributes:true,attributeFilter:["class"],subtree:true});
+    if(window.ResizeObserver){const ro=new ResizeObserver(place);ro.observe(nav);nav.querySelectorAll("button").forEach(b=>ro.observe(b))}
+    addEventListener("resize",place);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);place();
+  })();
+
+  if(RM)return;
+
+  /* scroll reveal */
+  if("IntersectionObserver" in window){
+    root.classList.add("mo");
+    const els=document.querySelectorAll(".wr,.hs,.fi"),idx=new Map();
+    els.forEach(el=>{const p=el.parentElement,i=idx.get(p)||0;idx.set(p,i+1);el.style.setProperty("--rd",Math.min(i,7)*85+"ms");el.classList.add("rv")});
+    const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("vis");io.unobserve(x.target)}}),{rootMargin:"0px 0px -7% 0px",threshold:.1});
+    els.forEach(el=>io.observe(el));
+  }
+
+  /* pointer-driven motion: mouse / pen only (touch keeps the plain layout) */
+  if(!matchMedia("(hover:hover) and (pointer:fine)").matches)return;
+  const CFG=[
+    ["tilt",".wr",{ax:5,ay:3.5,sc:1.012,pz:1100}],
+    ["tilt",".pcard",{ax:2.2,ay:3,sc:1.01,pz:1500}],
+    ["tilt",".dc",{ax:6,ay:8,sc:1.03,pz:1000}],
+    ["mag",".cta",{}]
+  ];
+  const S=new Map(),run=new Set(),hov=new Set();
+  let last=0,raf=0,hero=document.querySelector(".hero"),hx=0,hy=0,thx=0,thy=0;
+
+  function state(el,kind,c){
+    let s=S.get(el);
+    if(!s){
+      s={el,kind,c,rx:0,ry:0,tx:0,ty:0,sc:1,h:0,mx:0,my:0,trx:0,try:0,ttx:0,tty:0,tsc:1,th:0,tmx:0,tmy:0,press:0};S.set(el,s);
+      if(kind==="tilt"&&!el.querySelector(":scope>.spot")){const i=document.createElement("i");i.className="spot";i.setAttribute("aria-hidden","true");el.prepend(i)}
+    }
+    return s;
+  }
+  function aim(s,e){
+    const r=s.el.getBoundingClientRect();if(!r.width||!r.height)return;
+    if(s.kind==="tilt"){
+      const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      s.trx=-py*2*s.c.ax;s.try=px*2*s.c.ay;s.tsc=s.c.sc;s.tmx=e.clientX-r.left;s.tmy=e.clientY-r.top;
+    }else{
+      s.ttx=clamp((e.clientX-(r.left+r.width/2))*.22,-9,9);s.tty=clamp((e.clientY-(r.top+r.height/2))*.3,-7,7);s.tsc=1.035;
+    }
+    run.add(s);kick();
+  }
+  function kick(){if(!raf){last=performance.now();raf=requestAnimationFrame(tick)}}
+
+  function tick(now){
+    const dt=Math.min(.05,Math.max(.001,(now-last)/1000));last=now;
+    const k=1-Math.pow(.0009,dt),kf=1-Math.pow(.00005,dt),kh=1-Math.pow(.03,dt);
+    for(const s of run){
+      const el=s.el;
+      if(!el.isConnected){hov.delete(el);S.delete(el);run.delete(s);continue}
+      const tsc=s.tsc-(s.kind==="mag"?s.press*.07:0);
+      s.rx+=(s.trx-s.rx)*k;s.ry+=(s.try-s.ry)*k;s.tx+=(s.ttx-s.tx)*k;s.ty+=(s.tty-s.ty)*k;s.sc+=(tsc-s.sc)*k;s.h+=(s.th-s.h)*k;
+      s.mx+=(s.tmx-s.mx)*kf;s.my+=(s.tmy-s.my)*kf;
+      el.style.setProperty("--h",s.h.toFixed(3));
+      if(s.kind==="tilt"){
+        el.style.setProperty("--mx",s.mx.toFixed(1)+"px");el.style.setProperty("--my",s.my.toFixed(1)+"px");
+        el.style.transform="perspective("+s.c.pz+"px) rotateX("+s.rx.toFixed(3)+"deg) rotateY("+s.ry.toFixed(3)+"deg) scale("+s.sc.toFixed(4)+")";
+      }else el.style.transform="translate3d("+s.tx.toFixed(2)+"px,"+s.ty.toFixed(2)+"px,0) scale("+s.sc.toFixed(4)+")";
+      const settled=Math.abs(s.th-s.h)<.003&&Math.abs(s.trx-s.rx)<.01&&Math.abs(s.try-s.ry)<.01&&Math.abs(s.ttx-s.tx)<.03&&Math.abs(s.tty-s.ty)<.03&&Math.abs(tsc-s.sc)<.0008;
+      if(settled){
+        if(!hov.has(el)){el.style.transform="";["--h","--mx","--my"].forEach(v=>el.style.removeProperty(v));el.classList.remove("tl");run.delete(s)}
+        else run.delete(s);
+      }
+    }
+    let moving=run.size>0;
+    if(hero){
+      if(Math.abs(thx-hx)>.0005||Math.abs(thy-hy)>.0005){hx+=(thx-hx)*kh;hy+=(thy-hy)*kh;hero.style.setProperty("--px",hx.toFixed(4));hero.style.setProperty("--py",hy.toFixed(4));moving=true}
+    }
+    raf=moving?requestAnimationFrame(tick):0;
+  }
+
+  const find=t=>{const out=[];if(!(t instanceof Element))return out;for(const [kind,sel,c] of CFG){const el=t.closest(sel);if(el&&!el.disabled)out.push([el,kind,c])}return out};
+  document.addEventListener("pointerover",e=>{
+    if(e.pointerType==="touch")return;
+    for(const [el,kind,c] of find(e.target)){
+      if(hov.has(el))continue;
+      const s=state(el,kind,c);hov.add(el);run.add(s);el.classList.add("tl");s.th=1;aim(s,e);
+    }
+  },{passive:true});
+  document.addEventListener("pointerout",e=>{
+    for(const el of [...hov]){
+      if(el.contains(e.target)&&!el.contains(e.relatedTarget)){
+        hov.delete(el);const s=S.get(el);if(!s)continue;
+        s.th=0;s.trx=s.try=s.ttx=s.tty=0;s.tsc=1;s.press=0;run.add(s);kick();
+      }
+    }
+  },{passive:true});
+  document.addEventListener("pointermove",e=>{
+    if(e.pointerType==="touch")return;
+    for(const el of hov){const s=S.get(el);if(s)aim(s,e)}
+    thx=e.clientX/innerWidth-.5;thy=e.clientY/innerHeight-.5;kick();
+  },{passive:true});
+  document.addEventListener("pointerdown",e=>{for(const [el,kind] of find(e.target)){if(kind==="mag"){const s=S.get(el);if(s){s.press=1;run.add(s);kick()}}}},{passive:true});
+  ["pointerup","pointercancel"].forEach(ev=>document.addEventListener(ev,()=>{for(const s of S.values())if(s.press){s.press=0;run.add(s);kick()}},{passive:true}));
+})();
+</script>
+
 </body>
 </html>

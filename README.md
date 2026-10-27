@@ -125,3 +125,9 @@ the Discord server (`discord.gg/vyron`) for BLIK, PayPal and gift cards.
   Switched off by the existing "Spooky effects" toggle and in the light theme.
 - Code: CSS `<style id="midnight">`, the `#city` / `<audio id="mc">` elements after `#fx`, and the last `<script>` ("Midnight City") in `src/index.html`; `media-src 'self'` added to the CSP in `scripts/build.js`.
 - Rights: a copyrighted song on a commercial site needs a licence — otherwise expect takedowns (Vercel/GitHub/Discord) or complaints.
+
+## Motion (v24)
+- Background: the canvas glow/dust now follows the music through a slow envelope (no flashing on every kick), particles fade at the screen edges, resizes no longer re-roll them; the aurora layer only drifts (no opacity pulsing).
+- "Why Choose Us": each row leans toward the cursor in 3D (perspective tilt, spotlight, icon/title/text at different depths), icons draw themselves on scroll-in.
+- Also: sliding nav indicator, magnetic buttons, tilt on the product and Discord cards, hero parallax, scroll reveals for rows / steps / FAQ.
+- Code: `<style id="motion">` and the last `<script>` ("Motion v24") in `src/index.html`; the background change is in the "Midnight City" script. Touch devices and `prefers-reduced-motion` keep the plain layout.
