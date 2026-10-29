@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /api/
 Disallow: /app.html
 
 Sitemap: https://vyron.lol/sitemap.xml

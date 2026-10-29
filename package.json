@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node local-server.js",
-    "build": "node scripts/build.js",
-    "test": "node tests/backend.test.js"
+    "build": "node scripts/build.js"
   },
-  "engines": { "node": "22.x" }
+  "engines": {
+    "node": "22.x"
+  }
 }

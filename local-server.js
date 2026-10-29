@@ -1,4 +1,4 @@
-// Vyron — local dev server (Node 22.13+). On Vercel, public/ is served statically and api/* run as serverless functions.
+// Vyron — local dev server (Node 22.13+). On Vercel, public/ is served statically.
 const http = require("node:http");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -19,20 +19,8 @@ const readBody = req => new Promise(r => {
   req.on("error", () => r({}));
 });
 
-/* Shop endpoints reuse the exact same handlers Vercel runs */
-const ROUTES = [
-  [/^\/api\/rates$/, "./api/rates.js"],
-  [/^\/api\/checkout$/, "./api/checkout.js"],
-  [/^\/api\/discord$/, "./api/discord.js"],
-  [/^\/api\/verify$/, "./api/verify.js"],
-  [/^\/api\/orders\/[0-9A-Fa-f]{6}\/sent$/, "./api/orders/[id]/sent.js"],
-];
-
 http.createServer(async (req, res) => {
   const p = new URL(req.url, "http://x").pathname;
-
-  const route = ROUTES.find(([re]) => re.test(p));
-  if (route) { req.body = await readBody(req); try { return await require(route[1])(req, res); } catch { return json(res, 500, { error: "Server error" }); } }
 
   /* ---- Records (dashboard) ---- */
   const m = p.match(/^\/api\/records(?:\/(\d+))?$/);
@@ -51,16 +39,14 @@ http.createServer(async (req, res) => {
 
   /* ---- Static files ---- */
   const root = path.join(__dirname, "public");
-  if (p === "/pl") { res.writeHead(301, { Location: "/pl/" }); return res.end(); }
   let file = path.join(root, path.normalize(p));
-  if (file.startsWith(root) && fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html"); // "/" and "/pl/"
+  if (file.startsWith(root) && fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html"); // "/"
   if (!file.startsWith(root) || !fs.existsSync(file)) {
     const nf = path.join(root, "404.html");
     res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
     return fs.existsSync(nf) ? fs.createReadStream(nf).pipe(res) : res.end("Not found");
   }
   const MIME = { ".html": "text/html; charset=utf-8", ".png": "image/png", ".ico": "image/x-icon", ".webmanifest": "application/manifest+json", ".svg": "image/svg+xml", ".txt": "text/plain; charset=utf-8", ".xml": "application/xml" };
-  MIME[".mp3"] = "audio/mpeg";
   const type = MIME[path.extname(file).toLowerCase()] || "application/octet-stream", size = fs.statSync(file).size, rg = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || "");
   if (rg) { // Range support (Safari needs it for audio)
     const a = rg[1] ? +rg[1] : 0, z = rg[2] ? Math.min(+rg[2], size - 1) : size - 1;

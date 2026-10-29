@@ -55,6 +55,6 @@ a:focus-visible{outline:2px solid rgba(190,205,255,.6);outline-offset:2px;border
 <a class="back" id="home" href="/"><span data-l="en">← Back to Vyron</span><span data-l="pl">← Wróć do Vyron</span></a>
 </main>
 <div class="bot"><span>© <span id="yr">2026</span> Vyron</span></div>
-<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();(function(){var l=null;try{l=localStorage.getItem("vy-lang")}catch(e){}if(!l)l=(navigator.language||"en").toLowerCase().indexOf("pl")===0?"pl":"en";if(/^\/pl(\/|$)/.test(location.pathname))l="pl";document.documentElement.lang=l;document.getElementById("home").href=l==="pl"?"/pl/":"/"})();</script>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("vy-theme")||"dark")}catch(e){}document.getElementById("yr").textContent=new Date().getFullYear();(function(){var l=null;try{l=localStorage.getItem("vy-lang")}catch(e){}if(!l)l=(navigator.language||"en").toLowerCase().indexOf("pl")===0?"pl":"en";if(/^\/pl(\/|$)/.test(location.pathname))l="pl";document.documentElement.lang=l;document.getElementById("home").href="/"})();</script>
 </body>
 </html>
