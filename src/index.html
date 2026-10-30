@@ -63,7 +63,7 @@ h1 span{display:block;font-weight:400;background:linear-gradient(180deg,#eef1fb 
 .ghost{background:#26262b;border:1px solid rgba(255,255,255,.14)}
 .ghost:hover{background:#303036}
 .art{display:grid;place-items:center}
-.art svg{width:min(100%,560px);height:auto;overflow:visible}
+.art svg{width:min(100%,640px);height:auto;overflow:visible}
 
 @media (max-width:900px){
  .bar{height:84px;padding:0 20px}.sep,nav{display:none}.brand img{width:46px}.top{height:50px;padding:0 24px;font-size:17px;margin-left:10px}
@@ -96,16 +96,53 @@ h1 span{display:block;font-weight:400;background:linear-gradient(180deg,#eef1fb 
 </div>
 </div>
 <div class="art">
-<svg viewBox="0 0 400 400" role="img" aria-label="Vyron">
+<svg viewBox="0 0 732 692" role="img" aria-label="Vyron DMA">
 <defs>
-<linearGradient id="hx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#9aa6c4"/><stop offset="1" stop-color="#5b6685"/></linearGradient>
-<radialGradient id="gl" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8fa2d8" stop-opacity=".28"/><stop offset="1" stop-color="#8fa2d8" stop-opacity="0"/></radialGradient>
-<filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
+<linearGradient id="hx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#a9b4d0"/><stop offset="1" stop-color="#59638a"/></linearGradient>
+<linearGradient id="hx2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8ecf8" stop-opacity=".8"/><stop offset="1" stop-color="#6c78a0" stop-opacity=".5"/></linearGradient>
+<linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b1e26"/><stop offset=".55" stop-color="#0d0e12"/><stop offset="1" stop-color="#07080a"/></linearGradient>
+<linearGradient id="brk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#050506"/><stop offset=".6" stop-color="#14161c"/><stop offset="1" stop-color="#252933"/></linearGradient>
+<linearGradient id="fin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6ff"/><stop offset="1" stop-color="#8e9ab9"/></linearGradient>
+<linearGradient id="txt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6ff"/><stop offset="1" stop-color="#9aa6c4"/></linearGradient>
+<radialGradient id="gl" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8fa2d8" stop-opacity=".22"/><stop offset="1" stop-color="#8fa2d8" stop-opacity="0"/></radialGradient>
+<filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
+<filter id="drop" x="-20%" y="-20%" width="150%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000" flood-opacity=".7"/></filter>
 </defs>
-<circle cx="200" cy="200" r="200" fill="url(#gl)"/>
-<polygon points="200,18 358,109 358,291 200,382 42,291 42,109" fill="none" stroke="url(#hx)" stroke-width="16" stroke-linejoin="round" opacity=".55" filter="url(#sh)"/>
-<polygon points="200,18 358,109 358,291 200,382 42,291 42,109" fill="rgba(255,255,255,.03)" stroke="url(#hx)" stroke-width="12" stroke-linejoin="round"/>
-<image href="/logo.png?v=20" x="110" y="123" width="180" height="149" preserveAspectRatio="xMidYMid meet"/>
+<circle cx="408" cy="350" r="340" fill="url(#gl)"/>
+<g stroke-linejoin="round">
+<polygon points="408,48 660,192 660,500 408,650 156,500 156,192" fill="none" stroke="url(#hx)" stroke-width="34" opacity=".5" filter="url(#blur)"/>
+<polygon points="408,48 660,192 660,500 408,650 156,500 156,192" fill="none" stroke="url(#hx)" stroke-width="30"/>
+<polygon points="408,76 636,206 636,486 408,622 180,486 180,206" fill="none" stroke="url(#hx2)" stroke-width="3"/>
+</g>
+<g filter="url(#drop)">
+<!-- PCIe fingers -->
+<g>
+<polygon points="360,516 442,531 436,574 363,560" fill="#0b0c10" stroke="rgba(200,210,240,.25)" stroke-width="1.5"/>
+<polygon points="448,533 520,546 508,592 442,578" fill="#0b0c10" stroke="rgba(200,210,240,.25)" stroke-width="1.5"/>
+<g stroke="url(#fin)" stroke-width="5.500">
+<path d="M373,523 l-4,26 M384,525 l-4,26 M395,527 l-4,26 M406,529 l-4,26 M417,531 l-4,26 M428,533 l-4,26"/>
+<path d="M460,541 l-4,26 M471,543 l-4,26 M482,545 l-4,26 M493,547 l-4,26 M504,549 l-4,26"/>
+</g>
+</g>
+<!-- mounting tab -->
+<polygon points="305,476 354,486 350,522 300,512" fill="#0d0e12" stroke="rgba(200,210,240,.2)" stroke-width="1.5"/>
+<ellipse cx="330" cy="498" rx="9" ry="8" fill="#050506" stroke="rgba(200,210,240,.35)" stroke-width="1.500"/>
+<!-- card edge thickness -->
+<polygon points="578,517 580,534 200,444 198,425" fill="#050506"/>
+<polygon points="578,517 655,284 658,300 582,534" fill="#08090b"/>
+<!-- card body -->
+<polygon points="236,188 655,282 578,517 200,425 118,410 118,398" fill="url(#card)" stroke="rgba(200,210,240,.28)" stroke-width="2"/>
+<line x1="200" y1="425" x2="578" y2="517" stroke="#c9d2f0" stroke-opacity=".55" stroke-width="2"/>
+<polygon points="236,188 655,282 650,300 232,206" fill="#ffffff" opacity=".05"/>
+<!-- bracket -->
+<polygon points="212,46 268,58 272,168 122,412 124,438 74,514 52,468 90,382 208,142" fill="url(#brk)" stroke="rgba(200,210,240,.35)" stroke-width="2"/>
+<polyline points="268,58 272,168 122,412" fill="none" stroke="#dfe5fa" stroke-opacity=".55" stroke-width="2.500"/>
+<!-- branding -->
+<g transform="translate(548,336) rotate(13.500)">
+<image href="/logo.png?v=20" x="-30" y="-44" width="60" height="50" preserveAspectRatio="xMidYMid meet"/>
+<text x="0" y="28" text-anchor="middle" font-family="Outfit,Inter,system-ui,sans-serif" font-size="22" font-weight="500" fill="url(#txt)">Vyron DMA</text>
+</g>
+</g>
 </svg>
 </div>
 </main>
