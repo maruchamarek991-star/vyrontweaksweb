@@ -42,14 +42,14 @@ header{border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0
 .bar{max-width:1920px;margin:0 auto;height:116px;padding:0 clamp(24px,9vw,168px);display:flex;align-items:center}
 .brand img{display:block;width:58px;height:auto;filter:drop-shadow(0 0 12px rgba(170,185,230,.4))}
 .sep{width:2px;height:80px;margin:0 56px 0 30px;background:linear-gradient(transparent,rgba(255,255,255,.85),transparent)}
-nav{display:flex;gap:40px}
-nav a{color:#e3e5ea;text-decoration:none;font-size:18px;font-weight:400;transition:color .2s}
-nav a:hover{color:#fff}
+nav{display:flex;gap:14px}
+nav a{display:inline-block;color:#e3e5ea;text-decoration:none;font-size:18px;font-weight:400;padding:8px 14px;border-radius:12px;transition:color .2s,background .2s,box-shadow .2s,transform .18s ease-out;will-change:transform}
+nav a:hover{color:#fff;background:rgba(255,255,255,.07);box-shadow:0 10px 22px rgba(0,0,0,.55),0 0 0 1px rgba(200,210,240,.18);transform:perspective(500px) translateY(-2px) rotateX(10deg)}
 .sp{flex:1}
 .ico{display:grid;place-items:center;width:32px;height:32px;margin-right:16px;color:#b9bcc6;transition:color .2s}
 .ico:hover{color:#fff}
 .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font:400 20px Outfit,system-ui,sans-serif;color:#fff;transition:transform .2s,background .2s}
-.btn{will-change:transform}.btn:hover{transform:perspective(520px) translateY(-3px) rotateX(8deg)}
+.btn{will-change:transform;transition:transform .18s ease-out,background .2s,box-shadow .2s}.btn:hover{transform:perspective(520px) translateY(-3px) rotateX(8deg);box-shadow:0 16px 32px rgba(0,0,0,.6),0 0 24px rgba(170,185,230,.18)}
 .top{height:66px;padding:0 50px;margin-left:34px;border-radius:18px;border:1px solid rgba(200,210,240,.28);border-bottom-color:rgba(200,210,240,.7);background:linear-gradient(180deg,#000 40%,#1a1d28)}
 .hero{max-width:1920px;margin:0 auto;padding:0 clamp(24px,9vw,168px);display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:center;min-height:calc(100vh - 117px)}
 .copy{padding:60px 0}
@@ -156,6 +156,11 @@ function set(nx,ny){svg.style.transform="perspective(1100px) rotateX("+(-ny*11).
 function reset(){svg.style.transform="";card.style.transform="";orb.style.transform=""}
 art.addEventListener("pointermove",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var r=art.getBoundingClientRect(),nx=Math.max(-1,Math.min(1,(e.clientX-r.left)/r.width*2-1)),ny=Math.max(-1,Math.min(1,(e.clientY-r.top)/r.height*2-1));cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){set(nx,ny)})});
 art.addEventListener("pointerleave",function(){cancelAnimationFrame(raf);reset()});
+})();
+(function(){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+function tilt(el,rx,ry,lift,sc){el.addEventListener("pointermove",function(e){if(e.pointerType&&e.pointerType!=="mouse")return;var r=el.getBoundingClientRect(),nx=(e.clientX-r.left)/r.width*2-1,ny=(e.clientY-r.top)/r.height*2-1;el.style.transform="perspective(500px) translateY("+lift+"px) rotateX("+(-ny*rx).toFixed(2)+"deg) rotateY("+(nx*ry).toFixed(2)+"deg) scale("+sc+")"});el.addEventListener("pointerleave",function(){el.style.transform=""})}
+document.querySelectorAll("nav a").forEach(function(a){tilt(a,16,20,-2,1.08)});
+document.querySelectorAll(".btn").forEach(function(a){tilt(a,13,16,-3,1.05)});
 })();
 </script>
 </body>
