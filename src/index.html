@@ -96,69 +96,390 @@ h1 span{display:block;font-weight:400;background:linear-gradient(180deg,#eef1fb 
 </div>
 </div>
 <div class="art">
-<svg viewBox="0 0 691 627" role="img" aria-label="Vyron DMA">
+<svg viewBox="0 0 746 612" role="img" aria-label="Vyron DMA">
 <defs>
-<linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f6ff"/><stop offset=".45" stop-color="#a7b2d0"/><stop offset="1" stop-color="#4f597c"/></linearGradient>
-<linearGradient id="ring2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c3cce6"/><stop offset="1" stop-color="#7d89ad"/></linearGradient>
-<linearGradient id="ringDark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6d7899"/><stop offset="1" stop-color="#2b3250"/></linearGradient>
-<linearGradient id="face" x1="0" y1=".05" x2=".9" y2="1"><stop offset="0" stop-color="#20232d"/><stop offset=".35" stop-color="#12141a"/><stop offset="1" stop-color="#07080a"/></linearGradient>
-<linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".45" stop-color="#cfd8f5" stop-opacity=".07"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient>
-<linearGradient id="brk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2c313d"/><stop offset=".5" stop-color="#14161c"/><stop offset="1" stop-color="#0a0b0e"/></linearGradient>
-<linearGradient id="side" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1d26"/><stop offset="1" stop-color="#040405"/></linearGradient>
-<linearGradient id="fin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#8c98b8"/></linearGradient>
-<linearGradient id="txt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#9aa6c4"/></linearGradient>
-<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8d99ba" stop-opacity=".2"/><stop offset=".5" stop-color="#dfe6ff" stop-opacity=".95"/><stop offset="1" stop-color="#8d99ba" stop-opacity=".4"/></linearGradient>
-<radialGradient id="gl" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#8fa2d8" stop-opacity=".25"/><stop offset="1" stop-color="#8fa2d8" stop-opacity="0"/></radialGradient>
-<radialGradient id="inner" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#171a24"/><stop offset="1" stop-color="#050507"/></radialGradient>
-<filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
-<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+  <!-- Poświata tła i prawy górny refleks świetlny -->
+  <radialGradient id="bgGlow" cx="0.54" cy="0.48" r="0.48">
+    <stop offset="0%" stop-color="#7b93d6" stop-opacity="0.22"/>
+    <stop offset="55%" stop-color="#3b4870" stop-opacity="0.08"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="cornerGlow" cx="0.92" cy="0.08" r="0.45">
+    <stop offset="0%" stop-color="#a6b9f0" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+  </radialGradient>
+
+  <!-- Gradienty 3D zaokrąglonego sześciokąta (stylistyka Vyron Chrome/Ice) -->
+  <linearGradient id="hexOuter" x1="0.15" y1="0.05" x2="0.85" y2="0.95">
+    <stop offset="0%" stop-color="#eef3ff"/>
+    <stop offset="30%" stop-color="#b5c2e3"/>
+    <stop offset="68%" stop-color="#687599"/>
+    <stop offset="100%" stop-color="#2c334a"/>
+  </linearGradient>
+  <linearGradient id="hexBevel" x1="0.1" y1="0" x2="0.9" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="42%" stop-color="#ced8f2"/>
+    <stop offset="78%" stop-color="#808eb3"/>
+    <stop offset="100%" stop-color="#485373"/>
+  </linearGradient>
+  <linearGradient id="hexInnerWall" x1="0.5" y1="0" x2="0.5" y2="1">
+    <stop offset="0%" stop-color="#2a3147"/>
+    <stop offset="50%" stop-color="#566285"/>
+    <stop offset="100%" stop-color="#141824"/>
+  </linearGradient>
+
+  <!-- Gradienty obudowy i laminatu PCB -->
+  <linearGradient id="shroudFace" x1="0.08" y1="0.05" x2="0.88" y2="0.95">
+    <stop offset="0%" stop-color="#1b1e26"/>
+    <stop offset="38%" stop-color="#0f1116"/>
+    <stop offset="78%" stop-color="#08090c"/>
+    <stop offset="100%" stop-color="#040507"/>
+  </linearGradient>
+  <linearGradient id="shroudTopStep" x1="0" y1="0" x2="1" y2="0.25">
+    <stop offset="0%" stop-color="#272b37"/>
+    <stop offset="50%" stop-color="#151820"/>
+    <stop offset="100%" stop-color="#0b0d12"/>
+  </linearGradient>
+  <linearGradient id="shroudSideWall" x1="0" y1="0" x2="1" y2="0.2">
+    <stop offset="0%" stop-color="#040507"/>
+    <stop offset="35%" stop-color="#0c0e13"/>
+    <stop offset="100%" stop-color="#060709"/>
+  </linearGradient>
+  <linearGradient id="accentLine" x1="0" y1="0" x2="1" y2="0.25">
+    <stop offset="0%" stop-color="#8c9cc4" stop-opacity="0.45"/>
+    <stop offset="45%" stop-color="#dfe8ff" stop-opacity="0.9"/>
+    <stop offset="85%" stop-color="#9aa9cf" stop-opacity="0.75"/>
+    <stop offset="100%" stop-color="#5d698a" stop-opacity="0.35"/>
+  </linearGradient>
+  <linearGradient id="pcbBase" x1="0" y1="0" x2="0.9" y2="1">
+    <stop offset="0%" stop-color="#14171f"/>
+    <stop offset="100%" stop-color="#050608"/>
+  </linearGradient>
+
+  <!-- Gradienty metalowego śledzia PCIe -->
+  <linearGradient id="bracketMain" x1="0.2" y1="0" x2="0.8" y2="1">
+    <stop offset="0%" stop-color="#292d39"/>
+    <stop offset="28%" stop-color="#161820"/>
+    <stop offset="65%" stop-color="#0b0c10"/>
+    <stop offset="100%" stop-color="#050608"/>
+  </linearGradient>
+  <linearGradient id="bracketEdge" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#9aa7c7" stop-opacity="0.7"/>
+    <stop offset="35%" stop-color="#d8e2ff" stop-opacity="0.55"/>
+    <stop offset="75%" stop-color="#5f6b8a" stop-opacity="0.4"/>
+    <stop offset="100%" stop-color="#252a38" stop-opacity="0.2"/>
+  </linearGradient>
+  <linearGradient id="usbPort" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#cdd7f0"/>
+    <stop offset="45%" stop-color="#69748f"/>
+    <stop offset="100%" stop-color="#1f232e"/>
+  </linearGradient>
+
+  <!-- Gradienty pinów PCIe (srebrno-lodowy chrom z ukośnym cieniowaniem jak na renderze) -->
+  <linearGradient id="pinChrome" x1="0" y1="0" x2="0.35" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="25%" stop-color="#dce5ff"/>
+    <stop offset="62%" stop-color="#96a5cc"/>
+    <stop offset="88%" stop-color="#556285"/>
+    <stop offset="100%" stop-color="#2a3145"/>
+  </linearGradient>
+  <linearGradient id="pinShadowDiag" x1="0" y1="0.2" x2="1" y2="0.7">
+    <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="42%" stop-color="#000000" stop-opacity="0.38"/>
+    <stop offset="56%" stop-color="#000000" stop-opacity="0"/>
+  </linearGradient>
+
+  <!-- Gradient tekstu i radiatora -->
+  <linearGradient id="vyronText" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffffff"/>
+    <stop offset="55%" stop-color="#d4def7"/>
+    <stop offset="100%" stop-color="#8492b8"/>
+  </linearGradient>
+  <linearGradient id="heatsinkFin" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#2c3242"/>
+    <stop offset="100%" stop-color="#0d0f14"/>
+  </linearGradient>
+
+  <!-- Filtry rozmycia cieni i poświaty -->
+  <filter id="hexGlow" x="-25%" y="-25%" width="150%" height="150%">
+    <feGaussianBlur stdDeviation="12"/>
+  </filter>
+  <filter id="dropShadow" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="11"/>
+  </filter>
+  <filter id="hardShadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur stdDeviation="5"/>
+  </filter>
 </defs>
 
-<circle cx="375" cy="325" r="330" fill="url(#gl)"/>
+<!-- Tło świetlne -->
+<rect width="746" height="612" fill="url(#cornerGlow)" opacity="0.7"/>
+<circle cx="408" cy="312" r="295" fill="url(#bgGlow)"/>
 
-<!-- hexagon -->
-<g stroke-linejoin="round" fill="none">
-<polygon points="375,45 617,185 617,465 375,604 133,465 133,185" stroke="url(#ring)" stroke-width="40" opacity=".5" filter="url(#blur)"/>
-<polygon points="375,45 617,185 617,465 375,604 133,465 133,185" fill="url(#inner)" stroke="url(#ringDark)" stroke-width="36"/>
-<polygon points="375,45 617,185 617,465 375,604 133,465 133,185" stroke="url(#ring)" stroke-width="32"/>
-<polygon points="375,45 617,185 617,465 375,604 133,465 133,185" stroke="url(#ring2)" stroke-width="20" opacity=".9"/>
-<polygon points="375,45 617,185 617,465 375,604 133,465 133,185" stroke="#fff" stroke-width="2" opacity=".55" transform="translate(375 325) scale(.985) translate(-375 -325)"/>
-<polygon points="375,45 617,185 617,465 375,604 133,465 133,185" stroke="#0a0c14" stroke-width="3" opacity=".55" transform="translate(375 325) scale(.915) translate(-375 -325)"/>
+<!-- ==================== 1. ZAOKRĄGLONY SZEŚCIOKĄT 3D (Mavis DMA Geometry) ==================== -->
+<g fill="none" stroke-linejoin="round" stroke-linecap="round">
+  <!-- Zewnętrzna poświata sześciokąta -->
+  <path d="M 378,43 Q 409,26 440,44 L 614,151 Q 644,169 644,205 L 644,418 Q 644,454 614,472 L 440,578 Q 409,596 378,578 L 204,472 Q 174,454 174,418 L 174,205 Q 174,169 204,151 Z"
+        stroke="#8fa5de" stroke-width="38" opacity="0.28" filter="url(#hexGlow)"/>
+
+  <!-- Baza 3D (ciemniejszy spód i krawędź zewnętrzna) -->
+  <path d="M 378,43 Q 409,26 440,44 L 614,151 Q 644,169 644,205 L 644,418 Q 644,454 614,472 L 440,578 Q 409,596 378,578 L 204,472 Q 174,454 174,418 L 174,205 Q 174,169 204,151 Z"
+        fill="#050608" stroke="#1b2030" stroke-width="44"/>
+
+  <!-- Główny metaliczny korpus pierścienia -->
+  <path d="M 378,43 Q 409,26 440,44 L 614,151 Q 644,169 644,205 L 644,418 Q 644,454 614,472 L 440,578 Q 409,596 378,578 L 204,472 Q 174,454 174,418 L 174,205 Q 174,169 204,151 Z"
+        stroke="url(#hexOuter)" stroke-width="38"/>
+
+  <!-- Wewnętrzna ścianka fazowania (efekt głębi 3D obręczy) -->
+  <path d="M 381,56 Q 409,40 437,57 L 602,158 Q 629,175 629,207 L 629,416 Q 629,448 602,465 L 437,565 Q 409,582 381,565 L 216,465 Q 189,448 189,416 L 189,207 Q 189,175 216,158 Z"
+        stroke="url(#hexInnerWall)" stroke-width="10"/>
+
+  <!-- Jasny grzbiet fazowania (główny refleks świetlny na sześciokącie) -->
+  <path d="M 376,40 Q 409,22 442,41 L 617,149 Q 648,168 648,205 L 648,418 Q 648,455 617,474 L 442,581 Q 409,600 376,581 L 201,474 Q 170,455 170,418 L 170,205 Q 170,168 201,149 Z"
+        stroke="url(#hexBevel)" stroke-width="18" opacity="0.92"/>
+
+  <!-- Ostry refleks krawędziowy (specular highlight) -->
+  <path d="M 378,36 Q 409,19 440,37 L 616,145 Q 649,165 649,204 L 649,418"
+        stroke="#ffffff" stroke-width="2.2" opacity="0.65"/>
+
+  <!-- Wewnętrzny obrys odcinający tło -->
+  <path d="M 383,61 Q 409,46 435,62 L 596,161 Q 622,177 622,208 L 622,415 Q 622,446 596,462 L 435,560 Q 409,576 383,560 L 222,462 Q 196,446 196,415 L 196,208 Q 196,177 222,161 Z"
+        stroke="#090b10" stroke-width="3.5" opacity="0.9"/>
 </g>
 
-<!-- shadow of the card on the hexagon -->
-<polygon points="95,420 560,520 540,560 130,470" fill="#000" opacity=".65" filter="url(#soft)"/>
+<!-- Cienie rzucane przez kartę na lewy bok i dół sześciokąta (jak w Mavis DMA) -->
+<polygon points="150,165 235,175 198,325 145,310" fill="#000000" opacity="0.78" filter="url(#dropShadow)"/>
+<polygon points="155,405 265,435 235,495 150,460" fill="#000000" opacity="0.82" filter="url(#dropShadow)"/>
+<polygon points="485,480 620,515 595,575 460,545" fill="#000000" opacity="0.82" filter="url(#dropShadow)"/>
+<polygon points="165,390 615,495 585,555 160,445" fill="#000000" opacity="0.72" filter="url(#dropShadow)"/>
 
-<!-- PCB tail with connector -->
+<!-- ==================== 2. DOLNA CZĘŚĆ PCB: ZACZEP MONTAŻOWY I ZŁĄCZE PCIe (CaptainDma-75T + Mavis) ==================== -->
 <g>
-<path d="M258,432 L492,490 L478,583 L414,567 L410,552 L322,532 L330,510 L262,496 Z" fill="url(#side)" stroke="#c4cdea" stroke-opacity=".28" stroke-width="1.6" stroke-linejoin="round"/>
-<ellipse cx="298" cy="470" rx="11" ry="9.5" fill="#030304" stroke="#c4cdea" stroke-opacity=".5" stroke-width="2"/>
-<path d="M336.0,500.0 l-5,34 M345.4,502.0 l-5,34 M354.8,504.1 l-5,34 M364.2,506.1 l-5,34 M373.6,508.2 l-5,34 M383.0,510.2 l-5,34 M392.4,512.3 l-5,34 M401.8,514.3 l-5,34 M411.2,516.4 l-5,34" stroke="url(#fin)" stroke-width="5.2" stroke-linecap="butt" fill="none"/>
-<path d="M424.0,524.0 l-4,36 M434.2,526.2 l-4,36 M444.4,528.4 l-4,36 M454.6,530.7 l-4,36 M464.8,532.9 l-4,36" stroke="url(#fin)" stroke-width="5.2" stroke-linecap="butt" fill="none"/>
+  <!-- Grubość 3D dolnego laminatu PCB i zaczepu -->
+  <path d="M 326,442 L 538,499 L 532,526 L 520,523 L 505,578 L 456,565 L 470,511 L 459,508 L 444,562 L 363,540 L 378,486 L 315,469 L 319,452 Z"
+        fill="#030406"/>
+
+  <!-- Właściwa płytka dolna z uchwytem montażowym (oczkiem) po lewej i dwoma sekcjami PCIe -->
+  <path d="M 322,437 L 534,494 L 528,520 L 516,517 L 501,572 L 452,559 L 467,505 L 455,502 L 440,556 L 359,534 L 374,480 L 311,463 Z"
+        fill="url(#pcbBase)" stroke="#7a88ab" stroke-opacity="0.32" stroke-width="1.3" stroke-linejoin="round"/>
+
+  <!-- Fazowany występ uchwytu montażowego z otworem (jak na obu zdjęciach) -->
+  <polygon points="311,463 366,478 359,502 305,487" fill="#0d0f14" stroke="#6d7a9c" stroke-opacity="0.28" stroke-width="1"/>
+  <polygon points="305,487 359,502 356,510 302,495" fill="#050608"/>
+  <!-- Otwór montażowy (oczko z głębią 3D) -->
+  <ellipse cx="335" cy="483" rx="10.5" ry="8.5" transform="rotate(15.2 335 483)" fill="#020203" stroke="#566280" stroke-opacity="0.45" stroke-width="1.5"/>
+  <ellipse cx="336" cy="485" rx="7.5" ry="5.5" transform="rotate(15.2 336 485)" fill="#000000" stroke="#9aa8cc" stroke-opacity="0.25" stroke-width="1"/>
+
+  <!-- Oznaczenia na laminacie nad pinami (B1 / U26 / B11 / B12 / B18 z CaptainDma-75T) -->
+  <g transform="translate(382, 488) rotate(15.2)" fill="#9aa8cc" opacity="0.45" font-family="Outfit, monospace" font-size="5.5" font-weight="600">
+    <text x="0" y="0">B1</text>
+    <text x="32" y="1">U26</text>
+    <text x="68" y="0">B11</text>
+    <text x="88" y="0">B12</text>
+    <text x="122" y="0">B18</text>
+  </g>
+
+  <!-- SEKCJA 1 PINÓW PCIe (11 złotych/chromowanych styków jak w Mavis DMA / 75T) -->
+  <g transform="translate(373, 497) rotate(15.2)">
+    <!-- Podkład cienia pod stykami -->
+    <rect x="-1" y="0" width="82" height="39" rx="1" fill="#050608" opacity="0.85"/>
+    <!-- 11 pinów -->
+    <rect x="0"    y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="7.5"  y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="15.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="22.5" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="30.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="37.5" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="45.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="52.5" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="60.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="67.5" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="75.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <!-- Ukośny cień przechodzący przez piny (identycznie jak w Mavis DMA) -->
+    <rect x="0" y="0" width="81" height="38" fill="url(#pinShadowDiag)"/>
+  </g>
+
+  <!-- SEKCJA 2 PINÓW PCIe (7 styków za wcięciem klucza PCIe) -->
+  <g transform="translate(466, 522) rotate(15.2)">
+    <rect x="-1" y="0" width="51" height="39" rx="1" fill="#050608" opacity="0.85"/>
+    <!-- 7 pinów -->
+    <rect x="0"    y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="7.5"  y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="15.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="22.5" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="30.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="37.5" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="45.0" y="0" width="5.4" height="38" rx="0.8" fill="url(#pinChrome)"/>
+    <rect x="0" y="0" width="51" height="38" fill="url(#pinShadowDiag)"/>
+  </g>
 </g>
 
-<!-- card thickness -->
-<polygon points="160,413 545,497 548,509 162,425" fill="#030304"/>
-<polygon points="617,265 621,277 548,509 545,497" fill="#07080b"/>
-<polygon points="84,392 152,396 160,413 162,425 152,408 84,404" fill="#050507"/>
+<!-- ==================== 3. BOCZNY PRZEŁĄCZNIK KILL-SWITCH (ON/OFF z CaptainDma-75T) ==================== -->
+<!-- Wystający z prawej krawędzi karty przełącznik suwakowy ON/OFF widoczny na zdjęciu PCB -->
+<g transform="translate(618, 336) rotate(15.2)">
+  <!-- Metalowa obudowa przełącznika na skraju PCB -->
+  <rect x="-6" y="0" width="11" height="28" rx="1.5" fill="url(#usbPort)" stroke="#dce5ff" stroke-opacity="0.45" stroke-width="0.9"/>
+  <!-- Czarny suwak (actuator) wystający w prawo -->
+  <rect x="5" y="7" width="9" height="8" rx="1" fill="#101217" stroke="#7d8bad" stroke-opacity="0.5" stroke-width="0.8"/>
+  <line x1="7" y1="9" x2="7" y2="13" stroke="#9aa8cc" stroke-opacity="0.5" stroke-width="0.8"/>
+</g>
 
-<!-- card face -->
-<polygon points="213,178 617,265 545,497 160,413 152,396 84,392" fill="url(#face)" stroke="#c4cdea" stroke-opacity=".22" stroke-width="1.5" stroke-linejoin="round"/>
-<polygon points="213,178 617,265 545,497 160,413 152,396 84,392" fill="url(#sheen)"/>
-<polyline points="213,178 617,265" fill="none" stroke="#d9e0f7" stroke-opacity=".35" stroke-width="2"/>
-<polyline points="617,265 545,497" fill="none" stroke="#d9e0f7" stroke-opacity=".4" stroke-width="2"/>
-<polyline points="160,413 545,497" fill="none" stroke="url(#edge)" stroke-width="2.4"/>
-<polyline points="84,392 152,396 160,413" fill="none" stroke="url(#edge)" stroke-width="2"/>
+<!-- ==================== 4. KORPUS KARTY DMA (Obudowa Mavis DMA + Detale 75T pod spodem) ==================== -->
+<g>
+  <!-- Dolna ścianka grubości obudowy (3D extrusion) -->
+  <polygon points="118,399 188,418 197,398 584,503 576,527 192,422 183,441 113,422"
+           fill="url(#shroudSideWall)" stroke="#050608" stroke-width="0.8" stroke-linejoin="round"/>
 
-<!-- bracket -->
-<path d="M178,33 L232,44 L222,176 L84,392 L84,405 L152,411 L162,426 L152,440 L118,443 L72,462 L30,500 L15,455 L48,372 Z" fill="url(#brk)" stroke="#c4cdea" stroke-opacity=".35" stroke-width="1.8" stroke-linejoin="round"/>
-<path d="M232,44 L222,176 L84,392" fill="none" stroke="#e6ebff" stroke-opacity=".6" stroke-width="2.2" stroke-linejoin="round"/>
-<path d="M180,40 L50,374 L20,455" fill="none" stroke="#e6ebff" stroke-opacity=".28" stroke-width="1.6" stroke-linejoin="round"/>
+  <!-- Prawa ścianka boczna obudowy (3D extrusion) -->
+  <polygon points="651,269 658,284 584,524 576,527 584,503"
+           fill="#06070a" stroke="#7d8bad" stroke-opacity="0.22" stroke-width="0.8" stroke-linejoin="round"/>
 
-<!-- branding -->
-<g transform="translate(528,318) rotate(12.2)">
-<image href="/logo.png?v=20" x="-30" y="-46" width="60" height="50" preserveAspectRatio="xMidYMid meet"/>
-<text x="0" y="28" text-anchor="middle" font-family="Outfit,Inter,system-ui,sans-serif" font-size="22" font-weight="500" fill="url(#txt)">Vyron DMA</text>
+  <!-- Górny schodek (wcięcie na górnej krawędzi karty z Mavis DMA) -->
+  <polygon points="247,160 282,169 294,185 636,265 651,269 242,172"
+           fill="url(#shroudTopStep)"/>
+
+  <!-- Główna płyta czołowa obudowy (czarny matowy pancerz z dolnym uskokiem po lewej) -->
+  <path d="M 247,160 L 284,170 L 295,186 L 645,266 Q 653,268 650,276 L 584,503 L 197,398 L 188,418 L 118,399 Z"
+        fill="url(#shroudFace)" stroke="#8c9cc4" stroke-opacity="0.22" stroke-width="1.2" stroke-linejoin="round"/>
+
+  <!-- Subtelny ukośny pas refleksyjny na górnej części obudowy (jak w Mavis DMA) -->
+  <polygon points="282,175 645,266 632,310 268,215" fill="#9fb0d9" opacity="0.035"/>
+
+  <!-- ======== DETALE TECHNICZNE CAPTAINDMA-75T (subtelnie wygrawerowane / prześwitujące w strukturze karty) ======== -->
+  <g transform="translate(245, 192) rotate(15.2)" opacity="0.26">
+    <!-- Ścieżki i obrysy sekcji zasilania po lewej (cewki 4R7, 2R2, układ U5/U8) -->
+    <rect x="42" y="18" width="14" height="14" rx="2" fill="#080a0e" stroke="#8a99bf" stroke-width="1"/>
+    <circle cx="49" cy="25" r="4" fill="none" stroke="#8a99bf" stroke-width="0.9"/>
+    <!-- Diody statusu LED1, LED2, PWR na górze -->
+    <g fill="#a8b8e0" font-family="Outfit, monospace" font-size="5" font-weight="600">
+      <text x="64" y="12">LED1</text>
+      <text x="82" y="12">LED2</text>
+      <text x="100" y="12">PWR</text>
+      <rect x="66" y="15" width="6" height="4" rx="0.8" fill="#dce6ff"/>
+      <rect x="84" y="15" width="6" height="4" rx="0.8" fill="#dce6ff"/>
+      <rect x="101" y="15" width="6" height="4" rx="0.8" fill="#8fa5de"/>
+    </g>
+
+    <!-- Chip sterownika U5 obok portu DATA -->
+    <rect x="114" y="56" width="32" height="32" rx="2" fill="#07080c" stroke="#7d8bad" stroke-width="1.1"/>
+    <rect x="119" y="61" width="22" height="22" fill="#0d1017" stroke="#5b6785" stroke-width="0.6"/>
+
+    <!-- Cewki 4R7 i 2R2 w dolnej części laminatu -->
+    <g fill="#0a0c12" stroke="#7d8bad" stroke-width="0.9" font-family="Outfit, monospace" font-size="6" font-weight="700">
+      <rect x="92" y="118" width="22" height="24" rx="2"/>
+      <text x="97" y="133" fill="#8a99bf" stroke="none">4R7</text>
+      <rect x="92" y="158" width="22" height="24" rx="2"/>
+      <text x="97" y="173" fill="#8a99bf" stroke="none">2R2</text>
+      <rect x="202" y="154" width="22" height="24" rx="2"/>
+      <text x="207" y="169" fill="#8a99bf" stroke="none">4R7</text>
+    </g>
+
+    <!-- 6-pinowe złącze programatora JTAG (TMS, TDI, TDO, TCK, GND, VCC) z kwadratowym padem #1 -->
+    <g transform="translate(202, 22)">
+      <rect x="0" y="0" width="68" height="13" rx="1.5" fill="#07090d" stroke="#8a99bf" stroke-width="0.9"/>
+      <!-- Kwadratowy pad 1 (TMS) -->
+      <rect x="3.5" y="3" width="7" height="7" fill="none" stroke="#cfd9f5" stroke-width="1.1"/>
+      <circle cx="7" cy="6.5" r="1.8" fill="#020305"/>
+      <!-- Okrągłe pady 2-6 -->
+      <circle cx="18" cy="6.5" r="3.4" fill="none" stroke="#cfd9f5" stroke-width="1.1"/>
+      <circle cx="29" cy="6.5" r="3.4" fill="none" stroke="#cfd9f5" stroke-width="1.1"/>
+      <circle cx="40" cy="6.5" r="3.4" fill="none" stroke="#cfd9f5" stroke-width="1.1"/>
+      <circle cx="51" cy="6.5" r="3.4" fill="none" stroke="#cfd9f5" stroke-width="1.1"/>
+      <circle cx="62" cy="6.5" r="3.4" fill="none" stroke="#cfd9f5" stroke-width="1.1"/>
+      <g fill="#9aa8cc" font-family="Outfit, monospace" font-size="4.2" text-anchor="middle">
+        <text x="7" y="-2">TMS</text>
+        <text x="18" y="-2">TDI</text>
+        <text x="29" y="-2">TDO</text>
+        <text x="40" y="-2">TCK</text>
+        <text x="51" y="-2">GND</text>
+        <text x="62" y="-2">VCC</text>
+      </g>
+    </g>
+
+    <!-- Charakterystyczny czarny żebrowany radiator 6x6 na chipie FPGA (z CaptainDma-75T) -->
+    <g transform="translate(164, 42)">
+      <rect x="-3" y="-3" width="110" height="96" rx="3" fill="#050609" stroke="#7d8bad" stroke-width="1"/>
+      <!-- 6 kolumn x 6 rzędów żeberek radiatora -->
+      <g fill="url(#heatsinkFin)" stroke="#8e9dc4" stroke-width="0.6">
+        <!-- Rząd 1 -->
+        <rect x="2" y="2" width="14" height="11" rx="1"/><rect x="20" y="2" width="14" height="11" rx="1"/><rect x="38" y="2" width="14" height="11" rx="1"/><rect x="56" y="2" width="14" height="11" rx="1"/><rect x="74" y="2" width="14" height="11" rx="1"/><rect x="90" y="2" width="14" height="11" rx="1"/>
+        <!-- Rząd 2 -->
+        <rect x="2" y="17" width="14" height="11" rx="1"/><rect x="20" y="17" width="14" height="11" rx="1"/><rect x="38" y="17" width="14" height="11" rx="1"/><rect x="56" y="17" width="14" height="11" rx="1"/><rect x="74" y="17" width="14" height="11" rx="1"/><rect x="90" y="17" width="14" height="11" rx="1"/>
+        <!-- Rząd 3 -->
+        <rect x="2" y="32" width="14" height="11" rx="1"/><rect x="20" y="32" width="14" height="11" rx="1"/><rect x="38" y="32" width="14" height="11" rx="1"/><rect x="56" y="32" width="14" height="11" rx="1"/><rect x="74" y="32" width="14" height="11" rx="1"/><rect x="90" y="32" width="14" height="11" rx="1"/>
+        <!-- Rząd 4 -->
+        <rect x="2" y="47" width="14" height="11" rx="1"/><rect x="20" y="47" width="14" height="11" rx="1"/><rect x="38" y="47" width="14" height="11" rx="1"/><rect x="56" y="47" width="14" height="11" rx="1"/><rect x="74" y="47" width="14" height="11" rx="1"/><rect x="90" y="47" width="14" height="11" rx="1"/>
+        <!-- Rząd 5 -->
+        <rect x="2" y="62" width="14" height="11" rx="1"/><rect x="20" y="62" width="14" height="11" rx="1"/><rect x="38" y="62" width="14" height="11" rx="1"/><rect x="56" y="62" width="14" height="11" rx="1"/><rect x="74" y="62" width="14" height="11" rx="1"/><rect x="90" y="62" width="14" height="11" rx="1"/>
+        <!-- Rząd 6 -->
+        <rect x="2" y="77" width="14" height="11" rx="1"/><rect x="20" y="77" width="14" height="11" rx="1"/><rect x="38" y="77" width="14" height="11" rx="1"/><rect x="56" y="77" width="14" height="11" rx="1"/><rect x="74" y="77" width="14" height="11" rx="1"/><rect x="90" y="77" width="14" height="11" rx="1"/>
+      </g>
+    </g>
+
+    <!-- Subtelne oznaczenia portów przy lewej krawędzi (DATA PORT / UPDATE PORT) -->
+    <g fill="none" stroke="#9aa8cc" stroke-width="0.8" font-family="Outfit, sans-serif" font-size="5.5" font-weight="600">
+      <rect x="10" y="88" width="44" height="9" rx="1"/>
+      <text x="32" y="94.5" fill="#9aa8cc" stroke="none" text-anchor="middle">DATA PORT</text>
+      <rect x="10" y="162" width="52" height="9" rx="1"/>
+      <text x="36" y="168.5" fill="#9aa8cc" stroke="none" text-anchor="middle">UPDATE PORT</text>
+    </g>
+  </g>
+
+  <!-- Charakterystyczna podświetlona linia akcentowa biegnąca wzdłuż dolnej krawędzi i uskoku (1:1 z Mavis DMA, w kolorze Vyron Ice) -->
+  <polyline points="118,399 188,418 197,398 584,503"
+            fill="none" stroke="url(#accentLine)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Druga delikatna linia krawędziowa na prawym boku osłony -->
+  <polyline points="650,273 584,503"
+            fill="none" stroke="#c8d4f2" stroke-opacity="0.38" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+
+<!-- ==================== 5. METALOWY ŚLEDŹ PCIe + PORTY USB-C (Mavis 3D + CaptainDma-75T) ==================== -->
+<g>
+  <!-- Wystające po lewej stronie zza śledzia metalowe gniazda USB-C (DATA PORT i UPDATE PORT) -->
+  <!-- Górny port (DATA PORT) -->
+  <polygon points="154,242 172,247 159,281 141,276" fill="url(#usbPort)" stroke="#dce5ff" stroke-opacity="0.5" stroke-width="1" stroke-linejoin="round"/>
+  <polygon points="145,250 156,253 148,273 138,270" fill="#090b0f" opacity="0.8"/>
+  <!-- Dolny port (UPDATE PORT) -->
+  <polygon points="114,335 132,340 119,374 101,369" fill="url(#usbPort)" stroke="#dce5ff" stroke-opacity="0.5" stroke-width="1" stroke-linejoin="round"/>
+  <polygon points="105,343 116,346 108,366 98,363" fill="#090b0f" opacity="0.8"/>
+
+  <!-- Cień rzucany przez śledź PCIe na przednią ściankę karty -->
+  <polygon points="247,160 268,166 142,425 114,415" fill="#000000" opacity="0.75" filter="url(#hardShadow)"/>
+
+  <!-- Górna zagięta stopka montażowa śledzia PCIe (z wycięciem jak w Mavis DMA i CaptainDma-75T) -->
+  <path d="M 214,32 L 260,46 L 246,84 L 222,76 L 217,62 L 204,58 Z"
+        fill="#12141b" stroke="#7d8bad" stroke-opacity="0.38" stroke-width="1.2" stroke-linejoin="round"/>
+  <!-- Wewnętrzne zagięcie górnej stopki -->
+  <polygon points="214,32 260,46 256,54 210,40" fill="#2c3242"/>
+
+  <!-- Główna płaszczyzna metalowego śledzia PCIe (ukośna płyta od góry do dolnego zaczepu) -->
+  <path d="M 260,46 L 281,53 L 118,412 L 96,466 Q 88,484 74,479 L 61,474 Q 52,469 57,452 L 73,414 L 87,402 L 250,48 Z"
+        fill="url(#bracketMain)" stroke="#687494" stroke-opacity="0.35" stroke-width="1.2" stroke-linejoin="round"/>
+
+  <!-- Boczna ścianka grubości metalu śledzia (jasny refleks krawędziowy 1:1 jak w Mavis DMA) -->
+  <path d="M 260,46 L 266,49 L 94,405 L 79,418 L 63,456 Q 59,468 66,474 L 59,472 Q 51,466 56,451 L 72,413 L 86,401 L 254,45 Z"
+        fill="#1e222e" stroke="url(#bracketEdge)" stroke-width="1.6" stroke-linejoin="round"/>
+
+  <!-- Prawe wewnętrzne wzmocnienie śledzia stykające się z płytką PCB -->
+  <polygon points="281,53 263,164 118,399 113,422 96,466 118,412"
+           fill="#07080b" stroke="#8e9dc4" stroke-opacity="0.22" stroke-width="1"/>
+
+  <!-- Jasna linia świetlna wzdłuż głównego grzbietu śledzia -->
+  <line x1="278" y1="54" x2="116" y2="411" stroke="#dce5ff" stroke-opacity="0.45" stroke-width="1.8" stroke-linecap="round"/>
+</g>
+
+<!-- ==================== 6. BRANDING VYRON DMA (Idealnie w miejscu i pod kątem Mavis DMA) ==================== -->
+<g transform="translate(562, 314) rotate(15.2)">
+  <!-- Delikatna poświata pod sygnetem V -->
+  <circle cx="0" cy="-14" r="34" fill="#8fa5de" opacity="0.12" filter="url(#hardShadow)"/>
+
+  <!-- Oryginalne logo Vyron ze strony -->
+  <image href="/logo.png?v=20" x="-33" y="-45" width="66" height="55" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Napis Vyron DMA z metalicznym gradientem i lekkim cieniem -->
+  <text x="0" y="27" text-anchor="middle" font-family="Outfit, Inter, system-ui, sans-serif" font-size="22" font-weight="600" letter-spacing="0.02em" fill="#000000" opacity="0.65" transform="translate(0, 2)">Vyron DMA</text>
+  <text x="0" y="27" text-anchor="middle" font-family="Outfit, Inter, system-ui, sans-serif" font-size="22" font-weight="600" letter-spacing="0.02em" fill="url(#vyronText)">Vyron DMA</text>
 </g>
 </svg>
 </div>
