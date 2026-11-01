@@ -9,7 +9,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://vyron.lol/">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-BHbwf4ompmT3tVMiHLTbL6RRCt/foH9I94ns0g7ey9w='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wUzHVDBBjL7aebfqqfOuNPhfPlBw8/e4ChQosW4nbqA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'">
 <link rel="icon" href="/favicon.ico?v=20" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=20">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=20">
@@ -139,6 +139,26 @@ header{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.55);backdrop-filt
 }
 .tiles{display:block;max-width:620px}.tiles .tile:nth-child(n){transform:none}.tiles .tile-in{height:clamp(340px,33vw,500px);padding:30px 28px 44px}.tiles .tile-in>svg{width:100%;height:100%;margin-top:0}.tiles .tag{left:20px;bottom:18px}
 .tiles .tile-in>img.book{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 22px 30px rgba(0,0,0,.6));pointer-events:none;user-select:none}
+dialog#manual{border:0;padding:0;background:transparent;color:inherit;max-width:none;max-height:none;overflow:visible;margin:auto}
+dialog#manual::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+dialog#manual[open]{animation:dlg .28s ease-out both}
+dialog#manual[open]::backdrop{animation:page .28s ease both}
+@keyframes dlg{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+html:has(dialog[open]){overflow:hidden}
+.modal{position:relative;width:min(980px,92vw);max-height:92vh;overflow:auto;padding:48px 44px 44px;border-radius:34px;border:1px solid rgba(200,210,240,.2);text-align:center;
+ background:radial-gradient(60% 60% at 50% 0%,rgba(165,178,215,.16),transparent 70%),repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 64px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 64px),#07080b;
+ box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 80px rgba(150,165,205,.08)}
+.modal h3{margin:22px 0 36px;font:400 clamp(30px,3.4vw,46px)/1.15 Outfit,sans-serif;color:#f1f2f6}
+.modal h3 span{font-weight:500;background:linear-gradient(180deg,#eef1fb,#8f9ab8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.x{position:absolute;top:18px;right:18px;width:42px;height:42px;display:grid;place-items:center;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#c9ccd6;cursor:pointer;transition:background .2s,color .2s}
+.x:hover{background:rgba(255,255,255,.1);color:#fff}
+.fws{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;perspective:900px}
+.fw{display:flex;flex-direction:column;align-items:center;gap:18px;padding:34px 22px 28px;border-radius:26px;border:1px solid rgba(200,210,240,.16);background:linear-gradient(160deg,rgba(190,200,235,.12),rgba(255,255,255,.015) 65%);box-shadow:0 18px 40px rgba(0,0,0,.5);transition:transform .18s ease-out,box-shadow .2s,border-color .2s;will-change:transform}
+.fw:hover{border-color:rgba(220,228,250,.38);box-shadow:0 26px 54px rgba(0,0,0,.65),0 0 40px rgba(170,185,230,.16)}
+.fw h4{margin:0;font:500 24px Outfit,sans-serif;color:#e9ecf5}
+.price{font:500 clamp(48px,5vw,68px)/1 Outfit,sans-serif;background:linear-gradient(180deg,#fff,#97a2c0);-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0 8px}
+.go.sm{height:54px;padding:0 40px;font-size:19px}
+@media (max-width:820px){.fws{grid-template-columns:1fr}.modal{padding:56px 20px 28px}}
 </style>
 </head>
 <body>
@@ -201,13 +221,25 @@ header{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.55);backdrop-filt
 <h3>Explore our <span>products</span></h3>
 <p>Answer a few questions about your games, PC and budget, and we'll suggest a bundle. Your progress is saved in this browser.</p>
 <div class="chips"><span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Firmware picked by anti-cheat</span></div>
-<div class="p-cta"><a class="go" href="#">Start building<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a><a class="alt" href="#">or configure manually</a></div>
+<div class="p-cta"><a class="go" href="#">Start building<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></a><a class="alt" id="open-manual" href="#">or configure manually</a></div>
 </div>
 <div class="tiles">
 <a class="tile" href="#"><div class="tile-in"><img class="book" src="/firmware-book.png" width="1100" height="899" alt="Vyron DMA Firmware" loading="lazy" decoding="async"><span class="tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Firmware</span></div></a>
 </div>
 </div>
 </section>
+<dialog id="manual" aria-labelledby="manual-title">
+<div class="modal">
+<button class="x" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<span class="badge">CONFIGURE MANUALLY</span>
+<h3 id="manual-title">Choose your <span>firmware</span></h3>
+<div class="fws">
+<div class="fw"><h4>Basic Firmware</h4><div class="price">$50</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
+<div class="fw"><h4>Firmware Advanced</h4><div class="price">$100</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
+<div class="fw"><h4>Custom Firmware</h4><div class="price">$400</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
+</div>
+</div>
+</dialog>
 
 <script>
 (function(){var art=document.querySelector(".art");if(!art)return;var svg=art.querySelector("svg"),card=svg.querySelector(".L-card"),orb=svg.querySelector(".L-orb");
@@ -223,6 +255,12 @@ document.querySelectorAll("nav a").forEach(function(a){tilt(a,16,20,-2,1.08)});
 document.querySelectorAll(".btn").forEach(function(a){tilt(a,13,16,-3,1.05)});
 document.querySelectorAll(".tile-in").forEach(function(a){tilt(a,12,14,-6,1.04)});
 document.querySelectorAll(".go").forEach(function(a){tilt(a,12,14,-3,1.05)});
+document.querySelectorAll(".fw").forEach(function(a){tilt(a,9,11,-5,1.03)});
+})();
+(function(){var d=document.getElementById("manual"),o=document.getElementById("open-manual");if(!d||!o||typeof d.showModal!=="function")return;
+o.addEventListener("click",function(e){e.preventDefault();d.showModal()});
+d.addEventListener("click",function(e){if(e.target===d)d.close()});
+d.querySelector(".x").addEventListener("click",function(){d.close()});
 })();
 </script>
 </body>
