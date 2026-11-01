@@ -180,6 +180,7 @@ html:has(dialog[open]){overflow:hidden}
 .d-cta{margin-top:30px;display:flex;justify-content:center}
 @media (max-width:820px){.d-grid{grid-template-columns:1fr}.d-head{flex-direction:column;align-items:flex-start}}
 .soon{margin:0;color:#aab4d0;font:400 18px Outfit,sans-serif}
+.d-col p.note{margin:0;color:#c3c7d2;font:400 18px/1.6 Outfit,sans-serif}
 .fw .go{pointer-events:none}
 
 /* ===== polish: colour, motion, trust ===== */
@@ -379,7 +380,10 @@ h1 span{background:linear-gradient(90deg,#eef1fb,#86a8ff,#b79cff,#6ad4ff,#eef1fb
 <section class="detail" data-for="custom" hidden>
 <button class="back" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>Back</button>
 <div class="d-head"><h3>Custom Firmware</h3><div class="price sm">$400</div></div>
-<div class="d-col"><p class="soon">Details coming soon.</p></div>
+<div class="d-grid">
+<div class="d-col"><ul class="ticks"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Fully custom configuration</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>IOMMU ON</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>AMD IOMMU + VGK</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Supports DMA cards (35T &amp; 75T &amp; 100T)</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>All Motherboards Supported</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>All CPUs Supported</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>No shared builds</span></li></ul></div>
+<div class="d-col"><h5>Supported AC's</h5><div class="acs"><span class="ac">EAC</span><span class="ac">VGK</span><span class="ac">Battleye</span><span class="ac">ACE</span><span class="ac">VAC</span><span class="ac">Ricochet</span><span class="ac">FiveM</span></div><h5>FACEIT compatibility</h5><p class="note">FACEIT has not been fully tested; compatibility remains unconfirmed.</p></div>
+</div>
 </section>
 </div>
 </dialog>
