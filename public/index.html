@@ -9,7 +9,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://vyron.lol/">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-wUzHVDBBjL7aebfqqfOuNPhfPlBw8/e4ChQosW4nbqA='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-OTy0LX4j0tyf6fT5Yek+NLharo+a00sqKlhowopNzbM='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'self'; form-action 'none'">
 <link rel="icon" href="/favicon.ico?v=20" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=20">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png?v=20">
@@ -159,6 +159,26 @@ html:has(dialog[open]){overflow:hidden}
 .price{font:500 clamp(48px,5vw,68px)/1 Outfit,sans-serif;background:linear-gradient(180deg,#fff,#97a2c0);-webkit-background-clip:text;background-clip:text;color:transparent;margin:6px 0 8px}
 .go.sm{height:54px;padding:0 40px;font-size:19px}
 @media (max-width:820px){.fws{grid-template-columns:1fr}.modal{padding:56px 20px 28px}}
+.view-list[hidden],.detail[hidden]{display:none}
+.fw[data-tier]{cursor:pointer}
+.fw[data-tier]:focus-visible{outline:2px solid rgba(220,228,250,.7);outline-offset:3px}
+.detail{text-align:left;animation:dlg .25s ease-out both}
+.back{display:inline-flex;align-items:center;gap:6px;margin:4px 0 22px;padding:9px 16px 9px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#c9ccd6;font:400 15px Outfit,sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.back:hover{background:rgba(255,255,255,.1);color:#fff}
+.d-head{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.detail h3{margin:0;font:500 clamp(32px,3.6vw,50px)/1.1 Outfit,sans-serif;background:linear-gradient(180deg,#fff 20%,#9aa6c4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.price.sm{font-size:clamp(34px,3.4vw,48px);margin:0}
+.d-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
+.d-col{padding:26px 26px 22px;border-radius:24px;border:1px solid rgba(200,210,240,.15);background:linear-gradient(160deg,rgba(190,200,235,.10),rgba(255,255,255,.015) 65%)}
+.d-col h5{margin:0 0 14px;font:500 15px Outfit,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#aab4d0}
+.d-col h5:not(:first-child){margin-top:26px}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ticks li{display:flex;gap:12px;align-items:flex-start;color:#dfe2ea;font:400 18px/1.45 Outfit,sans-serif}
+.ticks svg{flex:none;margin-top:3px;color:#b9c4e4}
+.acs{display:flex;flex-wrap:wrap;gap:10px}
+.ac{padding:8px 16px;border-radius:999px;border:1px solid rgba(200,210,240,.3);background:rgba(200,210,240,.08);color:#e9ecf5;font:500 15px Outfit,sans-serif;letter-spacing:.04em}
+.d-cta{margin-top:30px;display:flex;justify-content:center}
+@media (max-width:820px){.d-grid{grid-template-columns:1fr}.d-head{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -231,13 +251,33 @@ html:has(dialog[open]){overflow:hidden}
 <dialog id="manual" aria-labelledby="manual-title">
 <div class="modal">
 <button class="x" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<div class="view-list">
 <span class="badge">CONFIGURE MANUALLY</span>
 <h3 id="manual-title">Choose your <span>firmware</span></h3>
 <div class="fws">
-<div class="fw"><h4>Basic Firmware</h4><div class="price">$50</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
-<div class="fw"><h4>Firmware Advanced</h4><div class="price">$100</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
+<div class="fw" data-tier="basic" role="button" tabindex="0"><h4>Basic Firmware</h4><div class="price">$50</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
+<div class="fw" data-tier="advanced" role="button" tabindex="0"><h4>Firmware Advanced</h4><div class="price">$100</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
 <div class="fw"><h4>Custom Firmware</h4><div class="price">$400</div><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
 </div>
+</div>
+<section class="detail" data-for="basic" hidden>
+<button class="back" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>Back</button>
+<div class="d-head"><h3>Firmware Basic</h3><div class="price sm">$50</div></div>
+<div class="d-grid">
+<div class="d-col"><ul class="ticks"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Budget firmware for low-tier ac games</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Supports DMA card (35T &amp; 75T &amp; 100T)</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>All Motherboards Supported</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>All CPUs Supported</span></li></ul></div>
+<div class="d-col"><h5>Supported AC's</h5><div class="acs"><span class="ac">VAC</span><span class="ac">EA</span><span class="ac">RICOCHET</span><span class="ac">BATTLEYE</span></div><h5>Warranty</h5><ul class="ticks"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Free 1-month warranty included</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Extended warranty available upon request</span></li></ul></div>
+</div>
+<div class="d-cta"><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
+</section>
+<section class="detail" data-for="advanced" hidden>
+<button class="back" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>Back</button>
+<div class="d-head"><h3>Firmware Advanced</h3><div class="price sm">$100</div></div>
+<div class="d-grid">
+<div class="d-col"><ul class="ticks"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Budget firmware for EAC</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Supports DMA cards (35T &amp; 75T &amp; 100T)</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>All Motherboards Supported</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>All CPUs Supported</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>No shared builds</span></li></ul></div>
+<div class="d-col"><h5>Supported AC's</h5><div class="acs"><span class="ac">EAC</span><span class="ac">Battleye</span><span class="ac">Ricochet</span><span class="ac">ACE</span><span class="ac">EA</span></div><h5>Warranty</h5><ul class="ticks"><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Free 1-month warranty included</span></li><li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg><span>Extended warranty available upon request</span></li></ul></div>
+</div>
+<div class="d-cta"><a class="go sm" href="https://discord.gg/vyron" target="_blank" rel="noopener">Select</a></div>
+</section>
 </div>
 </dialog>
 
@@ -261,6 +301,12 @@ document.querySelectorAll(".fw").forEach(function(a){tilt(a,9,11,-5,1.03)});
 o.addEventListener("click",function(e){e.preventDefault();d.showModal()});
 d.addEventListener("click",function(e){if(e.target===d)d.close()});
 d.querySelector(".x").addEventListener("click",function(){d.close()});
+var list=d.querySelector(".view-list"),panels=d.querySelectorAll(".detail"),box=d.querySelector(".modal");
+function show(id){list.hidden=true;panels.forEach(function(p){p.hidden=p.getAttribute("data-for")!==id});box.scrollTop=0}
+function back(){list.hidden=false;panels.forEach(function(p){p.hidden=true});box.scrollTop=0}
+d.querySelectorAll(".fw[data-tier]").forEach(function(c){c.addEventListener("click",function(e){if(e.target.closest(".go"))return;show(c.getAttribute("data-tier"))});c.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();show(c.getAttribute("data-tier"))}})});
+d.querySelectorAll(".back").forEach(function(b){b.addEventListener("click",back)});
+d.addEventListener("close",back);
 })();
 </script>
 </body>
