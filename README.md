@@ -1,13 +1,43 @@
-# Vyron
+# Vyron website
 
-A minimal page: the Vyron logo and name on the home page.
+Static single-page site served by a tiny Express server (`server.js`).
 
-## Run
-1. Install Node.js 22.13 or newer.
-2. In this folder run: `node local-server.js`
-3. Open http://localhost:3000
+## Structure
 
-## Editing
-The source is in `src/` (`index.html`, `404.html`, `app.html`). After editing run `node scripts/build.js`
-(or `npm run build`) — it writes `public/`, which is what gets served (set `SITE_URL=https://yourdomain` for canonical / sitemap links).
-Vercel serves `public/` as is.
+```
+public/index.html   the whole website
+public/favicon.png  icon (also served at /favicon.ico)
+public/robots.txt
+server.js           Express server (works locally and on Vercel)
+vercel.json         Vercel config
+package.json
+```
+
+## Run locally
+
+```
+npm install
+npm start
+```
+
+Open http://localhost:3000
+
+## Deploy on Vercel
+
+**Option A – GitHub (recommended)**
+1. Create a GitHub repo and push this folder.
+2. Go to https://vercel.com/new and import the repo.
+3. Leave all settings as they are (Framework Preset: Other) and click Deploy.
+
+**Option B – Vercel CLI**
+```
+npm i -g vercel
+vercel        # preview deploy
+vercel --prod # production deploy
+```
+
+## Custom domain
+Vercel project → Settings → Domains → add your domain and set the DNS records it shows.
+
+## Editing the site
+All content is in `public/index.html`. Change it, commit, push – Vercel redeploys automatically.
