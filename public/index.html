@@ -807,5 +807,59 @@ route();
 let s0="en";try{const v=localStorage.getItem('vyron-lang');if(v&&D[v])s0=v}catch(e){}
 setLang(s0);
 </script>
+<canvas id="snow" aria-hidden="true" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('snow');if(!c)return;
+  var x=c.getContext('2d');if(!x)return;
+  var W=0,H=0,dpr=1,flakes=[],run=true,last=0,t=0;
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=window.innerWidth;H=window.innerHeight;
+    c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
+    x.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.max(40,Math.min(130,Math.round(W/12)));
+    while(flakes.length<n)flakes.push(make(true));
+    if(flakes.length>n)flakes.length=n;
+  }
+  function make(anywhere){
+    var z=Math.random();
+    return {
+      x:Math.random()*W,
+      y:anywhere?Math.random()*H:-10-Math.random()*40,
+      r:0.8+z*z*3.2,
+      v:22+z*58,
+      a:0.35+z*0.55,
+      sw:10+Math.random()*26,
+      sp:0.4+Math.random()*1.1,
+      ph:Math.random()*6.283
+    };
+  }
+  function frame(now){
+    if(!run)return;
+    var dt=Math.min((now-last)/1000||0.016,0.05);last=now;t+=dt;
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<flakes.length;i++){
+      var f=flakes[i];
+      f.y+=f.v*dt;
+      var px=f.x+Math.sin(t*f.sp+f.ph)*f.sw;
+      if(f.y>H+10){flakes[i]=make(false);continue;}
+      var g=x.createRadialGradient(px,f.y,0,px,f.y,f.r);
+      g.addColorStop(0,'rgba(255,255,255,'+f.a+')');
+      g.addColorStop(0.6,'rgba(235,225,255,'+(f.a*0.7)+')');
+      g.addColorStop(1,'rgba(220,200,255,0)');
+      x.fillStyle=g;
+      x.beginPath();x.arc(px,f.y,f.r,0,6.283);x.fill();
+    }
+    requestAnimationFrame(frame);
+  }
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){run=false;}
+    else if(!run){run=true;last=performance.now();requestAnimationFrame(frame);}
+  });
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,150);});
+  size();requestAnimationFrame(frame);
+})();
+</script>
 </body>
 </html>
