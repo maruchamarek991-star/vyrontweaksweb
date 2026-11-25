@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Vyron – Pick your Software</title>
+<link rel="icon" type="image/png" href="/favicon.png?v=2">
+<link rel="apple-touch-icon" href="/favicon.png?v=2">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Noto+Sans+Arabic:wght@400;500;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#07040d;--card:#2a0f4a;--p:#9333ea;--p2:#a855f7;--txt:#f4f0fb;--mut:#a79bbd;--line:rgba(168,85,247,.22);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -322,6 +324,22 @@ button.bn2{border:0;width:100%;cursor:pointer;font-family:inherit}
 .pm img.full,.pdv img.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:none}
 .th{position:relative;overflow:hidden}
 .th img.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:none}
+.cpn{margin-top:18px}
+.cpi{display:flex;gap:10px}
+.cpi input{width:auto;min-width:0;flex:1;text-transform:uppercase;letter-spacing:.08em}
+.cpi input::placeholder{text-transform:none;letter-spacing:0;font-weight:500}
+.cpi button{background:#150b26;border:1px solid rgba(168,85,247,.5);color:#fff;border-radius:10px;padding:0 22px;font-weight:700;font-size:14px;cursor:pointer;transition:.2s}
+.cpi button:hover{border-color:var(--p2);background:#2d1255}
+.cpo{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px solid rgba(34,197,94,.5);background:rgba(8,40,22,.6);border-radius:12px;font-size:14px}
+.cpo b{letter-spacing:.08em}
+.cpo button{background:none;border:0;color:var(--mut);cursor:pointer;text-decoration:underline;font:inherit;font-size:13px}
+.cpm{margin-top:8px;color:#f87171;font-size:13px}
+.tt strong s{font-size:18px;color:var(--mut);font-weight:600;margin-inline-end:10px}
+*{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea{-webkit-user-select:text;user-select:text}
+.to code{-webkit-user-select:none;user-select:none}
+html{-webkit-tap-highlight-color:transparent}
+img{-webkit-user-drag:none;user-drag:none}
 </style>
 </head>
 <body>
@@ -572,6 +590,8 @@ function renderGD(){
 const PT={"en": ["Back to products", "CHOOSE YOUR ACCESS", "3 months", "1 year", "Lifetime", "/ month", "Save {n}%", "BEST VALUE", "One payment, no renewals", "Add Manual Installation", "Our team connects remotely and sets everything up for you.", "Total", "paid once, no auto-renew", "Want to pay with PayPal or another method? Click here", "Instant delivery", "Your key arrives right after checkout", "Safe & reversible", "Every change can be undone", "24/7 support", "Real people on Discord", "Setup guide included", "Step by step for your product", "Safe · updates within hours of a Windows update"], "fr": ["Retour aux produits", "CHOISISSEZ VOTRE ACCÈS", "3 mois", "1 an", "À vie", "/ mois", "Économisez {n} %", "MEILLEURE OFFRE", "Un seul paiement, sans renouvellement", "Ajouter l’installation manuelle", "Notre équipe se connecte à distance et configure tout pour vous.", "Total", "payé une seule fois, sans renouvellement automatique", "Vous voulez payer avec PayPal ou un autre moyen ? Cliquez ici", "Livraison instantanée", "Votre clé arrive juste après le paiement", "Sûr et réversible", "Chaque modification peut être annulée", "Support 24h/24 et 7j/7", "De vraies personnes sur Discord", "Guide d’installation inclus", "Pas à pas pour votre produit", "Sûr · mises à jour dans les heures suivant une mise à jour de Windows"], "ru": ["Назад к продуктам", "ВЫБЕРИТЕ СРОК ДОСТУПА", "3 месяца", "1 год", "Навсегда", "/ мес.", "Скидка {n}%", "САМОЕ ВЫГОДНОЕ", "Один платёж, без продлений", "Добавить ручную установку", "Наша команда подключится удалённо и всё настроит за вас.", "Итого", "оплата один раз, без автопродления", "Хотите оплатить через PayPal или другим способом? Нажмите здесь", "Мгновенная доставка", "Ключ приходит сразу после оплаты", "Безопасно и обратимо", "Любое изменение можно отменить", "Поддержка 24/7", "Живые люди в Discord", "Руководство по установке включено", "Пошагово для вашего продукта", "Безопасно · обновления в течение нескольких часов после обновления Windows"], "ar": ["العودة إلى المنتجات", "اختر مدة الاشتراك", "3 أشهر", "سنة واحدة", "مدى الحياة", "/ شهر", "وفّر {n}%", "أفضل قيمة", "دفعة واحدة، بدون تجديد", "أضف التثبيت اليدوي", "يتصل فريقنا عن بُعد ويضبط كل شيء نيابةً عنك.", "الإجمالي", "يُدفع مرة واحدة، دون تجديد تلقائي", "هل تريد الدفع عبر PayPal أو وسيلة أخرى؟ اضغط هنا", "تسليم فوري", "يصلك مفتاحك مباشرة بعد الدفع", "آمن وقابل للتراجع", "يمكن التراجع عن كل تغيير", "دعم على مدار الساعة", "أشخاص حقيقيون على Discord", "دليل الإعداد مضمّن", "خطوة بخطوة لمنتجك", "آمن · تحديثات خلال ساعات من تحديث Windows"], "pl": ["Wróć do produktów", "WYBIERZ DOSTĘP", "3 miesiące", "1 rok", "Dożywotnio", "/ mies.", "Oszczędzasz {n}%", "NAJLEPSZA WARTOŚĆ", "Jedna płatność, bez odnowień", "Dodaj instalację manualną", "Nasz zespół połączy się zdalnie i skonfiguruje wszystko za Ciebie.", "Razem", "płatność jednorazowa, bez automatycznego odnawiania", "Chcesz zapłacić przez PayPal lub inną metodą? Kliknij tutaj", "Natychmiastowa dostawa", "Klucz dostajesz zaraz po zakupie", "Bezpiecznie i odwracalnie", "Każdą zmianę można cofnąć", "Wsparcie 24/7", "Prawdziwi ludzie na Discordzie", "Instrukcja konfiguracji w zestawie", "Krok po kroku dla Twojego produktu", "Bezpieczne · aktualizacje w ciągu kilku godzin od aktualizacji Windows"], "es": ["Volver a productos", "ELIGE TU ACCESO", "3 meses", "1 año", "De por vida", "/ mes", "Ahorra {n} %", "MEJOR VALOR", "Un solo pago, sin renovaciones", "Añadir instalación manual", "Nuestro equipo se conecta en remoto y lo configura todo por ti.", "Total", "pago único, sin renovación automática", "¿Quieres pagar con PayPal u otro método? Haz clic aquí", "Entrega instantánea", "Tu clave llega justo después del pago", "Seguro y reversible", "Cada cambio se puede deshacer", "Soporte 24/7", "Personas reales en Discord", "Guía de configuración incluida", "Paso a paso para tu producto", "Seguro · actualizaciones a las pocas horas de una actualización de Windows"], "de": ["Zurück zu den Produkten", "WÄHLE DEINEN ZUGANG", "3 Monate", "1 Jahr", "Lebenslang", "/ Monat", "Spare {n} %", "BESTER WERT", "Einmalzahlung, keine Verlängerung", "Manuelle Installation hinzufügen", "Unser Team verbindet sich per Fernzugriff und richtet alles für dich ein.", "Gesamt", "einmalig bezahlt, keine automatische Verlängerung", "Mit PayPal oder anders bezahlen? Hier klicken", "Sofortige Lieferung", "Dein Key kommt direkt nach dem Kauf", "Sicher & umkehrbar", "Jede Änderung lässt sich rückgängig machen", "24/7-Support", "Echte Menschen auf Discord", "Einrichtungsanleitung inklusive", "Schritt für Schritt für dein Produkt", "Sicher · Updates innerhalb weniger Stunden nach einem Windows-Update"]};const PK=["backp", "pcrt", "pl2", "pl3", "pl4", "mo", "save", "bestv", "once", "manual", "manuald", "total", "tsub", "pay", "f1t", "f1d", "f2t", "f2d", "f3t", "f3d", "f4t", "f4d", "stp"];const LF={"en": "1 month", "fr": "1 mois", "ru": "1 месяц", "ar": "شهر واحد", "pl": "1 miesiąc", "es": "1 mes", "de": "1 Monat"};
 PK.forEach((n,i)=>Object.keys(D).forEach(k=>D[k][n]=PT[k][i]));
 Object.keys(D).forEach(k=>D[k].life=LF[k]);
+const CPN={cpl:{en:"Coupon code",fr:"Code promo",ru:"Промокод",ar:"رمز القسيمة",pl:"Kod kuponu",es:"Código de cupón",de:"Gutscheincode"},cap:{en:"Apply",fr:"Appliquer",ru:"Применить",ar:"تطبيق",pl:"Zastosuj",es:"Aplicar",de:"Einlösen"},cok:{en:"−20% applied",fr:"−20 % appliqué",ru:"−20% применено",ar:"تم تطبيق خصم 20%",pl:"−20% zastosowano",es:"−20 % aplicado",de:"−20 % angewendet"},cbad:{en:"Invalid coupon code",fr:"Code promo invalide",ru:"Неверный промокод",ar:"رمز القسيمة غير صالح",pl:"Nieprawidłowy kod kuponu",es:"Código de cupón no válido",de:"Ungültiger Gutscheincode"},crm:{en:"Remove",fr:"Retirer",ru:"Убрать",ar:"إزالة",pl:"Usuń",es:"Quitar",de:"Entfernen"}};
+Object.keys(CPN).forEach(n=>Object.keys(D).forEach(k=>D[k][n]=CPN[n][k]||CPN[n].en));
 const TG6={"en": "PERMANENT", "fr": "PERMANENT", "ru": "ПОСТОЯННЫЙ", "ar": "دائم", "pl": "STAŁY", "es": "PERMANENTE", "de": "DAUERHAFT"},DS6={"en": "Our flagship HyperVisor kernel-level hardware ID spoofer for EAC and BattlEye on every motherboard. No RAID0, no CRU, no usermode tricks.", "fr": "Notre spoofer d’ID matériel phare, au niveau noyau (HyperVisor), pour EAC et BattlEye, compatible avec toutes les cartes mères. Pas de RAID0, pas de CRU, pas d’astuces en mode utilisateur.", "ru": "Наш флагманский HyperVisor-спуфер HWID на уровне ядра для EAC и BattlEye, работает на любой материнской плате. Без RAID0, без CRU, без юзермод-трюков.", "ar": "منتجنا الرئيسي: منتحل معرّف الأجهزة (HWID) بتقنية HyperVisor على مستوى النواة لـ EAC وBattlEye على جميع اللوحات الأم. بدون RAID0 ولا CRU ولا حيل على مستوى المستخدم.", "pl": "Nasz flagowy spoofer ID sprzętu na poziomie jądra (HyperVisor) dla EAC i BattlEye, działający na każdej płycie głównej. Bez RAID0, bez CRU, bez sztuczek w trybie użytkownika.", "es": "Nuestro spoofer insignia de ID de hardware a nivel de kernel con HyperVisor para EAC y BattlEye, en cualquier placa base. Sin RAID0, sin CRU, sin trucos en modo usuario.", "de": "Unser Flaggschiff: ein HyperVisor-Hardware-ID-Spoofer auf Kernel-Ebene für EAC und BattlEye auf jedem Mainboard. Kein RAID0, kein CRU, keine Usermode-Tricks."},OT6={"en": "One-time", "fr": "Achat unique", "ru": "Разово", "ar": "مرة واحدة", "pl": "Jednorazowo", "es": "Pago único", "de": "Einmalig"};
 Object.keys(D).forEach(k=>{D[k].tags.push(TG6[k]);D[k].ds.push(DS6[k]);D[k].onetime=OT6[k]});
 const TG7={"en": "PIRATE TOKEN", "fr": "PIRATE TOKEN", "ru": "PIRATE TOKEN", "ar": "PIRATE TOKEN", "pl": "PIRATE TOKEN", "es": "PIRATE TOKEN", "de": "PIRATE TOKEN"},DS7={"en": "Plunder the Pirate Shop and stack the coin fast. Built to carry your squad: pull roughly 2K in ~10 minutes and up to 800 chests per game. EAC bypass included.", "fr": "Pillez la boutique des pirates et empilez les pièces à toute vitesse. Conçu pour porter votre équipe : environ 2K en ~10 minutes et jusqu’à 800 coffres par partie. Bypass EAC inclus.", "ru": "Грабьте Pirate Shop и быстро копите монеты. Создан, чтобы тащить вашу команду: около 2K за ~10 минут и до 800 сундуков за игру. Обход EAC включён.", "ar": "انهب متجر القراصنة وكدّس العملات بسرعة. مصمم ليحمل فريقك: حوالي 2K خلال ~10 دقائق وما يصل إلى 800 صندوق في كل مباراة. تجاوز EAC مشمول.", "pl": "Złup Pirate Shop i szybko zgarniaj monety. Stworzony, by nieść twoją drużynę: ok. 2K w ~10 minut i do 800 skrzyń na grę. Bypass EAC w zestawie.", "es": "Saquea la Pirate Shop y acumula monedas rápido. Hecho para cargar a tu escuadra: unos 2K en ~10 minutos y hasta 800 cofres por partida. Bypass de EAC incluido.", "de": "Plündere den Pirate Shop und sammle schnell Münzen. Gebaut, um dein Squad zu tragen: etwa 2K in ~10 Minuten und bis zu 800 Truhen pro Match. EAC-Bypass inklusive."};
@@ -581,7 +601,7 @@ Object.keys(D).forEach(k=>{D[k].tags.push(TG8[k]);D[k].ds.push(DS8[k])});
 const SL=['perm','pirate','temp'];
 const CNT=[[6,5,4],[1,1,1],[6,5,4]];
 const PMUL=[1,2.5,8,20],PMON=[1,3,12,0];
-let curP=0,plan=1,man=false;
+let curP=0,plan=1,man=false,coupon=false,cin='',cmsg=0;
 const DCU="https://discord.gg/wgbyqDMWXE";
 const AR='<svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M7 17L17 7M8 7h9v9"/></svg>';
 const CK='<svg class="i" viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M5 12l5 5 9-10"/></svg>';
@@ -594,7 +614,7 @@ function renderPD(){
  const PRICE8=[10,30,60,100],NAMES8=["1 Week","1 Month","3 Months","Lifetime"];
  const pr=j=>PERM?[10,40][j]:PIRATE?PRICE7[j]:TEMP?PRICE8[j]:(j===0?base:Math.round(base*PMUL[j])-0.01),f=n=>CUR[i]+n.toFixed(2);
  const names=PERM?[L.onetime,L.pl4]:PIRATE?NAMES7:TEMP?NAMES8:[L.life,L.pl2,L.pl3,L.pl4];
- const tot=pr(plan)+(man&&!PERM&&!PIRATE&&!TEMP?9.99:0),cn=CNT[i],sum=cn.reduce((a,b)=>a+b,0);lastOrder={name:P[i][0],plan:PERM?(plan?D.en.pl4:D.en.onetime):(PIRATE?NAMES7[plan]:TEMP?NAMES8[plan]:D.en[['life','pl2','pl3','pl4'][plan]]),usd:Math.round(tot*100)/100,man:man&&!PERM&&!PIRATE&&!TEMP,cur:(PERM||TEMP)?'EUR':'USD'};
+ const tot0=pr(plan)+(man&&!PERM&&!PIRATE&&!TEMP?9.99:0),off=coupon?Math.round(tot0*20)/100:0,tot=Math.round((tot0-off)*100)/100,cn=CNT[i],sum=cn.reduce((a,b)=>a+b,0);lastOrder={name:P[i][0],plan:PERM?(plan?D.en.pl4:D.en.onetime):(PIRATE?NAMES7[plan]:TEMP?NAMES8[plan]:D.en[['life','pl2','pl3','pl4'][plan]]),usd:Math.round(tot*100)/100,coupon:coupon?'VYRON20':'',man:man&&!PERM&&!PIRATE&&!TEMP,cur:(PERM||TEMP)?'EUR':'USD'};
  const plans=(PERM?[0,1]:PIRATE?[0,1,2,3,4]:[0,1,2,3]).map(j=>{
   const sv=!PERM&&!PIRATE&&!TEMP&&j&&j<3?Math.round((1-pr(j)/(base*PMON[j]))*100):0;
   const sub=(PERM||PIRATE||TEMP||j===3)?L.once:(j?f(pr(j)/PMON[j])+' '+L.mo:f(base)+' '+L.mo);
@@ -605,11 +625,16 @@ function renderPD(){
  '</div>'+
  '<div class="pdr"><a class="bk" href="#products"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>'+L.backp+'</span></a><div class="eye" style="margin-top:26px">'+L[m.c].toUpperCase()+'</div><h1>'+P[i][0]+'</h1><div class="sp'+(STAT[i]==='dev'?' dev':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':L.stp)+'</div><p class="pdp">'+L.ds[i]+'</p>'+
  '<div class="eye2">'+L.pcrt+'</div><div class="pls">'+plans+((PERM||PIRATE||TEMP)?'':'<div class="pl2 mn'+(man?' on':'')+'" id="mn"><span class="cb"></span><div class="m"><b>'+L.manual+' <span>+$9.99</span></b><small>'+L.manuald+'</small></div></div>')+'</div>'+
- '<div class="tt"><div><b>'+L.total+'</b><small>'+names[plan]+' · '+L.tsub+'</small></div><strong>'+f(tot)+'</strong></div>'+
+ '<div class="cpn">'+(coupon?'<div class="cpo"><span>✓ <b>VYRON20</b> · '+L.cok+'</span><button type="button" id="cpr">'+L.crm+'</button></div>':'<div class="cpi"><input id="cpin" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="'+L.cpl+'" value="'+cin+'"><button type="button" id="cpa">'+L.cap+'</button></div>'+(cmsg?'<div class="cpm">'+L.cbad+'</div>':''))+'</div>'+
+  '<div class="tt"><div><b>'+L.total+'</b><small>'+names[plan]+' · '+L.tsub+'</small></div><strong>'+(off?'<s>'+f(tot0)+'</s>':'')+f(tot)+'</strong></div>'+
  '<button class="bn2" id="buyb" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M5 7h14l-1 13H6zM9 7a3 3 0 0 1 6 0"/></svg>'+L.buy2+AR+'</button><a class="pp2" href="'+DCU+'" target="_blank" rel="noopener">'+L.pay+'</a></div>';
  const R=document.getElementById('pdi');
  R.querySelectorAll('.pl2[data-j]').forEach(e=>e.onclick=()=>{plan=+e.dataset.j;renderPD()});
  if(R.querySelector('#mn'))R.querySelector('#mn').onclick=()=>{man=!man;renderPD()};R.querySelector('#buyb').onclick=()=>openPay(lastOrder);
+  const cpin=R.querySelector('#cpin'),cpa=R.querySelector('#cpa'),cpr=R.querySelector('#cpr');
+  if(cpin){const ap=()=>{cin=cpin.value.trim().toUpperCase().replace(/[^A-Z0-9_-]/g,'');if(cin==='VYRON20'){coupon=true;cmsg=0;cin=''}else{coupon=false;cmsg=1}renderPD()};
+   cpin.oninput=()=>{cin=cpin.value.replace(/[^A-Za-z0-9_-]/g,'');cmsg=0};cpin.onkeydown=e=>{if(e.key==='Enter')ap()};cpa.onclick=ap}
+  if(cpr)cpr.onclick=()=>{coupon=false;cin='';cmsg=0;renderPD()};
  R.querySelectorAll('.ths i').forEach(e=>e.onclick=()=>{R.querySelectorAll('.ths i').forEach(x=>x.classList.remove('on'));e.classList.add('on')});
 }
 const wp=document.createElement('div');wp.id='wipe';wp.innerHTML='<img alt="" src="'+document.querySelector('.logo img').src+'">';document.body.appendChild(wp);
@@ -716,7 +741,7 @@ function setSt(html,bad){const s=gid('pst');if(!s)return;s.className='pst'+(bad?
 function openPay(o){
  ord={id:hex32(),usd:o.usd,cur:o.cur||'USD',sy:o.cur==='EUR'?'€':'$',created:Date.now()};
  gid('poid').textContent=ord.id;
- gid('pit').textContent=o.name+' — '+o.plan+(o.man?' + Manual Installation':'');
+ gid('pit').textContent=o.name+' — '+o.plan+(o.man?' + Manual Installation':'')+(o.coupon?' · '+o.coupon+' −20%':'');
  gid('pip').textContent=ord.sy+o.usd.toFixed(2);
  pm.classList.add('on');document.body.style.overflow='hidden';pm.scrollTop=0;
  showPay('LTC');
@@ -812,44 +837,68 @@ setLang(s0);
 (function(){
   var c=document.getElementById('snow');if(!c)return;
   var x=c.getContext('2d');if(!x)return;
-  var W=0,H=0,dpr=1,flakes=[],run=true,last=0,t=0;
+  var W=0,H=0,dpr=1,flakes=[],run=true,last=0,t=0,TAU=6.2832;
   function size(){
     dpr=Math.min(window.devicePixelRatio||1,2);
     W=window.innerWidth;H=window.innerHeight;
     c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
     x.setTransform(dpr,0,0,dpr,0,0);
-    var n=Math.max(40,Math.min(130,Math.round(W/12)));
+    var n=Math.max(22,Math.min(55,Math.round(W/28)));
     while(flakes.length<n)flakes.push(make(true));
     if(flakes.length>n)flakes.length=n;
   }
   function make(anywhere){
-    var z=Math.random();
+    var z=Math.random(),big=z>0.8;
     return {
       x:Math.random()*W,
-      y:anywhere?Math.random()*H:-10-Math.random()*40,
-      r:0.8+z*z*3.2,
-      v:22+z*58,
-      a:0.35+z*0.55,
-      sw:10+Math.random()*26,
-      sp:0.4+Math.random()*1.1,
-      ph:Math.random()*6.283
+      y:anywhere?Math.random()*H:-12-Math.random()*60,
+      z:z,
+      r:0.9+z*z*4.4,
+      v:9+z*24,
+      a:big?0.5:0.45+z*0.4,
+      sw:6+Math.random()*16,
+      sp:0.22+Math.random()*0.45,
+      ph:Math.random()*TAU,
+      dx:(Math.random()-0.5)*5,
+      cr:z>0.55&&Math.random()<0.4,
+      rot:Math.random()*TAU,
+      rs:(Math.random()-0.5)*0.7
     };
+  }
+  function crystal(px,py,r,a,rot){
+    x.save();x.translate(px,py);x.rotate(rot);
+    x.strokeStyle='rgba(244,249,255,'+a+')';x.lineCap='round';x.lineWidth=Math.max(0.7,r*0.2);
+    x.beginPath();
+    for(var k=0;k<6;k++){
+      var an=k*TAU/6,ca=Math.cos(an),sa=Math.sin(an),L=r*1.8;
+      x.moveTo(0,0);x.lineTo(ca*L,sa*L);
+      var bx=ca*L*0.55,by=sa*L*0.55,bl=L*0.32;
+      x.moveTo(bx,by);x.lineTo(bx+Math.cos(an+0.9)*bl,by+Math.sin(an+0.9)*bl);
+      x.moveTo(bx,by);x.lineTo(bx+Math.cos(an-0.9)*bl,by+Math.sin(an-0.9)*bl);
+    }
+    x.stroke();x.restore();
   }
   function frame(now){
     if(!run)return;
     var dt=Math.min((now-last)/1000||0.016,0.05);last=now;t+=dt;
+    var wind=Math.sin(t*0.13)*7;
     x.clearRect(0,0,W,H);
     for(var i=0;i<flakes.length;i++){
       var f=flakes[i];
       f.y+=f.v*dt;
-      var px=f.x+Math.sin(t*f.sp+f.ph)*f.sw;
-      if(f.y>H+10){flakes[i]=make(false);continue;}
-      var g=x.createRadialGradient(px,f.y,0,px,f.y,f.r);
-      g.addColorStop(0,'rgba(255,255,255,'+f.a+')');
-      g.addColorStop(0.6,'rgba(235,225,255,'+(f.a*0.7)+')');
-      g.addColorStop(1,'rgba(220,200,255,0)');
+      f.x+=(wind*(0.4+f.z)+f.dx)*dt;
+      f.rot+=f.rs*dt;
+      if(f.y>H+14){flakes[i]=make(false);continue;}
+      if(f.x<-20)f.x=W+20;else if(f.x>W+20)f.x=-20;
+      var px=f.x+Math.sin(t*f.sp+f.ph)*f.sw,py=f.y;
+      if(f.cr){crystal(px,py,f.r,f.a*0.9,f.rot);continue;}
+      var soft=f.r>3.4,R=soft?f.r*1.5:f.r*1.15,a=soft?f.a*0.6:f.a;
+      var g=x.createRadialGradient(px,py,0,px,py,R);
+      g.addColorStop(0,'rgba(248,251,255,'+a+')');
+      g.addColorStop(soft?0.35:0.55,'rgba(240,246,255,'+(a*0.8)+')');
+      g.addColorStop(1,'rgba(235,243,255,0)');
       x.fillStyle=g;
-      x.beginPath();x.arc(px,f.y,f.r,0,6.283);x.fill();
+      x.beginPath();x.arc(px,py,R,0,TAU);x.fill();
     }
     requestAnimationFrame(frame);
   }
@@ -859,6 +908,24 @@ setLang(s0);
   });
   var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(size,150);});
   size();requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){
+  function ed(e){var t=e.target;return !!(t&&t.closest&&t.closest('input,textarea'))}
+  document.addEventListener('contextmenu',function(e){e.preventDefault()},true);
+  document.addEventListener('selectstart',function(e){if(!ed(e))e.preventDefault()},true);
+  document.addEventListener('dragstart',function(e){e.preventDefault()},true);
+  ['copy','cut'].forEach(function(n){document.addEventListener(n,function(e){if(!ed(e))e.preventDefault()},true)});
+  document.addEventListener('keydown',function(e){
+    var c=e.ctrlKey||e.metaKey,co=e.code,bad=
+      co==='F12'||
+      (c&&e.shiftKey&&(co==='KeyI'||co==='KeyJ'||co==='KeyC'||co==='KeyK'))||
+      (e.metaKey&&e.altKey&&(co==='KeyI'||co==='KeyJ'||co==='KeyC'||co==='KeyU'))||
+      (c&&(co==='KeyU'||co==='KeyS'))||
+      (c&&co==='KeyA'&&!ed(e));
+    if(bad){e.preventDefault();e.stopPropagation();return false}
+  },true);
 })();
 </script>
 </body>
