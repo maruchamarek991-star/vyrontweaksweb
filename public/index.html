@@ -94,6 +94,8 @@ button{font-family:inherit}
 .bd i{width:7px;height:7px;border-radius:50%;background:#22c55e}
 .bd.dev{background:rgba(69,38,8,.75);border-color:rgba(251,146,60,.5);color:#fdba74}
 .bd.dev i{background:#fb923c}
+.bd.upd{background:rgba(10,24,56,.75);border-color:rgba(59,130,246,.5);color:#93c5fd}
+.bd.upd i{background:#3b82f6}
 .bs{position:absolute;top:12px;inset-inline-end:12px;background:var(--p2);color:#fff;font-size:11px;font-weight:800;letter-spacing:.1em;padding:7px 12px;border-radius:4px;z-index:1}
 .pb{flex:1;display:flex;flex-direction:column;padding:18px 10px 8px;text-align:start}
 .pe{color:var(--p2);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
@@ -135,12 +137,16 @@ button{font-family:inherit}
 .sp{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;border-radius:999px;background:rgba(8,40,22,.75);border:1px solid rgba(34,197,94,.5);color:#4ade80;font-size:13px;font-weight:600;justify-self:start}
 .sp.dev{background:rgba(69,38,8,.75);border-color:rgba(251,146,60,.5);color:#fdba74}
 .sp.dev i{background:#fb923c!important}
+.sp.upd{background:rgba(10,24,56,.75);border-color:rgba(59,130,246,.5);color:#93c5fd}
+.sp.upd i{background:#3b82f6!important}
 .sp i{width:7px;height:7px;border-radius:50%;background:#22c55e}
 .bar{height:6px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden}
 .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#16a34a,#4ade80)}
 .bar i.dev{background:linear-gradient(90deg,#ea580c,#fb923c)}
+.bar i.upd{background:linear-gradient(90deg,#2563eb,#60a5fa)}
 .pc2{color:#4ade80;font-weight:800;font-size:18px}
 .pc2.dev{color:#fb923c}
+.pc2.upd{color:#60a5fa}
 @media(max-width:760px){.sh,.sr{grid-template-columns:minmax(0,1fr) auto 70px}.bar,.sh .hb{display:none}.th{width:70px}.hero{padding:26px 22px;flex-direction:column;align-items:flex-start}}
 :root{--brk:none}
 .sup{position:relative;overflow:hidden;background:radial-gradient(ellipse 50% 40% at 85% 60%,rgba(147,51,234,.25),transparent 70%),radial-gradient(ellipse 40% 50% at 0 20%,rgba(147,51,234,.22),transparent 70%),linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:auto,auto,44px 44px,44px 44px}
@@ -451,7 +457,7 @@ nav{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
   </div>
   <div class="stats">
     <div class="sc"><b id="sv1"></b><span data-i="st1">PRODUCTS ONLINE</span></div>
-    <div class="sc"><b id="sv2">99.9%</b><span data-i="st2">UPTIME, 30 DAYS</span></div>
+    <div class="sc"><b id="sv2">86.7%</b><span data-i="st2">UPTIME, 30 DAYS</span></div>
     <div class="sc"><b>24/7</b><span data-i="st3">SUPPORT ON DISCORD</span></div>
   </div>
   <div class="sh"><span data-i="th1">PRODUCT</span><span data-i="th2">STATUS</span><span class="hb" data-i="th3">UPTIME (30 DAYS)</span><span>%</span></div>
@@ -564,7 +570,7 @@ pl:["SKLEP","Wszystkie produkty","","Szukaj produktów...","Wszystkie","Sortuj: 
 es:["TIENDA","Todos los productos","","Buscar productos...","Todos","Ordenar: Más vendidos","Ordenar: Precio, de menor a mayor","Ordenar: Precio, de mayor a menor","Juegos","Red","Limpieza","Seguro","MÁS VENDIDO","De por vida","Comprar ahora","No se encontraron productos.","Eliminar bloatware","Inicio","Telemetría","Latencia","Energía","Caché","Archivos temp.","Registro"],
 de:["SHOP","Alle Produkte","","Produkte suchen...","Alle","Sortieren: Bestseller","Sortieren: Preis aufsteigend","Sortieren: Preis absteigend","Gaming","Netzwerk","Bereinigung","Sicher","BESTSELLER","Lebenslang","Jetzt kaufen","Keine Produkte gefunden.","Entschlacken","Autostart","Telemetrie","Latenz","Energie","Cache","Temp-Dateien","Registry"]};
 Object.keys(D).forEach(k=>{XK.forEach((n,i)=>D[k][n]=XV[k][i]);Object.assign(D[k],{windows:"Windows",hwid:"HWID",fortnite:"Fortnite",fps:"FPS",ping:"Ping",dns:"DNS/TCP"})});
-const STAT=['beta','ready','dev'];
+const STAT=['upd','ready','ready'];
 const PM=[{c:'hwid',ch:['startup','registry','telemetry']},{c:'fortnite',ch:['fps','ping','power']},{c:'hwid',ch:['startup','registry','telemetry']}];
 const CATS=['hwid','fortnite'];
 let cat='all';
@@ -581,7 +587,7 @@ function renderPV(){
  const pr=i=>parseFloat(P[i][1].slice(1));
  if(sv==='lo')ix.sort((a,b)=>pr(a)-pr(b));else if(sv==='hi')ix.sort((a,b)=>pr(b)-pr(a));else ix.sort((a,b)=>(PM[b].best||0)-(PM[a].best||0));
  document.getElementById('grid').innerHTML=ix.length?ix.map(i=>{const m=PM[i];
-  return '<article class="pc'+(m.best?' best':'')+'"><div class="pm"><span class="bd'+(STAT[i]==='dev'?' dev':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='beta'?'Beta':L.safe)+'</span>'+(m.best?'<span class="bs">'+L.best+'</span>':'')+'<img alt="" class="'+(PIMG[i]?'full':'')+'" src="'+(PIMG[i]||lg)+'"></div><div class="pb"><div class="pe">'+L[m.c]+'</div><div class="pn">'+P[i][0]+'</div><div class="pd">'+L.ds[i]+'</div><div class="pf"><div><div class="pl">'+L.from+' · '+(i===0?L.onetime:L.life)+'</div><div class="pp">'+P[i][1]+'</div></div><button class="bn" type="button" data-p="'+i+'"><svg class="i" viewBox="0 0 24 24"><path d="M5 7h14l-1 13H6zM9 7a3 3 0 0 1 6 0"/></svg>'+L.buy2+'<svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M7 17L17 7M8 7h9v9"/></svg></button></div></div></article>'}).join(''):'<div class="none">'+L.none+'</div>';
+  return '<article class="pc'+(m.best?' best':'')+'"><div class="pm"><span class="bd'+(STAT[i]==='dev'?' dev':STAT[i]==='upd'?' upd':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='upd'?'Updating':L.safe)+'</span>'+(m.best?'<span class="bs">'+L.best+'</span>':'')+'<img alt="" class="'+(PIMG[i]?'full':'')+'" src="'+(PIMG[i]||lg)+'"></div><div class="pb"><div class="pe">'+L[m.c]+'</div><div class="pn">'+P[i][0]+'</div><div class="pd">'+L.ds[i]+'</div><div class="pf"><div><div class="pl">'+L.from+' · '+(i===0?L.onetime:L.life)+'</div><div class="pp">'+P[i][1]+'</div></div><button class="bn" type="button" data-p="'+i+'"><svg class="i" viewBox="0 0 24 24"><path d="M5 7h14l-1 13H6zM9 7a3 3 0 0 1 6 0"/></svg>'+L.buy2+'<svg class="i" viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M7 17L17 7M8 7h9v9"/></svg></button></div></div></article>'}).join(''):'<div class="none">'+L.none+'</div>';
  document.querySelectorAll('#grid .bn').forEach(b=>b.onclick=()=>go('p-'+SL[b.dataset.p]));
 }
 qEl.oninput=renderPV;sEl.onchange=renderPV;
@@ -604,11 +610,11 @@ es:["ESTADO EN VIVO","Todos los sistemas operativos","{n} seguros · las actuali
 de:["LIVE-STATUS","Alle Systeme betriebsbereit","{n} sicher · Updates erscheinen innerhalb weniger Stunden nach einem Windows-Update","PRODUKTE ONLINE","VERFÜGBARKEIT, 30 TAGE","SUPPORT AUF DISCORD","PRODUKT","STATUS","VERFÜGBARKEIT (30 TAGE)"]};
 const SK=['live','allok','ssub','st1','st2','st3','th1','th2','th3'];
 Object.keys(D).forEach(k=>SK.forEach((n,i)=>D[k][n]=SV[k][i]));
-const UP=[100,100,40];
+const UP=[60,100,100];
 function renderSV(){
  const lg=document.querySelector('.logo img').src;
  document.getElementById('sv1').textContent=P.length+'/'+P.length;document.getElementById('sv2').textContent=(UP.reduce((a,b)=>a+b,0)/UP.length).toFixed(1)+'%';
- document.getElementById('srows').innerHTML=P.map((x,i)=>'<div class="sr"><div class="sn"><div class="th"><img alt="" class="'+(PIMG[i]?'full':'')+'" src="'+(PIMG[i]||lg)+'"></div><div><b>'+x[0]+'</b><small>'+L[PM[i].c]+'</small></div></div><span class="sp'+(STAT[i]==='dev'?' dev':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='beta'?'Beta':'Ready')+'</span><div class="bar"><i class="'+(STAT[i]==='dev'?'dev':'')+'" style="width:'+UP[i]+'%"></i></div><div class="pc2'+(STAT[i]==='dev'?' dev':'')+'">'+UP[i].toFixed(2)+'%</div></div>').join('');
+ document.getElementById('srows').innerHTML=P.map((x,i)=>'<div class="sr"><div class="sn"><div class="th"><img alt="" class="'+(PIMG[i]?'full':'')+'" src="'+(PIMG[i]||lg)+'"></div><div><b>'+x[0]+'</b><small>'+L[PM[i].c]+'</small></div></div><span class="sp'+(STAT[i]==='dev'?' dev':STAT[i]==='upd'?' upd':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='upd'?'Updating':'Ready')+'</span><div class="bar"><i class="'+(STAT[i]==='dev'?'dev':STAT[i]==='upd'?'upd':'')+'" style="width:'+UP[i]+'%"></i></div><div class="pc2'+(STAT[i]==='dev'?' dev':STAT[i]==='upd'?' upd':'')+'">'+UP[i].toFixed(2)+'%</div></div>').join('');
 }
 const SU={"en": ["Let’s talk", "Vyron Support.", "We’ve got your back.", "Your PC shouldn’t wait on a question.", "Get help with setup, access or your order.", "Get support", "A real team. In your corner."], "fr": ["Parlons-en", "Support Vyron.", "On est là pour vous.", "Votre PC ne devrait pas attendre une réponse.", "Obtenez de l’aide pour l’installation, l’accès ou votre commande.", "Obtenir de l’aide", "Une vraie équipe. À vos côtés."], "ru": ["Давайте поговорим", "Поддержка Vyron.", "Мы всегда на вашей стороне.", "Ваш ПК не должен ждать ответа на вопрос.", "Поможем с установкой, доступом или вашим заказом.", "Получить поддержку", "Настоящая команда. Всегда рядом."], "ar": ["لنتحدث", "دعم Vyron.", "نحن إلى جانبك.", "جهازك لا يجب أن ينتظر إجابة على سؤال.", "احصل على مساعدة في الإعداد أو الوصول أو طلبك.", "احصل على الدعم", "فريق حقيقي. بجانبك."], "pl": ["Porozmawiajmy", "Wsparcie Vyron.", "Jesteśmy przy Tobie.", "Twój komputer nie powinien czekać na odpowiedź.", "Pomożemy z konfiguracją, dostępem lub zamówieniem.", "Uzyskaj wsparcie", "Prawdziwy zespół. U Twojego boku."], "es": ["Hablemos", "Soporte de Vyron.", "Te respaldamos.", "Tu PC no debería esperar por una pregunta.", "Recibe ayuda con la configuración, el acceso o tu pedido.", "Obtener soporte", "Un equipo real. A tu lado."], "de": ["Lass uns reden", "Vyron-Support.", "Wir halten dir den Rücken frei.", "Dein PC sollte nicht auf eine Antwort warten.", "Hol dir Hilfe bei Einrichtung, Zugang oder deiner Bestellung.", "Support erhalten", "Ein echtes Team. An deiner Seite."]};
 ['talk','sup1','sup2','sup3','sup4','supb','supf'].forEach((n,i)=>Object.keys(D).forEach(k=>D[k][n]=SU[k][i]));
@@ -662,10 +668,10 @@ function renderPD(){
   const sub=(PERM||PIRATE||TEMP||j===3)?L.once:(j?f(pr(j)/PMON[j])+' '+L.mo:f(base)+' '+L.mo);
   return '<div class="pl2'+(plan===j?' on':'')+'" data-j="'+j+'"><span class="rd"></span><div class="m"><b>'+names[j]+'</b>'+(j===(PERM?1:PIRATE?3:TEMP?2:2)?'<span class="tg">'+L.bestv+'</span>':'')+'<small>'+sub+'</small></div><div class="r"><b>'+f(pr(j))+'</b>'+(sv?'<small>'+L.save.replace('{n}',sv)+'</small>':'')+'</div></div>';}).join('');
  document.getElementById('pdi').innerHTML=
- '<div class="pdl"><div class="pdv"><span class="bd'+(STAT[i]==='dev'?' dev':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='beta'?'Beta':L.safe)+'</span><img alt="" class="'+(PIMG[i]?'full':'')+'" src="'+(PIMG[i]||lg)+'"></div><div class="ths"><i class="on"></i><i></i><i></i><i></i><i></i></div>'+
+ '<div class="pdl"><div class="pdv"><span class="bd'+(STAT[i]==='dev'?' dev':STAT[i]==='upd'?' upd':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='upd'?'Updating':L.safe)+'</span><img alt="" class="'+(PIMG[i]?'full':'')+'" src="'+(PIMG[i]||lg)+'"></div><div class="ths"><i class="on"></i><i></i><i></i><i></i><i></i></div>'+
  '<div class="fg"><div><u>'+CK+'</u><span><b>'+L.f1t+'</b><small>'+L.f1d+'</small></span></div><div><u>'+CK+'</u><span><b>'+L.f2t+'</b><small>'+L.f2d+'</small></span></div><div><u>'+CK+'</u><span><b>'+L.f3t+'</b><small>'+L.f3d+'</small></span></div><div><u>'+CK+'</u><span><b>'+L.f4t+'</b><small>'+L.f4d+'</small></span></div></div>'+
  '</div>'+
- '<div class="pdr"><a class="bk" href="#products"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>'+L.backp+'</span></a><div class="eye" style="margin-top:26px">'+L[m.c].toUpperCase()+'</div><h1>'+P[i][0]+'</h1><div class="sp'+(STAT[i]==='dev'?' dev':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='beta'?'Beta':L.stp)+'</div><p class="pdp">'+L.ds[i]+'</p>'+
+ '<div class="pdr"><a class="bk" href="#products"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>'+L.backp+'</span></a><div class="eye" style="margin-top:26px">'+L[m.c].toUpperCase()+'</div><h1>'+P[i][0]+'</h1><div class="sp'+(STAT[i]==='dev'?' dev':STAT[i]==='upd'?' upd':'')+'"><i></i>'+(STAT[i]==='dev'?'In development':STAT[i]==='upd'?'Updating':L.stp)+'</div><p class="pdp">'+L.ds[i]+'</p>'+
  '<div class="eye2">'+L.pcrt+'</div><div class="pls">'+plans+((PERM||PIRATE||TEMP)?'':'<div class="pl2 mn'+(man?' on':'')+'" id="mn"><span class="cb"></span><div class="m"><b>'+L.manual+' <span>+$9.99</span></b><small>'+L.manuald+'</small></div></div>')+'</div>'+
  '<div class="cpn">'+(coupon?'<div class="cpo"><span>✓ <b>VYRON20</b> · '+L.cok+'</span><button type="button" id="cpr">'+L.crm+'</button></div>':'<div class="cpi"><input id="cpin" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="'+L.cpl+'" value="'+cin+'"><button type="button" id="cpa">'+L.cap+'</button></div>'+(cmsg?'<div class="cpm">'+L.cbad+'</div>':''))+'</div>'+
   '<div class="tt"><div><b>'+L.total+'</b><small>'+names[plan]+' · '+L.tsub+'</small></div><strong>'+(off?'<s>'+f(tot0)+'</s>':'')+f(tot)+'</strong></div>'+
